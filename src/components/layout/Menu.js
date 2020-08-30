@@ -15,12 +15,6 @@ export default function SimpleMenu() {
                     <Button className="m-1" size="small" variant="contained" m={2} color="primary" href="/projet">
                     Projets
                     </Button>
-                    <Button className="m-1" size="small" variant="contained" m={2} color="primary" href="/a-propos">
-                    A propos
-                    </Button>
-                    <Button className="m-1" size="small" variant="contained" m={2} color="primary" href="/contact">
-                    Contact
-                    </Button>
                     </Nav>
                 </Navbar.Collapse>
                 </Navbar>

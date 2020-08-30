@@ -13,7 +13,6 @@ export default class Routing extends Component {
                 <Route path='/' component={Home} exact></Route>
                 <Route path='/projet' component={Project}></Route>
                 <Route path='/a-propos' component={About}></Route>
-                <Route path='/contact' component={Contact}></Route>
             </Switch>
         )
     }
