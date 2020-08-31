@@ -23,11 +23,11 @@ export class Home extends Component {
                     <Col md={6} className='ml-auto d-flex justify-content-center align-items-center flex-column'>
                         <h1>Strawbang</h1>
                         <h3>Developpeur</h3><br/>
-                        <Button className="m-1" size="small" variant="contained" m={2} color="primary" href="/CV_Djamel_Bougouffa_Developpeur.pdf" target="_blank">Téléchargez mon CV<GetAppIcon/></Button><br/>
+                        <Button className="m-1" size="small" variant="contained" m={2} color="primary" href="/CV_Djamel_Bougouffa_Developpeur.pdf" target="_blank" rel="noopener noreferrer">Téléchargez mon CV<GetAppIcon/></Button><br/>
                         <div>
-                            <a href='https://www.linkedin.com/in/djamel-bougouffa/' target="_blank"><LinkedInIcon style={{width: '40px',height: '40px',fontsize: '40px'}}/></a>
-                            <a href='https://github.com/Strawbang' target="_blank"><GitHubIcon style={{width: '40px',height: '40px',fontsize: '40px'}}/></a>
-                            <a href='https://www.instagram.com/strawbang' target="_blank"><InstagramIcon style={{width: '40px',height: '40px',fontsize: '40px'}}/></a>
+                            <a href='https://www.linkedin.com/in/djamel-bougouffa/' target="_blank" rel="noopener noreferrer"><LinkedInIcon style={{width: '40px',height: '40px',fontsize: '40px'}}/></a>
+                            <a href='https://github.com/Strawbang' target="_blank" rel="noopener noreferrer"><GitHubIcon style={{width: '40px',height: '40px',fontsize: '40px'}}/></a>
+                            <a href='https://www.instagram.com/strawbang' target="_blank" rel="noopener noreferrer"><InstagramIcon style={{width: '40px',height: '40px',fontsize: '40px'}}/></a>
                         </div>
 
                     </Col>
