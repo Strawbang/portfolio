@@ -33,7 +33,7 @@ export class Home extends Component {
                     </Col>
                     <Col md={6} className='ml-auto d-flex align-items-center'>
                         <ProgressiveImage src={homeImage} placeholder={homeImage}>
-                            {src => <img src={src} alt="an image" style={{width: '100%', boxShadow: "200px 5px 5px white", borderRadius:"50%"}}/>}
+                            {src => <img src={src} alt="an image" className="border-white"/>}
                         </ProgressiveImage>
                     </Col>
                 </Row>
