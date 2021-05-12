@@ -30,7 +30,7 @@
     "react-router-sitemap": "^1.2.0",
     "react-scripts": "^3.4.3",
     "react-scroll-parallax": "^2.3.4",
-    "swiper": "^5.4.5",
+    "swiper": "^6.5.1",
     "yup": "^0.29.3"
   },
   "scripts": {
