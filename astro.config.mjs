@@ -6,4 +6,5 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://djamel-bougouffa.com",
   integrations: [robotsTxt(), sitemap()],
+  experimental: { assets: true },
 });

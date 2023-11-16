@@ -1,6 +1,6 @@
 ---
 title: METRO France
-publishDate: 2023-07-15 00:00:00
+publishDate: 2023-06-15 00:00:00
 img: /assets/metro-france.png
 img_alt: Parking of METRO France Nanterre
 description: |
@@ -8,15 +8,15 @@ description: |
 tags:
   - Dev
   - Scrum
+  - DevOps
 ---
 
-<p>Arrived in April 2022 in a new working environment with a Scrum work methodology, a typescript language and testing.</p>
-<p>Worked on the Gerland project, which involved creating displays on kiosks in warehouses to make it easier for customers to buy, and creating displays for employees in warehouses to track orders.</p>
-<ul>
-<li>I was able to make a few features, including automatic scrolling on order screens.</li>
-<li>I was able toswitched to another project once the Gerland project went into maintenance.</li>
-<li>I was able to had more responsibility for initiating the project as our lead developer was leaving.</li>
-<li>I did a lot of features, including importing xlsx files, modifying the pipeline and working on other projects for the devops part.
-<li>Doing releases and deployments.</li>
-<li>I was also able to lead some agile ceremonies.</li>
-</ul>
+### Revolutionizing Product Development at METRO France
+
+<p>During my tenure at METRO France as a Full-Stack Software Engineer, I initiated transformative changes that revolutionized product development.</p>
+
+<p>I implemented uniform technologies, architectures, and processes across products, resulting in an incredible 80% acceleration in product creation. This involved leveraging a sophisticated tech stack that included Scrum, GCP, Kubernetes, GitHub Action, Typescript, React, Node.js, TypeORM, and GraphQL, ensuring seamless integration.<p>
+
+<p>One of the significant milestones was the development of an innovative employee bonus management product. This not only reduced staff turnover across 93 warehouses but also improved operational efficiency and customer experiences on a nationwide scale.<p>
+
+<p>My contributions have centered on streamlining operations, enhancing products, and fostering a positive work environment for both employees and customers at METRO France.<p>

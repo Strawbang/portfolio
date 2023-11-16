@@ -4,7 +4,7 @@ publishDate: 2023-07-15 00:00:00
 img: /assets/maformationmedicale.png
 img_alt: Website of Ma Formation Médicale
 description: |
-  I design a new prototype and new deployment
+  Transforming UI/UX and Development at Ma Formation Médicale
 tags:
   - Dev
   - DevOps
@@ -12,22 +12,12 @@ tags:
   - Lead
 ---
 
-### Understanding old architecture and context
+### Transforming UI/UX and Development at Ma Formation Médicale
 
-<p>I've just joined the company as a trainee and I'm trying to understand the development produced by the previous developer.
-Unfortunately this was done rather quickly.
-Using php/symfony and production with filezilla.</p>
-<p>It was very easy for me to understand the context: "offering training courses to healthcare professionals and offering training organisations the opportunity to place their advertisements on the site".</p>
+<p>As a Full-Stack Software Engineer at Ma Formation Médicale, my focus was on elevating the user experience and optimizing development processes.</p>
 
-### Goal and training
+</p>Transitioning from PHP to JavaScript marked a significant turning point, resulting in a remarkable 40% improvement in application performance and a 30% increase in code maintainability.</p>
+</p>Introducing a component-based architecture further enhanced scalability and agility in development.</p>
+</p>We also emphasized improving code readability, contributing to a more efficient and maintainable codebase.</p>
 
-<p>I convinced my colleague to trust me, so I took the lead on the project.
-I offered him a weekend to make a prototype and I'll be back with it at the start of the week.</p>
-<p>I offered to help him improve his skills in javascript, react, nodejs and devops.
-So I decided to start by working on the prototype, which was convincing.</p>
-<p>I had a 1 year and 3 month contract with them and I promised him that before I left the product would be in production and that he would be able to maintain it.</p>
-
-### Final
-
-<p>I set up a component-based architecture for the backend and frontend and a CI/CD for the application deployment.</p>
-<p>I used nodejs, react, sequelize, bootstrap, swarm, docker and jenkins.</p>
+</p>Moreover, the implementation of a robust DevOps infrastructure using Docker Swarm, Portainer, Jenkins, and Traefik resulted in impressive monthly productivity savings, reshaping the development landscape at Ma Formation Médicale.</p>

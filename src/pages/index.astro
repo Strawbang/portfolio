@@ -17,6 +17,10 @@ import PortfolioPreview from "../components/PortfolioPreview.astro";
 import ContactCTA from "../components/ContactCTA.astro";
 import Skills from "../components/Skills.astro";
 
+// Optimize Images
+import { Image } from "astro:assets"
+import portrait from "../../public/assets/portrait.png"
+
 // Content Fetching: List four most recent work projects
 const projects = (await getCollection("work"))
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
@@ -31,13 +35,14 @@ const projects = (await getCollection("work"))
       <header class="hero">
         <Hero
           title="Hello, my name is Djamel Bougouffa"
-          tagline="I am a Fullstack Software Engineer who is currently based Paris"
+          tagline="I am a Fullstack Software Engineer"
           align="start"
         >
           <div class="roles">
             <Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
             <!-- <Pill><Icon icon="microphone-stage" size="1.33em" /> Speaker</Pill> -->
             <Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
+            <Pill><Icon icon="desktop" size="1.33em" /> Remote</Pill>
           </div>
           <div class="download">
             <CallToAction
@@ -49,12 +54,7 @@ const projects = (await getCollection("work"))
           </div>
         </Hero>
 
-        <img
-          alt="Djamel Bougouffa think about new code"
-          width="480"
-          height="620"
-          src="/assets/portrait.jpg"
-        />
+        <Image src={portrait} alt="Djamel Bougouffa think about new code!" width="480" height="620" />
       </header>
 
       <Skills />
