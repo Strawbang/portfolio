@@ -2,28 +2,28 @@
 import { getCollection } from "astro:content";
 
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 
 // Component Imports
-import CallToAction from "../components/CallToAction.astro";
-import Grid from "../components/Grid.astro";
-import Hero from "../components/Hero.astro";
-import Icon from "../components/Icon.astro";
-import Pill from "../components/Pill.astro";
+import CallToAction from "../../components/CallToAction.astro";
+import Grid from "../../components/Grid.astro";
+import Hero from "../../components/Hero.astro";
+import Icon from "../../components/Icon.astro";
+import Pill from "../../components/Pill.astro";
 // import Article from "../components/Article.astro";
-import PortfolioPreview from "../components/PortfolioPreview.astro";
+import PortfolioPreview from "../../components/PortfolioPreview.astro";
 
 // Page section components
-import ContactCTA from "../components/ContactCTA.astro";
-import Skills from "../components/Skills.astro";
+import ContactCTA from "../../components/fr/ContactCTA.astro";
+import Skills from "../../components/fr/Skills.astro";
 
 // Optimize Images
 import { Image } from "astro:assets"
-import portrait from "../../public/assets/portrait.png"
+import portrait from "../../../public/assets/portrait.png"
 
 // Content Fetching: List four most recent work projects
 const projects = (await getCollection("work", ({ id }) => {
-		return !id.startsWith('fr/');
+		return id.startsWith('fr/');
    }))
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
   .slice(0, 4);
@@ -36,27 +36,27 @@ const projects = (await getCollection("work", ({ id }) => {
     <div class="wrapper stack gap-8 lg:gap-20">
       <header class="hero">
         <Hero
-          title="Hello, my name is Djamel Bougouffa"
-          tagline="I am a Fullstack Software Engineer"
+          title="Bonjour, je m'appelle Djamel Bougouffa"
+          tagline="Je suis un ingénieur logiciel Fullstack"
           align="start"
         >
           <div class="roles">
-            <Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
-            <!-- <Pill><Icon icon="microphone-stage" size="1.33em" /> Speaker</Pill> -->
-            <Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
-            <Pill><Icon icon="desktop" size="1.33em" /> Remote</Pill>
+            <Pill><Icon icon="code" size="1.33em" /> Développeur</Pill>
+            <!-- <Pill><Icon icon="microphone-stage" size="1.33em" /> Orateur</Pill> -->
+            <Pill><Icon icon="pencil-line" size="1.33em" /> Écrivain</Pill>
+            <Pill><Icon icon="desktop" size="1.33em" /> À distance</Pill>
           </div>
           <div class="download">
             <CallToAction
-              href="/assets/Resume_Djamel_Bougouffa_Full_Stack_Software_Engineer.pdf"
+              href="/assets/CV_Djamel_Bougouffa_Ingenieur_Logiciel_Full_Stack.pdf"
             >
-              Download Resume
+              Télécharger le CV
               <Icon icon="arrow-right" size="1.2em" />
             </CallToAction>
           </div>
         </Hero>
 
-        <Image src={portrait} alt="Djamel Bougouffa think about new code!" width="480" height="620" />
+        <Image src={portrait} alt="Djamel Bougouffa pense à du nouveau code!" width="480" height="620" />
       </header>
 
       <Skills />
@@ -65,10 +65,10 @@ const projects = (await getCollection("work", ({ id }) => {
     <main class="wrapper stack gap-20 lg:gap-48">
       <section class="section with-background with-cta">
         <header class="section-header stack gap-2 lg:gap-4">
-          <h3>Selected Work</h3>
+          <h3>Travaux sélectionnés</h3>
           <p>
-            Take a look below at some of my featured work for clients from the
-            past few years.
+            Jetez un œil ci-dessous à certains de mes travaux en vedette pour des clients des
+            dernières années.
           </p>
         </header>
 
@@ -85,8 +85,8 @@ const projects = (await getCollection("work", ({ id }) => {
         </div>
 
         <div class="cta">
-          <CallToAction href="/work/">
-            View All
+          <CallToAction href="/fr/a-propos/">
+            Voir tout
             <Icon icon="arrow-right" size="1.2em" />
           </CallToAction>
         </div>
@@ -95,7 +95,7 @@ const projects = (await getCollection("work", ({ id }) => {
       <!-- <section class="section with-background bg-variant">
         <header class="section-header stack gap-2 lg:gap-4">
           <h3>Articles</h3>
-          <p>The latest articles I have published.</p>
+          <p>Les derniers articles que j'ai publiés.</p>
         </header>
 
         <div class="gallery">

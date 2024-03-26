@@ -1,29 +1,29 @@
 ---
 import { getCollection } from "astro:content";
 
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 
-import ContactCTA from "../components/ContactCTA.astro";
-import PortfolioPreview from "../components/PortfolioPreview.astro";
-import Hero from "../components/Hero.astro";
-import Grid from "../components/Grid.astro";
+import ContactCTA from "../../components/fr/ContactCTA.astro";
+import PortfolioPreview from "../../components/PortfolioPreview.astro";
+import Hero from "../../components/Hero.astro";
+import Grid from "../../components/Grid.astro";
 
 const projects = (await getCollection("work", ({ id }) => {
-		return !id.startsWith('fr/');
+		return id.startsWith('fr/');
    })).sort(
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
 );
 ---
 
 <BaseLayout
-  title="My Work | Djamel Bougouffa"
-  description="Learn about Djamel Bougouffa's most recent projects"
+  title="Mes Projets | Djamel Bougouffa"
+  description="Découvrez les projets les plus récents de Djamel Bougouffa"
 >
   <div class="stack gap-20">
     <main class="wrapper stack gap-8">
       <Hero
-        title="My Work"
-        tagline="See my most recent projects below to get an idea of my past experience."
+        title="Mes Projets"
+        tagline="Consultez ci-dessous mes projets les plus récents pour vous faire une idée de mon expérience passée."
         align="start"
       />
       <Grid variant="offset">
@@ -39,3 +39,4 @@ const projects = (await getCollection("work", ({ id }) => {
     <ContactCTA />
   </div>
 </BaseLayout>
+

@@ -1,0 +1,51 @@
+---
+import { languages } from '../i18n/ui';
+import { getLangFromUrl, useTranslatedPath } from '../i18n/utils';
+import { getRouteFromUrl } from '../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const route = getRouteFromUrl(Astro.url);
+const flags = {
+  en: '🇺🇸',
+  fr: '🇫🇷',
+};
+---
+
+<ul class="language-list">
+  {Object.entries(languages).map(([lang, label]) => (
+    <li key={lang} className="language-item">
+      <span class="flag">{flags[lang]}</span> {/* Display the flag */}
+      <a href={translatePath(`/${route ? route : ''}`, lang)}>{label}</a>
+    </li>
+  ))}
+</ul>
+
+
+<style>
+  .language-list {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .language-item {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .flag {
+    margin-right: 10px;
+    font-size: 20px;
+  }
+
+  /* Style for links */
+  a {
+    color: var(--accent-dark);;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  a:hover {
+    color: var(--accent-text-over); /* Change color on hover */
+  }
+</style>
