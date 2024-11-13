@@ -10,8 +10,9 @@ import Grid from "../components/Grid.astro";
 import Hero from "../components/Hero.astro";
 import Icon from "../components/Icon.astro";
 import Pill from "../components/Pill.astro";
-// import Article from "../components/Article.astro";
 import PortfolioPreview from "../components/PortfolioPreview.astro";
+import ArticlePreview from "../components/ArticlePreview.astro";
+import { fetchArticles } from "../services/articles";
 
 // Page section components
 import ContactCTA from "../components/ContactCTA.astro";
@@ -27,6 +28,9 @@ const projects = (await getCollection("work", ({ id }) => {
    }))
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
   .slice(0, 4);
+
+const articles = await fetchArticles();
+
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
 ---
@@ -42,7 +46,6 @@ const projects = (await getCollection("work", ({ id }) => {
         >
           <div class="roles">
             <Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
-            <!-- <Pill><Icon icon="microphone-stage" size="1.33em" /> Speaker</Pill> -->
             <Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
             <Pill><Icon icon="desktop" size="1.33em" /> Remote</Pill>
           </div>
@@ -92,18 +95,24 @@ const projects = (await getCollection("work", ({ id }) => {
         </div>
       </section>
 
-      <!-- <section class="section with-background bg-variant">
+      <section class="section with-background bg-variant">
         <header class="section-header stack gap-2 lg:gap-4">
           <h3>Articles</h3>
-          <p>The latest articles I have published.</p>
+          <p>My latest articles published on Medium and Dev.to</p>
         </header>
 
         <div class="gallery">
-          <Grid variant="small">
-            <Article />
+          <Grid variant="offset">
+            {
+              articles.map((article) => (
+                <li>
+                  <ArticlePreview article={article} />
+                </li>
+              ))
+            }
           </Grid>
         </div>
-      </section> -->
+      </section>
     </main>
 
     <ContactCTA />

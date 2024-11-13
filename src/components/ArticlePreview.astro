@@ -1,0 +1,44 @@
+---
+const { article } = Astro.props;
+---
+
+<article class="card">
+  <header>
+    <a href={article.url} target="_blank">
+      <h3 class="title">{article.title}</h3>
+    </a>
+  </header>
+  <p class="description">{article.description}</p>
+  <footer>
+    <span class="platform">{article.platform}</span>
+    <time datetime={article.publishDate.toISOString()}>
+      {article.publishDate.toLocaleDateString()}
+    </time>
+  </footer>
+</article>
+
+<style>
+  .card {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--gray-999);
+    border: 1px solid var(--gray-800);
+  }
+
+  .title {
+    font-size: var(--text-lg);
+    color: var(--gray-200);
+  }
+
+  .description {
+    margin-top: 0.5rem;
+    color: var(--gray-300);
+  }
+
+  footer {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    color: var(--gray-400);
+  }
+</style> 

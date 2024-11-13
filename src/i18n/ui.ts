@@ -11,6 +11,7 @@ export const routes = {
   fr: {
     'work': 'travaux',
     'about': 'a-propos',
+    'articles': 'articles'
   }
 }
  
@@ -19,10 +20,12 @@ export const ui = {
     'nav.home': 'Home',
     'nav.about': 'About',
     'nav.work': 'Work',
+    'nav.articles' : 'Articles'
   },
   fr: {
     'nav.home': 'Accueil',
     'nav.about': 'À propos',
     'nav.work': 'Travaux',
+    'nav.articles' : 'Articles'
   },
 } as const;
