@@ -3,65 +3,353 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 import ContactCTA from "../components/ContactCTA.astro";
 import Hero from "../components/Hero.astro";
+import Icon from "../components/Icon.astro";
+import Pill from "../components/Pill.astro";
+import CallToAction from "../components/CallToAction.astro";
+
+// Import du composant Schema depuis le package astro-seo-schema
+import { Schema } from 'astro-seo-schema';
 ---
 
 <BaseLayout
   title="About | Djamel Bougouffa"
-  description="About Djamel Bougouffa Fullstack Software Engineer"
+  description="About Djamel Bougouffa: Full-Stack Software Engineer with experience in TypeScript, React, Node.js, and DevOps"
 >
   <div class="stack gap-20">
     <main class="wrapper about">
       <Hero
-        title="About"
-        tagline="Thanks for stopping by. Read below to learn more about myself and my background."
+        title="About Me"
+        tagline="Discover my background, skills, and expertise as a Full-Stack Software Engineer."
       >
         <img
           width="1553"
           height="873"
           src="/assets/at-work.jpg"
-          alt="Jeanine White at work with a colleague"
+          alt="Djamel Bougouffa working at his desk with multiple monitors showing code"
         />
       </Hero>
 
-      <section>
+      <section class="section-container">
         <h2 class="section-title">Background</h2>
         <div class="content">
           <p>
-            Fullstack Developer, graduating in 2021 with 3 years' experience
-            (including 2 years on a sandwich course), looking for a position in
-            Node.js and React.js, TypeScript.<br /> Currently working at Wemanity
-            since March 2022. I've been working for Metro since April 2022 as a Fullstack
-            Developer in Node.js, React.js, TypeScript and GraphQL. <br />I also
-            did a year's work experience at Ma Formation Médicale as a Fullstack
-            Developer (Node.js / React.js). I was involved in redesigning the
-            API, updating the databases and redesigning the Front-End of the
-            application. I'm looking for a new position because I'd like to have
-            more remote flexibility.<br /> I'm available immediately on a full remote
-            basis.
+            Hello! I'm a dedicated developer specializing in web development
+            and DevOps. Over the past few years, I've collaborated with multiple
+            companies, leading to the successful creation of 7 operational
+            applications.
+          </p>
+          
+          <div class="experience-item">
+            <h3>SYSTRAN by ChapsVision</h3>
+            <p class="experience-meta">Full-Stack Software Engineer | January 2025 - Present</p>
+            <p>Currently working on enterprise translation solutions using cutting-edge technologies.</p>
+          </div>
+          
+          <div class="experience-item">
+            <h3>Wemanity Group (METRO France)</h3>
+            <p class="experience-meta">Fullstack Developer | March 2022 - March 2024</p>
+            <p>Worked as a Fullstack Developer using Node.js, React.js, TypeScript and GraphQL.</p>
+          </div>
+          
+          <div class="experience-item">
+            <h3>Ma Formation Médicale</h3>
+            <p class="experience-meta">Fullstack Developer | Node.js / React.js</p>
+            <p>Involved in redesigning the API, transitioning legacy PHP codebase to JavaScript, and implementing a modular, component-based architecture.</p>
+          </div>
+          
+          <p>
+            My expertise extends to various RDBMS like MySQL, and I have
+            hands-on experience with DevOps tools including Swarm and
+            Kubernetes. I'm also well-versed in Agile and Scrum
+            methodologies, which I've effectively used to provide strategic
+            leadership on projects.
           </p>
         </div>
       </section>
-      <section>
+
+      <section class="section-container">
         <h2 class="section-title">Education</h2>
         <div class="content">
-          <p>Master's degree in computer engineering / Expert Architect Web</p>
-          <p>Bachelor's degree in computer engineering / Digital Project Manager </p>
+          <div class="education-item">
+            <h3>Master's degree in computer engineering</h3>
+            <p class="education-meta">Expert Architect Web | 2020 - 2021</p>
+            <p>Institut F2I</p>
+            <p class="education-skills">Skills: Docker · Jenkins · JavaScript · Git · CSS · SQL · React.js · REST APIs · Node.js · DevOps</p>
+          </div>
+          
+          <div class="education-item">
+            <h3>Bachelor's degree in computer engineering</h3>
+            <p class="education-meta">Digital Project Manager | 2018 - 2020</p>
+            <p>Institut F2I</p>
+            <p class="education-skills">Skills: JavaScript · Git · CSS · SQL · Node.js</p>
+          </div>
+          
+          <div class="education-item">
+            <h3>Diploma of Advanced Technician</h3>
+            <p class="education-meta">Solutions and Business Applications | 2017 - 2018</p>
+            <p>IRIS - Ecole supérieure d'informatique</p>
+            <p class="education-skills">Skills: JavaScript · Git · CSS · SQL · Node.js</p>
+          </div>
+          
+          <div class="education-item">
+            <h3>Diploma of Advanced Technician</h3>
+            <p class="education-meta">Solutions and Business Applications | 2015 - 2017</p>
+            <p>Lycée Léonard de Vinci de Melun</p>
+            <p class="education-skills">Skills: JavaScript · Git · CSS · SQL · MongoDB · Node.js · Java · Symfony</p>
+          </div>
+          
+          <div class="education-item">
+            <h3>Diploma of Advanced Technician</h3>
+            <p class="education-meta">Solutions and Business Applications | 2014 - 2015</p>
+            <p>CNED</p>
+            <p class="education-skills">Skills: Git · CSS · SQL</p>
+          </div>
+          
+          <div class="education-item">
+            <h3>Professional Baccalaureate</h3>
+            <p class="education-meta">Digital Electronic Systems | 2011 - 2014</p>
+            <p>Lycée La Fayette</p>
+            <p class="education-skills">Skills: SQL</p>
+          </div>
         </div>
       </section>
-      <section>
+
+      <section class="section-container">
         <h2 class="section-title">Skills</h2>
         <div class="content">
-          <p>
-            React, Node, Typescript, Scrum, Kubernetes, Docker, Graphql,
-            Continuous CI/CD, Review, Tests, Hexagonal Architecture, Atomic
-            Design
-          </p>
+          <div class="skills-grid">
+            <div class="skill-category">
+              <h3><Icon icon="code" size="1.33em" /> Frontend</h3>
+              <ul class="skill-list">
+                <li>React</li>
+                <li>Next.js</li>
+                <li>TypeScript</li>
+                <li>JavaScript</li>
+                <li>CSS</li>
+              </ul>
+            </div>
+            
+            <div class="skill-category">
+              <h3><Icon icon="terminal-window" size="1.33em" /> Backend</h3>
+              <ul class="skill-list">
+                <li>Node.js</li>
+                <li>Express.js</li>
+                <li>GraphQL</li>
+                <li>REST APIs</li>
+              </ul>
+            </div>
+            
+            <div class="skill-category">
+              <h3><Icon icon="devops-logo" size="1.33em" /> DevOps</h3>
+              <ul class="skill-list">
+                <li>Docker</li>
+                <li>Kubernetes</li>
+                <li>Swarm</li>
+                <li>CI/CD</li>
+                <li>GitHub Actions</li>
+                <li>Cloud Platforms</li>
+              </ul>
+            </div>
+            
+            <div class="skill-category">
+              <h3><Icon icon="strategy" size="1.33em" /> Methodologies</h3>
+              <ul class="skill-list">
+                <li>Agile</li>
+                <li>Scrum</li>
+                <li>Test-Driven Development</li>
+                <li>Code Review</li>
+              </ul>
+            </div>
+            
+            <div class="skill-category">
+              <h3><Icon icon="pencil-line" size="1.33em" /> Architecture</h3>
+              <ul class="skill-list">
+                <li>Hexagonal Architecture</li>
+                <li>Atomic Design</li>
+                <li>Modular Component-based Design</li>
+              </ul>
+            </div>
+            
+            <div class="skill-category">
+              <h3><Icon icon="github-logo" size="1.33em" /> Tools</h3>
+              <ul class="skill-list">
+                <li>Git</li>
+                <li>VSCode</li>
+                <li>Docker</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-container">
+        <h2 class="section-title">Languages</h2>
+        <div class="content">
+          <div class="languages-grid">
+            <div class="language-item">
+              <h3>Français</h3>
+              <p>Native or Bilingual</p>
+            </div>
+            
+            <div class="language-item">
+              <h3>English</h3>
+              <p>Full Professional</p>
+            </div>
+            
+            <div class="language-item">
+              <h3>Allemand</h3>
+              <p>Elementary</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-container">
+        <h2 class="section-title">Contact</h2>
+        <div class="content">
+          <div class="contact-grid">
+            <div class="contact-item">
+              <h3><Icon icon="paper-plane-tilt" size="1.33em" /> Email</h3>
+              <p><a href="mailto:dbougouffa@gmail.com">dbougouffa@gmail.com</a></p>
+            </div>
+            
+            <div class="contact-item">
+              <h3><Icon icon="desktop" size="1.33em" /> Phone</h3>
+              <p><a href="tel:+33621562848">+33621562848</a></p>
+            </div>
+            
+            <div class="contact-item">
+              <h3><Icon icon="linkedin-logo" size="1.33em" /> LinkedIn</h3>
+              <p><a href="https://www.linkedin.com/in/djamel-bougouffa" target="_blank">www.linkedin.com/in/djamel-bougouffa</a></p>
+            </div>
+            
+            <div class="contact-item">
+              <h3><Icon icon="github-logo" size="1.33em" /> GitHub</h3>
+              <p><a href="https://github.com/Strawbang" target="_blank">github.com/Strawbang</a></p>
+            </div>
+            
+            <div class="contact-item">
+              <h3><Icon icon="rocket-launch" size="1.33em" /> Portfolio</h3>
+              <p><a href="https://djamel-bougouffa.com" target="_blank">djamel-bougouffa.com</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-container">
+        <h2 class="section-title">Resume</h2>
+        <div class="content">
+          <p>Want a copy of my resume? Download it here:</p>
+          <CallToAction href="/assets/Resume_Djamel_Bougouffa_Full_Stack_Software_Engineer.pdf">
+            Download Resume
+            <Icon icon="arrow-right" size="1.2em" />
+          </CallToAction>
         </div>
       </section>
     </main>
 
     <ContactCTA />
   </div>
+
+  <Schema
+    item={{
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: "Djamel Bougouffa",
+      jobTitle: "Full-Stack Software Engineer",
+      description: "Full-Stack Software Engineer with over 5 years of experience specializing in TypeScript, React, Node.js, and DevOps. Passionate about building scalable web applications and optimizing development workflows.",
+      image: "https://strawbang.github.io/portfolio/assets/at-work.jpg",
+      url: "https://strawbang.github.io/portfolio/about/",
+      email: "djamel.bougouffa@gmail.com",
+      telephone: "+33621562848",
+      sameAs: [
+        "https://github.com/strawbang",
+        "https://www.linkedin.com/in/djamel-bougouffa/",
+        "https://twitter.com/strawbang",
+        "https://www.instagram.com/strawbang",
+        "https://dev.to/strawbang",
+        "https://medium.com/@strawbang"
+      ],
+      knowsLanguage: ["en", "fr"],
+      workLocation: {
+        "@type": "Place",
+        name: "Paris, France",
+        address: "Paris, France"
+      },
+      worksFor: {
+        "@type": "Organization",
+        name: "Freelance",
+        url: "https://strawbang.github.io/portfolio/"
+      },
+      alumniOf: [
+        {
+          "@type": "EducationalOrganization",
+          name: "Institut F2I",
+          url: "https://www.f2i-institute.com/",
+          description: "Master's degree in computer engineering / Expert Architect Web",
+          startDate: "2020",
+          endDate: "2021"
+        },
+        {
+          "@type": "EducationalOrganization",
+          name: "Institut F2I",
+          url: "https://www.f2i-institute.com/",
+          description: "Bachelor's degree in computer engineering / Digital Project Manager",
+          startDate: "2018",
+          endDate: "2020"
+        },
+        {
+          "@type": "EducationalOrganization",
+          name: "IRIS - Ecole supérieure d'informatique",
+          description: "Diploma of Advanced Technician Solutions and Business Applications",
+          startDate: "2017",
+          endDate: "2018"
+        },
+        {
+          "@type": "EducationalOrganization",
+          name: "Lycée Léonard de Vinci de Melun",
+          description: "Diploma of Advanced Technician Solutions and Business Applications",
+          startDate: "2015",
+          endDate: "2017"
+        },
+        {
+          "@type": "EducationalOrganization",
+          name: "CNED",
+          url: "https://www.cned.fr/",
+          description: "Diploma of Advanced Technician Solutions and Business Applications",
+          startDate: "2014",
+          endDate: "2015"
+        },
+        {
+          "@type": "EducationalOrganization",
+          name: "Lycée La Fayette",
+          description: "Professional Baccalaureate in Digital Electronic Systems",
+          startDate: "2011",
+          endDate: "2014"
+        }
+      ],
+      skills: [
+        "TypeScript",
+        "JavaScript",
+        "React",
+        "Node.js",
+        "Express.js",
+        "Next.js",
+        "DevOps",
+        "Docker",
+        "Kubernetes",
+        "AWS",
+        "CI/CD",
+        "MongoDB",
+        "PostgreSQL"
+      ],
+      seeks: {
+        "@type": "Demand",
+        description: "Full-time position or freelance opportunities in web development and software engineering"
+      },
+      availableForHire: true
+    }}
+  />
 </BaseLayout>
 
 <style>
@@ -77,21 +365,81 @@ import Hero from "../components/Hero.astro";
     box-shadow: var(--shadow-md);
   }
 
-  section {
+  .section-container {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     color: var(--gray-200);
+    margin-bottom: 2rem;
   }
 
   .section-title {
     grid-column-start: 1;
     font-size: var(--text-xl);
     color: var(--gray-0);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--gray-800);
+    padding-bottom: 0.5rem;
   }
 
   .content {
     grid-column: 2 / 4;
+  }
+
+  .content h3 {
+    color: var(--accent-regular);
+    font-size: var(--text-lg);
+    margin-bottom: 0.5rem;
+  }
+
+  .experience-item, .education-item {
+    margin-bottom: 1.5rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--accent-regular);
+  }
+
+  .experience-meta, .education-meta {
+    font-style: italic;
+    color: var(--gray-300);
+    margin-bottom: 0.5rem;
+  }
+
+  .skills-grid, .languages-grid, .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-category, .language-item, .contact-item {
+    background-color: var(--gray-999);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .skill-category:hover, .language-item:hover, .contact-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .skill-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+  }
+
+  .skill-list li {
+    margin-bottom: 0.25rem;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .skill-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--accent-regular);
   }
 
   .content :global(a) {
@@ -115,9 +463,15 @@ import Hero from "../components/Hero.astro";
       grid-column-start: 2;
     }
 
-    section {
+    .section-container {
       display: contents;
       font-size: var(--text-lg);
+    }
+  }
+
+  @media (max-width: 50em) {
+    .skills-grid, .languages-grid, .contact-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>

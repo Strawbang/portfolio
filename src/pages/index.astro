@@ -13,6 +13,7 @@ import Pill from "../components/Pill.astro";
 import PortfolioPreview from "../components/PortfolioPreview.astro";
 import ArticlePreview from "../components/ArticlePreview.astro";
 import { fetchArticles } from "../services/articles";
+import { Schema } from "astro-seo-schema";
 
 // Page section components
 import ContactCTA from "../components/ContactCTA.astro";
@@ -35,18 +36,18 @@ const articles = await fetchArticles();
 // https://docs.astro.build/core-concepts/astro-components/
 ---
 
-<BaseLayout>
+<BaseLayout title="Djamel Bougouffa | Full-Stack Software Engineer" description="Portfolio de Djamel Bougouffa, Full-Stack Software Engineer spécialisé en TypeScript, React, Node.js et DevOps avec plus de 5 ans d'expérience.">
   <div class="stack gap-20 lg:gap-48">
     <div class="wrapper stack gap-8 lg:gap-20">
       <header class="hero">
         <Hero
           title="Hello, my name is Djamel Bougouffa"
-          tagline="I am a Fullstack Software Engineer"
+          tagline="I am a Full-Stack Software Engineer specializing in TypeScript, React, Node.js, and DevOps"
           align="start"
         >
           <div class="roles">
             <Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
-            <Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
+            <Pill><Icon icon="devops-logo" size="1.33em" /> DevOps</Pill>
             <Pill><Icon icon="desktop" size="1.33em" /> Remote</Pill>
           </div>
           <div class="download">
@@ -59,7 +60,7 @@ const articles = await fetchArticles();
           </div>
         </Hero>
 
-        <Image src={portrait} alt="Djamel Bougouffa think about new code!" width="480" height="620" />
+        <Image src={portrait} alt="Djamel Bougouffa, Full-Stack Software Engineer portrait" width="480" height="620" />
       </header>
 
       <Skills />
@@ -70,8 +71,8 @@ const articles = await fetchArticles();
         <header class="section-header stack gap-2 lg:gap-4">
           <h3>Selected Work</h3>
           <p>
-            Take a look below at some of my featured work for clients from the
-            past few years.
+            Take a look below at some of my featured work from the past few years, 
+            where I've successfully delivered 7 operational applications across various industries.
           </p>
         </header>
 
@@ -117,6 +118,97 @@ const articles = await fetchArticles();
 
     <ContactCTA />
   </div>
+
+  <!-- Données structurées pour les IA comme ChatGPT -->
+  <Schema
+    item={{
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: "Djamel Bougouffa",
+      jobTitle: "Full-Stack Software Engineer",
+      description: "Full-Stack Software Engineer with over 5 years of experience specializing in TypeScript, React, Node.js, and DevOps. Passionate about building scalable web applications and optimizing development workflows.",
+      image: "https://strawbang.github.io/portfolio/assets/at-work.jpg",
+      url: "https://strawbang.github.io/portfolio/about/",
+      email: "djamel.bougouffa@gmail.com",
+      sameAs: [
+        "https://github.com/strawbang",
+        "https://www.linkedin.com/in/djamel-bougouffa/"
+      ],
+      skills: [
+        "TypeScript",
+        "JavaScript",
+        "React",
+        "Node.js",
+        "Express.js",
+        "Next.js",
+        "DevOps",
+        "Docker",
+        "Kubernetes",
+        "AWS",
+        "CI/CD",
+        "MongoDB",
+        "PostgreSQL"
+      ],
+      worksFor: {
+        "@type": "Organization",
+        name: "Systran By ChapsVision",
+        url: "https://strawbang.github.io/portfolio/"
+      },
+      alumniOf: [
+        {
+          "@type": "EducationalOrganization",
+          name: "Institut F2I",
+          url: "https://www.f2i-institute.com/",
+          description: "Master's degree in computer engineering / Expert Architect Web",
+          startDate: "2020",
+          endDate: "2021"
+        },
+        {
+          "@type": "EducationalOrganization",
+          name: "Institut F2I",
+          url: "https://www.f2i-institute.com/",
+          description: "Bachelor's degree in computer engineering / Digital Project Manager",
+          startDate: "2018",
+          endDate: "2020"
+        },
+        {
+          "@type": "EducationalOrganization",
+          name: "IRIS - Ecole supérieure d'informatique",
+          description: "Diploma of Advanced Technician Solutions and Business Applications",
+          startDate: "2017",
+          endDate: "2018"
+        },
+        {
+          "@type": "EducationalOrganization",
+          name: "Lycée Léonard de Vinci de Melun",
+          description: "Diploma of Advanced Technician Solutions and Business Applications",
+          startDate: "2015",
+          endDate: "2017"
+        },
+        {
+          "@type": "EducationalOrganization",
+          name: "CNED",
+          url: "https://www.cned.fr/",
+          description: "Diploma of Advanced Technician Solutions and Business Applications",
+          startDate: "2014",
+          endDate: "2015"
+        },
+        {
+          "@type": "EducationalOrganization",
+          name: "Lycée La Fayette",
+          description: "Professional Baccalaureate in Digital Electronic Systems",
+          startDate: "2011",
+          endDate: "2014"
+        }
+      ],
+      knowsLanguage: ["en", "fr"],
+      seeks: {
+        "@type": "Demand",
+        description: "Looking for new opportunities as a Full-Stack Software Engineer"
+      },
+      availableForHire: true
+    }}
+  />
 </BaseLayout>
 
 <style>
@@ -204,6 +296,7 @@ const articles = await fetchArticles();
 
   .section-header h3 {
     font-size: var(--text-2xl);
+    color: var(--gray-0);
   }
 
   @media (min-width: 50em) {
@@ -237,6 +330,28 @@ const articles = await fetchArticles();
 
     .cta {
       grid-area: cta;
+    }
+  }
+
+  /* ====================================================== */
+
+  .mention-card {
+    display: flex;
+    height: 7rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid var(--gray-800);
+    border-radius: 1.5rem;
+    color: var(--gray-300);
+    background: var(--gradient-subtle);
+    box-shadow: var(--shadow-sm);
+  }
+
+  @media (min-width: 50em) {
+    .mention-card {
+      border-radius: 1.5rem;
+      height: 9.5rem;
     }
   }
 </style>

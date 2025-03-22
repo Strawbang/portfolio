@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import BaseLayout from "../../layouts/FrenchBaseLayout.astro";
 
 // Component Imports
 import CallToAction from "../../components/CallToAction.astro";
@@ -13,6 +13,7 @@ import Pill from "../../components/Pill.astro";
 import PortfolioPreview from "../../components/PortfolioPreview.astro";
 import ArticlePreview from "../../components/ArticlePreview.astro";
 import { fetchArticles } from "../../services/articles";
+import { Schema } from "astro-seo-schema";
 
 // Page section components
 import ContactCTA from "../../components/fr/ContactCTA.astro";
@@ -35,18 +36,18 @@ const articles = await fetchArticles();
 // https://docs.astro.build/core-concepts/astro-components/
 ---
 
-<BaseLayout>
+<BaseLayout title="Djamel Bougouffa | Ingénieur Logiciel Full-Stack" description="Portfolio de Djamel Bougouffa, Ingénieur Logiciel Full-Stack spécialisé en TypeScript, React, Node.js et DevOps avec plus de 5 ans d'expérience.">
   <div class="stack gap-20 lg:gap-48">
     <div class="wrapper stack gap-8 lg:gap-20">
       <header class="hero">
         <Hero
           title="Bonjour, je m'appelle Djamel Bougouffa"
-          tagline="Je suis un ingénieur logiciel Fullstack"
+          tagline="Je suis un Ingénieur Logiciel Full-Stack spécialisé en TypeScript, React, Node.js et DevOps"
           align="start"
         >
           <div class="roles">
             <Pill><Icon icon="code" size="1.33em" /> Développeur</Pill>
-            <Pill><Icon icon="pencil-line" size="1.33em" /> Écrivain</Pill>
+            <Pill><Icon icon="devops-logo" size="1.33em" /> DevOps</Pill>
             <Pill><Icon icon="desktop" size="1.33em" /> À distance</Pill>
           </div>
           <div class="download">
@@ -117,6 +118,96 @@ const articles = await fetchArticles();
 
     <ContactCTA />
   </div>
+  
+  <Schema 
+    item={{
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: "Djamel Bougouffa",
+      jobTitle: "Ingénieur Logiciel Full-Stack",
+      description: "Ingénieur Logiciel Full-Stack avec plus de 5 ans d'expérience, spécialisé en TypeScript, React, Node.js et DevOps. Passionné par la création d'applications web évolutives et l'optimisation des flux de développement.",
+      image: "https://strawbang.github.io/portfolio/assets/at-work.jpg",
+      url: "https://strawbang.github.io/portfolio/fr/a-propos/",
+      email: "djamel.bougouffa@gmail.com",
+      sameAs: [
+        "https://github.com/strawbang",
+        "https://www.linkedin.com/in/djamel-bougouffa/"
+      ],
+      skills: [
+        "TypeScript",
+        "JavaScript",
+        "React",
+        "Node.js",
+        "Express.js",
+        "Next.js",
+        "DevOps",
+        "Docker",
+        "Kubernetes",
+        "AWS",
+        "CI/CD",
+        "MongoDB",
+        "PostgreSQL"
+      ],
+      worksFor: {
+        "@type": "Organization",
+        name: "Freelance",
+        url: "https://strawbang.github.io/portfolio/"
+      },
+      alumniOf: [
+        {
+          "@type": "EducationalOrganization",
+          name: "Institut F2I",
+          url: "https://www.f2i-institute.com/",
+          description: "Master en ingénierie informatique / Expert Architecte Web",
+          startDate: "2020",
+          endDate: "2021"
+        },
+        {
+          "@type": "EducationalOrganization",
+          name: "Institut F2I",
+          url: "https://www.f2i-institute.com/",
+          description: "Licence en ingénierie informatique / Chef de Projet Digital",
+          startDate: "2018",
+          endDate: "2020"
+        },
+        {
+          "@type": "EducationalOrganization",
+          name: "IRIS - Ecole supérieure d'informatique",
+          description: "BTS Solutions et Applications aux Processus Métiers",
+          startDate: "2017",
+          endDate: "2018"
+        },
+        {
+          "@type": "EducationalOrganization",
+          name: "Lycée Léonard de Vinci de Melun",
+          description: "BTS Solutions et Applications aux Processus Métiers",
+          startDate: "2015",
+          endDate: "2017"
+        },
+        {
+          "@type": "EducationalOrganization",
+          name: "CNED",
+          url: "https://www.cned.fr/",
+          description: "BTS Solutions et Applications aux Processus Métiers",
+          startDate: "2014",
+          endDate: "2015"
+        },
+        {
+          "@type": "EducationalOrganization",
+          name: "Lycée La Fayette",
+          description: "Baccalauréat Professionnel Systèmes Électroniques Numériques",
+          startDate: "2011",
+          endDate: "2014"
+        }
+      ],
+      knowsLanguage: ["fr", "en"],
+      seeks: {
+        "@type": "Demand",
+        description: "Recherche de nouvelles opportunités en tant qu'Ingénieur Logiciel Full-Stack"
+      },
+      availableForHire: true
+    }}
+  />
 </BaseLayout>
 
 <style>

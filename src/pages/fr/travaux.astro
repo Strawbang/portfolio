@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import FrenchBaseLayout from "../../layouts/FrenchBaseLayout.astro";
 
 import ContactCTA from "../../components/fr/ContactCTA.astro";
 import PortfolioPreview from "../../components/PortfolioPreview.astro";
@@ -15,7 +15,7 @@ const projects = (await getCollection("work", ({ id }) => {
 );
 ---
 
-<BaseLayout
+<FrenchBaseLayout
   title="Mes Projets | Djamel Bougouffa"
   description="Découvrez les projets les plus récents de Djamel Bougouffa"
 >
@@ -38,5 +38,4 @@ const projects = (await getCollection("work", ({ id }) => {
     </main>
     <ContactCTA />
   </div>
-</BaseLayout>
-
+</FrenchBaseLayout>

@@ -3,15 +3,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ArticlePreview from "../components/ArticlePreview.astro";
 import { fetchArticles } from "../services/articles";
 
-// Fetch all articles
+// Récupérer tous les articles
 const articles = await fetchArticles();
 ---
 
-<BaseLayout>
+<BaseLayout
+  title="Articles | Portfolio - Développeur Full-Stack"
+  description="Découvrez mes articles publiés sur Medium et Dev.to sur le développement web, TypeScript, React, Node.js et plus encore."
+>
   <div class="wrapper stack gap-20">
     <header class="section-header stack gap-2 lg:gap-4">
-      <h1>My Blog</h1>
-      <p>Here are all my articles published on Medium and Dev.to.</p>
+      <h1>Mes Articles</h1>
+      <p>Voici tous mes articles publiés sur Medium et Dev.to.</p>
     </header>
 
     <ul class="gallery">
@@ -35,4 +38,4 @@ const articles = await fetchArticles();
     padding: 0;
     margin: 0;
   }
-</style> 
+</style>

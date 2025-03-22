@@ -1,5 +1,5 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import BaseLayout from "../../layouts/FrenchBaseLayout.astro";
 import ArticlePreview from "../../components/ArticlePreview.astro";
 import { fetchArticles } from "../../services/articles";
 
@@ -7,7 +7,10 @@ import { fetchArticles } from "../../services/articles";
 const articles = await fetchArticles();
 ---
 
-<BaseLayout>
+<BaseLayout
+  title="Articles | Portfolio - Développeur Full-Stack"
+  description="Découvrez mes articles publiés sur Medium et Dev.to sur le développement web, TypeScript, React, Node.js et plus encore."
+>
   <div class="wrapper stack gap-20">
     <header class="section-header stack gap-2 lg:gap-4">
       <h1>Mon Blog</h1>
@@ -35,4 +38,4 @@ const articles = await fetchArticles();
     padding: 0;
     margin: 0;
   }
-</style> 
+</style>

@@ -1,0 +1,160 @@
+---
+// Composant pour ajouter les données structurées Schema.org Person
+// Cela aide les IA comme ChatGPT à mieux comprendre votre profil professionnel
+
+interface Props {
+  name: string;
+  jobTitle: string;
+  description: string;
+  image: string;
+  sameAs: string[];
+  url: string;
+  email?: string;
+  telephone?: string;
+  skills?: string[];
+  worksFor?: {
+    name: string;
+    url?: string;
+  };
+  alumniOf?: {
+    name: string;
+    url?: string;
+  }[];
+  knowsLanguage?: string[];
+  workLocation?: {
+    name: string;
+    address?: string;
+  };
+  awards?: string[];
+  projects?: {
+    name: string;
+    url?: string;
+    description?: string;
+  }[];
+  publications?: {
+    name: string;
+    url?: string;
+    description?: string;
+  }[];
+  seeks?: string;
+  availability?: string;
+  yearsOfExperience?: number;
+}
+
+const {
+  name,
+  jobTitle,
+  description,
+  image,
+  sameAs,
+  url,
+  email,
+  telephone,
+  skills = [],
+  worksFor,
+  alumniOf = [],
+  knowsLanguage = [],
+  workLocation,
+  awards = [],
+  projects = [],
+  publications = [],
+  seeks,
+  availability,
+  yearsOfExperience
+} = Astro.props;
+
+// Construction de l'objet JSON-LD
+const personSchema: any = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": name,
+  "jobTitle": jobTitle,
+  "description": description,
+  "image": image,
+  "sameAs": sameAs,
+  "url": url
+};
+
+// Ajout des propriétés optionnelles
+if (email) personSchema.email = email;
+if (telephone) personSchema.telephone = telephone;
+if (skills.length > 0) personSchema.skills = skills;
+
+// Ajout de l'organisation pour laquelle la personne travaille
+if (worksFor) {
+  personSchema.worksFor = {
+    "@type": "Organization",
+    "name": worksFor.name,
+    ...(worksFor.url && { "url": worksFor.url })
+  };
+}
+
+// Ajout des établissements d'enseignement
+if (alumniOf.length > 0) {
+  personSchema.alumniOf = alumniOf.map(org => ({
+    "@type": "EducationalOrganization",
+    "name": org.name,
+    ...(org.url && { "url": org.url })
+  }));
+}
+
+// Ajout des langues parlées
+if (knowsLanguage.length > 0) {
+  personSchema.knowsLanguage = knowsLanguage;
+}
+
+// Ajout du lieu de travail
+if (workLocation) {
+  personSchema.workLocation = {
+    "@type": "Place",
+    "name": workLocation.name,
+    ...(workLocation.address && { "address": workLocation.address })
+  };
+}
+
+// Ajout des récompenses et distinctions
+if (awards.length > 0) {
+  personSchema.awards = awards;
+}
+
+// Ajout des projets
+if (projects.length > 0) {
+  personSchema.memberOf = projects.map(project => ({
+    "@type": "Project",
+    "name": project.name,
+    ...(project.url && { "url": project.url }),
+    ...(project.description && { "description": project.description })
+  }));
+}
+
+// Ajout des publications
+if (publications.length > 0) {
+  personSchema.publications = publications.map(publication => ({
+    "@type": "CreativeWork",
+    "name": publication.name,
+    ...(publication.url && { "url": publication.url }),
+    ...(publication.description && { "description": publication.description })
+  }));
+}
+
+// Ajout des informations de recherche d'emploi
+if (seeks) {
+  personSchema.seeks = {
+    "@type": "Demand",
+    "description": seeks
+  };
+}
+
+// Ajout de la disponibilité
+if (availability) {
+  personSchema.availability = availability;
+}
+
+// Ajout des années d'expérience
+if (yearsOfExperience) {
+  personSchema.yearsOfExperience = yearsOfExperience;
+}
+---
+
+<!-- Rendu des données structurées en JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)}></script>
