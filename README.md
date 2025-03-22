@@ -1,12 +1,16 @@
-# Astro Starter Kit: Portfolio
+# Djamel Bougouffa's Portfolio | Full-Stack Software Engineer
 
-```
-npm create astro@latest -- --template portfolio
-```
+A professional bilingual portfolio (English/French) built with Astro, optimized for SEO and interpretation by AI like ChatGPT.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/portfolio)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/portfolio)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/portfolio/devcontainer.json)
+## ✨ Features
+
+- **Responsive design** adapted to all devices
+- **Bilingual site** with English and French versions
+- **SEO optimization** with metadata and Schema.org structured data
+- **Optimal performance** thanks to Astro
+- **Project showcase** with detailed descriptions
+- **About page** with professional background and skills
+- **Articles page** for sharing technical knowledge
 
 ## 🧞 Commands
 
@@ -15,12 +19,38 @@ All commands are run from the root of the project, from a terminal:
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
 | `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:3000`      |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
 | `npm run build`           | Build your production site to `./dist/`          |
 | `npm run preview`         | Preview your build locally, before deploying     |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
+## 🛠️ Technologies Used
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- [Astro](https://astro.build/) - High-performance web framework
+- [astro-seo-schema](https://www.npmjs.com/package/astro-seo-schema) - Schema.org structured data integration
+- HTML/CSS - Structure and styling
+- TypeScript - Logic and typing
+- Markdown - Project and article content
+
+## 🔍 SEO and AI Optimization
+
+This portfolio is optimized for search engines and AI like ChatGPT through:
+
+- Complete metadata (title, description) on all pages
+- Schema.org structured data for better interpretation
+- Semantic content structure
+- Consistency between English and French versions
+- Alternative text for images
+
+## 🌐 Deployment
+
+The site is deployed on [Netlify](https://www.netlify.com/) and accessible at [https://djamel-bougouffa.com/](https://djamel-bougouffa.com/).
+
+## 📝 License
+
+This project is based on Astro's portfolio template, modified and customized for my needs.
+
+---
+
+*This README was last updated on March 22, 2025.*
