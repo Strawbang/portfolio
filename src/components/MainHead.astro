@@ -25,7 +25,16 @@ const {
 <link
   href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400&family=Rubik:wght@500;600&display=swap"
   rel="stylesheet"
+  media="print"
+  onload="this.media='all'"
 />
+<!-- Fallback pour les navigateurs qui ne supportent pas l'attribut onload -->
+<noscript>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400&family=Rubik:wght@500;600&display=swap"
+    rel="stylesheet"
+  />
+</noscript>
 
 <script is:inline>
   // This code is inlined in the head to make dark mode instant & blocking.

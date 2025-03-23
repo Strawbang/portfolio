@@ -1,0 +1,68 @@
+---
+// OptimizedImage.astro
+// Composant pour servir des images optimisées avec WebP et AVIF
+
+interface Props {
+  src: string;          // Chemin de l'image originale
+  alt: string;          // Texte alternatif
+  width?: number;       // Largeur optionnelle
+  height?: number;      // Hauteur optionnelle
+  class?: string;       // Classes CSS optionnelles
+  loading?: 'lazy' | 'eager'; // Stratégie de chargement
+}
+
+const { 
+  src, 
+  alt, 
+  width, 
+  height, 
+  class: className = '', 
+  loading = 'lazy' 
+} = Astro.props;
+
+// Extraire le nom de base et l'extension
+const srcPath = src.startsWith('/') ? src : `/${src}`;
+const basePath = srcPath.substring(0, srcPath.lastIndexOf('.'));
+const ext = srcPath.substring(srcPath.lastIndexOf('.') + 1);
+
+// Construire les chemins pour les versions optimisées
+const webpSrc = `/assets/optimized${basePath.substring(basePath.lastIndexOf('/'))}.webp`;
+const avifSrc = `/assets/optimized${basePath.substring(basePath.lastIndexOf('/'))}.avif`;
+
+// Attributs communs pour l'élément img
+const imgAttributes = {
+  alt,
+  loading,
+  ...(width ? { width } : {}),
+  ...(height ? { height } : {}),
+  class: className,
+};
+---
+
+<picture>
+  <!-- Format AVIF pour les navigateurs compatibles -->
+  <source srcset={avifSrc} type="image/avif" />
+  
+  <!-- Format WebP pour les navigateurs compatibles -->
+  <source srcset={webpSrc} type="image/webp" />
+  
+  <!-- Image originale comme fallback -->
+  <img src={srcPath} {...imgAttributes} />
+</picture>
+
+<style>
+  picture {
+    display: block;
+    width: 100%;
+  }
+  
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    background: var(--gradient-subtle);
+    border: 1px solid var(--gray-800);
+  }
+</style>

@@ -1,5 +1,5 @@
 ---
-import { CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content';
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
@@ -7,6 +7,7 @@ import ContactCTA from '../../components/ContactCTA.astro';
 import Hero from '../../components/Hero.astro';
 import Icon from '../../components/Icon.astro';
 import Pill from '../../components/Pill.astro';
+import OptimizedImage from '../../components/OptimizedImage.astro';
 
 interface Props {
 	entry: CollectionEntry<'work'>;
@@ -45,7 +46,7 @@ const { Content } = await entry.render();
 			</header>
 			<main class="wrapper">
 				<div class="stack gap-10 content">
-					{entry.data.img && <img src={entry.data.img} alt={entry.data.img_alt || ''} />}
+					{entry.data.img && <OptimizedImage src={entry.data.img} alt={entry.data.img_alt || ''} />}
 					<div class="content">
 						<Content />
 					</div>
@@ -100,13 +101,6 @@ const { Content } = await entry.render();
 	.content :global(h4),
 	.content :global(h5) {
 		margin: 1.5rem 0;
-	}
-
-	.content :global(img) {
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-sm);
-		background: var(--gradient-subtle);
-		border: 1px solid var(--gray-800);
 	}
 
 	.content :global(blockquote) {
