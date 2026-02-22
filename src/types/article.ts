@@ -2,7 +2,8 @@ export interface Article {
   title: string;
   description: string;
   url: string;
-  platform: 'Medium' | 'Dev.to';
+  platform: 'Medium' | 'Dev.to' | 'Blog';
+  platforms?: ('Medium' | 'Dev.to' | 'Blog')[];
   publishDate: Date;
   imageUrl?: string;
 }

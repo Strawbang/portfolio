@@ -10,9 +10,14 @@ import Footer from '../components/Footer.astro';
 interface Props {
 	title?: string | undefined;
 	description?: string | undefined;
+	canonicalURL?: string | undefined;
+	image?: string | undefined;
+	type?: 'website' | 'article';
+	publishedTime?: string | undefined;
+	tags?: string[];
 }
 
-const { title, description } = Astro.props;
+const { title, description, canonicalURL, image, type, publishedTime, tags } = Astro.props;
 
 import { getLangFromUrl } from '../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
@@ -20,7 +25,15 @@ const lang = getLangFromUrl(Astro.url);
 
 <html lang={lang}>
 	<head>
-		<MainHead title={title} description={description} />
+		<MainHead 
+			title={title} 
+			description={description} 
+			canonicalURL={canonicalURL}
+			image={image}
+			type={type}
+			publishedTime={publishedTime}
+			tags={tags}
+		/>
 	</head>
 	<body>
 		<div class="stack backgrounds">

@@ -1,8 +1,100 @@
 ---
-import Hero from '../components/Hero.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CallToAction from '../components/CallToAction.astro';
+import Icon from '../components/Icon.astro';
+
+const messages: Record<string, { title: string; tagline: string; cta: string }> = {
+  fr: { title: 'Page introuvable', tagline: "Oups ! Cette page n'existe pas ou a été déplacée.", cta: "Retour à l'accueil" },
+  de: { title: 'Seite nicht gefunden', tagline: 'Hoppla! Diese Seite existiert nicht oder wurde verschoben.', cta: 'Zurück zur Startseite' },
+  es: { title: 'Página no encontrada', tagline: '¡Ups! Esta página no existe o ha sido movida.', cta: 'Volver al inicio' },
+  pt: { title: 'Página não encontrada', tagline: 'Ops! Esta página não existe ou foi movida.', cta: 'Voltar ao início' },
+  ja: { title: 'ページが見つかりません', tagline: 'このページは存在しないか、移動されました。', cta: 'ホームに戻る' },
+  zh: { title: '页面未找到', tagline: '哎呀！此页面不存在或已被移动。', cta: '返回首页' },
+  ko: { title: '페이지를 찾을 수 없습니다', tagline: '이 페이지는 존재하지 않거나 이동되었습니다.', cta: '홈으로 돌아가기' },
+  ar: { title: 'الصفحة غير موجودة', tagline: 'عذراً! هذه الصفحة غير موجودة أو تم نقلها.', cta: 'العودة إلى الرئيسية' },
+  hi: { title: 'पृष्ठ नहीं मिला', tagline: 'उफ़! यह पृष्ठ मौजूद नहीं है या स्थानांतरित कर दिया गया है।', cta: 'होम पर वापस जाएं' },
+  th: { title: 'ไม่พบหน้านี้', tagline: 'อุ๊ปส์! หน้านี้ไม่มีอยู่หรือถูกย้ายแล้ว', cta: 'กลับหน้าหลัก' },
+  vi: { title: 'Không tìm thấy trang', tagline: 'Rất tiếc! Trang này không tồn tại hoặc đã được di chuyển.', cta: 'Về trang chủ' },
+  ms: { title: 'Halaman tidak dijumpai', tagline: 'Oops! Halaman ini tidak wujud atau telah dipindahkan.', cta: 'Kembali ke utama' },
+  id: { title: 'Halaman tidak ditemukan', tagline: 'Ups! Halaman ini tidak ada atau telah dipindahkan.', cta: 'Kembali ke beranda' },
+  tl: { title: 'Hindi nahanap ang pahina', tagline: 'Oops! Ang pahinang ito ay wala o inilipat na.', cta: 'Bumalik sa tahanan' },
+  en: { title: 'Page Not Found', tagline: "Oops! This page doesn't exist or has been moved.", cta: 'Back to Home' },
+};
 ---
 
-<BaseLayout title="Not Found" description="404 Error — this page was not found">
-	<Hero title="Page Not Found" tagline="Not found" />
+<BaseLayout title="404 — Page Not Found" description="This page could not be found.">
+  <div class="wrapper stack gap-20">
+    <div class="error-container stack gap-8">
+      <div class="error-code">404</div>
+      <div id="msg-title" class="error-title">{messages.en.title}</div>
+      <p id="msg-tagline" class="error-tagline">{messages.en.tagline}</p>
+      <div class="cta-wrapper">
+        <a id="msg-cta" href="/" class="cta-link">
+          {messages.en.cta} <Icon icon="arrow-right" size="1.2em" />
+        </a>
+      </div>
+    </div>
+  </div>
 </BaseLayout>
+
+<script define:vars={{ messages }}>
+  const lang = navigator.language?.split('-')[0] ?? 'en';
+  const m = messages[lang] ?? messages['en'];
+  const prefix = lang !== 'en' && messages[lang] ? `/${lang}` : '';
+
+  document.getElementById('msg-title').textContent = m.title;
+  document.getElementById('msg-tagline').textContent = m.tagline;
+  const cta = document.getElementById('msg-cta');
+  cta.textContent = m.cta;
+  cta.href = prefix + '/';
+</script>
+
+<style>
+  .error-container {
+    text-align: center;
+    padding: 6rem 1rem;
+    align-items: center;
+  }
+
+  .error-code {
+    font-size: 8rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--accent-regular);
+    opacity: 0.3;
+  }
+
+  .error-title {
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    color: var(--gray-0);
+  }
+
+  .error-tagline {
+    font-size: var(--text-lg);
+    color: var(--gray-300);
+    max-width: 40ch;
+  }
+
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--accent-regular);
+    color: var(--accent-text-over);
+    border-radius: 999rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background var(--theme-transition);
+  }
+
+  .cta-link:hover {
+    background: var(--accent-dark);
+  }
+
+  @media (min-width: 50em) {
+    .error-code { font-size: 12rem; }
+    .error-title { font-size: var(--text-5xl); }
+  }
+</style>

@@ -1,0 +1,152 @@
+---
+export interface Props {
+  totalItems: number;
+  pageSize?: number;
+  labelPrev?: string;
+  labelNext?: string;
+  labelPage?: string;
+}
+
+const {
+  totalItems,
+  pageSize = 9,
+  labelPrev = 'Previous',
+  labelNext = 'Next',
+  labelPage = 'Page',
+} = Astro.props;
+
+const totalPages = Math.ceil(totalItems / pageSize);
+---
+
+{totalPages > 1 && (
+  <nav class="pagination" aria-label="Blog pagination" data-page-size={pageSize} data-total-pages={totalPages}>
+    <button class="page-btn prev-btn" aria-label={labelPrev} disabled>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      {labelPrev}
+    </button>
+
+    <div class="page-numbers" role="list">
+      {Array.from({ length: totalPages }, (_, i) => (
+        <button
+          class={`page-btn page-number ${i === 0 ? 'active' : ''}`}
+          data-page={i}
+          aria-label={`${labelPage} ${i + 1}`}
+          aria-current={i === 0 ? 'page' : undefined}
+          role="listitem"
+        >
+          {i + 1}
+        </button>
+      ))}
+    </div>
+
+    <button class="page-btn next-btn" aria-label={labelNext} disabled={totalPages <= 1}>
+      {labelNext}
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </nav>
+)}
+
+<script>
+  function initPagination() {
+    const nav = document.querySelector<HTMLElement>('.pagination');
+    if (!nav) return;
+
+    const pageSize = parseInt(nav.dataset.pageSize ?? '9', 10);
+    const totalPages = parseInt(nav.dataset.totalPages ?? '1', 10);
+    const gallery = document.querySelector<HTMLElement>('.gallery');
+    if (!gallery) return;
+
+    const items = Array.from(gallery.children) as HTMLElement[];
+    let currentPage = 0;
+
+    const prevBtn = nav.querySelector<HTMLButtonElement>('.prev-btn')!;
+    const nextBtn = nav.querySelector<HTMLButtonElement>('.next-btn')!;
+    const pageNumbers = nav.querySelectorAll<HTMLButtonElement>('.page-number');
+
+    function showPage(page: number) {
+      currentPage = page;
+
+      items.forEach((item, index) => {
+        const inPage = index >= page * pageSize && index < (page + 1) * pageSize;
+        item.style.display = inPage ? '' : 'none';
+      });
+
+      prevBtn.disabled = page === 0;
+      nextBtn.disabled = page === totalPages - 1;
+
+      pageNumbers.forEach((btn) => {
+        const isActive = parseInt(btn.dataset.page ?? '0', 10) === page;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-current', isActive ? 'page' : '');
+      });
+
+      (nav as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    prevBtn.addEventListener('click', () => { if (currentPage > 0) showPage(currentPage - 1); });
+    nextBtn.addEventListener('click', () => { if (currentPage < totalPages - 1) showPage(currentPage + 1); });
+    pageNumbers.forEach((btn) => {
+      btn.addEventListener('click', () => showPage(parseInt(btn.dataset.page ?? '0', 10)));
+    });
+
+    showPage(0);
+  }
+
+  document.addEventListener('DOMContentLoaded', initPagination);
+</script>
+
+<style>
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  .page-numbers {
+    display: flex;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .page-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 0.4rem;
+    border: 1px solid var(--gray-800);
+    background: var(--gray-999);
+    color: var(--gray-300);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    line-height: 1;
+  }
+
+  .page-btn:hover:not(:disabled) {
+    background: var(--gray-800);
+    color: var(--gray-100);
+    border-color: var(--gray-700);
+  }
+
+  .page-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .page-btn.active {
+    background: var(--accent-regular);
+    color: var(--accent-text-over);
+    border-color: var(--accent-regular);
+    font-weight: 600;
+  }
+
+  .page-number {
+    min-width: 2.2rem;
+    justify-content: center;
+  }
+</style>

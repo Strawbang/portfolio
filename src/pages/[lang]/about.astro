@@ -1,18 +1,25 @@
 ---
-import FrenchBaseLayout from "../../layouts/FrenchBaseLayout.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import ContactCTA from "../../components/ContactCTA.astro";
 import Hero from "../../components/Hero.astro";
 import Icon from "../../components/Icon.astro";
 import CallToAction from "../../components/CallToAction.astro";
 import { Schema } from 'astro-seo-schema';
-import { experiences, education, skills, spokenLanguages, contact, resumeFiles, aboutLabels } from '../../data/about';
+import { languages } from '../../i18n/ui';
+import { experiences, education, skills, spokenLanguages, contact, resumeFiles, aboutLabels, type Lang } from '../../data/about';
 
-const lang = 'fr';
-const l = aboutLabels[lang];
-const resume = resumeFiles[lang];
+export function getStaticPaths() {
+  return Object.keys(languages)
+    .filter(l => l !== 'en')
+    .map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const l = aboutLabels[lang] ?? aboutLabels['en'];
+const resume = resumeFiles[lang as keyof typeof resumeFiles] ?? resumeFiles['en'];
 ---
 
-<FrenchBaseLayout title={l.metaTitle} description={l.metaDescription}>
+<BaseLayout title={l.metaTitle} description={l.metaDescription}>
   <div class="stack gap-20">
     <main class="wrapper about">
       <Hero title={l.title} tagline={l.tagline}>
@@ -118,6 +125,10 @@ const resume = resumeFiles[lang];
               <h3><Icon icon="github-logo" size="1.33em" /> GitHub</h3>
               <p><a href={contact.github} target="_blank">{contact.github.replace('https://', '')}</a></p>
             </div>
+            <div class="contact-item">
+              <h3><Icon icon="rocket-launch" size="1.33em" /> Portfolio</h3>
+              <p><a href={contact.portfolio} target="_blank">{contact.portfolio.replace('https://', '')}</a></p>
+            </div>
           </div>
         </div>
       </section>
@@ -142,18 +153,15 @@ const resume = resumeFiles[lang];
       "@context": "https://schema.org",
       "@type": "Person",
       name: "Djamel Bougouffa",
-      jobTitle: "Ingénieur Logiciel Full-Stack",
-      description: l.metaDescription,
+      jobTitle: "Full-Stack Software Engineer",
+      url: `https://djamel-bougouffa.com/${lang}/about/`,
       image: "https://djamel-bougouffa.com/assets/at-work.jpg",
-      url: "https://djamel-bougouffa.com/fr/a-propos/",
       email: contact.email,
       telephone: contact.phone,
       sameAs: [contact.github, contact.linkedin],
-      knowsLanguage: ["fr", "en"],
-      availableForHire: true
     }}
   />
-</FrenchBaseLayout>
+</BaseLayout>
 
 <style>
   .about {
@@ -168,14 +176,11 @@ const resume = resumeFiles[lang];
     box-shadow: var(--shadow-md);
   }
 
-  section {
+  .section-container {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     color: var(--gray-200);
-  }
-
-  .section-container {
     margin-bottom: 2rem;
   }
 
@@ -183,15 +188,12 @@ const resume = resumeFiles[lang];
     grid-column-start: 1;
     font-size: var(--text-xl);
     color: var(--gray-0);
-  }
-
-  .content {
-    grid-column: 2 / 4;
-  }
-
-  .content p {
     margin-bottom: 1rem;
+    border-bottom: 1px solid var(--gray-800);
+    padding-bottom: 0.5rem;
   }
+
+  .content { grid-column: 2 / 4; }
 
   .content h3 {
     color: var(--accent-regular);
@@ -266,13 +268,19 @@ const resume = resumeFiles[lang];
       grid-template-columns: 1fr 60% 1fr;
     }
 
-    .about > :global(*) {
-      grid-column: 2;
+    .about > :global(:first-child) {
+      grid-column-start: 2;
     }
 
-    section {
+    .section-container {
       display: contents;
       font-size: var(--text-lg);
+    }
+  }
+
+  @media (max-width: 50em) {
+    .skills-grid, .languages-grid, .contact-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>

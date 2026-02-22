@@ -30,23 +30,39 @@ const projects = (await getCollection("work", ({ id }) => {
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
   .slice(0, 4);
 
-const articles = await fetchArticles();
+const externalArticles = await fetchArticles();
+
+const blogPosts = (await getCollection('blog'))
+  .filter(post => !post.data.draft)
+  .map(post => ({
+    title: post.data.title,
+    description: post.data.description,
+    url: `/blog/${post.slug}/`,
+    platform: 'Blog' as const,
+    publishDate: post.data.publishDate,
+    imageUrl: post.data.img
+  }));
+
+const allArticles = [...externalArticles, ...blogPosts]
+  .sort((a, b) => b.publishDate.getTime() - a.publishDate.getTime())
+  .slice(0, 3);
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
 ---
 
-<BaseLayout title="Djamel Bougouffa | Full-Stack Software Engineer" description="Portfolio de Djamel Bougouffa, Full-Stack Software Engineer spécialisé en TypeScript, React, Node.js et DevOps avec plus de 5 ans d'expérience.">
+<BaseLayout title="Djamel Bougouffa | Full-Stack Software Engineer & AI/GenAI" description="Portfolio of Djamel Bougouffa, Full-Stack Software Engineer specializing in TypeScript, React, Node.js, DevOps, Rust, RAG and GenAI with 5+ years of experience.">
   <div class="stack gap-20 lg:gap-48">
     <div class="wrapper stack gap-8 lg:gap-20">
       <header class="hero">
         <Hero
           title="Hello, my name is Djamel Bougouffa"
-          tagline="I am a Full-Stack Software Engineer specializing in TypeScript, React, Node.js, and DevOps"
+          tagline="I am a Full-Stack Software Engineer specializing in TypeScript, React, Node.js, DevOps & AI/GenAI"
           align="start"
         >
           <div class="roles">
             <Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
+            <Pill><Icon icon="rocket-launch" size="1.33em" /> AI/GenAI</Pill>
             <Pill><Icon icon="devops-logo" size="1.33em" /> DevOps</Pill>
             <Pill><Icon icon="desktop" size="1.33em" /> Remote</Pill>
           </div>
@@ -96,22 +112,29 @@ const articles = await fetchArticles();
         </div>
       </section>
 
-      <section class="section with-background bg-variant">
+      <section class="section with-background bg-variant with-cta">
         <header class="section-header stack gap-2 lg:gap-4">
-          <h3>Articles</h3>
-          <p>My latest articles published on Medium and Dev.to</p>
+          <h3>Latest Articles</h3>
+          <p>My latest articles from my blog, Medium and Dev.to</p>
         </header>
 
         <div class="gallery">
-          <Grid variant="offset">
+          <ul class="articles-grid">
             {
-              articles.map((article) => (
+              allArticles.map((article) => (
                 <li>
                   <ArticlePreview article={article} />
                 </li>
               ))
             }
-          </Grid>
+          </ul>
+        </div>
+
+        <div class="cta">
+          <CallToAction href="/blog/">
+            View Blog
+            <Icon icon="arrow-right" size="1.2em" />
+          </CallToAction>
         </div>
       </section>
     </main>
@@ -126,9 +149,9 @@ const articles = await fetchArticles();
       "@type": "Person",
       name: "Djamel Bougouffa",
       jobTitle: "Full-Stack Software Engineer",
-      description: "Full-Stack Software Engineer with over 5 years of experience specializing in TypeScript, React, Node.js, and DevOps. Passionate about building scalable web applications and optimizing development workflows.",
-      image: "https://strawbang.github.io/portfolio/assets/at-work.jpg",
-      url: "https://strawbang.github.io/portfolio/about/",
+      description: "Full-Stack Software Engineer with over 5 years of experience specializing in TypeScript, React, Node.js, DevOps, and AI/GenAI. Currently at Ippon Technologies, building AI-driven legacy modernization tools in Rust with RAG, Tree-sitter, and Model Context Protocol (MCP).",
+      image: "https://djamel-bougouffa.com/assets/at-work.jpg",
+      url: "https://djamel-bougouffa.com/about/",
       email: "djamel.bougouffa@gmail.com",
       sameAs: [
         "https://github.com/strawbang",
@@ -141,18 +164,20 @@ const articles = await fetchArticles();
         "Node.js",
         "Express.js",
         "Next.js",
+        "Rust",
+        "RAG",
+        "GenAI",
+        "MCP",
+        "LLM Integration",
         "DevOps",
         "Docker",
         "Kubernetes",
-        "AWS",
-        "CI/CD",
-        "MongoDB",
-        "PostgreSQL"
+        "CI/CD"
       ],
       worksFor: {
         "@type": "Organization",
-        name: "Systran By ChapsVision",
-        url: "https://strawbang.github.io/portfolio/"
+        name: "Ippon Technologies",
+        url: "https://www.ippon.fr/"
       },
       alumniOf: [
         {
@@ -204,7 +229,7 @@ const articles = await fetchArticles();
       knowsLanguage: ["en", "fr"],
       seeks: {
         "@type": "Demand",
-        description: "Looking for new opportunities as a Full-Stack Software Engineer"
+        description: "Open to new opportunities as a Full-Stack Software Engineer with expertise in AI/GenAI, Rust, RAG, and legacy modernization"
       },
       availableForHire: true
     }}
@@ -292,6 +317,16 @@ const articles = await fetchArticles();
     max-width: 50ch;
     font-size: var(--text-md);
     color: var(--gray-300);
+  }
+
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
   .section-header h3 {

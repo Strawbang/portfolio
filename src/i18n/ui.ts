@@ -1,31 +1,307 @@
 export const languages = {
    en: 'English',
    fr: 'Français',
+   ja: '日本語',
+   zh: '简体中文',
+   th: 'ไทย',
+   vi: 'Tiếng Việt',
+   ms: 'Bahasa Melayu',
+   ko: '한국어',
+   id: 'Bahasa Indonesia',
+   tl: 'Filipino',
+   ar: 'العربية',
+   hi: 'हिन्दी',
+   de: 'Deutsch',
+   es: 'Español',
+   pt: 'Português',
  };
- 
+
 export const defaultLang = 'en';
 
 export const showDefaultLang = false;
 
-export const routes = {
+export const routes: Record<string, Record<string, string>> = {
   fr: {
-    'work': 'travaux',
+    'work': 'experiences',
     'about': 'a-propos',
-    'articles': 'articles'
+    'blog': 'blog'
+  },
+  ja: {
+    'work': 'work',
+    'about': 'about',
+    'blog': 'blog'
+  },
+  zh: {
+    'work': 'work',
+    'about': 'about',
+    'blog': 'blog'
+  },
+  th: {
+    'work': 'work',
+    'about': 'about',
+    'blog': 'blog'
+  },
+  vi: {
+    'work': 'work',
+    'about': 'about',
+    'blog': 'blog'
+  },
+  ms: {
+    'work': 'work',
+    'about': 'about',
+    'blog': 'blog'
+  },
+  ko: {
+    'work': 'work',
+    'about': 'about',
+    'blog': 'blog'
+  },
+  id: {
+    'work': 'work',
+    'about': 'about',
+    'blog': 'blog'
+  },
+  tl: {
+    'work': 'work',
+    'about': 'about',
+    'blog': 'blog'
+  },
+  ar: {
+    'work': 'work',
+    'about': 'about',
+    'blog': 'blog'
+  },
+  hi: {
+    'work': 'work',
+    'about': 'about',
+    'blog': 'blog'
+  },
+  de: {
+    'work': 'work',
+    'about': 'about',
+    'blog': 'blog'
+  },
+  es: {
+    'work': 'work',
+    'about': 'about',
+    'blog': 'blog'
+  },
+  pt: {
+    'work': 'work',
+    'about': 'about',
+    'blog': 'blog'
   }
 }
- 
+
 export const ui = {
   en: {
     'nav.home': 'Home',
     'nav.about': 'About',
-    'nav.work': 'Work',
-    'nav.articles' : 'Articles'
+    'nav.work': 'Experience',
+    'nav.blog': 'Blog',
+    'cta.title': 'Interested in working together?',
+    'cta.button': 'Send Me a Message',
+    'skills.fullstack': 'Full Stack',
+    'skills.fullstack.desc': 'Experienced full stack developer proficient in TypeScript, React, Node.js, GraphQL, and Express.js, with a track record of creating 7 operational web applications.',
+    'skills.devops': 'DevOps',
+    'skills.devops.desc': 'Hands-on experience with Docker, Kubernetes, Swarm, and CI/CD pipelines, ensuring efficient deployment and high-quality code delivery.',
+    'skills.agile': 'Agile Methodologies',
+    'skills.agile.desc': 'Well-versed in Agile and Scrum methodologies, with a collaborative mindset and strategic leadership on projects that saw 2x higher reaction.',
   },
   fr: {
     'nav.home': 'Accueil',
     'nav.about': 'À propos',
-    'nav.work': 'Travaux',
-    'nav.articles' : 'Articles'
+    'nav.work': 'Expériences',
+    'nav.blog': 'Blog',
+    'cta.title': 'Intéressé par une collaboration ?',
+    'cta.button': 'Envoyez-moi un message',
+    'skills.fullstack': 'Full Stack',
+    'skills.fullstack.desc': 'Développeur full stack expérimenté maîtrisant les technologies frontend et backend, capable de créer des applications web réactives et dynamiques.',
+    'skills.devops': 'DevOps',
+    'skills.devops.desc': 'Expérience pratique avec Docker, Kubernetes, Swarm et les pipelines CI/CD, garantissant un déploiement efficace et une livraison de code de haute qualité.',
+    'skills.agile': 'Méthodologies Agile',
+    'skills.agile.desc': 'Maîtrise des méthodologies Agile et Scrum, avec un esprit collaboratif et un leadership stratégique sur des projets ayant connu une réaction 2x plus élevée.',
+  },
+  ja: {
+    'nav.home': 'ホーム',
+    'nav.about': '私について',
+    'nav.work': '職務経歴',
+    'nav.blog': 'ブログ',
+    'cta.title': '一緒に働きませんか？',
+    'cta.button': 'メッセージを送る',
+    'skills.fullstack': 'フルスタック',
+    'skills.fullstack.desc': 'TypeScript、React、Node.js、GraphQL、Express.jsに精通したフルスタック開発者。7つのWebアプリケーションを成功裏に作成した実績があります。',
+    'skills.devops': 'DevOps',
+    'skills.devops.desc': 'Docker、Kubernetes、Swarm、CI/CDパイプラインの実践的な経験があり、効率的なデプロイと高品質なコード配信を確保します。',
+    'skills.agile': 'アジャイル手法',
+    'skills.agile.desc': 'アジャイルとスクラム手法に精通し、協調的な考え方と戦略的なリーダーシップでプロジェクトを推進します。',
+  },
+  zh: {
+    'nav.home': '首页',
+    'nav.about': '关于我',
+    'nav.work': '工作经历',
+    'nav.blog': '博客',
+    'cta.title': '有意合作？',
+    'cta.button': '发送消息',
+    'skills.fullstack': '全栈开发',
+    'skills.fullstack.desc': '精通TypeScript、React、Node.js、GraphQL和Express.js的全栈开发者，成功创建了7个Web应用程序。',
+    'skills.devops': 'DevOps',
+    'skills.devops.desc': '拥有Docker、Kubernetes、Swarm和CI/CD流水线的实践经验，确保高效部署和高质量代码交付。',
+    'skills.agile': '敏捷方法论',
+    'skills.agile.desc': '熟悉敏捷和Scrum方法论，具有协作思维和战略领导力。',
+  },
+  th: {
+    'nav.home': 'หน้าแรก',
+    'nav.about': 'เกี่ยวกับฉัน',
+    'nav.work': 'ประสบการณ์',
+    'nav.blog': 'บทความ',
+    'cta.title': 'สนใจร่วมงานด้วยกันไหม？',
+    'cta.button': 'ส่งข้อความถึงฉัน',
+    'skills.fullstack': 'Full Stack',
+    'skills.fullstack.desc': 'นักพัฒนา Full Stack ที่มีความชำนาญใน TypeScript, React, Node.js, GraphQL และ Express.js พร้อมประวัติการสร้างแอปพลิเคชัน 7 รายการ',
+    'skills.devops': 'DevOps',
+    'skills.devops.desc': 'มีประสบการณ์จริงกับ Docker, Kubernetes, Swarm และ CI/CD pipelines',
+    'skills.agile': 'วิธีการ Agile',
+    'skills.agile.desc': 'เชี่ยวชาญในวิธีการ Agile และ Scrum พร้อมความคิดแบบร่วมมือและภาวะผู้นำเชิงกลยุทธ์',
+  },
+  vi: {
+    'nav.home': 'Trang chủ',
+    'nav.about': 'Giới thiệu',
+    'nav.work': 'Kinh Nghiệm',
+    'nav.blog': 'Bài viết',
+    'cta.title': 'Quan tâm đến việc hợp tác？',
+    'cta.button': 'Gửi tin nhắn cho tôi',
+    'skills.fullstack': 'Full Stack',
+    'skills.fullstack.desc': 'Lập trình viên Full Stack thành thạo TypeScript, React, Node.js, GraphQL và Express.js, với thành tích tạo 7 ứng dụng web hoạt động.',
+    'skills.devops': 'DevOps',
+    'skills.devops.desc': 'Kinh nghiệm thực tế với Docker, Kubernetes, Swarm và CI/CD pipelines.',
+    'skills.agile': 'Phương pháp Agile',
+    'skills.agile.desc': 'Thành thạo các phương pháp Agile và Scrum với tư duy cộng tác và lãnh đạo chiến lược.',
+  },
+  ms: {
+    'nav.home': 'Utama',
+    'nav.about': 'Tentang',
+    'nav.work': 'Pengalaman',
+    'nav.blog': 'Blog',
+    'cta.title': 'Berminat untuk bekerjasama？',
+    'cta.button': 'Hantar Mesej',
+    'skills.fullstack': 'Full Stack',
+    'skills.fullstack.desc': 'Pembangun Full Stack berpengalaman dalam TypeScript, React, Node.js, GraphQL dan Express.js, dengan rekod mencipta 7 aplikasi web.',
+    'skills.devops': 'DevOps',
+    'skills.devops.desc': 'Pengalaman praktikal dengan Docker, Kubernetes, Swarm dan saluran paip CI/CD.',
+    'skills.agile': 'Metodologi Agile',
+    'skills.agile.desc': 'Mahir dalam metodologi Agile dan Scrum dengan pemikiran kolaboratif dan kepimpinan strategik.',
+  },
+  ko: {
+    'nav.home': '홈',
+    'nav.about': '소개',
+    'nav.work': '경력',
+    'nav.blog': '블로그',
+    'cta.title': '함께 일하고 싶으신가요？',
+    'cta.button': '메시지 보내기',
+    'skills.fullstack': '풀스택',
+    'skills.fullstack.desc': 'TypeScript, React, Node.js, GraphQL, Express.js에 능숙한 풀스택 개발자로 7개의 웹 애플리케이션을 성공적으로 만들었습니다.',
+    'skills.devops': 'DevOps',
+    'skills.devops.desc': 'Docker, Kubernetes, Swarm, CI/CD 파이프라인에 대한 실무 경험.',
+    'skills.agile': '애자일 방법론',
+    'skills.agile.desc': '협업적 사고방식과 전략적 리더십으로 애자일 및 스크럼 방법론에 능숙합니다.',
+  },
+  id: {
+    'nav.home': 'Beranda',
+    'nav.about': 'Tentang',
+    'nav.work': 'Pengalaman',
+    'nav.blog': 'Blog',
+    'cta.title': 'Tertarik untuk bekerja sama？',
+    'cta.button': 'Kirim Pesan',
+    'skills.fullstack': 'Full Stack',
+    'skills.fullstack.desc': 'Pengembang Full Stack berpengalaman dalam TypeScript, React, Node.js, GraphQL dan Express.js, dengan rekam jejak membuat 7 aplikasi web.',
+    'skills.devops': 'DevOps',
+    'skills.devops.desc': 'Pengalaman langsung dengan Docker, Kubernetes, Swarm dan pipeline CI/CD.',
+    'skills.agile': 'Metodologi Agile',
+    'skills.agile.desc': 'Menguasai metodologi Agile dan Scrum dengan pola pikir kolaboratif dan kepemimpinan strategis.',
+  },
+  tl: {
+    'nav.home': 'Tahanan',
+    'nav.about': 'Tungkol',
+    'nav.work': 'Karanasan',
+    'nav.blog': 'Blog',
+    'cta.title': 'Interesado bang magtulungan？',
+    'cta.button': 'Magpadala ng Mensahe',
+    'skills.fullstack': 'Full Stack',
+    'skills.fullstack.desc': 'Bihasang Full Stack developer sa TypeScript, React, Node.js, GraphQL at Express.js, na may track record ng paglikha ng 7 web application.',
+    'skills.devops': 'DevOps',
+    'skills.devops.desc': 'Karanasan sa Docker, Kubernetes, Swarm at CI/CD pipelines.',
+    'skills.agile': 'Agile Methodologies',
+    'skills.agile.desc': 'Bihasa sa Agile at Scrum na may collaborative mindset at strategic leadership.',
+  },
+  ar: {
+    'nav.home': 'الرئيسية',
+    'nav.about': 'من أنا',
+    'nav.work': 'تجربتي',
+    'nav.blog': 'المدونة',
+    'cta.title': 'مهتم بالعمل معاً？',
+    'cta.button': 'أرسل لي رسالة',
+    'skills.fullstack': 'فول ستاك',
+    'skills.fullstack.desc': 'مطور فول ستاك متمرس في TypeScript وReact وNode.js وGraphQL وExpress.js، مع سجل حافل بإنشاء 7 تطبيقات ويب.',
+    'skills.devops': 'DevOps',
+    'skills.devops.desc': 'خبرة عملية مع Docker وKubernetes وSwarm وخطوط أنابيب CI/CD.',
+    'skills.agile': 'المنهجيات الرشيقة',
+    'skills.agile.desc': 'إلمام بمنهجيات Agile وScrum مع عقلية تعاونية وقيادة استراتيجية.',
+  },
+  hi: {
+    'nav.home': 'होम',
+    'nav.about': 'परिचय',
+    'nav.work': 'अनुभव',
+    'nav.blog': 'ब्लॉग',
+    'cta.title': 'साथ काम करने में रुचि है？',
+    'cta.button': 'मुझे संदेश भेजें',
+    'skills.fullstack': 'फुल स्टैक',
+    'skills.fullstack.desc': 'TypeScript, React, Node.js, GraphQL और Express.js में कुशल फुल स्टैक डेवलपर, 7 वेब एप्लिकेशन बनाने का ट्रैक रिकॉर्ड।',
+    'skills.devops': 'DevOps',
+    'skills.devops.desc': 'Docker, Kubernetes, Swarm और CI/CD पाइपलाइन के साथ व्यावहारिक अनुभव।',
+    'skills.agile': 'एजाइल पद्धतियां',
+    'skills.agile.desc': 'सहयोगी मानसिकता और रणनीतिक नेतृत्व के साथ Agile और Scrum पद्धतियों में दक्ष।',
+  },
+  de: {
+    'nav.home': 'Startseite',
+    'nav.about': 'Über mich',
+    'nav.work': 'Erfahrung',
+    'nav.blog': 'Blog',
+    'cta.title': 'Interesse an einer Zusammenarbeit？',
+    'cta.button': 'Nachricht senden',
+    'skills.fullstack': 'Full Stack',
+    'skills.fullstack.desc': 'Erfahrener Full-Stack-Entwickler mit Kenntnissen in TypeScript, React, Node.js, GraphQL und Express.js, mit einer Erfolgsbilanz von 7 erstellten Webanwendungen.',
+    'skills.devops': 'DevOps',
+    'skills.devops.desc': 'Praktische Erfahrung mit Docker, Kubernetes, Swarm und CI/CD-Pipelines.',
+    'skills.agile': 'Agile Methoden',
+    'skills.agile.desc': 'Vertraut mit Agile- und Scrum-Methoden mit kollaborativer Denkweise und strategischer Führung.',
+  },
+  es: {
+    'nav.home': 'Inicio',
+    'nav.about': 'Sobre mí',
+    'nav.work': 'Experiencia',
+    'nav.blog': 'Blog',
+    'cta.title': '¿Interesado en trabajar juntos？',
+    'cta.button': 'Envíame un mensaje',
+    'skills.fullstack': 'Full Stack',
+    'skills.fullstack.desc': 'Desarrollador Full Stack con experiencia en TypeScript, React, Node.js, GraphQL y Express.js, con un historial de creación de 7 aplicaciones web.',
+    'skills.devops': 'DevOps',
+    'skills.devops.desc': 'Experiencia práctica con Docker, Kubernetes, Swarm y pipelines CI/CD.',
+    'skills.agile': 'Metodologías Ágiles',
+    'skills.agile.desc': 'Versado en metodologías Agile y Scrum con mentalidad colaborativa y liderazgo estratégico.',
+  },
+  pt: {
+    'nav.home': 'Início',
+    'nav.about': 'Sobre mim',
+    'nav.work': 'Experiência',
+    'nav.blog': 'Blog',
+    'cta.title': 'Interessado em trabalhar juntos？',
+    'cta.button': 'Envie-me uma mensagem',
+    'skills.fullstack': 'Full Stack',
+    'skills.fullstack.desc': 'Desenvolvedor Full Stack experiente em TypeScript, React, Node.js, GraphQL e Express.js, com histórico de criação de 7 aplicações web.',
+    'skills.devops': 'DevOps',
+    'skills.devops.desc': 'Experiência prática com Docker, Kubernetes, Swarm e pipelines CI/CD.',
+    'skills.agile': 'Metodologias Ágeis',
+    'skills.agile.desc': 'Versado em metodologias Agile e Scrum com mentalidade colaborativa e liderança estratégica.',
   },
 } as const;

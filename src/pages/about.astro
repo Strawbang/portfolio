@@ -1,247 +1,136 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
 import ContactCTA from "../components/ContactCTA.astro";
 import Hero from "../components/Hero.astro";
 import Icon from "../components/Icon.astro";
-import Pill from "../components/Pill.astro";
 import CallToAction from "../components/CallToAction.astro";
-
-// Import du composant Schema depuis le package astro-seo-schema
 import { Schema } from 'astro-seo-schema';
+import { experiences, education, skills, spokenLanguages, contact, resumeFiles, aboutLabels } from '../data/about';
+
+const l = aboutLabels['en'];
+const resume = resumeFiles['en'];
 ---
 
-<BaseLayout
-  title="About | Djamel Bougouffa"
-  description="About Djamel Bougouffa: Full-Stack Software Engineer with experience in TypeScript, React, Node.js, and DevOps"
->
+<BaseLayout title={l.metaTitle} description={l.metaDescription}>
   <div class="stack gap-20">
     <main class="wrapper about">
-      <Hero
-        title="About Me"
-        tagline="Discover my background, skills, and expertise as a Full-Stack Software Engineer."
-      >
-        <img
-          width="1553"
-          height="873"
-          src="/assets/at-work.jpg"
-          alt="Djamel Bougouffa working at his desk with multiple monitors showing code"
-        />
+      <Hero title={l.title} tagline={l.tagline}>
+        <img width="1553" height="873" src="/assets/at-work.jpg" alt={l.imgAlt} />
       </Hero>
 
       <section class="section-container">
-        <h2 class="section-title">Background</h2>
+        <h2 class="section-title">{l.sectionBackground}</h2>
         <div class="content">
-          <p>
-            Hello! I'm a dedicated developer specializing in web development
-            and DevOps. Over the past few years, I've collaborated with multiple
-            companies, leading to the successful creation of 7 operational
-            applications.
-          </p>
-          
-          <div class="experience-item">
-            <h3>SYSTRAN by ChapsVision</h3>
-            <p class="experience-meta">Full-Stack Software Engineer | January 2025 - Present</p>
-            <p>Currently working on enterprise translation solutions using cutting-edge technologies.</p>
-          </div>
-          
-          <div class="experience-item">
-            <h3>Wemanity Group (METRO France)</h3>
-            <p class="experience-meta">Fullstack Developer | March 2022 - March 2024</p>
-            <p>Worked as a Fullstack Developer using Node.js, React.js, TypeScript and GraphQL.</p>
-          </div>
-          
-          <div class="experience-item">
-            <h3>Ma Formation Médicale</h3>
-            <p class="experience-meta">Fullstack Developer | Node.js / React.js</p>
-            <p>Involved in redesigning the API, transitioning legacy PHP codebase to JavaScript, and implementing a modular, component-based architecture.</p>
-          </div>
-          
-          <p>
-            My expertise extends to various RDBMS like MySQL, and I have
-            hands-on experience with DevOps tools including Swarm and
-            Kubernetes. I'm also well-versed in Agile and Scrum
-            methodologies, which I've effectively used to provide strategic
-            leadership on projects.
-          </p>
+          <p>{l.backgroundIntro}</p>
+          {experiences.map(exp => (
+            <div class="experience-item">
+              <h3>{exp.company}</h3>
+              <p class="experience-meta">{exp.role['en']} | {exp.period['en']}</p>
+              <p>{exp.description['en']}</p>
+            </div>
+          ))}
+          <p>{l.backgroundOutro}</p>
         </div>
       </section>
 
       <section class="section-container">
-        <h2 class="section-title">Education</h2>
+        <h2 class="section-title">{l.sectionEducation}</h2>
         <div class="content">
-          <div class="education-item">
-            <h3>Master's degree in computer engineering</h3>
-            <p class="education-meta">Expert Architect Web | 2020 - 2021</p>
-            <p>Institut F2I</p>
-            <p class="education-skills">Skills: Docker · Jenkins · JavaScript · Git · CSS · SQL · React.js · REST APIs · Node.js · DevOps</p>
-          </div>
-          
-          <div class="education-item">
-            <h3>Bachelor's degree in computer engineering</h3>
-            <p class="education-meta">Digital Project Manager | 2018 - 2020</p>
-            <p>Institut F2I</p>
-            <p class="education-skills">Skills: JavaScript · Git · CSS · SQL · Node.js</p>
-          </div>
-          
-          <div class="education-item">
-            <h3>Diploma of Advanced Technician</h3>
-            <p class="education-meta">Solutions and Business Applications | 2017 - 2018</p>
-            <p>IRIS - Ecole supérieure d'informatique</p>
-            <p class="education-skills">Skills: JavaScript · Git · CSS · SQL · Node.js</p>
-          </div>
-          
-          <div class="education-item">
-            <h3>Diploma of Advanced Technician</h3>
-            <p class="education-meta">Solutions and Business Applications | 2015 - 2017</p>
-            <p>Lycée Léonard de Vinci de Melun</p>
-            <p class="education-skills">Skills: JavaScript · Git · CSS · SQL · MongoDB · Node.js · Java · Symfony</p>
-          </div>
-          
-          <div class="education-item">
-            <h3>Diploma of Advanced Technician</h3>
-            <p class="education-meta">Solutions and Business Applications | 2014 - 2015</p>
-            <p>CNED</p>
-            <p class="education-skills">Skills: Git · CSS · SQL</p>
-          </div>
-          
-          <div class="education-item">
-            <h3>Professional Baccalaureate</h3>
-            <p class="education-meta">Digital Electronic Systems | 2011 - 2014</p>
-            <p>Lycée La Fayette</p>
-            <p class="education-skills">Skills: SQL</p>
-          </div>
+          {education.map(edu => (
+            <div class="education-item">
+              <h3>{edu.degree['en']}</h3>
+              <p class="education-meta">{edu.field['en']} | {edu.period}</p>
+              <p>{edu.institution}</p>
+              <p class="education-skills">{edu.skills}</p>
+            </div>
+          ))}
         </div>
       </section>
 
       <section class="section-container">
-        <h2 class="section-title">Skills</h2>
+        <h2 class="section-title">{l.sectionSkills}</h2>
         <div class="content">
           <div class="skills-grid">
             <div class="skill-category">
-              <h3><Icon icon="code" size="1.33em" /> Frontend</h3>
-              <ul class="skill-list">
-                <li>React</li>
-                <li>Next.js</li>
-                <li>TypeScript</li>
-                <li>JavaScript</li>
-                <li>CSS</li>
-              </ul>
+              <h3><Icon icon="code" size="1.33em" /> {l.skillFrontend}</h3>
+              <ul class="skill-list">{skills.frontend.map(s => <li>{s}</li>)}</ul>
             </div>
-            
             <div class="skill-category">
-              <h3><Icon icon="terminal-window" size="1.33em" /> Backend</h3>
-              <ul class="skill-list">
-                <li>Node.js</li>
-                <li>Express.js</li>
-                <li>GraphQL</li>
-                <li>REST APIs</li>
-              </ul>
+              <h3><Icon icon="terminal-window" size="1.33em" /> {l.skillBackend}</h3>
+              <ul class="skill-list">{skills.backend.map(s => <li>{s}</li>)}</ul>
             </div>
-            
             <div class="skill-category">
-              <h3><Icon icon="devops-logo" size="1.33em" /> DevOps</h3>
-              <ul class="skill-list">
-                <li>Docker</li>
-                <li>Kubernetes</li>
-                <li>Swarm</li>
-                <li>CI/CD</li>
-                <li>GitHub Actions</li>
-                <li>Cloud Platforms</li>
-              </ul>
+              <h3><Icon icon="rocket-launch" size="1.33em" /> {l.skillAi}</h3>
+              <ul class="skill-list">{skills.ai.map(s => <li>{s}</li>)}</ul>
             </div>
-            
             <div class="skill-category">
-              <h3><Icon icon="strategy" size="1.33em" /> Methodologies</h3>
-              <ul class="skill-list">
-                <li>Agile</li>
-                <li>Scrum</li>
-                <li>Test-Driven Development</li>
-                <li>Code Review</li>
-              </ul>
+              <h3><Icon icon="devops-logo" size="1.33em" /> {l.skillDevops}</h3>
+              <ul class="skill-list">{skills.devops.map(s => <li>{s}</li>)}</ul>
             </div>
-            
             <div class="skill-category">
-              <h3><Icon icon="pencil-line" size="1.33em" /> Architecture</h3>
-              <ul class="skill-list">
-                <li>Hexagonal Architecture</li>
-                <li>Atomic Design</li>
-                <li>Modular Component-based Design</li>
-              </ul>
+              <h3><Icon icon="strategy" size="1.33em" /> {l.skillMethodologies}</h3>
+              <ul class="skill-list">{skills.methodologies.map(s => <li>{s}</li>)}</ul>
             </div>
-            
             <div class="skill-category">
-              <h3><Icon icon="github-logo" size="1.33em" /> Tools</h3>
-              <ul class="skill-list">
-                <li>Git</li>
-                <li>VSCode</li>
-                <li>Docker</li>
-              </ul>
+              <h3><Icon icon="pencil-line" size="1.33em" /> {l.skillArchitecture}</h3>
+              <ul class="skill-list">{skills.architecture.map(s => <li>{s}</li>)}</ul>
+            </div>
+            <div class="skill-category">
+              <h3><Icon icon="github-logo" size="1.33em" /> {l.skillTools}</h3>
+              <ul class="skill-list">{skills.tools.map(s => <li>{s}</li>)}</ul>
             </div>
           </div>
         </div>
       </section>
 
       <section class="section-container">
-        <h2 class="section-title">Languages</h2>
+        <h2 class="section-title">{l.sectionLanguages}</h2>
         <div class="content">
           <div class="languages-grid">
-            <div class="language-item">
-              <h3>Français</h3>
-              <p>Native or Bilingual</p>
-            </div>
-            
-            <div class="language-item">
-              <h3>English</h3>
-              <p>Full Professional</p>
-            </div>
-            
-            <div class="language-item">
-              <h3>Allemand</h3>
-              <p>Elementary</p>
-            </div>
+            {spokenLanguages.map(sl => (
+              <div class="language-item">
+                <h3>{sl.name}</h3>
+                <p>{sl.level['en']}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       <section class="section-container">
-        <h2 class="section-title">Contact</h2>
+        <h2 class="section-title">{l.sectionContact}</h2>
         <div class="content">
           <div class="contact-grid">
             <div class="contact-item">
               <h3><Icon icon="paper-plane-tilt" size="1.33em" /> Email</h3>
-              <p><a href="mailto:dbougouffa@gmail.com">dbougouffa@gmail.com</a></p>
+              <p><a href={`mailto:${contact.email}`}>{contact.email}</a></p>
             </div>
-            
             <div class="contact-item">
               <h3><Icon icon="desktop" size="1.33em" /> Phone</h3>
-              <p><a href="tel:+33621562848">+33621562848</a></p>
+              <p><a href={`tel:${contact.phone}`}>{contact.phone}</a></p>
             </div>
-            
             <div class="contact-item">
               <h3><Icon icon="linkedin-logo" size="1.33em" /> LinkedIn</h3>
-              <p><a href="https://www.linkedin.com/in/djamel-bougouffa" target="_blank">www.linkedin.com/in/djamel-bougouffa</a></p>
+              <p><a href={contact.linkedin} target="_blank">{contact.linkedin.replace('https://', '')}</a></p>
             </div>
-            
             <div class="contact-item">
               <h3><Icon icon="github-logo" size="1.33em" /> GitHub</h3>
-              <p><a href="https://github.com/Strawbang" target="_blank">github.com/Strawbang</a></p>
+              <p><a href={contact.github} target="_blank">{contact.github.replace('https://', '')}</a></p>
             </div>
-            
             <div class="contact-item">
               <h3><Icon icon="rocket-launch" size="1.33em" /> Portfolio</h3>
-              <p><a href="https://djamel-bougouffa.com" target="_blank">djamel-bougouffa.com</a></p>
+              <p><a href={contact.portfolio} target="_blank">{contact.portfolio.replace('https://', '')}</a></p>
             </div>
           </div>
         </div>
       </section>
 
       <section class="section-container">
-        <h2 class="section-title">Resume</h2>
+        <h2 class="section-title">{l.sectionResume}</h2>
         <div class="content">
-          <p>Want a copy of my resume? Download it here:</p>
-          <CallToAction href="/assets/Resume_Djamel_Bougouffa_Full_Stack_Software_Engineer.pdf">
-            Download Resume
+          <p>{l.resumeText}</p>
+          <CallToAction href={resume}>
+            {l.resumeDownload}
             <Icon icon="arrow-right" size="1.2em" />
           </CallToAction>
         </div>
@@ -257,96 +146,17 @@ import { Schema } from 'astro-seo-schema';
       "@type": "Person",
       name: "Djamel Bougouffa",
       jobTitle: "Full-Stack Software Engineer",
-      description: "Full-Stack Software Engineer with over 5 years of experience specializing in TypeScript, React, Node.js, and DevOps. Passionate about building scalable web applications and optimizing development workflows.",
-      image: "https://strawbang.github.io/portfolio/assets/at-work.jpg",
-      url: "https://strawbang.github.io/portfolio/about/",
-      email: "djamel.bougouffa@gmail.com",
-      telephone: "+33621562848",
-      sameAs: [
-        "https://github.com/strawbang",
-        "https://www.linkedin.com/in/djamel-bougouffa/",
-        "https://twitter.com/strawbang",
-        "https://www.instagram.com/strawbang",
-        "https://dev.to/strawbang",
-        "https://medium.com/@strawbang"
-      ],
+      description: "Full-Stack Software Engineer with over 5 years of experience specializing in TypeScript, React, Node.js, DevOps, and AI/GenAI. Currently at Ippon Technologies, building AI-driven legacy modernization tools in Rust with RAG, Tree-sitter, and Model Context Protocol (MCP).",
+      image: "https://djamel-bougouffa.com/assets/at-work.jpg",
+      url: "https://djamel-bougouffa.com/about/",
+      email: contact.email,
+      telephone: contact.phone,
+      sameAs: [contact.github, contact.linkedin, "https://twitter.com/strawbang", "https://dev.to/strawbang", "https://medium.com/@strawbang"],
       knowsLanguage: ["en", "fr"],
-      workLocation: {
-        "@type": "Place",
-        name: "Paris, France",
-        address: "Paris, France"
-      },
-      worksFor: {
-        "@type": "Organization",
-        name: "Freelance",
-        url: "https://strawbang.github.io/portfolio/"
-      },
-      alumniOf: [
-        {
-          "@type": "EducationalOrganization",
-          name: "Institut F2I",
-          url: "https://www.f2i-institute.com/",
-          description: "Master's degree in computer engineering / Expert Architect Web",
-          startDate: "2020",
-          endDate: "2021"
-        },
-        {
-          "@type": "EducationalOrganization",
-          name: "Institut F2I",
-          url: "https://www.f2i-institute.com/",
-          description: "Bachelor's degree in computer engineering / Digital Project Manager",
-          startDate: "2018",
-          endDate: "2020"
-        },
-        {
-          "@type": "EducationalOrganization",
-          name: "IRIS - Ecole supérieure d'informatique",
-          description: "Diploma of Advanced Technician Solutions and Business Applications",
-          startDate: "2017",
-          endDate: "2018"
-        },
-        {
-          "@type": "EducationalOrganization",
-          name: "Lycée Léonard de Vinci de Melun",
-          description: "Diploma of Advanced Technician Solutions and Business Applications",
-          startDate: "2015",
-          endDate: "2017"
-        },
-        {
-          "@type": "EducationalOrganization",
-          name: "CNED",
-          url: "https://www.cned.fr/",
-          description: "Diploma of Advanced Technician Solutions and Business Applications",
-          startDate: "2014",
-          endDate: "2015"
-        },
-        {
-          "@type": "EducationalOrganization",
-          name: "Lycée La Fayette",
-          description: "Professional Baccalaureate in Digital Electronic Systems",
-          startDate: "2011",
-          endDate: "2014"
-        }
-      ],
-      skills: [
-        "TypeScript",
-        "JavaScript",
-        "React",
-        "Node.js",
-        "Express.js",
-        "Next.js",
-        "DevOps",
-        "Docker",
-        "Kubernetes",
-        "AWS",
-        "CI/CD",
-        "MongoDB",
-        "PostgreSQL"
-      ],
-      seeks: {
-        "@type": "Demand",
-        description: "Full-time position or freelance opportunities in web development and software engineering"
-      },
+      workLocation: { "@type": "Place", name: "Paris, France" },
+      worksFor: { "@type": "Organization", name: "Ippon Technologies", url: "https://www.ippon.fr/" },
+      skills: ["TypeScript", "React", "Node.js", "Rust", "RAG", "GenAI", "MCP", "LLM Integration", "DevOps", "Docker", "Kubernetes", "Next.js"],
+      seeks: { "@type": "Demand", description: "Open to new opportunities as a Full-Stack Software Engineer with expertise in AI/GenAI, Rust, RAG, and legacy modernization" },
       availableForHire: true
     }}
   />

@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+import ArticlePreview from '../../components/ArticlePreview.astro';
+import Pagination from '../../components/Pagination.astro';
+import { fetchArticles, deduplicateArticles } from '../../services/articles';
+import type { Article } from '../../types/article';
+import { languages } from '../../i18n/ui';
+import { blogLabels, type Lang } from '../../data/pages';
+
+export function getStaticPaths() {
+  return Object.keys(languages)
+    .filter(l => l !== 'en')
+    .map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const l = blogLabels[lang] ?? blogLabels['en'];
+
+const localPosts = (await getCollection('blog'))
+  .filter(post => !post.data.draft)
+  .map(post => ({
+    title: post.data.title,
+    description: post.data.description,
+    publishDate: post.data.publishDate,
+    url: `/${lang}/blog/${post.slug}/`,
+    imageUrl: post.data.img,
+    platform: 'Blog'
+  } as Article));
+
+const externalArticles = await fetchArticles();
+const allPosts = deduplicateArticles([...localPosts, ...externalArticles]);
+---
+
+<BaseLayout title={l.metaTitle} description={l.metaDescription}>
+  <div class="wrapper stack gap-20">
+    <header class="section-header stack gap-2 lg:gap-4">
+      <h1>{l.heroTitle}</h1>
+      <p>{l.heroTagline}</p>
+    </header>
+    <ul class="gallery">
+      {allPosts.map((post) => (<li><ArticlePreview article={post} /></li>))}
+    </ul>
+    <Pagination totalItems={allPosts.length} />
+    <ContactCTA />
+  </div>
+</BaseLayout>
+
+<style>
+  .section-header { text-align: center; }
+  .section-header h1 { font-size: var(--text-5xl); }
+  .section-header p { color: var(--gray-300); font-size: var(--text-lg); }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; list-style-type: none; padding: 0; margin: 0; }
+  @media (min-width: 50em) { .section-header h1 { font-size: var(--text-6xl); } }
+</style>

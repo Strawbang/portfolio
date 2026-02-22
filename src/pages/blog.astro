@@ -1,0 +1,86 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import ArticlePreview from '../components/ArticlePreview.astro';
+import Pagination from '../components/Pagination.astro';
+import { fetchArticles, deduplicateArticles } from "../services/articles";
+import type { Article } from '../types/article';
+
+// Fetch local blog posts
+const localPosts = (await getCollection('blog'))
+  .filter(post => !post.data.draft)
+  .map(post => ({
+    title: post.data.title,
+    description: post.data.description,
+    publishDate: post.data.publishDate,
+    url: `/blog/${post.slug}/`,
+    imageUrl: post.data.img,
+    platform: 'Blog'
+  } as Article));
+
+// Fetch external articles
+const externalArticles = (await fetchArticles());
+
+const allPosts = deduplicateArticles([...localPosts, ...externalArticles]);
+
+---
+
+<BaseLayout
+  title="Blog | Djamel Bougouffa - Full-Stack Developer"
+  description="Articles and tutorials on web development, TypeScript, React, Node.js and best practices."
+>
+  <div class="wrapper stack gap-20">
+    <header class="section-header stack gap-2 lg:gap-4">
+      <h1>Blog</h1>
+      <p>
+        Discover my articles on web development, modern technologies,
+        and programming best practices.
+      </p>
+    </header>
+
+    <ul class="gallery">
+      {
+        allPosts.map((post) => (
+          <li>
+            <ArticlePreview article={post} />
+          </li>
+        ))
+      }
+    </ul>
+
+    <Pagination totalItems={allPosts.length} labelPrev="Previous" labelNext="Next" labelPage="Page" />
+
+    <ContactCTA />
+  </div>
+</BaseLayout>
+
+<style>
+  .section-header {
+    text-align: center;
+  }
+
+  .section-header h1 {
+    font-size: var(--text-5xl);
+  }
+
+  .section-header p {
+    color: var(--gray-300);
+    font-size: var(--text-lg);
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  @media (min-width: 50em) {
+    .section-header h1 {
+      font-size: var(--text-6xl);
+    }
+  }
+</style>

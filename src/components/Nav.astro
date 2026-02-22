@@ -14,7 +14,7 @@ const textLinks: { label: string; href: string }[] = [
   { label: t('nav.home'), href: translatePath('/') },
   { label: t('nav.work'), href: translatePath('/work/') },
   { label: t('nav.about'), href: translatePath('/about/') },
-  { label: t('nav.articles'), href: translatePath('/articles/') },
+  { label: t('nav.blog'), href: translatePath('/blog/') },
 ];
 
 /** Icon links to social media — edit these with links to your profiles! */
@@ -67,15 +67,23 @@ const iconLinks: {
       />
       Djamel Bougouffa
     </a>
-    <menu-button>
-      <template>
-        <button class="menu-button" aria-expanded="false">
-          <span class="sr-only">Menu</span>
-          <Icon icon="list" />
-        </button>
-      </template>
-    </menu-button>
+    <div class="header-actions">
+      <menu-button>
+        <template>
+          <button class="menu-button" aria-expanded="false" aria-label="Menu">
+            <span class="hamburger">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </button>
+        </template>
+      </menu-button>
+    </div>
   </div>
+
+  <div id="menu-overlay" aria-hidden="true"></div>
+
   <div id="menu-content">
     <ul class="nav-items">
       {
@@ -88,7 +96,7 @@ const iconLinks: {
                 {
                   active:
                     Astro.url.pathname === href ||
-                    ((href !== "/" && href !== "/fr/") && Astro.url.pathname.startsWith(href)),
+                    (href !== translatePath('/') && Astro.url.pathname.startsWith(href)),
                 },
               ]}
               href={href}
@@ -99,7 +107,8 @@ const iconLinks: {
         ))
       }
     </ul>
-    <div class="menu-footer">
+
+    <div class="mobile-bottom-bar">
       <LanguagePicker />
       <div class="socials">
         {
@@ -123,27 +132,45 @@ const iconLinks: {
     constructor() {
       super();
 
-      // Inject menu toggle button when JS runs.
       this.appendChild(this.querySelector("template")!.content.cloneNode(true));
       const btn = this.querySelector("button")!;
-
-      // Hide menu (shown by default to support no-JS browsers).
       const menu = document.getElementById("menu-content")!;
+      const overlay = document.getElementById("menu-overlay")!;
+      const nav = btn.closest("nav")!;
+
       menu.hidden = true;
 
-      /** Set whether the menu is currently expanded or collapsed. */
       const setExpanded = (expand: boolean) => {
         btn.setAttribute("aria-expanded", expand ? "true" : "false");
         menu.hidden = !expand;
+        overlay.setAttribute("aria-hidden", expand ? "false" : "true");
+        nav.classList.toggle("menu-open", expand);
+        document.body.classList.toggle("menu-open", expand);
       };
 
-      // Toggle menu visibility when the menu button is clicked.
-      btn.addEventListener("click", () => setExpanded(menu.hidden));
+      btn.addEventListener("click", () => {
+        const isOpen = btn.getAttribute("aria-expanded") === "true";
+        setExpanded(!isOpen);
+      });
 
-      // Hide menu button for large screens.
+      overlay.addEventListener("click", () => setExpanded(false));
+
+      menu.querySelectorAll(".nav-items .link").forEach((link) => {
+        link.addEventListener("click", () => setExpanded(false));
+      });
+
       const handleViewports = (e: MediaQueryList | MediaQueryListEvent) => {
-        setExpanded(e.matches);
-        btn.hidden = e.matches;
+        if (e.matches) {
+          menu.hidden = false;
+          overlay.setAttribute("aria-hidden", "true");
+          nav.classList.remove("menu-open");
+          document.body.classList.remove("menu-open");
+          btn.hidden = true;
+        } else {
+          menu.hidden = true;
+          btn.hidden = false;
+          btn.setAttribute("aria-expanded", "false");
+        }
       };
       const mediaQueries = window.matchMedia("(min-width: 50em)");
       handleViewports(mediaQueries);
@@ -154,6 +181,10 @@ const iconLinks: {
 </script>
 
 <style>
+  :global(body.menu-open) {
+    overflow: hidden;
+  }
+
   nav {
     z-index: 9999;
     position: relative;
@@ -165,8 +196,15 @@ const iconLinks: {
   .menu-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 0.5rem;
-    padding: 1.5rem;
+    padding: 1rem 1.25rem;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
   }
 
   .site-title {
@@ -178,26 +216,21 @@ const iconLinks: {
     text-decoration: none;
   }
 
+  /* Hamburger button */
   .menu-button {
     position: relative;
     display: flex;
+    align-items: center;
+    justify-content: center;
     border: 0;
     border-radius: 999rem;
-    padding: 0.5rem;
-    font-size: 1.5rem;
+    width: 2.75rem;
+    height: 2.75rem;
     color: var(--gray-300);
     background: radial-gradient(var(--gray-900), var(--gray-800) 150%);
     box-shadow: var(--shadow-md);
-  }
-
-  .menu-button[aria-expanded="true"] {
-    color: var(--gray-0);
-    background: linear-gradient(180deg, var(--gray-600), transparent),
-      radial-gradient(var(--gray-900), var(--gray-800) 150%);
-  }
-
-  .menu-button[hidden] {
-    display: none;
+    cursor: pointer;
+    flex-shrink: 0;
   }
 
   .menu-button::before {
@@ -209,52 +242,143 @@ const iconLinks: {
     z-index: -1;
   }
 
+  .menu-button[hidden] {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+
+  .menu-button[aria-expanded="true"] .hamburger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .menu-button[aria-expanded="true"] .hamburger span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .menu-button[aria-expanded="true"] .hamburger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Overlay */
+  #menu-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 998;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  nav.menu-open #menu-overlay {
+    display: block;
+    opacity: 1;
+  }
+
+  /* Menu panel */
   #menu-content {
-    position: absolute;
-    left: 0;
+    position: fixed;
+    top: 0;
     right: 0;
+    bottom: 0;
+    width: min(85vw, 320px);
+    background: var(--gray-999);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.3);
+    padding-top: env(safe-area-inset-top, 0);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  #menu-content:not([hidden]) {
+    transform: translateX(0);
+  }
+
+  #menu-content[hidden] {
+    display: flex !important;
+    transform: translateX(100%);
+    pointer-events: none;
   }
 
   .nav-items {
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    font-size: var(--text-md);
-    line-height: 1.2;
     list-style: none;
-    padding: 2rem;
-    background-color: var(--gray-999);
+    padding: 5rem 1.5rem 1.5rem;
+    flex: 1;
+    overflow-y: auto;
+    gap: 0;
+  }
+
+  .nav-items li {
     border-bottom: 1px solid var(--gray-800);
   }
 
+  .nav-items li:first-child {
+    border-top: 1px solid var(--gray-800);
+  }
+
   .link {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    padding: 1rem 0.5rem;
     color: var(--gray-300);
     text-decoration: none;
+    font-size: var(--text-lg);
+    transition: color 0.2s ease, padding-left 0.2s ease;
+  }
+
+  .link:active {
+    color: var(--accent-regular);
   }
 
   .link.active {
     color: var(--gray-0);
+    padding-left: 1rem;
+    border-left: 3px solid var(--accent-regular);
   }
 
-  .menu-footer {
+  /* Bottom bar mobile */
+  .mobile-bottom-bar {
     --icon-size: var(--text-xl);
     --icon-padding: 0.5rem;
 
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    gap: 0.75rem;
-    padding: 1.5rem 2rem 1.5rem 1.5rem;
-    background-color: var(--gray-999);
-    border-radius: 0 0 0.75rem 0.75rem;
-    box-shadow: var(--shadow-lg);
+    gap: 0.5rem;
+    padding: 1rem 1.25rem;
+    border-top: 1px solid var(--gray-800);
+    background: var(--gray-999);
+    flex-shrink: 0;
   }
 
   .socials {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.625rem;
+    gap: 0.25rem;
     font-size: var(--icon-size);
   }
 
@@ -275,6 +399,7 @@ const iconLinks: {
     display: flex;
     align-items: center;
     height: calc(var(--icon-size) + 2 * var(--icon-padding));
+    flex-shrink: 0;
   }
 
   @media (min-width: 50em) {
@@ -294,8 +419,24 @@ const iconLinks: {
       font-size: var(--text-lg);
     }
 
+    #menu-overlay {
+      display: none !important;
+    }
+
     #menu-content {
-      display: contents;
+      position: static;
+      display: contents !important;
+      transform: none;
+      width: auto;
+      background: transparent;
+      box-shadow: none;
+      pointer-events: auto;
+    }
+
+    #menu-content[hidden] {
+      display: contents !important;
+      transform: none;
+      pointer-events: auto;
     }
 
     .nav-items {
@@ -307,6 +448,17 @@ const iconLinks: {
       padding: 0.5rem 0.5625rem;
       background: radial-gradient(var(--gray-900), var(--gray-800) 150%);
       box-shadow: var(--shadow-md);
+      flex: none;
+      overflow: visible;
+      gap: 0;
+    }
+
+    .nav-items li {
+      border: none;
+    }
+
+    .nav-items li:first-child {
+      border: none;
     }
 
     .nav-items::before {
@@ -321,6 +473,8 @@ const iconLinks: {
     .link {
       padding: 0.5rem 1rem;
       border-radius: 999rem;
+      font-size: var(--text-sm);
+      border-left: none;
       transition: color var(--theme-transition),
         background-color var(--theme-transition);
     }
@@ -334,16 +488,19 @@ const iconLinks: {
     .link.active {
       color: var(--accent-text-over);
       background-color: var(--accent-regular);
+      padding-left: 1rem;
+      border-left: none;
     }
 
-    .menu-footer {
+    .mobile-bottom-bar {
       --icon-padding: 0.375rem;
 
       justify-self: flex-end;
       align-items: center;
       padding: 0;
       background-color: transparent;
-      box-shadow: none;
+      border-top: none;
+      gap: 0.75rem;
     }
 
     .socials {
@@ -358,6 +515,7 @@ const iconLinks: {
       gap: 0;
     }
   }
+
   @media (forced-colors: active) {
     .link.active {
       color: SelectedItem;

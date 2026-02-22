@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import FrenchBaseLayout from "../../layouts/FrenchBaseLayout.astro";
+import ContactCTA from "../../components/ContactCTA.astro";
+import PortfolioPreview from "../../components/PortfolioPreview.astro";
+import Hero from "../../components/Hero.astro";
+import Grid from "../../components/Grid.astro";
+import { workLabels } from '../../data/pages';
+
+const l = workLabels['fr'];
+
+const projects = (await getCollection("work", ({ id }) => id.startsWith('fr/')))
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+---
+
+<FrenchBaseLayout title={l.metaTitle} description={l.metaDescription}>
+  <div class="stack gap-20">
+    <main class="wrapper stack gap-8">
+      <Hero title={l.heroTitle} tagline={l.heroTagline} align="start" />
+      <Grid variant="offset">
+        {projects.map((project) => (<li><PortfolioPreview project={project} /></li>))}
+      </Grid>
+    </main>
+    <ContactCTA />
+  </div>
+</FrenchBaseLayout>

@@ -1,41 +1,26 @@
 ---
 import Icon from "./Icon.astro";
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section class="box skills">
   <div class="stack gap-2 lg:gap-4">
-    <Icon
-      icon="terminal-window"
-      color="var(--accent-regular)"
-      size="2.5rem"
-      gradient
-    />
-    <h2>Full Stack</h2>
-    <p>
-      Experienced full stack developer proficient in TypeScript, React, Node.js, 
-      GraphQL, and Express.js, with a track record of creating 7 operational web applications.
-    </p>
+    <Icon icon="terminal-window" color="var(--accent-regular)" size="2.5rem" gradient />
+    <h2>{t('skills.fullstack')}</h2>
+    <p>{t('skills.fullstack.desc')}</p>
   </div>
   <div class="stack gap-2 lg:gap-4">
     <Icon icon="devops-logo" color="var(--accent-regular)" size="2.5rem" gradient />
-    <h2>DevOps</h2>
-    <p>
-      Hands-on experience with Docker, Kubernetes, Swarm, and CI/CD pipelines, 
-      ensuring efficient deployment and high-quality code delivery.
-    </p>
+    <h2>{t('skills.devops')}</h2>
+    <p>{t('skills.devops.desc')}</p>
   </div>
   <div class="stack gap-2 lg:gap-4">
-    <Icon
-      icon="trophy"
-      color="var(--accent-regular)"
-      size="2.5rem"
-      gradient
-    />
-    <h2>Agile Methodologies</h2>
-    <p>
-      Well-versed in Agile and Scrum methodologies, with a collaborative mindset 
-      and strategic leadership on projects that saw 2x higher reaction.
-    </p>
+    <Icon icon="trophy" color="var(--accent-regular)" size="2.5rem" gradient />
+    <h2>{t('skills.agile')}</h2>
+    <p>{t('skills.agile.desc')}</p>
   </div>
 </section>
 

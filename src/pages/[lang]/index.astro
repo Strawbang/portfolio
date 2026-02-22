@@ -1,0 +1,154 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CallToAction from "../../components/CallToAction.astro";
+import Grid from "../../components/Grid.astro";
+import Hero from "../../components/Hero.astro";
+import Icon from "../../components/Icon.astro";
+import Pill from "../../components/Pill.astro";
+import PortfolioPreview from "../../components/PortfolioPreview.astro";
+import ArticlePreview from "../../components/ArticlePreview.astro";
+import { fetchArticles } from "../../services/articles";
+import { Schema } from "astro-seo-schema";
+import ContactCTA from "../../components/ContactCTA.astro";
+import Skills from "../../components/Skills.astro";
+import { Image } from "astro:assets";
+import portrait from "../../../public/assets/portrait.png";
+import { languages } from '../../i18n/ui';
+import { useTranslatedPath } from '../../i18n/utils';
+import { indexLabels, type Lang } from '../../data/pages';
+import { contact, resumeFiles } from '../../data/about';
+
+export function getStaticPaths() {
+  return Object.keys(languages)
+    .filter(l => l !== 'en')
+    .map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const translatePath = useTranslatedPath(lang as keyof typeof languages);
+const l = indexLabels[lang] ?? indexLabels['en'];
+const resume = resumeFiles[lang as keyof typeof resumeFiles] ?? resumeFiles['en'];
+
+const projects = (await getCollection("work", ({ id }) => !id.startsWith('fr/')))
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 4);
+
+const externalArticles = await fetchArticles();
+
+const blogPosts = (await getCollection('blog'))
+  .filter(post => !post.data.draft)
+  .map(post => ({
+    title: post.data.title,
+    description: post.data.description,
+    url: `/${lang}/blog/${post.slug}/`,
+    platform: 'Blog' as const,
+    publishDate: post.data.publishDate,
+    imageUrl: post.data.img
+  }));
+
+const allArticles = [...externalArticles, ...blogPosts]
+  .sort((a, b) => b.publishDate.getTime() - a.publishDate.getTime())
+  .slice(0, 3);
+---
+
+<BaseLayout title={l.metaTitle} description={l.metaDescription}>
+  <div class="stack gap-20 lg:gap-48">
+    <div class="wrapper stack gap-8 lg:gap-20">
+      <header class="hero">
+        <Hero title={l.heroGreeting} tagline={l.heroTagline} align="start">
+          <div class="roles">
+            <Pill><Icon icon="code" size="1.33em" /> {l.pillDeveloper}</Pill>
+            <Pill><Icon icon="devops-logo" size="1.33em" /> {l.pillDevops}</Pill>
+            <Pill><Icon icon="desktop" size="1.33em" /> {l.pillRemote}</Pill>
+          </div>
+          <div class="download">
+            <CallToAction href={resume}>
+              {l.downloadCV} <Icon icon="arrow-right" size="1.2em" />
+            </CallToAction>
+          </div>
+        </Hero>
+        <Image src={portrait} alt={l.portraitAlt} width="480" height="620" />
+      </header>
+      <Skills />
+    </div>
+
+    <main class="wrapper stack gap-20 lg:gap-48">
+      <section class="section with-background with-cta">
+        <header class="section-header stack gap-2 lg:gap-4">
+          <h3>{l.sectionWorkTitle}</h3>
+          <p>{l.sectionWorkDesc}</p>
+        </header>
+        <div class="gallery">
+          <Grid variant="offset">
+            {projects.map((project) => (<li><PortfolioPreview project={project} /></li>))}
+          </Grid>
+        </div>
+        <div class="cta">
+          <CallToAction href={translatePath('/work/')}>{l.sectionWorkCta} <Icon icon="arrow-right" size="1.2em" /></CallToAction>
+        </div>
+      </section>
+
+      <section class="section with-background bg-variant with-cta">
+        <header class="section-header stack gap-2 lg:gap-4">
+          <h3>{l.sectionBlogTitle}</h3>
+          <p>{l.sectionBlogDesc}</p>
+        </header>
+        <div class="gallery">
+          <ul class="articles-grid">
+            {allArticles.map((article) => (<li><ArticlePreview article={article} /></li>))}
+          </ul>
+        </div>
+        <div class="cta">
+          <CallToAction href={`/${lang}/blog/`}>{l.sectionBlogCta} <Icon icon="arrow-right" size="1.2em" /></CallToAction>
+        </div>
+      </section>
+    </main>
+
+    <ContactCTA />
+  </div>
+
+  <Schema
+    item={{
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: "Djamel Bougouffa",
+      jobTitle: "Full-Stack Software Engineer",
+      description: l.metaDescription,
+      image: "https://djamel-bougouffa.com/assets/at-work.jpg",
+      url: `https://djamel-bougouffa.com/${lang}/`,
+      email: contact.email,
+      telephone: contact.phone,
+      sameAs: [contact.github, contact.linkedin],
+      knowsLanguage: ["en", "fr"],
+      availableForHire: true
+    }}
+  />
+</BaseLayout>
+
+<style>
+  .hero { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
+  .roles { display: none; }
+  .hero img { aspect-ratio: 5/4; object-fit: cover; object-position: top; border-radius: 1.5rem; box-shadow: var(--shadow-md); }
+  @media (min-width: 50em) {
+    .hero { display: grid; grid-template-columns: 6fr 4fr; padding-inline: 2.5rem; gap: 3.75rem; }
+    .roles { margin-top: 0.5rem; display: flex; gap: 0.5rem; }
+    .hero img { aspect-ratio: 3/4; border-radius: 4.5rem; object-fit: cover; }
+  }
+  .section { display: grid; gap: 2rem; }
+  .with-background { position: relative; }
+  .with-background::before { --hero-bg: var(--bg-image-subtle-2); content: ""; position: absolute; pointer-events: none; left: 50%; width: 100vw; aspect-ratio: calc(2.25 / var(--bg-scale)); top: 0; transform: translateY(-75%) translateX(-50%); background: url("/assets/backgrounds/noise.png") top center/220px repeat, var(--hero-bg) center center / var(--bg-gradient-size) no-repeat, var(--gray-999); background-blend-mode: overlay, normal, normal, normal; mix-blend-mode: var(--bg-blend-mode); z-index: -1; }
+  .with-background.bg-variant::before { --hero-bg: var(--bg-image-subtle-1); }
+  .section-header { justify-self: center; text-align: center; max-width: 50ch; font-size: var(--text-md); color: var(--gray-300); }
+  .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; list-style: none; padding: 0; margin: 0; }
+  .section-header h3 { font-size: var(--text-2xl); color: var(--gray-0); }
+  @media (min-width: 50em) {
+    .section { grid-template-columns: repeat(4, 1fr); grid-template-areas: "header header header header" "gallery gallery gallery gallery"; gap: 5rem; }
+    .section.with-cta { grid-template-areas: "header header header cta" "gallery gallery gallery gallery"; }
+    .section-header { grid-area: header; font-size: var(--text-lg); }
+    .section-header h3 { font-size: var(--text-4xl); }
+    .with-cta .section-header { justify-self: flex-start; text-align: left; }
+    .gallery { grid-area: gallery; }
+    .cta { grid-area: cta; }
+  }
+</style>

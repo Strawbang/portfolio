@@ -10,6 +10,7 @@ const { article } = Astro.props;
 const DEFAULT_IMAGES: Record<string, string> = {
   'Dev.to': '/assets/devto-logo.png',
   'Medium': '/assets/medium-logo.png',
+  'Blog': '/assets/blog-logo.png',
   fallback: '/assets/placeholder-article.jpg'
 };
 
@@ -18,7 +19,7 @@ const imageUrl = article.imageUrl || DEFAULT_IMAGES[article.platform] || DEFAULT
 ---
 
 <article class="card">
-  <a href={article.url} target="_blank" rel="noopener noreferrer" class="card-link">
+  <a href={article.url} target={article.platform === 'Blog' ? '_self' : '_blank'} rel={article.platform === 'Blog' ? '' : 'noopener noreferrer'} class="card-link">
     <div class="image-container">
       <img 
         src={imageUrl} 
@@ -27,7 +28,11 @@ const imageUrl = article.imageUrl || DEFAULT_IMAGES[article.platform] || DEFAULT
         width="300"
         height="150"
       />
-      <div class="platform-badge">{article.platform}</div>
+      <div class="platform-badges">
+        {(article.platforms ?? [article.platform]).map(p => (
+          <span class="platform-badge">{p}</span>
+        ))}
+      </div>
     </div>
     <header>
       <h3 class="title">{article.title}</h3>
@@ -80,15 +85,27 @@ const imageUrl = article.imageUrl || DEFAULT_IMAGES[article.platform] || DEFAULT
     object-fit: cover;
   }
 
-  .platform-badge {
+  .platform-badges {
     position: absolute;
     bottom: 0;
     right: 0;
+    display: flex;
+    gap: 0.15rem;
+  }
+
+  .platform-badge {
     background-color: var(--accent-regular);
     color: var(--accent-text-over);
     padding: 0.2rem 0.5rem;
     font-size: var(--text-xs);
+  }
+
+  .platform-badge:first-child {
     border-top-left-radius: 0.3rem;
+  }
+
+  .platform-badges:has(.platform-badge:nth-child(2)) .platform-badge:last-child {
+    background-color: var(--accent-dark);
   }
 
   .title {

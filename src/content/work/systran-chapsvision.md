@@ -6,18 +6,16 @@ img_alt: SYSTRAN by ChapsVision logo
 description: |
   Full-Stack Software Engineer
 tags:
-  - DevOps
   - TypeScript
-  - React
-  - Node.js
+  - Next.js
+  - NLP
+  - Agile
 ---
 
 ### Advancing Language Technology at SYSTRAN by ChapsVision
 
-<p>As a Full-Stack Software Engineer at SYSTRAN by ChapsVision since January 2025, I've been applying my expertise in web development and DevOps to enhance language processing solutions that bridge communication gaps worldwide.</p>
+<p>As a Full-Stack Software Engineer at SYSTRAN by ChapsVision (January – April 2025), I contributed to the development of web applications on an AI-powered NLP platform dedicated to translation services.</p>
 
-<p>Leveraging my skills in TypeScript, React, and Node.js, I contribute to the development and maintenance of robust applications that deliver seamless language processing capabilities to users across various industries.</p>
+<p>Leveraging TypeScript and Next.js, I improved user experience and interface design while collaborating with an international team in a multicultural environment, strengthening my professional English communication skills.</p>
 
-<p>My DevOps experience with tools like Docker, Kubernetes, and cloud platforms enables me to implement efficient CI/CD pipelines, ensuring rapid deployment and high-quality code delivery.</p>
-
-<p>At SYSTRAN by ChapsVision, I continue to expand my technical expertise while contributing to innovative language technology solutions that serve global enterprises.</p>
+<p>I proposed solutions to modernize a legacy codebase, focusing on scalability and maintainability, and actively participated in Agile ceremonies to optimize team efficiency and workflow.</p>

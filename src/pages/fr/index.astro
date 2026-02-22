@@ -1,10 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-
-// Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
-import BaseLayout from "../../layouts/FrenchBaseLayout.astro";
-
-// Component Imports
+import FrenchBaseLayout from "../../layouts/FrenchBaseLayout.astro";
 import CallToAction from "../../components/CallToAction.astro";
 import Grid from "../../components/Grid.astro";
 import Hero from "../../components/Hero.astro";
@@ -14,53 +10,57 @@ import PortfolioPreview from "../../components/PortfolioPreview.astro";
 import ArticlePreview from "../../components/ArticlePreview.astro";
 import { fetchArticles } from "../../services/articles";
 import { Schema } from "astro-seo-schema";
+import ContactCTA from "../../components/ContactCTA.astro";
+import Skills from "../../components/Skills.astro";
+import { Image } from "astro:assets";
+import portrait from "../../../public/assets/portrait.png";
+import { indexLabels } from '../../data/pages';
+import { contact, resumeFiles } from '../../data/about';
 
-// Page section components
-import ContactCTA from "../../components/fr/ContactCTA.astro";
-import Skills from "../../components/fr/Skills.astro";
+const l = indexLabels['fr'];
+const resume = resumeFiles['fr'];
 
-// Optimize Images
-import { Image } from "astro:assets"
-import portrait from "../../../public/assets/portrait.png"
-
-// Content Fetching: List four most recent work projects
-const projects = (await getCollection("work", ({ id }) => {
-		return id.startsWith('fr/');
-   }))
+const projects = (await getCollection("work", ({ id }) => id.startsWith('fr/')))
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
   .slice(0, 4);
 
-const articles = await fetchArticles();
+const externalArticles = await fetchArticles();
 
-// Full Astro Component Syntax:
-// https://docs.astro.build/core-concepts/astro-components/
+const blogPosts = (await getCollection('blog'))
+  .filter(post => !post.data.draft)
+  .map(post => ({
+    title: post.data.title,
+    description: post.data.description,
+    url: `/fr/blog/${post.slug}/`,
+    platform: 'Blog' as const,
+    publishDate: post.data.publishDate,
+    imageUrl: post.data.img
+  }));
+
+const allArticles = [...externalArticles, ...blogPosts]
+  .sort((a, b) => b.publishDate.getTime() - a.publishDate.getTime())
+  .slice(0, 3);
 ---
 
-<BaseLayout title="Djamel Bougouffa | Ingénieur Logiciel Full-Stack" description="Portfolio de Djamel Bougouffa, Ingénieur Logiciel Full-Stack spécialisé en TypeScript, React, Node.js et DevOps avec plus de 5 ans d'expérience.">
+<FrenchBaseLayout title={l.metaTitle} description={l.metaDescription}>
   <div class="stack gap-20 lg:gap-48">
     <div class="wrapper stack gap-8 lg:gap-20">
       <header class="hero">
-        <Hero
-          title="Bonjour, je m'appelle Djamel Bougouffa"
-          tagline="Je suis un Ingénieur Logiciel Full-Stack spécialisé en TypeScript, React, Node.js et DevOps"
-          align="start"
-        >
+        <Hero title={l.heroGreeting} tagline={l.heroTagline} align="start">
           <div class="roles">
-            <Pill><Icon icon="code" size="1.33em" /> Développeur</Pill>
-            <Pill><Icon icon="devops-logo" size="1.33em" /> DevOps</Pill>
-            <Pill><Icon icon="desktop" size="1.33em" /> À distance</Pill>
+            <Pill><Icon icon="code" size="1.33em" /> {l.pillDeveloper}</Pill>
+            <Pill><Icon icon="devops-logo" size="1.33em" /> {l.pillDevops}</Pill>
+            <Pill><Icon icon="desktop" size="1.33em" /> {l.pillRemote}</Pill>
           </div>
           <div class="download">
-            <CallToAction
-              href="/assets/CV_Djamel_Bougouffa_Ingenieur_Logiciel_Full_Stack.pdf"
-            >
-              Télécharger le CV
+            <CallToAction href={resume}>
+              {l.downloadCV}
               <Icon icon="arrow-right" size="1.2em" />
             </CallToAction>
           </div>
         </Hero>
 
-        <Image src={portrait} alt="Djamel Bougouffa pense à du nouveau code!" width="480" height="620" />
+        <Image src={portrait} alt={l.portraitAlt} width="480" height="620" />
       </header>
 
       <Skills />
@@ -69,11 +69,8 @@ const articles = await fetchArticles();
     <main class="wrapper stack gap-20 lg:gap-48">
       <section class="section with-background with-cta">
         <header class="section-header stack gap-2 lg:gap-4">
-          <h3>Travaux sélectionnés</h3>
-          <p>
-            Jetez un œil ci-dessous à certains de mes travaux en vedette pour des clients des
-            dernières années.
-          </p>
+          <h3>{l.sectionWorkTitle}</h3>
+          <p>{l.sectionWorkDesc}</p>
         </header>
 
         <div class="gallery">
@@ -89,29 +86,36 @@ const articles = await fetchArticles();
         </div>
 
         <div class="cta">
-          <CallToAction href="/fr/a-propos/">
-            Voir tout
+          <CallToAction href="/fr/experiences/">
+            {l.sectionWorkCta}
             <Icon icon="arrow-right" size="1.2em" />
           </CallToAction>
         </div>
       </section>
 
-      <section class="section with-background bg-variant">
+      <section class="section with-background bg-variant with-cta">
         <header class="section-header stack gap-2 lg:gap-4">
-          <h3>Articles</h3>
-          <p>Mes derniers articles publiés sur Medium et Dev.to</p>
+          <h3>{l.sectionBlogTitle}</h3>
+          <p>{l.sectionBlogDesc}</p>
         </header>
 
         <div class="gallery">
-          <Grid variant="offset">
+          <ul class="articles-grid">
             {
-              articles.map((article) => (
+              allArticles.map((article) => (
                 <li>
                   <ArticlePreview article={article} />
                 </li>
               ))
             }
-          </Grid>
+          </ul>
+        </div>
+
+        <div class="cta">
+          <CallToAction href="/fr/blog/">
+            {l.sectionBlogCta}
+            <Icon icon="arrow-right" size="1.2em" />
+          </CallToAction>
         </div>
       </section>
     </main>
@@ -119,96 +123,23 @@ const articles = await fetchArticles();
     <ContactCTA />
   </div>
   
-  <Schema 
+  <Schema
     item={{
       "@context": "https://schema.org",
       "@type": "Person",
       name: "Djamel Bougouffa",
       jobTitle: "Ingénieur Logiciel Full-Stack",
-      description: "Ingénieur Logiciel Full-Stack avec plus de 5 ans d'expérience, spécialisé en TypeScript, React, Node.js et DevOps. Passionné par la création d'applications web évolutives et l'optimisation des flux de développement.",
-      image: "https://strawbang.github.io/portfolio/assets/at-work.jpg",
-      url: "https://strawbang.github.io/portfolio/fr/a-propos/",
-      email: "djamel.bougouffa@gmail.com",
-      sameAs: [
-        "https://github.com/strawbang",
-        "https://www.linkedin.com/in/djamel-bougouffa/"
-      ],
-      skills: [
-        "TypeScript",
-        "JavaScript",
-        "React",
-        "Node.js",
-        "Express.js",
-        "Next.js",
-        "DevOps",
-        "Docker",
-        "Kubernetes",
-        "AWS",
-        "CI/CD",
-        "MongoDB",
-        "PostgreSQL"
-      ],
-      worksFor: {
-        "@type": "Organization",
-        name: "Freelance",
-        url: "https://strawbang.github.io/portfolio/"
-      },
-      alumniOf: [
-        {
-          "@type": "EducationalOrganization",
-          name: "Institut F2I",
-          url: "https://www.f2i-institute.com/",
-          description: "Master en ingénierie informatique / Expert Architecte Web",
-          startDate: "2020",
-          endDate: "2021"
-        },
-        {
-          "@type": "EducationalOrganization",
-          name: "Institut F2I",
-          url: "https://www.f2i-institute.com/",
-          description: "Licence en ingénierie informatique / Chef de Projet Digital",
-          startDate: "2018",
-          endDate: "2020"
-        },
-        {
-          "@type": "EducationalOrganization",
-          name: "IRIS - Ecole supérieure d'informatique",
-          description: "BTS Solutions et Applications aux Processus Métiers",
-          startDate: "2017",
-          endDate: "2018"
-        },
-        {
-          "@type": "EducationalOrganization",
-          name: "Lycée Léonard de Vinci de Melun",
-          description: "BTS Solutions et Applications aux Processus Métiers",
-          startDate: "2015",
-          endDate: "2017"
-        },
-        {
-          "@type": "EducationalOrganization",
-          name: "CNED",
-          url: "https://www.cned.fr/",
-          description: "BTS Solutions et Applications aux Processus Métiers",
-          startDate: "2014",
-          endDate: "2015"
-        },
-        {
-          "@type": "EducationalOrganization",
-          name: "Lycée La Fayette",
-          description: "Baccalauréat Professionnel Systèmes Électroniques Numériques",
-          startDate: "2011",
-          endDate: "2014"
-        }
-      ],
+      description: l.metaDescription,
+      image: "https://djamel-bougouffa.com/assets/at-work.jpg",
+      url: "https://djamel-bougouffa.com/fr/",
+      email: contact.email,
+      telephone: contact.phone,
+      sameAs: [contact.github, contact.linkedin],
       knowsLanguage: ["fr", "en"],
-      seeks: {
-        "@type": "Demand",
-        description: "Recherche de nouvelles opportunités en tant qu'Ingénieur Logiciel Full-Stack"
-      },
       availableForHire: true
     }}
   />
-</BaseLayout>
+</FrenchBaseLayout>
 
 <style>
   .hero {
@@ -291,6 +222,15 @@ const articles = await fetchArticles();
     max-width: 50ch;
     font-size: var(--text-md);
     color: var(--gray-300);
+  }
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
   .section-header h3 {

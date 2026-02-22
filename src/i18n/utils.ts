@@ -24,28 +24,34 @@ export function useTranslatedPath(lang: keyof typeof ui) {
 
 export function getRouteFromUrl(url: URL): string | undefined {
   const pathname = new URL(url).pathname;
-  const parts = pathname?.split('/');
-  const path = parts.pop() || parts.pop();
+  const parts = pathname?.split('/').filter(Boolean);
 
-  if (path === undefined) {
+  if (parts.length === 0) {
     return undefined;
   }
 
   const currentLang = getLangFromUrl(url);
 
-  if (defaultLang === currentLang) {
-    const route = Object.values(routes)[0];
-    return route[path] !== undefined ? route[path] : undefined;
-  }
+  const getKeyByValue = (obj: Record<string, string>, value: string): string | undefined => {
+    return Object.keys(obj).find((key) => obj[key] === value);
+  };
 
-  const getKeyByValue = (obj: Record<string, string>, value: string): string | undefined  => {
-      return Object.keys(obj).find((key) => obj[key] === value);
-  }
+  // Try each segment from last to first to find a known route
+  for (let i = parts.length - 1; i >= 0; i--) {
+    const segment = parts[i];
 
-  const reversedKey = getKeyByValue(routes[currentLang], path);
-
-  if (reversedKey !== undefined) {
-    return reversedKey;
+    if (defaultLang === currentLang) {
+      const route = Object.values(routes)[0];
+      // Check if segment is a direct route key (e.g. 'work', 'about', 'blog') first
+      if (Object.keys(route).includes(segment)) return segment;
+      // Then check if segment matches a translated value
+      if (route[segment] !== undefined) return route[segment];
+    } else {
+      const reversedKey = getKeyByValue(routes[currentLang], segment);
+      if (reversedKey !== undefined) return reversedKey;
+      // Also check if segment is a direct route key
+      if (routes[currentLang] && Object.keys(routes[currentLang]).includes(segment)) return segment;
+    }
   }
 
   return undefined;

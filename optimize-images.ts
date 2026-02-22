@@ -30,7 +30,8 @@ const imagesToOptimize: string[] = [
   'maformationmedicale.png',
   'systran.png',
   'portrait.png',
-  'metro-france.png'
+  'metro-france.png',
+  'ippon.png'
 ];
 
 // Créer le répertoire cible s'il n'existe pas

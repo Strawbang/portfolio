@@ -2,50 +2,218 @@
 import { languages } from '../i18n/ui';
 import { getLangFromUrl, useTranslatedPath } from '../i18n/utils';
 import { getRouteFromUrl } from '../i18n/utils';
+
 const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
 const route = getRouteFromUrl(Astro.url);
+
 const flags = {
-  en: '🇺🇸',
-  fr: '🇫🇷',
+  en: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path fill="#bd3d44" d="M0 0h640v480H0"/><path stroke="#fff" stroke-width="37" d="M0 55.3h640M0 129h640M0 203h640M0 277h640M0 351h640M0 425h640"/><path fill="#192f5d" d="M0 0h296v258.5H0"/><g fill="#fff"><g id="s18"><g id="s9"><g id="s5"><g id="s4"><path id="s" d="M24.7 9.5L18.8 33 5.9 14.8l23.5-.4-19 19.3z"/><use href="#s" x="42"/></g><use href="#s" x="84"/></g><use href="#s" x="168"/></g><use href="#s" x="42" y="221"/><use href="#s9" y="442"/></g><use href="#s18" y="258"/></g></svg>`,
+  fr: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="900" height="600" fill="#ED2939"/><rect width="600" height="600" fill="#fff"/><rect width="300" height="600" fill="#002395"/></svg>`,
+  ja: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect fill="#fff" width="900" height="600"/><circle fill="#bc002d" cx="450" cy="300" r="180"/></svg>`,
+  zh: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect fill="#de2910" width="900" height="600"/><use href="#s" transform="translate(150 150) scale(90)"/><use href="#s" transform="translate(300 60) rotate(-12.1) scale(30)"/><use href="#s" transform="translate(360 120) rotate(-2.1) scale(30)"/><use href="#s" transform="translate(360 210) rotate(19.9) scale(30)"/><use href="#s" transform="translate(300 270) rotate(41.9) scale(30)"/><defs><path id="s" fill="#ffde00" d="M0-1 0.6 0.8-1-0.3 1-0.3-0.6 0.8z"/></defs></svg>`,
+  th: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect fill="#ED1C24" width="900" height="600"/><rect fill="#fff" y="100" width="900" height="400"/><rect fill="#241D4F" y="200" width="900" height="200"/></svg>`,
+  vi: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect fill="#da251d" width="900" height="600"/><path fill="#ff0" d="M450 120l58.8 180.9 190.2-61.8-153.9 111.8 58.8 180.9-153.9-111.8-153.9 111.8 58.8-180.9-153.9-111.8 190.2 61.8z"/></svg>`,
+  ms: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect fill="#fff" width="1200" height="600"/><rect fill="#c00" y="42.8" width="1200" height="42.8"/><rect fill="#c00" y="128.4" width="1200" height="42.8"/><rect fill="#c00" y="214" width="1200" height="42.8"/><rect fill="#c00" y="299.6" width="1200" height="42.8"/><rect fill="#c00" y="385.2" width="1200" height="42.8"/><rect fill="#c00" y="470.8" width="1200" height="42.8"/><rect fill="#c00" y="556.4" width="1200" height="43.6"/><rect fill="#006" width="600" height="342.8"/><path fill="#fc0" d="M265.5 67.4c-87.3 0-158.3 70.8-158.3 158.3s71 158.3 158.3 158.3c27.1 0 52.7-6.8 75.3-18.8-77.9-1.5-141.2-65.2-141.2-143.8s66.9-142.3 145-143.8c-24-12.7-51.5-20.2-79.1-20.2z"/><path fill="#fc0" d="M472.1 127.4l16.2 49.8 52.4-1.3-43.2 29.8 17.5 49.4-42.9-30.3-42.9 30.3 17.5-49.4-43.2-29.8 52.4 1.3z"/></svg>`,
+  ko: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect fill="#fff" width="900" height="600"/><circle fill="#cd2e3a" cx="450" cy="300" r="150"/><path fill="#0047a0" d="M450 150a150 150 0 0 1 0 300c0-50 50-100 0-150s0-100 0-150z"/><g stroke="#000" stroke-width="11" transform="rotate(-56.3 450 300)"><line x1="594" y1="150" x2="756" y2="150"/><line x1="594" y1="180" x2="756" y2="180"/><line x1="594" y1="210" x2="756" y2="210"/><line x1="144" y1="390" x2="306" y2="390"/><line x1="144" y1="420" x2="306" y2="420"/><line x1="144" y1="450" x2="306" y2="450"/><line x1="594" y1="390" x2="756" y2="390"/><line x1="594" y1="420" x2="756" y2="420"/><line x1="144" y1="150" x2="306" y2="150"/><line x1="144" y1="180" x2="306" y2="180"/><line x1="144" y1="210" x2="306" y2="210"/><line x1="594" y1="450" x2="756" y2="450"/></g></svg>`,
+  id: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect fill="#ce1126" width="900" height="300"/><rect fill="#fff" y="300" width="900" height="300"/></svg>`,
+  tl: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect fill="#fff" width="900" height="600"/><rect fill="#0038a8" width="900" height="300"/><rect fill="#ce1126" y="300" width="900" height="300"/><path fill="#fff" d="M0 0l450 300L0 600z"/><path fill="#fcd116" d="M112 300l-21.5-66.1L34 300l56.5-41.1zm-56.5-41.1l-21.5 66.1 56.5-41.1-56.5-41.1zm0 82.2l21.5 66.1L99 366l-43.5-24.9zm0 0l56.5 41.1-21.5-66.1-35 25zm56.5 41.1l-21.5-66.1-35 25 56.5 41.1z"/><circle fill="#fcd116" cx="112" cy="300" r="40"/></svg>`,
+  ar: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect fill="#006233" width="900" height="200"/><rect fill="#fff" y="200" width="900" height="200"/><rect fill="#000" y="400" width="900" height="200"/><rect fill="#ce1126" width="300" height="600"/></svg>`,
+  hi: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect fill="#FF9933" width="900" height="200"/><rect fill="#fff" y="200" width="900" height="200"/><rect fill="#138808" y="400" width="900" height="200"/><circle fill="#000080" cx="450" cy="300" r="66"/><circle fill="#fff" cx="450" cy="300" r="60"/><circle fill="#000080" cx="450" cy="300" r="10"/></svg>`,
+  de: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect fill="#000" width="900" height="200"/><rect fill="#D00" y="200" width="900" height="200"/><rect fill="#FFCE00" y="400" width="900" height="200"/></svg>`,
+  es: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect fill="#c60b1e" width="900" height="600"/><rect fill="#ffc400" y="150" width="900" height="300"/></svg>`,
+  pt: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect fill="#006600" width="900" height="600"/><rect fill="#ff0000" x="360" width="540" height="600"/><circle fill="#ffff00" cx="360" cy="300" r="100"/><circle fill="#fff" cx="360" cy="300" r="80"/><circle fill="#003399" cx="360" cy="300" r="50"/></svg>`,
 };
+
+const currentLang = lang as keyof typeof flags;
+
+const continents: { label: string; langs: (keyof typeof flags)[] }[] = [
+  { label: 'Europe', langs: ['en', 'fr', 'de', 'es', 'pt'] },
+  { label: 'East Asia', langs: ['ja', 'zh', 'ko'] },
+  { label: 'Southeast Asia', langs: ['th', 'vi', 'ms', 'id', 'tl'] },
+  { label: 'South Asia / Middle East', langs: ['hi', 'ar'] },
+];
+
 ---
 
-<ul class="language-list">
-  {Object.entries(languages).map(([lang, label]) => (
-    <li key={lang} className="language-item">
-      <span class="flag">{flags[lang]}</span> {/* Display the flag */}
-      <a href={translatePath(`/${route ? route : ''}`, lang)}>{label}</a>
-    </li>
-  ))}
-</ul>
+<div class="language-picker">
+  <button class="current-lang" aria-label="Changer de langue" aria-expanded="false">
+    <span class="flag" set:html={flags[currentLang]}></span>
+    <span class="label">{languages[currentLang]}</span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chevron"><polyline points="6 9 12 15 18 9"></polyline></svg>
+  </button>
+  <ul class="dropdown-menu">
+    {continents.map(({ label, langs }, i) => (
+      <>
+        {i > 0 && <li class="divider" role="separator" aria-hidden="true"></li>}
+        <li class="continent-label" aria-hidden="true">{label}</li>
+        {langs.map((l) => (
+          <li>
+            <a href={translatePath(`/${route ? route : ''}`, l)} class={l === currentLang ? 'active' : ''}>
+              <span class="flag" set:html={flags[l]}></span>
+              <span class="label-text">{languages[l]}</span>
+            </a>
+          </li>
+        ))}
+      </>
+    ))}
+  </ul>
+</div>
 
+<script>
+  const pickers = document.querySelectorAll('.language-picker');
+  
+  pickers.forEach(picker => {
+    const button = picker.querySelector('.current-lang');
+
+    button?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', (!expanded).toString());
+      picker.classList.toggle('open');
+    });
+
+    // Fermer le menu si on clique ailleurs
+    document.addEventListener('click', (e) => {
+        if (!picker.contains(e.target as Node)) {
+            button?.setAttribute('aria-expanded', 'false');
+            picker.classList.remove('open');
+        }
+    });
+  });
+</script>
 
 <style>
-  .language-list {
-    list-style-type: none;
-    padding: 0;
+  .language-picker {
+    position: relative;
+    font-family: var(--font-brand);
   }
 
-  .language-item {
-    margin-bottom: 10px;
+  .current-lang {
     display: flex;
     align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: 1px solid var(--gray-800);
+    padding: 0.5rem 1rem;
+    border-radius: 999rem;
+    color: var(--gray-300);
+    cursor: pointer;
+    font-size: var(--text-sm);
+    transition: all 0.2s ease;
+  }
+
+  .current-lang:hover, .language-picker.open .current-lang {
+    border-color: var(--accent-regular);
+    color: var(--gray-100);
+    background-color: var(--gray-900);
   }
 
   .flag {
-    margin-right: 10px;
-    font-size: 20px;
+    display: inline-block;
+    width: 1.5em;
+    height: 1em;
+    border-radius: 0.15em;
+    overflow: hidden;
+    flex-shrink: 0;
+    vertical-align: middle;
   }
 
-  /* Style for links */
-  a {
-    color: var(--accent-dark);;
+  .flag :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .chevron {
+    transition: transform 0.2s ease;
+    opacity: 0.7;
+  }
+
+  .language-picker.open .chevron {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    bottom: 100%;
+    left: 0; 
+    margin: 0 0 0.5rem 0;
+    padding: 0.5rem;
+    list-style: none;
+    background: var(--gray-999);
+    border: 1px solid var(--gray-800);
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-md);
+    
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s ease;
+    z-index: 1000;
+    min-width: 180px;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  /* Sur desktop, on affiche le menu en dessous */
+  @media (min-width: 50em) {
+      .dropdown-menu {
+          top: 100%;
+          bottom: auto;
+          left: auto;
+          right: 0;
+          margin: 0.5rem 0 0 0;
+          transform: translateY(-10px);
+      }
+  }
+
+  .language-picker.open .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown-menu li {
+    margin-bottom: 0;
+  }
+
+  .continent-label {
+    padding: 0.35rem 0.75rem 0.15rem;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray-500);
+    pointer-events: none;
+  }
+
+  .divider {
+    height: 1px;
+    background-color: var(--gray-800);
+    margin: 0.35rem 0.5rem;
+  }
+
+  .dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
     text-decoration: none;
-    transition: color 0.3s ease;
+    color: var(--gray-300);
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-size: var(--text-sm);
   }
 
-  a:hover {
-    color: var(--accent-text-over); /* Change color on hover */
+  .dropdown-menu a:hover {
+    background-color: var(--gray-800);
+    color: var(--gray-100);
+  }
+
+  .dropdown-menu a.active {
+    background-color: var(--accent-subtle-overlay);
+    color: var(--accent-text-over);
+    font-weight: 500;
   }
 </style>

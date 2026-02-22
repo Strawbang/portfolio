@@ -1,22 +1,115 @@
 ---
 import "../styles/global.css";
+import { languages, routes, defaultLang, showDefaultLang } from '../i18n/ui';
+import { getLangFromUrl } from '../i18n/utils';
 
 interface Props {
   title?: string | undefined;
   description?: string | undefined;
+  canonicalURL?: string | undefined;
+  image?: string | undefined;
+  type?: 'website' | 'article';
+  publishedTime?: string | undefined;
+  tags?: string[];
 }
 
 const {
   title = "Djamel Bougouffa: Portfolio",
   description = "Portfolio of Djamel Bougouffa",
+  canonicalURL,
+  image = "/assets/portrait.png",
+  type = "website",
+  publishedTime,
+  tags = [],
 } = Astro.props;
+
+const siteUrl = "https://djamel-bougouffa.com";
+const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
+
+const currentLang = getLangFromUrl(Astro.url);
+
+// Build canonical URL automatically if not provided
+const pathname = Astro.url.pathname;
+const autoCanonical = canonicalURL ?? `${siteUrl}${pathname}`;
+
+// Build hreflang alternate URLs for all languages
+// Detect the current route key (e.g. 'work', 'about', 'blog', or undefined for home)
+const pathParts = pathname.split('/').filter(Boolean);
+// Remove lang prefix if present
+const langKeys = Object.keys(languages);
+const firstPart = pathParts[0];
+const hasLangPrefix = langKeys.includes(firstPart) && firstPart !== defaultLang;
+const routeParts = hasLangPrefix ? pathParts.slice(1) : pathParts;
+const routeSlug = routeParts[0]; // e.g. 'work', 'about', 'travaux', 'a-propos', etc.
+
+// Reverse-map translated slug to canonical route key
+function getCanonicalRoute(lang: string, slug: string | undefined): string | undefined {
+  if (!slug) return undefined;
+  if (!routes[lang]) return slug;
+  const entry = Object.entries(routes[lang]).find(([, v]) => v === slug);
+  return entry ? entry[0] : slug;
+}
+
+const canonicalRoute = getCanonicalRoute(currentLang, routeSlug);
+
+// Build alternate URL for a given language
+function buildAlternateUrl(lang: string): string {
+  let path = '';
+  if (canonicalRoute) {
+    const langRoutes = routes[lang] as Record<string, string> | undefined;
+    const translatedSlug = langRoutes?.[canonicalRoute] ?? canonicalRoute;
+    path = `/${translatedSlug}/`;
+  } else {
+    path = '/';
+  }
+  const prefix = (!showDefaultLang && lang === defaultLang) ? '' : `/${lang}`;
+  return `${siteUrl}${prefix}${path}`;
+}
+
+const hreflangLinks = Object.keys(languages).map((lang) => ({
+  lang,
+  url: buildAlternateUrl(lang),
+}));
+
+// og:locale mapping
+const ogLocaleMap: Record<string, string> = {
+  en: 'en_US', fr: 'fr_FR', ja: 'ja_JP', zh: 'zh_CN', th: 'th_TH',
+  vi: 'vi_VN', ms: 'ms_MY', ko: 'ko_KR', id: 'id_ID', tl: 'fil_PH',
+  ar: 'ar_SA', hi: 'hi_IN', de: 'de_DE', es: 'es_ES', pt: 'pt_BR',
+};
+const ogLocale = ogLocaleMap[currentLang] ?? 'en_US';
 ---
 
 <meta charset="UTF-8" />
-<meta name="description" property="og:description" content={description} />
+<meta name="description" content={description} />
 <meta name="viewport" content="width=device-width" />
 <meta name="generator" content={Astro.generator} />
 <title>{title}</title>
+<link rel="canonical" href={autoCanonical} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={fullImageUrl} />
+<meta property="og:locale" content={ogLocale} />
+{publishedTime && <meta property="article:published_time" content={publishedTime} />}
+{tags.map(tag => <meta property="article:tag" content={tag} />)}
+
+<!-- hreflang alternate links for all languages -->
+{hreflangLinks.map(({ lang, url }) => (
+  <link rel="alternate" hreflang={lang} href={url} />
+))}
+<link rel="alternate" hreflang="x-default" href={buildAlternateUrl('en')} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={fullImageUrl} />
+<meta name="twitter:creator" content="@strawbang" />
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -61,3 +154,7 @@ const {
     });
   }
 </script>
+
+<!-- Cloudflare Web Analytics -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1efc3535a25447d4b439d1ef9f57f72d"}'></script>
+<!-- End Cloudflare Web Analytics -->
