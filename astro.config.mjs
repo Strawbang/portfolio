@@ -95,20 +95,23 @@ export default defineConfig({
 			filter: (page) => !page.includes('/og/'),
 			customPages: [],
 			serialize(item) {
-				// Homepage (no path after domain)
-				if (/https:\/\/djamel-bougouffa\.com\/?$/.test(item.url) ||
-					/https:\/\/djamel-bougouffa\.com\/[a-z]{2}\/?$/.test(item.url)) {
+				const url = new URL(item.url);
+				const parts = url.pathname.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
+				// Homepage: / or /[lang]/
+				if (parts.length === 0 || (parts.length === 1 && parts[0].length === 2)) {
 					return { ...item, changefreq: 'weekly', priority: 1.0 };
 				}
-				// Blog posts
-				if (item.url.includes('/blog/') && item.url.split('/').length > 5) {
+				// Blog post detail: /blog/[slug]/ or /[lang]/blog/[slug]/
+				const isBlogPost = parts.includes('blog') && parts[parts.length - 1] !== 'blog';
+				if (isBlogPost) {
 					return { ...item, changefreq: 'monthly', priority: 0.6 };
 				}
-				// Work/experience detail pages
-				if ((item.url.includes('/work/') || item.url.includes('/experiences/')) && item.url.split('/').length > 5) {
+				// Work/experience detail: /work/[slug]/ or /[lang]/experiences/[slug]/
+				const isWorkDetail = (parts.includes('work') || parts.includes('experiences')) && parts[parts.length - 1] !== 'work' && parts[parts.length - 1] !== 'experiences';
+				if (isWorkDetail) {
 					return { ...item, changefreq: 'monthly', priority: 0.6 };
 				}
-				// Main section pages (about, blog, work, experiences)
+				// All other pages: listing pages, about, etc.
 				return { ...item, changefreq: 'weekly', priority: 0.8 };
 			},
 			i18n: {
