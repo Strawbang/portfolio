@@ -91,9 +91,26 @@ export default defineConfig({
 			],
 		}),
 		sitemap({
-			changefreq: 'weekly',
-			priority: 0.8,
 			lastmod: new Date(),
+			filter: (page) => !page.includes('/og/'),
+			customPages: [],
+			serialize(item) {
+				// Homepage (no path after domain)
+				if (/https:\/\/djamel-bougouffa\.com\/?$/.test(item.url) ||
+					/https:\/\/djamel-bougouffa\.com\/[a-z]{2}\/?$/.test(item.url)) {
+					return { ...item, changefreq: 'weekly', priority: 1.0 };
+				}
+				// Blog posts
+				if (item.url.includes('/blog/') && item.url.split('/').length > 5) {
+					return { ...item, changefreq: 'monthly', priority: 0.6 };
+				}
+				// Work/experience detail pages
+				if ((item.url.includes('/work/') || item.url.includes('/experiences/')) && item.url.split('/').length > 5) {
+					return { ...item, changefreq: 'monthly', priority: 0.6 };
+				}
+				// Main section pages (about, blog, work, experiences)
+				return { ...item, changefreq: 'weekly', priority: 0.8 };
+			},
 			i18n: {
 				defaultLocale: 'en',
 				locales: {
