@@ -139,6 +139,10 @@ export default defineConfig({
 	redirects: {
 		'/fr/travaux': '/fr/experiences',
 		'/fr/travaux/[...slug]': '/fr/experiences/[...slug]',
+		'/fr/travaux/fr/[...slug]': '/fr/experiences/[...slug]',
+		'/articles': '/blog',
+		'/fr/articles': '/fr/blog',
+		'/work/fr/[...slug]': '/work/[...slug]',
 	},
 	// experimental: { assets: true },
 	i18n: {

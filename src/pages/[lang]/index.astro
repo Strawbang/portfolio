@@ -21,7 +21,7 @@ import { contact, resumeFiles } from '../../data/about';
 
 export function getStaticPaths() {
   return Object.keys(languages)
-    .filter(l => l !== 'en')
+    .filter(l => l !== 'en' && l !== 'fr')
     .map(lang => ({ params: { lang } }));
 }
 
