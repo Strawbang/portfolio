@@ -92,7 +92,14 @@ export default defineConfig({
 		}),
 		sitemap({
 			lastmod: new Date(),
-			filter: (page) => !page.includes('/og/'),
+			filter: (page) => {
+			if (page.includes('/og/')) return false;
+			const url = new URL(page);
+			const parts = url.pathname.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
+			const noIndexLocales = ['ja', 'zh', 'th', 'vi', 'ms', 'ko', 'id', 'tl', 'ar', 'hi', 'de', 'es', 'pt'];
+			if (parts.length > 0 && noIndexLocales.includes(parts[0])) return false;
+			return true;
+		},
 			customPages: [],
 			serialize(item) {
 				const url = new URL(item.url);

@@ -83,6 +83,7 @@ const ogLocale = ogLocaleMap[currentLang] ?? 'en_US';
 <meta charset="UTF-8" />
 <meta name="description" content={description} />
 <meta name="viewport" content="width=device-width" />
+{!['en', 'fr'].includes(currentLang) && <meta name="robots" content="noindex, follow" />}
 <meta name="generator" content={Astro.generator} />
 <title>{title}</title>
 <link rel="canonical" href={autoCanonical} />
