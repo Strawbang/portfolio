@@ -27,12 +27,12 @@ const projects = (await getCollection("work", ({ id }) => id.startsWith('fr/')))
 const externalArticles = await fetchArticles();
 
 const blogPosts = (await getCollection('blog'))
-  .filter(post => !post.data.draft)
+  .filter(post => !post.data.draft && post.data.lang === 'fr')
   .map(post => ({
     title: post.data.title,
     description: post.data.description,
-    url: `/fr/blog/${post.slug}/`,
-    platform: 'Blog' as const,
+    url: `/fr/blog/${post.slug.replace(/^fr-/, '')}/`,
+    platform: (post.data.source ?? 'Blog') as string,
     publishDate: post.data.publishDate,
     imageUrl: post.data.img
   }));
