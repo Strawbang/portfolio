@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactCTA from '../components/ContactCTA.astro';
 import ArticlePreview from '../components/ArticlePreview.astro';
 import Pagination from '../components/Pagination.astro';
+import Hero from '../components/Hero.astro';
 import { fetchArticles, deduplicateArticles } from "../services/articles";
 import type { Article } from '../types/article';
 
@@ -30,45 +31,27 @@ const allPosts = deduplicateArticles([...localPosts, ...externalArticles]);
   title="Blog | Djamel Bougouffa - Full-Stack Developer"
   description="Articles and tutorials on web development, TypeScript, React, Node.js and best practices."
 >
-  <div class="wrapper stack gap-20">
-    <header class="section-header stack gap-2 lg:gap-4">
-      <h1>Blog</h1>
-      <p>
-        Discover my articles on web development, modern technologies,
-        and programming best practices.
-      </p>
-    </header>
-
-    <ul class="gallery">
-      {
-        allPosts.map((post) => (
+  <div class="stack gap-20">
+    <main class="wrapper stack gap-8">
+      <Hero
+        title="Blog"
+        tagline="Discover my articles on web development, modern technologies, and programming best practices."
+        align="start"
+      />
+      <ul class="gallery">
+        {allPosts.map((post) => (
           <li>
             <ArticlePreview article={post} />
           </li>
-        ))
-      }
-    </ul>
-
-    <Pagination totalItems={allPosts.length} labelPrev="Previous" labelNext="Next" labelPage="Page" />
-
+        ))}
+      </ul>
+      <Pagination totalItems={allPosts.length} labelPrev="Previous" labelNext="Next" labelPage="Page" />
+    </main>
     <ContactCTA />
   </div>
 </BaseLayout>
 
 <style>
-  .section-header {
-    text-align: center;
-  }
-
-  .section-header h1 {
-    font-size: var(--text-5xl);
-  }
-
-  .section-header p {
-    color: var(--gray-300);
-    font-size: var(--text-lg);
-  }
-
   .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -76,11 +59,5 @@ const allPosts = deduplicateArticles([...localPosts, ...externalArticles]);
     list-style-type: none;
     padding: 0;
     margin: 0;
-  }
-
-  @media (min-width: 50em) {
-    .section-header h1 {
-      font-size: var(--text-6xl);
-    }
   }
 </style>
