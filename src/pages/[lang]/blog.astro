@@ -19,14 +19,14 @@ const { lang } = Astro.params as { lang: Lang };
 const l = blogLabels[lang] ?? blogLabels['en'];
 
 const localPosts = (await getCollection('blog'))
-  .filter(post => !post.data.draft)
+  .filter(post => !post.data.draft && post.data.lang !== 'fr')
   .map(post => ({
     title: post.data.title,
     description: post.data.description,
     publishDate: post.data.publishDate,
-    url: `/${lang}/blog/${post.slug}/`,
+    url: `/blog/${post.slug}/`,
     imageUrl: post.data.img,
-    platform: 'Blog'
+    platform: post.data.source ?? 'Blog'
   } as Article));
 
 const externalArticles = await fetchArticles();

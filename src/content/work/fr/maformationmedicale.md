@@ -4,7 +4,7 @@ publishDate: 2023-07-15 00:00:00
 img: /assets/maformationmedicale.png
 img_alt: Website of Ma Formation Médicale
 description: |
-  Transforming UI/UX and Development at Ma Formation Médicale
+  Ingénieur Full-Stack chez Ma Formation Médicale — migration PHP vers JavaScript, +40% performance, architecture composants, Docker Swarm, Jenkins, Traefik
 tags:
   - Dev
   - DevOps
@@ -12,12 +12,26 @@ tags:
   - Lead
 ---
 
-### Transforming UI/UX and Development at Ma Formation Médicale
+### Transformation UI/UX et ingénierie chez Ma Formation Médicale
 
-<p>As a Full-Stack Software Engineer at Ma Formation Médicale, my focus was on elevating the user experience and optimizing development processes.</p>
+<p>Ma Formation Médicale est une plateforme d'e-learning dédiée à la formation médicale continue pour les professionnels de santé en France. En tant qu'Ingénieur Logiciel Full-Stack, j'ai piloté une modernisation complète de la stack applicative et de l'infrastructure de livraison — une transformation touchant chaque couche du système, de l'UI au pipeline de déploiement.</p>
 
-</p>Transitioning from PHP to JavaScript marked a significant turning point, resulting in a remarkable 40% improvement in application performance and a 30% increase in code maintainability.</p>
-</p>Introducing a component-based architecture further enhanced scalability and agility in development.</p>
-</p>We also emphasized improving code readability, contributing to a more efficient and maintainable codebase.</p>
+#### Migration PHP vers JavaScript
 
-</p>Moreover, the implementation of a robust DevOps infrastructure using Docker Swarm, Portainer, Jenkins, and Traefik resulted in impressive monthly productivity savings, reshaping the development landscape at Ma Formation Médicale.</p>
+<p>La plateforme reposait initialement sur un monolithe PHP avec une logique front-end fortement couplée. J'ai conduit la migration vers une stack JavaScript moderne, introduisant une séparation claire entre front-end et back-end, et refondant l'UI avec une architecture orientée composants. Le résultat : une amélioration de 40% des performances applicatives et une hausse de 30% de la maintenabilité du code — des gains mesurables qui ont permis à l'équipe de livrer des fonctionnalités plus rapidement avec moins de régressions.</p>
+
+#### Architecture orientée composants
+
+<p>La transition vers une approche composants n'était pas qu'un choix technologique — c'était un changement culturel pour l'équipe. J'ai introduit des composants UI réutilisables, standardisé les patterns de récupération de données et documenté l'architecture pour permettre à l'équipe de scaler le développement sans accumuler de dette technique. La lisibilité et la cohérence du code se sont considérablement améliorées.</p>
+
+#### Refonte de l'infrastructure DevOps
+
+<p>Au-delà du développement applicatif, j'ai architecturé et déployé une infrastructure DevOps robuste : Docker Swarm pour l'orchestration des conteneurs, Portainer pour la gestion du cluster, Jenkins pour les pipelines CI/CD, et Traefik comme reverse proxy et load balancer. Ce dispositif a remplacé des procédures de déploiement manuelles par des pipelines automatisés et reproductibles — générant des économies de productivité significatives chaque mois et réduisant les risques lors des mises en production.</p>
+
+#### Impact
+
+<p>L'effet combiné de la modernisation applicative et de la refonte DevOps a positionné Ma Formation Médicale pour scaler sa plateforme face à la demande croissante des professionnels de santé, tout en maîtrisant les coûts opérationnels et la charge de maintenance.</p>
+
+#### Stack technique
+
+<p>JavaScript · Architecture composants · Docker Swarm · Portainer · Jenkins · Traefik · CI/CD</p>

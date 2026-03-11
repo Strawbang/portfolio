@@ -7,9 +7,9 @@ import { calculateReadingTime, getReadingTimeText } from '../../../utils/reading
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts
-    .filter(post => !post.data.draft)
+    .filter(post => !post.data.draft && post.data.lang === 'fr')
     .map((post) => ({
-      params: { slug: post.slug },
+      params: { slug: post.slug.replace(/^fr-/, '') },
       props: post,
     }));
 }

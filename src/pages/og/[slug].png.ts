@@ -8,7 +8,7 @@ import { resolve } from 'path';
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts
-    .filter(post => !post.data.draft)
+    .filter(post => !post.data.draft && post.data.lang !== 'fr')
     .map(post => ({ params: { slug: post.slug }, props: post }));
 }
 

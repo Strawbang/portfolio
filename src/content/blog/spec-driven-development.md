@@ -1,16 +1,18 @@
 ---
-title: "Spec-Driven Development : de la spécification au code avec l'IA"
-description: "Découvrez le Spec-Driven Development (SDD) et comment l'IA, avec Kiro, transforme une spécification en code structuré et vérifié par les tests."
+title: "Spec-Driven Development: From Specification to Code with AI"
+description: "Discover Spec-Driven Development (SDD) and how AI, using Kiro, transforms a specification into structured, test-verified code."
 publishDate: 2026-02-18
-tags: ["SDD", "IA", "Architecture", "Kiro", "Spécification"]
+tags: ["SDD", "AI", "Architecture", "Kiro", "Specification"]
 img: "https://blog.ippon.fr/content/images/2026/02/spec-driven-developement.png"
-img_alt: "Spec-Driven Development avec l'IA"
+img_alt: "Spec-Driven Development with AI"
 canonicalURL: "https://blog.ippon.fr/2026/02/18/spec-driven-development/"
 draft: false
+lang: en
+source: Ippon
 ---
 
-Cet article a été co-écrit et publié sur le [blog Ippon Technologies](https://blog.ippon.fr/2026/02/18/spec-driven-development/).
+This article was co-written and published on the [Ippon Technologies blog](https://blog.ippon.fr/2026/02/18/spec-driven-development/) (in French).
 
-Le **Spec-Driven Development (SDD)** propose un changement simple mais radical : la spécification devient la source de vérité du projet. Avant d'écrire du code, on décrit précisément ce que le système doit garantir. Ces garanties guident directement l'architecture, l'implémentation et les tests.
+**Spec-Driven Development (SDD)** proposes a simple yet radical shift: the specification becomes the source of truth for the project. Before writing any code, you precisely describe what the system must guarantee. These guarantees directly guide the architecture, implementation, and tests.
 
-Retrouvez l'article complet sur le blog Ippon : [Spec-Driven Development : de la spécification au code avec l'IA](https://blog.ippon.fr/2026/02/18/spec-driven-development/)
+Read the full article on the Ippon blog: [Spec-Driven Development: From Specification to Code with AI](https://blog.ippon.fr/2026/02/18/spec-driven-development/)

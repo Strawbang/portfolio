@@ -22,6 +22,8 @@ export const collections = {
 			img_alt: z.string().optional(),
 			canonicalURL: z.string().url().optional(),
 			draft: z.boolean().default(false),
+			lang: z.enum(['en', 'fr']).default('en'),
+			source: z.string().optional(),
 		}),
 	}),
 };
