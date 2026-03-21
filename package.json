@@ -13,6 +13,7 @@
     "@astrojs/rss": "^4.0.15",
     "@astrojs/sitemap": "^3.1.1",
     "@fontsource/public-sans": "^5.2.7",
+    "@fontsource/rubik": "^5.2.8",
     "@resvg/resvg-js": "^2.6.2",
     "astro": "^4.5.7",
     "astro-seo-schema": "^4.0.3",

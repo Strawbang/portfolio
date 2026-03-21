@@ -1,5 +1,10 @@
 ---
 import "../styles/global.css";
+import "@fontsource/public-sans/400.css";
+import "@fontsource/public-sans/700.css";
+import "@fontsource/public-sans/400-italic.css";
+import "@fontsource/rubik/500.css";
+import "@fontsource/rubik/600.css";
 import { languages, routes, defaultLang, showDefaultLang } from '../i18n/ui';
 import { getLangFromUrl } from '../i18n/utils';
 
@@ -113,22 +118,7 @@ const ogLocale = ogLocaleMap[currentLang] ?? 'en_US';
 <meta name="twitter:creator" content="@strawbang" />
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="sitemap" href="/sitemap-index.xml" />
-<link
-  href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400&family=Rubik:wght@500;600&display=swap"
-  rel="stylesheet"
-  media="print"
-  onload="this.media='all'"
-/>
-<!-- Fallback pour les navigateurs qui ne supportent pas l'attribut onload -->
-<noscript>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400&family=Rubik:wght@500;600&display=swap"
-    rel="stylesheet"
-  />
-</noscript>
 
 <script is:inline>
   // This code is inlined in the head to make dark mode instant & blocking.
