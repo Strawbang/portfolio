@@ -156,6 +156,11 @@ const ogLocale = ogLocaleMap[currentLang] ?? 'en_US';
   }
 </script>
 
-<!-- Cloudflare Web Analytics -->
-<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1efc3535a25447d4b439d1ef9f57f72d"}'></script>
-<!-- End Cloudflare Web Analytics -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GRQ7796BSZ"></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GRQ7796BSZ');
+</script>
