@@ -31,7 +31,7 @@ const blogPosts = (await getCollection('blog'))
   .map(post => ({
     title: post.data.title,
     description: post.data.description,
-    url: `/fr/blog/${post.slug.replace(/^fr-/, '')}/`,
+    url: `/fr/blog/${post.id.replace(/\.md$/, '').replace(/^fr-/, '')}/`,
     platform: (post.data.source ?? 'Blog') as 'Medium' | 'Dev.to' | 'Blog',
     publishDate: post.data.publishDate,
     imageUrl: post.data.img

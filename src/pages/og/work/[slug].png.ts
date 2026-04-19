@@ -7,7 +7,7 @@ import { resolve } from 'path';
 
 export async function getStaticPaths() {
   const work = await getCollection('work');
-  return work.map(entry => ({ params: { slug: entry.slug.replace('fr/', '') }, props: entry }));
+  return work.map(entry => ({ params: { slug: entry.id.replace(/\.md$/, '').replace(/^fr\//, '') }, props: entry }));
 }
 
 export const GET: APIRoute = async ({ props }) => {

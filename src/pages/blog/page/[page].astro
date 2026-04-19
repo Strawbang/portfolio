@@ -17,7 +17,7 @@ export async function getStaticPaths() {
       title: post.data.title,
       description: post.data.description,
       publishDate: post.data.publishDate,
-      url: `/blog/${post.slug}/`,
+      url: `/blog/${post.id.replace(/\.md$/, '')}/`,
       imageUrl: post.data.img,
       platform: post.data.source ?? 'Blog',
       tags: post.data.tags,

@@ -9,7 +9,7 @@ export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts
     .filter(post => !post.data.draft && post.data.lang !== 'fr')
-    .map(post => ({ params: { slug: post.slug }, props: post }));
+    .map(post => ({ params: { slug: post.id.replace(/\.md$/, '') }, props: post }));
 }
 
 export const GET: APIRoute = async ({ props }) => {

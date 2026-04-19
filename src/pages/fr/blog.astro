@@ -16,7 +16,7 @@ const localPosts = (await getCollection('blog'))
     title: post.data.title,
     description: post.data.description,
     publishDate: post.data.publishDate,
-    url: `/fr/blog/${post.slug.replace(/^fr-/, '')}/`,
+    url: `/fr/blog/${post.id.replace(/\.md$/, '').replace(/^fr-/, '')}/`,
     imageUrl: post.data.img,
     platform: post.data.source ?? 'Blog'
   } as Article));

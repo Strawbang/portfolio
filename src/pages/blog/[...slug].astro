@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
@@ -10,7 +10,7 @@ export async function getStaticPaths() {
   return posts
     .filter(post => !post.data.draft && post.data.lang !== 'fr')
     .map((post) => ({
-      params: { slug: post.slug },
+      params: { slug: post.id.replace(/\.md$/, '') },
       props: post,
     }));
 }
@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
-const { Content, remarkPluginFrontmatter, headings } = await post.render();
+const { Content, remarkPluginFrontmatter, headings } = await render(post);
 const readingTime = calculateReadingTime(post.body);
 const readingTimeText = getReadingTimeText(readingTime, 'en');
 
@@ -39,7 +39,7 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('en-US', 
   title={`${post.data.title} | Blog`}
   description={post.data.description}
   canonicalURL={post.data.canonicalURL}
-  image={`/og/${post.slug}.png`}
+  image={`/og/${post.id.replace(/\.md$/, '')}.png`}
   type="article"
   publishedTime={post.data.publishDate.toISOString()}
   tags={post.data.tags}

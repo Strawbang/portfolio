@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
 import FrenchBaseLayout from '../../../layouts/FrenchBaseLayout.astro';
 import ContactCTA from '../../../components/ContactCTA.astro';
 import { calculateReadingTime, getReadingTimeText } from '../../../utils/readingTime';
@@ -9,7 +9,7 @@ export async function getStaticPaths() {
   return posts
     .filter(post => !post.data.draft && post.data.lang === 'fr')
     .map((post) => ({
-      params: { slug: post.slug.replace(/^fr-/, '') },
+      params: { slug: post.id.replace(/\.md$/, '').replace(/^fr-/, '') },
       props: post,
     }));
 }
@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 const readingTime = calculateReadingTime(post.body);
 const readingTimeText = getReadingTimeText(readingTime, 'fr');
 

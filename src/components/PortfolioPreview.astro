@@ -5,7 +5,8 @@ interface Props {
 	project: CollectionEntry<'work'>;
 }
 
-const { data, slug } = Astro.props.project;
+const { data, id } = Astro.props.project;
+const slug = id.replace(/\.md$/, '');
 const isFr = slug.startsWith('fr/');
 const href = isFr ? `/fr/experiences/${slug.replace('fr/', '')}` : `/work/${slug}`;
 ---

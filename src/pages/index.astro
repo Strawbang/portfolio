@@ -37,7 +37,7 @@ const blogPosts = (await getCollection('blog'))
   .map(post => ({
     title: post.data.title,
     description: post.data.description,
-    url: `/blog/${post.slug}/`,
+    url: `/blog/${post.id.replace(/\.md$/, '')}/`,
     platform: (post.data.source ?? 'Blog') as string,
     publishDate: post.data.publishDate,
     imageUrl: post.data.img

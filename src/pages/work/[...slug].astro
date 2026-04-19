@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
@@ -19,21 +19,21 @@ interface Props {
 export async function getStaticPaths() {
 	const work = await getCollection('work');
 	return work
-		.filter((entry) => !entry.slug.startsWith('fr/'))
+		.filter((entry) => !entry.id.startsWith('fr/'))
 		.map((entry) => ({
-			params: { slug: entry.slug },
+			params: { slug: entry.id.replace(/\.md$/, '') },
 			props: { entry },
 		}));
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
-const isFr = entry.slug.startsWith('fr/');
+const { Content } = await render(entry);
+const isFr = entry.id.startsWith('fr/');
 const backHref = isFr ? '/fr/experiences/' : '/work/';
 const backLabel = isFr ? 'Expériences' : 'Experience';
 ---
 
-<BaseLayout title={entry.data.title} description={entry.data.description} image={`/og/work/${entry.slug.replace('fr/', '')}.png`}>
+<BaseLayout title={entry.data.title} description={entry.data.description} image={`/og/work/${entry.id.replace(/\.md$/, '').replace(/^fr\//, '')}.png`}>
 	<div class="stack gap-20">
 		<div class="stack gap-15">
 			<header>

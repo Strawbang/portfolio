@@ -15,7 +15,7 @@ export async function GET(context) {
       title: post.data.title,
       description: post.data.description,
       pubDate: post.data.publishDate,
-      link: `/blog/${post.slug}/`,
+      link: `/blog/${post.id.replace(/\.md$/, '')}/`,
       categories: post.data.tags,
       customData: post.data.canonicalURL
         ? `<atom:link href="${post.data.canonicalURL}" rel="canonical" />`
