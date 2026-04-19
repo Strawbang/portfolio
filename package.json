@@ -7,7 +7,9 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "import-articles": "node scripts/import-articles.mjs",
+    "import-articles:dry": "node scripts/import-articles.mjs --dry-run"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.18",

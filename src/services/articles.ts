@@ -79,7 +79,7 @@ async function fetchDevToArticles(username: string): Promise<Article[]> {
   }
 }
 
-const PLATFORM_PRIORITY: Record<string, number> = { 'Medium': 0, 'Dev.to': 1, 'Blog': 2 };
+const PLATFORM_PRIORITY: Record<string, number> = { 'Blog': 0, 'Medium': 1, 'Dev.to': 2 };
 
 export function deduplicateArticles(articles: Article[]): Article[] {
   const seenMap = new Map<string, Article>();
