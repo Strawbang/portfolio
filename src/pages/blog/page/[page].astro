@@ -8,9 +8,8 @@ import Hero from '../../../components/Hero.astro';
 import { fetchArticles, deduplicateArticles } from '../../../services/articles';
 import type { Article } from '../../../types/article';
 
-const PAGE_SIZE = 9;
-
 export async function getStaticPaths() {
+  const PAGE_SIZE = 9;
   const localPosts = (await getCollection('blog'))
     .filter(post => !post.data.draft && post.data.lang !== 'fr')
     .map(post => ({

@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
 import ArticlePreview from '../../components/ArticlePreview.astro';
-import { fetchArticles, deduplicateArticles } from '../../services/articles';
+import Hero from '../../components/Hero.astro';
 import type { Article } from '../../types/article';
 import { languages } from '../../i18n/ui';
 import { blogLabels, type Lang } from '../../data/pages';
@@ -25,30 +25,117 @@ const localPosts = (await getCollection('blog'))
     publishDate: post.data.publishDate,
     url: `/blog/${post.id.replace(/\.md$/, '')}/`,
     imageUrl: post.data.img,
-    platform: post.data.source ?? 'Blog'
+    imageAlt: post.data.img_alt,
+    platform: post.data.source ?? 'Blog',
+    tags: post.data.tags,
   } as Article));
 
-const externalArticles = await fetchArticles();
-const allPosts = deduplicateArticles([...localPosts, ...externalArticles]);
+const allPosts = localPosts.sort((a, b) => b.publishDate.getTime() - a.publishDate.getTime());
+
+const allTags = [...new Set(allPosts.flatMap(post => post.tags ?? []))].sort();
 ---
 
 <BaseLayout title={l.metaTitle} description={l.metaDescription}>
-  <div class="wrapper stack gap-20">
-    <header class="section-header stack gap-2 lg:gap-4">
-      <h1>{l.heroTitle}</h1>
-      <p>{l.heroTagline}</p>
-    </header>
-    <ul class="gallery">
-      {allPosts.map((post) => (<li><ArticlePreview article={post} /></li>))}
-    </ul>
+  <div class="stack gap-20">
+    <main class="wrapper stack gap-8">
+      <Hero
+        title={l.heroTitle}
+        tagline={l.heroTagline}
+        align="start"
+      />
+
+      {allTags.length > 0 && (
+        <div class="tag-filters" role="group" aria-label="Filter by tag">
+          <button class="tag-filter active" data-tag="all">All</button>
+          {allTags.map(tag => (
+            <button class="tag-filter" data-tag={tag}>{tag}</button>
+          ))}
+        </div>
+      )}
+
+      <ul class="gallery">
+        {allPosts.map((post) => (
+          <li data-tags={(post.tags ?? []).join(',')}>
+            <ArticlePreview article={post} />
+          </li>
+        ))}
+      </ul>
+    </main>
     <ContactCTA />
   </div>
 </BaseLayout>
 
+<script>
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('.tag-filter');
+  const items = document.querySelectorAll<HTMLLIElement>('.gallery > li');
+
+  function applyFilter(tag: string) {
+    filterBtns.forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed', 'false');
+    });
+    const target = document.querySelector<HTMLButtonElement>(`.tag-filter[data-tag="${CSS.escape(tag)}"]`);
+    const active = target ?? document.querySelector<HTMLButtonElement>('.tag-filter[data-tag="all"]');
+    if (active) {
+      active.classList.add('active');
+      active.setAttribute('aria-pressed', 'true');
+    }
+    items.forEach(item => {
+      if (tag === 'all' || !target) {
+        item.style.display = '';
+      } else {
+        const tags = (item.dataset.tags ?? '').split(',').map(t => t.trim()).filter(Boolean);
+        item.style.display = tags.includes(tag) ? '' : 'none';
+      }
+    });
+  }
+
+  const initialTag = new URLSearchParams(window.location.search).get('tag');
+  if (initialTag) applyFilter(initialTag);
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => applyFilter(btn.dataset.tag ?? 'all'));
+  });
+</script>
+
 <style>
-  .section-header { text-align: center; }
-  .section-header h1 { font-size: var(--text-5xl); }
-  .section-header p { color: var(--gray-300); font-size: var(--text-lg); }
-  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; list-style-type: none; padding: 0; margin: 0; }
-  @media (min-width: 50em) { .section-header h1 { font-size: var(--text-6xl); } }
+  .tag-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag-filter {
+    padding: 0.35rem 0.9rem;
+    border-radius: 999rem;
+    border: 1px solid var(--gray-800);
+    background: var(--gray-999);
+    color: var(--gray-300);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    font-family: var(--font-body);
+  }
+
+  .tag-filter:hover {
+    background: var(--gray-800);
+    color: var(--gray-100);
+    border-color: var(--gray-700);
+  }
+
+  .tag-filter.active {
+    background: var(--accent-regular);
+    color: var(--accent-text-over);
+    border-color: var(--accent-regular);
+    font-weight: 600;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
 </style>

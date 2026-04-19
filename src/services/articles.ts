@@ -81,12 +81,25 @@ async function fetchDevToArticles(username: string): Promise<Article[]> {
 
 const PLATFORM_PRIORITY: Record<string, number> = { 'Blog': 0, 'Medium': 1, 'Dev.to': 2 };
 
+function normalizeTitle(title: string): string {
+  return title
+    .trim()
+    .replace(/&#x([\da-fA-F]+);/gi, (_, h) => String.fromCharCode(parseInt(h, 16)))
+    .replace(/&#(\d+);/g, (_, d) => String.fromCharCode(parseInt(d, 10)))
+    .replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&apos;/g, "'")
+    .replace(/[\u2018\u2019\u201a\u201b\u02bc]/g, "'")
+    .replace(/[\u201c\u201d\u201e\u201f]/g, '"')
+    .replace(/\u2011|\u2013|\u2014/g, '-')
+    .toLowerCase()
+    .replace(/\s+/g, ' ');
+}
+
 export function deduplicateArticles(articles: Article[]): Article[] {
   const seenMap = new Map<string, Article>();
   articles
     .sort((a, b) => b.publishDate.getTime() - a.publishDate.getTime())
     .forEach(p => {
-      const key = p.title.toLowerCase().trim().replace(/\s+/g, ' ');
+      const key = normalizeTitle(p.title);
       if (seenMap.has(key)) {
         const existing = seenMap.get(key)!;
         const existingPriority = PLATFORM_PRIORITY[existing.platform] ?? 99;

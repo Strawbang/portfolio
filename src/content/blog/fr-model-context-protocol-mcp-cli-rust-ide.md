@@ -2,7 +2,7 @@
 title: "Model Context Protocol (MCP) : exposer un CLI Rust dans votre IDE"
 description: "Retour d'expérience sur l'utilisation de MCP pour exposer un CLI Rust à un agent IA dans l'IDE — architecture, bonnes pratiques et implémentation TypeScript."
 publishDate: 2026-03-11
-tags: ["MCP", "Rust", "IA", "TypeScript", "IDE", "Agents"]
+tags: ["mcp", "ai-agents", "rust", "typescript", "devtools"]
 img: "https://blog.ippon.fr/content/images/2026/03/mcp-cli-rust-ide-schema-architecture.png"
 img_alt: "Architecture MCP : CLI Rust connecté à un IDE via un serveur MCP"
 canonicalURL: "https://blog.ippon.fr/2026/03/11/model-context-protocol-mcp-cli-rust-ide/"

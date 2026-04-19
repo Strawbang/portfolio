@@ -6,6 +6,7 @@ export interface Article {
   platforms?: ('Medium' | 'Dev.to' | 'Blog')[];
   publishDate: Date;
   imageUrl?: string;
+  imageAlt?: string;
   tags?: string[];
 }
 

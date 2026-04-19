@@ -197,6 +197,10 @@ h5 {
 	padding-inline: 1.5rem;
 }
 
+h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
+	scroll-margin-top: 2rem;
+}
+
 .stack {
 	display: flex;
 	flex-direction: column;

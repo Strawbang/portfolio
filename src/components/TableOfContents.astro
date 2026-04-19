@@ -31,20 +31,23 @@ const toc = headings.filter(h => h.depth === 2 || h.depth === 3);
       .map(slug => document.getElementById(slug))
       .filter(Boolean) as HTMLElement[];
 
-    let activeSlug = '';
+    const visible = new Set<string>();
 
     const observer = new IntersectionObserver(
       entries => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            activeSlug = entry.target.id;
+            visible.add(entry.target.id);
+          } else {
+            visible.delete(entry.target.id);
           }
         }
+        const activeSlug = slugs.find(s => visible.has(s)) ?? '';
         links.forEach(link => {
           link.classList.toggle('active', link.dataset.heading === activeSlug);
         });
       },
-      { rootMargin: '-10% 0% -70% 0%', threshold: 0 }
+      { rootMargin: '0px 0px -85% 0px', threshold: 0 }
     );
 
     headingEls.forEach(el => observer.observe(el));

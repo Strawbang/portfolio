@@ -17,6 +17,7 @@ const localPosts = (await getCollection('blog'))
     publishDate: post.data.publishDate,
     url: `/blog/${post.id.replace(/\.md$/, '')}/`,
     imageUrl: post.data.img,
+    imageAlt: post.data.img_alt,
     platform: post.data.source ?? 'Blog',
     tags: post.data.tags,
   } as Article));

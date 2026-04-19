@@ -103,10 +103,15 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('en-US', 
       </div>
 
       {post.data.img && (
-        <img 
-          src={post.data.img} 
+        <img
+          src={post.data.img}
           alt={post.data.img_alt || post.data.title}
           class="hero-image"
+          fetchpriority="high"
+          loading="eager"
+          decoding="async"
+          width="1000"
+          height="420"
         />
       )}
     </header>
@@ -205,10 +210,9 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('en-US', 
 
   .hero-image {
     width: 100%;
-    max-height: 500px;
-    object-fit: cover;
-    border-radius: 1rem;
-    box-shadow: var(--shadow-lg);
+    height: auto;
+    border-radius: 0.5rem;
+    display: block;
   }
 
   .post-body {
