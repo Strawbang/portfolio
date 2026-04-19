@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 import { calculateReadingTime, getReadingTimeText } from '../../utils/readingTime';
+import BlogPostingSchema from '../../components/BlogPostingSchema.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -19,7 +20,7 @@ type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
 const { Content, remarkPluginFrontmatter, headings } = await render(post);
-const readingTime = calculateReadingTime(post.body);
+const readingTime = calculateReadingTime(post.body ?? '');
 const readingTimeText = getReadingTimeText(readingTime, 'en');
 
 const formattedDate = post.data.publishDate.toLocaleDateString('en-US', {
@@ -42,8 +43,20 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('en-US', 
   image={`/og/${post.id.replace(/\.md$/, '')}.png`}
   type="article"
   publishedTime={post.data.publishDate.toISOString()}
+  updatedTime={post.data.updatedDate?.toISOString()}
   tags={post.data.tags}
 >
+  <BlogPostingSchema
+    slot="head"
+    title={post.data.title}
+    description={post.data.description}
+    url={`https://djamel-bougouffa.com/blog/${post.id.replace(/\.md$/, '')}/`}
+    imageUrl={post.data.img ?? `/og/${post.id.replace(/\.md$/, '')}.png`}
+    datePublished={post.data.publishDate.toISOString()}
+    dateModified={post.data.updatedDate?.toISOString()}
+    tags={post.data.tags}
+    lang="en"
+  />
   <div class="wrapper stack gap-10 lg:gap-20">
     <header class="hero stack gap-4">
       <div class="stack gap-2">

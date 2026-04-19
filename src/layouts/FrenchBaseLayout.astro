@@ -15,10 +15,11 @@ interface Props {
 	image?: string | undefined;
 	type?: 'website' | 'article';
 	publishedTime?: string | undefined;
+	updatedTime?: string | undefined;
 	tags?: string[];
 }
 
-const { title, description, canonicalURL, image, type, publishedTime, tags } = Astro.props;
+const { title, description, canonicalURL, image, type, publishedTime, updatedTime, tags } = Astro.props;
 
 // Définit la langue comme français
 const lang = 'fr';
@@ -33,8 +34,10 @@ const lang = 'fr';
 			image={image}
 			type={type}
 			publishedTime={publishedTime}
+			updatedTime={updatedTime}
 			tags={tags}
 		/>
+		<slot name="head" />
 	</head>
 	<body>
 		<div class="stack backgrounds">

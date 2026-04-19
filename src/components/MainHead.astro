@@ -15,7 +15,9 @@ interface Props {
   image?: string | undefined;
   type?: 'website' | 'article';
   publishedTime?: string | undefined;
+  updatedTime?: string | undefined;
   tags?: string[];
+  author?: string;
 }
 
 const {
@@ -25,7 +27,9 @@ const {
   image = "/assets/portrait.png",
   type = "website",
   publishedTime,
+  updatedTime,
   tags = [],
+  author = "Djamel Bougouffa",
 } = Astro.props;
 
 const siteUrl = "https://djamel-bougouffa.com";
@@ -93,14 +97,21 @@ const ogLocale = ogLocaleMap[currentLang] ?? 'en_US';
 <title>{title}</title>
 <link rel="canonical" href={autoCanonical} />
 
+<meta name="author" content={author} />
+
 <!-- Open Graph / Facebook -->
+<meta property="og:site_name" content="Djamel Bougouffa" />
 <meta property="og:type" content={type} />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={fullImageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 <meta property="og:locale" content={ogLocale} />
 {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+{updatedTime && <meta property="article:modified_time" content={updatedTime} />}
+{type === 'article' && <meta property="article:author" content={author} />}
 {tags.map(tag => <meta property="article:tag" content={tag} />)}
 
 <!-- hreflang alternate links for all languages -->

@@ -11,7 +11,7 @@ interface Props {
   url: string;
   email?: string;
   telephone?: string;
-  skills?: string[];
+  knowsAbout?: string[];
   worksFor?: {
     name: string;
     url?: string;
@@ -54,7 +54,7 @@ const {
   url,
   email,
   telephone,
-  skills = [],
+  knowsAbout = [],
   worksFor,
   alumniOf = [],
   knowsLanguage = [],
@@ -83,7 +83,7 @@ const personSchema: any = {
 // Ajout des propriétés optionnelles
 if (email) personSchema.email = email;
 if (telephone) personSchema.telephone = telephone;
-if (skills.length > 0) personSchema.skills = skills;
+if (knowsAbout.length > 0) personSchema.knowsAbout = knowsAbout;
 
 // Ajout de l'organisation pour laquelle la personne travaille
 if (worksFor) {

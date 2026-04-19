@@ -38,7 +38,7 @@ const blogPosts = (await getCollection('blog'))
     title: post.data.title,
     description: post.data.description,
     url: `/blog/${post.id.replace(/\.md$/, '')}/`,
-    platform: (post.data.source ?? 'Blog') as string,
+    platform: (post.data.source ?? 'Blog') as 'Blog' | 'Medium' | 'Dev.to',
     publishDate: post.data.publishDate,
     imageUrl: post.data.img
   }));
@@ -151,7 +151,7 @@ const allArticles = [...externalArticles, ...blogPosts]
     url="https://djamel-bougouffa.com/about/"
     email="djamel.bougouffa@gmail.com"
     sameAs={["https://github.com/strawbang", "https://www.linkedin.com/in/djamel-bougouffa/"]}
-    skills={["TypeScript", "JavaScript", "React", "Node.js", "Express.js", "Next.js", "Rust", "RAG", "GenAI", "MCP", "LLM Integration", "DevOps", "Docker", "Kubernetes", "CI/CD"]}
+    knowsAbout={["TypeScript", "JavaScript", "React", "Node.js", "Express.js", "Next.js", "Rust", "RAG", "GenAI", "MCP", "LLM Integration", "DevOps", "Docker", "Kubernetes", "CI/CD"]}
     worksFor={{ name: "Ippon Technologies", url: "https://www.ippon.fr/" }}
     alumniOf={[
       { name: "Institut F2I", url: "https://www.f2i-institute.com/", description: "Master's degree in computer engineering / Expert Architect Web", startDate: "2020", endDate: "2021" },
