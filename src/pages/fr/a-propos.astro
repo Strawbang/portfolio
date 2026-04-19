@@ -4,7 +4,7 @@ import ContactCTA from "../../components/ContactCTA.astro";
 import Hero from "../../components/Hero.astro";
 import Icon from "../../components/Icon.astro";
 import CallToAction from "../../components/CallToAction.astro";
-import { Schema } from 'astro-seo-schema';
+import SchemaOrgPerson from '../../components/SchemaOrgPerson.astro';
 import { experiences, education, skills, spokenLanguages, contact, resumeFiles, aboutLabels } from '../../data/about';
 
 const lang = 'fr';
@@ -112,11 +112,11 @@ const resume = resumeFiles[lang];
             </div>
             <div class="contact-item">
               <h3><Icon icon="linkedin-logo" size="1.33em" /> LinkedIn</h3>
-              <p><a href={contact.linkedin} target="_blank">{contact.linkedin.replace('https://', '')}</a></p>
+              <p><a href={contact.linkedin} target="_blank" rel="noopener noreferrer">{contact.linkedin.replace('https://', '')}</a></p>
             </div>
             <div class="contact-item">
               <h3><Icon icon="github-logo" size="1.33em" /> GitHub</h3>
-              <p><a href={contact.github} target="_blank">{contact.github.replace('https://', '')}</a></p>
+              <p><a href={contact.github} target="_blank" rel="noopener noreferrer">{contact.github.replace('https://', '')}</a></p>
             </div>
           </div>
         </div>
@@ -137,21 +137,17 @@ const resume = resumeFiles[lang];
     <ContactCTA />
   </div>
 
-  <Schema
-    item={{
-      "@context": "https://schema.org",
-      "@type": "Person",
-      name: "Djamel Bougouffa",
-      jobTitle: "Ingénieur Logiciel Full-Stack",
-      description: l.metaDescription,
-      image: "https://djamel-bougouffa.com/assets/at-work.jpg",
-      url: "https://djamel-bougouffa.com/fr/a-propos/",
-      email: contact.email,
-      telephone: contact.phone,
-      sameAs: [contact.github, contact.linkedin],
-      knowsLanguage: ["fr", "en"],
-      availableForHire: true
-    }}
+  <SchemaOrgPerson
+    name="Djamel Bougouffa"
+    jobTitle="Ingénieur Logiciel Full-Stack"
+    description={l.metaDescription}
+    image="https://djamel-bougouffa.com/assets/at-work.jpg"
+    url="https://djamel-bougouffa.com/fr/a-propos/"
+    email={contact.email}
+    telephone={contact.phone}
+    sameAs={[contact.github, contact.linkedin]}
+    knowsLanguage={["fr", "en"]}
+    availableForHire={true}
   />
 </FrenchBaseLayout>
 

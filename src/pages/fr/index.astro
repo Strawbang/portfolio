@@ -9,7 +9,7 @@ import Pill from "../../components/Pill.astro";
 import PortfolioPreview from "../../components/PortfolioPreview.astro";
 import ArticlePreview from "../../components/ArticlePreview.astro";
 import { fetchArticles } from "../../services/articles";
-import { Schema } from "astro-seo-schema";
+import SchemaOrgPerson from "../../components/SchemaOrgPerson.astro";
 import ContactCTA from "../../components/ContactCTA.astro";
 import Skills from "../../components/Skills.astro";
 import { Image } from "astro:assets";
@@ -32,7 +32,7 @@ const blogPosts = (await getCollection('blog'))
     title: post.data.title,
     description: post.data.description,
     url: `/fr/blog/${post.slug.replace(/^fr-/, '')}/`,
-    platform: (post.data.source ?? 'Blog') as string,
+    platform: (post.data.source ?? 'Blog') as 'Medium' | 'Dev.to' | 'Blog',
     publishDate: post.data.publishDate,
     imageUrl: post.data.img
   }));
@@ -123,21 +123,17 @@ const allArticles = [...externalArticles, ...blogPosts]
     <ContactCTA />
   </div>
   
-  <Schema
-    item={{
-      "@context": "https://schema.org",
-      "@type": "Person",
-      name: "Djamel Bougouffa",
-      jobTitle: "Ingénieur Logiciel Full-Stack",
-      description: l.metaDescription,
-      image: "https://djamel-bougouffa.com/assets/at-work.jpg",
-      url: "https://djamel-bougouffa.com/fr/",
-      email: contact.email,
-      telephone: contact.phone,
-      sameAs: [contact.github, contact.linkedin],
-      knowsLanguage: ["fr", "en"],
-      availableForHire: true
-    }}
+  <SchemaOrgPerson
+    name="Djamel Bougouffa"
+    jobTitle="Ingénieur Logiciel Full-Stack"
+    description={l.metaDescription}
+    image="https://djamel-bougouffa.com/assets/at-work.jpg"
+    url="https://djamel-bougouffa.com/fr/"
+    email={contact.email}
+    telephone={contact.phone}
+    sameAs={[contact.github, contact.linkedin]}
+    knowsLanguage={["fr", "en"]}
+    availableForHire={true}
   />
 </FrenchBaseLayout>
 

@@ -91,7 +91,6 @@ export default defineConfig({
 			],
 		}),
 		sitemap({
-			lastmod: new Date(),
 			filter: (page) => {
 			if (page.includes('/og/')) return false;
 			const url = new URL(page);
@@ -159,9 +158,4 @@ export default defineConfig({
 			prefixDefaultLocale: false,
 		},
 	},
-	vite: {
-		ssr: {
-			noExternal: ['astro-seo-schema']
-		}
-	}
 });

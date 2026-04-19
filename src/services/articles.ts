@@ -55,7 +55,7 @@ async function fetchMediumArticles(username: string): Promise<Article[]> {
       };
     });
   } catch (error) {
-    console.error('Erreur lors de la récupération des articles Medium:', error);
+    console.error('Failed to fetch Medium articles:', error);
     return [];
   }
 }
@@ -74,7 +74,7 @@ async function fetchDevToArticles(username: string): Promise<Article[]> {
       imageUrl: article.cover_image || article.social_image
     }));
   } catch (error) {
-    console.error('Erreur lors de la récupération des articles Dev.to:', error);
+    console.error('Failed to fetch Dev.to articles:', error);
     return [];
   }
 }

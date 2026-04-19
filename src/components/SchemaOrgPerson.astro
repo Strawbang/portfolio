@@ -19,6 +19,9 @@ interface Props {
   alumniOf?: {
     name: string;
     url?: string;
+    description?: string;
+    startDate?: string;
+    endDate?: string;
   }[];
   knowsLanguage?: string[];
   workLocation?: {
@@ -39,6 +42,7 @@ interface Props {
   seeks?: string;
   availability?: string;
   yearsOfExperience?: number;
+  availableForHire?: boolean;
 }
 
 const {
@@ -60,7 +64,8 @@ const {
   publications = [],
   seeks,
   availability,
-  yearsOfExperience
+  yearsOfExperience,
+  availableForHire
 } = Astro.props;
 
 // Construction de l'objet JSON-LD
@@ -94,7 +99,10 @@ if (alumniOf.length > 0) {
   personSchema.alumniOf = alumniOf.map(org => ({
     "@type": "EducationalOrganization",
     "name": org.name,
-    ...(org.url && { "url": org.url })
+    ...(org.url && { "url": org.url }),
+    ...(org.description && { "description": org.description }),
+    ...(org.startDate && { "startDate": org.startDate }),
+    ...(org.endDate && { "endDate": org.endDate }),
   }));
 }
 
@@ -153,6 +161,10 @@ if (availability) {
 // Ajout des années d'expérience
 if (yearsOfExperience) {
   personSchema.yearsOfExperience = yearsOfExperience;
+}
+
+if (availableForHire !== undefined) {
+  personSchema.availableForHire = availableForHire;
 }
 ---
 

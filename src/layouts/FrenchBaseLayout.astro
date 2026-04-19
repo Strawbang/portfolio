@@ -6,6 +6,7 @@
 import MainHead from '../components/MainHead.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/fr/Footer.astro';
+import BackToTop from '../components/BackToTop.astro';
 
 interface Props {
 	title?: string | undefined;
@@ -41,6 +42,7 @@ const lang = 'fr';
 			<slot />
 			<Footer />
 		</div>
+		<BackToTop label="Retour en haut" />
 
 		<script>
 			// Ajoute la classe "loaded" une fois que le document est complètement chargé

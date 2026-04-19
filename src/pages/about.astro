@@ -4,7 +4,7 @@ import ContactCTA from "../components/ContactCTA.astro";
 import Hero from "../components/Hero.astro";
 import Icon from "../components/Icon.astro";
 import CallToAction from "../components/CallToAction.astro";
-import { Schema } from 'astro-seo-schema';
+import SchemaOrgPerson from '../components/SchemaOrgPerson.astro';
 import { experiences, education, skills, spokenLanguages, contact, resumeFiles, aboutLabels } from '../data/about';
 
 const l = aboutLabels['en'];
@@ -111,15 +111,15 @@ const resume = resumeFiles['en'];
             </div>
             <div class="contact-item">
               <h3><Icon icon="linkedin-logo" size="1.33em" /> LinkedIn</h3>
-              <p><a href={contact.linkedin} target="_blank">{contact.linkedin.replace('https://', '')}</a></p>
+              <p><a href={contact.linkedin} target="_blank" rel="noopener noreferrer">{contact.linkedin.replace('https://', '')}</a></p>
             </div>
             <div class="contact-item">
               <h3><Icon icon="github-logo" size="1.33em" /> GitHub</h3>
-              <p><a href={contact.github} target="_blank">{contact.github.replace('https://', '')}</a></p>
+              <p><a href={contact.github} target="_blank" rel="noopener noreferrer">{contact.github.replace('https://', '')}</a></p>
             </div>
             <div class="contact-item">
               <h3><Icon icon="rocket-launch" size="1.33em" /> Portfolio</h3>
-              <p><a href={contact.portfolio} target="_blank">{contact.portfolio.replace('https://', '')}</a></p>
+              <p><a href={contact.portfolio} target="_blank" rel="noopener noreferrer">{contact.portfolio.replace('https://', '')}</a></p>
             </div>
           </div>
         </div>
@@ -140,25 +140,21 @@ const resume = resumeFiles['en'];
     <ContactCTA />
   </div>
 
-  <Schema
-    item={{
-      "@context": "https://schema.org",
-      "@type": "Person",
-      name: "Djamel Bougouffa",
-      jobTitle: "Full-Stack Software Engineer",
-      description: "Full-Stack Software Engineer with over 5 years of experience specializing in TypeScript, React, Node.js, DevOps, and AI/GenAI. Currently at Ippon Technologies, building AI-driven legacy modernization tools in Rust with RAG, Tree-sitter, and Model Context Protocol (MCP).",
-      image: "https://djamel-bougouffa.com/assets/at-work.jpg",
-      url: "https://djamel-bougouffa.com/about/",
-      email: contact.email,
-      telephone: contact.phone,
-      sameAs: [contact.github, contact.linkedin, "https://twitter.com/strawbang", "https://dev.to/strawbang", "https://medium.com/@strawbang"],
-      knowsLanguage: ["en", "fr"],
-      workLocation: { "@type": "Place", name: "Paris, France" },
-      worksFor: { "@type": "Organization", name: "Ippon Technologies", url: "https://www.ippon.fr/" },
-      skills: ["TypeScript", "React", "Node.js", "Rust", "RAG", "GenAI", "MCP", "LLM Integration", "DevOps", "Docker", "Kubernetes", "Next.js"],
-      seeks: { "@type": "Demand", description: "Open to new opportunities as a Full-Stack Software Engineer with expertise in AI/GenAI, Rust, RAG, and legacy modernization" },
-      availableForHire: true
-    }}
+  <SchemaOrgPerson
+    name="Djamel Bougouffa"
+    jobTitle="Full-Stack Software Engineer"
+    description="Full-Stack Software Engineer with over 5 years of experience specializing in TypeScript, React, Node.js, DevOps, and AI/GenAI. Currently at Ippon Technologies, building AI-driven legacy modernization tools in Rust with RAG, Tree-sitter, and Model Context Protocol (MCP)."
+    image="https://djamel-bougouffa.com/assets/at-work.jpg"
+    url="https://djamel-bougouffa.com/about/"
+    email={contact.email}
+    telephone={contact.phone}
+    sameAs={[contact.github, contact.linkedin, "https://twitter.com/strawbang", "https://dev.to/strawbang", "https://medium.com/@strawbang"]}
+    knowsLanguage={["en", "fr"]}
+    workLocation={{ name: "Paris, France" }}
+    worksFor={{ name: "Ippon Technologies", url: "https://www.ippon.fr/" }}
+    skills={["TypeScript", "React", "Node.js", "Rust", "RAG", "GenAI", "MCP", "LLM Integration", "DevOps", "Docker", "Kubernetes", "Next.js"]}
+    seeks="Open to new opportunities as a Full-Stack Software Engineer with expertise in AI/GenAI, Rust, RAG, and legacy modernization"
+    availableForHire={true}
   />
 </BaseLayout>
 

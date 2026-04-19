@@ -13,7 +13,7 @@ import Pill from "../components/Pill.astro";
 import PortfolioPreview from "../components/PortfolioPreview.astro";
 import ArticlePreview from "../components/ArticlePreview.astro";
 import { fetchArticles } from "../services/articles";
-import { Schema } from "astro-seo-schema";
+import SchemaOrgPerson from "../components/SchemaOrgPerson.astro";
 
 // Page section components
 import ContactCTA from "../components/ContactCTA.astro";
@@ -143,96 +143,27 @@ const allArticles = [...externalArticles, ...blogPosts]
   </div>
 
   <!-- Données structurées pour les IA comme ChatGPT -->
-  <Schema
-    item={{
-      "@context": "https://schema.org",
-      "@type": "Person",
-      name: "Djamel Bougouffa",
-      jobTitle: "Full-Stack Software Engineer",
-      description: "Full-Stack Software Engineer with over 5 years of experience specializing in TypeScript, React, Node.js, DevOps, and AI/GenAI. Currently at Ippon Technologies, building AI-driven legacy modernization tools in Rust with RAG, Tree-sitter, and Model Context Protocol (MCP).",
-      image: "https://djamel-bougouffa.com/assets/at-work.jpg",
-      url: "https://djamel-bougouffa.com/about/",
-      email: "djamel.bougouffa@gmail.com",
-      sameAs: [
-        "https://github.com/strawbang",
-        "https://www.linkedin.com/in/djamel-bougouffa/"
-      ],
-      skills: [
-        "TypeScript",
-        "JavaScript",
-        "React",
-        "Node.js",
-        "Express.js",
-        "Next.js",
-        "Rust",
-        "RAG",
-        "GenAI",
-        "MCP",
-        "LLM Integration",
-        "DevOps",
-        "Docker",
-        "Kubernetes",
-        "CI/CD"
-      ],
-      worksFor: {
-        "@type": "Organization",
-        name: "Ippon Technologies",
-        url: "https://www.ippon.fr/"
-      },
-      alumniOf: [
-        {
-          "@type": "EducationalOrganization",
-          name: "Institut F2I",
-          url: "https://www.f2i-institute.com/",
-          description: "Master's degree in computer engineering / Expert Architect Web",
-          startDate: "2020",
-          endDate: "2021"
-        },
-        {
-          "@type": "EducationalOrganization",
-          name: "Institut F2I",
-          url: "https://www.f2i-institute.com/",
-          description: "Bachelor's degree in computer engineering / Digital Project Manager",
-          startDate: "2018",
-          endDate: "2020"
-        },
-        {
-          "@type": "EducationalOrganization",
-          name: "IRIS - Ecole supérieure d'informatique",
-          description: "Diploma of Advanced Technician Solutions and Business Applications",
-          startDate: "2017",
-          endDate: "2018"
-        },
-        {
-          "@type": "EducationalOrganization",
-          name: "Lycée Léonard de Vinci de Melun",
-          description: "Diploma of Advanced Technician Solutions and Business Applications",
-          startDate: "2015",
-          endDate: "2017"
-        },
-        {
-          "@type": "EducationalOrganization",
-          name: "CNED",
-          url: "https://www.cned.fr/",
-          description: "Diploma of Advanced Technician Solutions and Business Applications",
-          startDate: "2014",
-          endDate: "2015"
-        },
-        {
-          "@type": "EducationalOrganization",
-          name: "Lycée La Fayette",
-          description: "Professional Baccalaureate in Digital Electronic Systems",
-          startDate: "2011",
-          endDate: "2014"
-        }
-      ],
-      knowsLanguage: ["en", "fr"],
-      seeks: {
-        "@type": "Demand",
-        description: "Open to new opportunities as a Full-Stack Software Engineer with expertise in AI/GenAI, Rust, RAG, and legacy modernization"
-      },
-      availableForHire: true
-    }}
+  <SchemaOrgPerson
+    name="Djamel Bougouffa"
+    jobTitle="Full-Stack Software Engineer"
+    description="Full-Stack Software Engineer with over 5 years of experience specializing in TypeScript, React, Node.js, DevOps, and AI/GenAI. Currently at Ippon Technologies, building AI-driven legacy modernization tools in Rust with RAG, Tree-sitter, and Model Context Protocol (MCP)."
+    image="https://djamel-bougouffa.com/assets/at-work.jpg"
+    url="https://djamel-bougouffa.com/about/"
+    email="djamel.bougouffa@gmail.com"
+    sameAs={["https://github.com/strawbang", "https://www.linkedin.com/in/djamel-bougouffa/"]}
+    skills={["TypeScript", "JavaScript", "React", "Node.js", "Express.js", "Next.js", "Rust", "RAG", "GenAI", "MCP", "LLM Integration", "DevOps", "Docker", "Kubernetes", "CI/CD"]}
+    worksFor={{ name: "Ippon Technologies", url: "https://www.ippon.fr/" }}
+    alumniOf={[
+      { name: "Institut F2I", url: "https://www.f2i-institute.com/", description: "Master's degree in computer engineering / Expert Architect Web", startDate: "2020", endDate: "2021" },
+      { name: "Institut F2I", url: "https://www.f2i-institute.com/", description: "Bachelor's degree in computer engineering / Digital Project Manager", startDate: "2018", endDate: "2020" },
+      { name: "IRIS - Ecole supérieure d'informatique", description: "Diploma of Advanced Technician Solutions and Business Applications", startDate: "2017", endDate: "2018" },
+      { name: "Lycée Léonard de Vinci de Melun", description: "Diploma of Advanced Technician Solutions and Business Applications", startDate: "2015", endDate: "2017" },
+      { name: "CNED", url: "https://www.cned.fr/", description: "Diploma of Advanced Technician Solutions and Business Applications", startDate: "2014", endDate: "2015" },
+      { name: "Lycée La Fayette", description: "Professional Baccalaureate in Digital Electronic Systems", startDate: "2011", endDate: "2014" },
+    ]}
+    knowsLanguage={["en", "fr"]}
+    seeks="Open to new opportunities as a Full-Stack Software Engineer with expertise in AI/GenAI, Rust, RAG, and legacy modernization"
+    availableForHire={true}
   />
 </BaseLayout>
 
