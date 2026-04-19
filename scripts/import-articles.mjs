@@ -81,18 +81,20 @@ function buildFrontmatter(fields) {
   return lines.join('\n');
 }
 
-/** Load existing titles from src/content/blog to avoid duplicates */
-function loadExistingTitles() {
+/** Load existing titles + slugs from src/content/blog to avoid duplicates */
+function loadExistingContent() {
   const titles = new Set();
+  const slugs = new Set();
   try {
     const files = readdirSync(CONTENT_DIR).filter(f => f.endsWith('.md'));
     for (const file of files) {
+      slugs.add(basename(file, '.md'));
       const content = readFileSync(join(CONTENT_DIR, file), 'utf-8');
       const match = content.match(/^title:\s*"?(.+?)"?\s*$/m);
       if (match) titles.add(match[1].toLowerCase().trim());
     }
   } catch {}
-  return titles;
+  return { titles, slugs };
 }
 
 function writeFile(filepath, content) {
@@ -102,7 +104,7 @@ function writeFile(filepath, content) {
 
 // ─── Dev.to ─────────────────────────────────────────────────────────────────
 
-async function importDevTo(existingTitles) {
+async function importDevTo(existingTitles, existingSlugs) {
   console.log('\n📡 Fetching Dev.to articles...');
   let articles;
   try {
@@ -121,7 +123,7 @@ async function importDevTo(existingTitles) {
     const filename = `${slug}.md`;
     const filepath = join(CONTENT_DIR, filename);
 
-    if (existsSync(filepath) || existingTitles.has(titleKey)) {
+    if (existsSync(filepath) || existingTitles.has(titleKey) || existingSlugs.has(slug)) {
       console.log(`  ⏭  Skipped (exists): ${filename}`);
       skipped++;
       continue;
@@ -147,6 +149,7 @@ async function importDevTo(existingTitles) {
       console.log(`  ✅ Imported: ${filename}`);
     }
     existingTitles.add(titleKey);
+    existingSlugs.add(slug);
     imported++;
   }
 
@@ -163,7 +166,7 @@ function getTextBetween(xml, tag) {
   return cdata ? cdata[1].trim() : val;
 }
 
-async function importMedium(existingTitles) {
+async function importMedium(existingTitles, existingSlugs) {
   console.log('\n📡 Fetching Medium articles...');
   let xml;
   try {
@@ -221,6 +224,7 @@ async function importMedium(existingTitles) {
       console.log(`  📝 Stub created (draft): ${filename}`);
     }
     existingTitles.add(titleKey);
+    existingSlugs.add(slug);
     imported++;
   }
 
@@ -238,11 +242,11 @@ async function main() {
     mkdirSync(CONTENT_DIR, { recursive: true });
   }
 
-  const existingTitles = loadExistingTitles();
+  const { titles: existingTitles, slugs: existingSlugs } = loadExistingContent();
   console.log(`   Existing articles: ${existingTitles.size}`);
 
-  if (SOURCE === 'all' || SOURCE === 'devto') await importDevTo(existingTitles);
-  if (SOURCE === 'all' || SOURCE === 'medium') await importMedium(existingTitles);
+  if (SOURCE === 'all' || SOURCE === 'devto') await importDevTo(existingTitles, existingSlugs);
+  if (SOURCE === 'all' || SOURCE === 'medium') await importMedium(existingTitles, existingSlugs);
 
   if (DRY_RUN) {
     console.log('\n💡 Run without --dry-run to create the files.');
