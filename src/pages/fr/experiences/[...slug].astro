@@ -8,6 +8,8 @@ import Hero from '../../../components/Hero.astro';
 import Icon from '../../../components/Icon.astro';
 import Pill from '../../../components/Pill.astro';
 import OptimizedImage from '../../../components/OptimizedImage.astro';
+import WorkSchema from '../../../components/WorkSchema.astro';
+import BreadcrumbSchema from '../../../components/BreadcrumbSchema.astro';
 
 interface Props {
 	entry: CollectionEntry<'work'>;
@@ -31,6 +33,24 @@ const { Content } = await render(entry);
 ---
 
 <BaseLayout title={entry.data.title} description={entry.data.description}>
+	<WorkSchema
+		slot="head"
+		title={entry.data.title}
+		description={entry.data.description}
+		url={`/fr/experiences/${entry.id.replace(/\.md$/, '').replace(/^fr\//, '')}/`}
+		imageUrl={entry.data.img}
+		tags={entry.data.tags}
+		publishDate={entry.data.publishDate.toISOString()}
+		lang="fr"
+	/>
+	<BreadcrumbSchema
+		slot="head"
+		items={[
+			{ name: 'Accueil', url: '/fr/' },
+			{ name: 'Expériences', url: '/fr/experiences/' },
+			{ name: entry.data.title },
+		]}
+	/>
 	<div class="stack gap-20">
 		<div class="stack gap-15">
 			<header>
@@ -39,7 +59,7 @@ const { Content } = await render(entry);
 					<Hero title={entry.data.title} align="start">
 						<div class="details">
 							<div class="tags">
-								{entry.data.tags.map((t) => <Pill>{t}</Pill>)}
+								{entry.data.tags.map((t: string) => <Pill>{t}</Pill>)}
 							</div>
 							<p class="description">{entry.data.description}</p>
 						</div>

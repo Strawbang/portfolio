@@ -1,0 +1,35 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  url: string;
+  imageUrl?: string;
+  tags?: string[];
+  publishDate?: string;
+  lang?: string;
+}
+
+const { title, description, url, imageUrl, tags = [], publishDate, lang = 'en' } = Astro.props;
+const siteUrl = 'https://djamel-bougouffa.com';
+
+const schema: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: title,
+  description,
+  url: url.startsWith('http') ? url : `${siteUrl}${url}`,
+  inLanguage: lang,
+  ...(imageUrl && {
+    image: imageUrl.startsWith('http') ? imageUrl : `${siteUrl}${imageUrl}`,
+  }),
+  ...(tags.length > 0 && { keywords: tags.join(', ') }),
+  ...(publishDate && { dateCreated: publishDate }),
+  author: {
+    '@type': 'Person',
+    name: 'Djamel Bougouffa',
+    url: `${siteUrl}/about/`,
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)}></script>

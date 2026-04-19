@@ -1,0 +1,33 @@
+---
+export interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+const siteUrl = 'https://djamel-bougouffa.com';
+const urlPrefix = lang === 'en' ? '' : `/${lang}`;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Djamel Bougouffa',
+  url: `${siteUrl}${urlPrefix}/`,
+  description:
+    lang === 'fr'
+      ? 'Portfolio et blog de Djamel Bougouffa, Ingénieur Full-Stack spécialisé TypeScript, React, Rust et IA/GenAI'
+      : 'Portfolio and blog of Djamel Bougouffa, Full-Stack Software Engineer specializing in TypeScript, React, Rust and AI/GenAI',
+  inLanguage: lang,
+  author: {
+    '@type': 'Person',
+    name: 'Djamel Bougouffa',
+    url: `${siteUrl}${lang === 'fr' ? '/fr/a-propos/' : '/about/'}`,
+  },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: `${siteUrl}${urlPrefix}/blog/?tag={search_term_string}`,
+    'query-input': 'required name=search_term_string',
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)}></script>

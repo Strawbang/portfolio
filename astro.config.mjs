@@ -1,6 +1,38 @@
 import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
 import { defineConfig } from 'astro/config';
+import { readFileSync, readdirSync } from 'fs';
+import { join, basename } from 'path';
+
+function buildLastmodMap() {
+	const map = new Map();
+	const dirs = ['./src/content/blog', './src/content/work'];
+	for (const dir of dirs) {
+		try {
+			const files = readdirSync(dir, { recursive: true })
+				.map(String)
+				.filter(f => /\.(md|mdx)$/.test(f));
+			for (const file of files) {
+				try {
+					const content = readFileSync(join(dir, file), 'utf-8');
+					const updated = content.match(/updatedDate:\s*(\d{4}-\d{2}-\d{2})/)?.[1];
+					const published = content.match(/publishDate:\s*(\d{4}-\d{2}-\d{2})/)?.[1];
+					const dateStr = updated ?? published;
+					if (dateStr) {
+						const slug = basename(file).replace(/\.(mdx?)$/, '');
+						const isFrSubdir = file.startsWith('fr/');
+						const key = isFrSubdir ? `fr/${slug}` : slug;
+						map.set(key, new Date(dateStr));
+						if (isFrSubdir) map.set(slug.replace(/^fr-/, ''), new Date(dateStr));
+					}
+				} catch {}
+			}
+		} catch {}
+	}
+	return map;
+}
+
+const lastmodMap = buildLastmodMap();
 
 // https://astro.build/config
 export default defineConfig({
@@ -103,6 +135,10 @@ export default defineConfig({
 			serialize(item) {
 				const url = new URL(item.url);
 				const parts = url.pathname.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
+				const isFrPage = parts[0] === 'fr';
+				const slugKey = parts[parts.length - 1];
+				const lookupKey = isFrPage ? `fr/${slugKey}` : slugKey;
+				const lastmod = lastmodMap.get(lookupKey) ?? lastmodMap.get(slugKey);
 				// Homepage: / or /[lang]/
 				if (parts.length === 0 || (parts.length === 1 && parts[0].length === 2)) {
 					return { ...item, changefreq: 'weekly', priority: 1.0 };
@@ -110,12 +146,12 @@ export default defineConfig({
 				// Blog post detail: /blog/[slug]/ or /[lang]/blog/[slug]/
 				const isBlogPost = parts.includes('blog') && parts[parts.length - 1] !== 'blog';
 				if (isBlogPost) {
-					return { ...item, changefreq: 'monthly', priority: 0.6 };
+					return { ...item, changefreq: 'monthly', priority: 0.6, ...(lastmod && { lastmod }) };
 				}
 				// Work/experience detail: /work/[slug]/ or /[lang]/experiences/[slug]/
 				const isWorkDetail = (parts.includes('work') || parts.includes('experiences')) && parts[parts.length - 1] !== 'work' && parts[parts.length - 1] !== 'experiences';
 				if (isWorkDetail) {
-					return { ...item, changefreq: 'monthly', priority: 0.6 };
+					return { ...item, changefreq: 'monthly', priority: 0.6, ...(lastmod && { lastmod }) };
 				}
 				// All other pages: listing pages, about, etc.
 				return { ...item, changefreq: 'weekly', priority: 0.8 };

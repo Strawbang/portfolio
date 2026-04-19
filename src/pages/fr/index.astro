@@ -10,6 +10,7 @@ import PortfolioPreview from "../../components/PortfolioPreview.astro";
 import ArticlePreview from "../../components/ArticlePreview.astro";
 import { fetchArticles } from "../../services/articles";
 import SchemaOrgPerson from "../../components/SchemaOrgPerson.astro";
+import WebSiteSchema from "../../components/WebSiteSchema.astro";
 import ContactCTA from "../../components/ContactCTA.astro";
 import Skills from "../../components/Skills.astro";
 import { Image } from "astro:assets";
@@ -123,6 +124,8 @@ const allArticles = [...externalArticles, ...blogPosts]
     <ContactCTA />
   </div>
   
+  <WebSiteSchema slot="head" lang="fr" />
+
   <SchemaOrgPerson
     name="Djamel Bougouffa"
     jobTitle="Ingénieur Logiciel Full-Stack"

@@ -4,6 +4,7 @@ import FrenchBaseLayout from '../../../layouts/FrenchBaseLayout.astro';
 import ContactCTA from '../../../components/ContactCTA.astro';
 import { calculateReadingTime, getReadingTimeText } from '../../../utils/readingTime';
 import BlogPostingSchema from '../../../components/BlogPostingSchema.astro';
+import BreadcrumbSchema from '../../../components/BreadcrumbSchema.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -55,6 +56,14 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('fr-FR', 
     dateModified={post.data.updatedDate?.toISOString()}
     tags={post.data.tags}
     lang="fr"
+  />
+  <BreadcrumbSchema
+    slot="head"
+    items={[
+      { name: 'Accueil', url: '/fr/' },
+      { name: 'Blog', url: '/fr/blog/' },
+      { name: post.data.title },
+    ]}
   />
   <div class="wrapper stack gap-10 lg:gap-20">
     <header class="hero stack gap-4">
