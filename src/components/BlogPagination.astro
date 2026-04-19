@@ -1,0 +1,131 @@
+---
+export interface Props {
+  currentPage: number;
+  totalPages: number;
+  prevUrl?: string;
+  nextUrl?: string;
+  labelPrev?: string;
+  labelNext?: string;
+}
+
+const {
+  currentPage,
+  totalPages,
+  prevUrl,
+  nextUrl,
+  labelPrev = 'Previous',
+  labelNext = 'Next',
+} = Astro.props;
+---
+
+{totalPages > 1 && (
+  <nav class="blog-pagination" aria-label="Blog pagination">
+    {prevUrl
+      ? <a href={prevUrl} class="page-btn prev-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          {labelPrev}
+        </a>
+      : <span class="page-btn prev-btn disabled" aria-disabled="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          {labelPrev}
+        </span>
+    }
+
+    <div class="page-numbers" role="list">
+      {Array.from({ length: totalPages }, (_, i) => {
+        const page = i + 1;
+        const url = page === 1 ? '/blog/' : `/blog/page/${page}/`;
+        const isCurrent = page === currentPage;
+        return (
+          <a
+            href={isCurrent ? undefined : url}
+            class={`page-num${isCurrent ? ' active' : ''}`}
+            aria-label={`Page ${page}`}
+            aria-current={isCurrent ? 'page' : undefined}
+            role="listitem"
+          >
+            {page}
+          </a>
+        );
+      })}
+    </div>
+
+    {nextUrl
+      ? <a href={nextUrl} class="page-btn next-btn">
+          {labelNext}
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      : <span class="page-btn next-btn disabled" aria-disabled="true">
+          {labelNext}
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+    }
+  </nav>
+)}
+
+<style>
+  .blog-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .page-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--gray-800);
+    background: var(--gray-999);
+    color: var(--gray-300);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
+    font-family: var(--font-body);
+  }
+
+  a.page-btn:hover {
+    background: var(--gray-800);
+    color: var(--gray-100);
+  }
+
+  .page-btn.disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .page-numbers {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .page-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.5rem;
+    border: 1px solid transparent;
+    color: var(--gray-300);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .page-num:hover:not(.active) {
+    background: var(--gray-800);
+    color: var(--gray-100);
+  }
+
+  .page-num.active {
+    background: var(--accent-regular);
+    color: var(--accent-text-over);
+    border-color: var(--accent-regular);
+    font-weight: 600;
+    pointer-events: none;
+  }
+</style>

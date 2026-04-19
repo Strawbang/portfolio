@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import FrenchBaseLayout from '../../layouts/FrenchBaseLayout.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
 import ArticlePreview from '../../components/ArticlePreview.astro';
-import Pagination from '../../components/Pagination.astro';
 import Hero from '../../components/Hero.astro';
 import { fetchArticles, deduplicateArticles } from '../../services/articles';
 import type { Article } from '../../types/article';
@@ -37,7 +36,6 @@ const allPosts = deduplicateArticles([...localPosts, ...externalArticles]);
       <ul class="gallery">
         {allPosts.map((post) => (<li><ArticlePreview article={post} /></li>))}
       </ul>
-      <Pagination totalItems={allPosts.length} labelPrev="Précédent" labelNext="Suivant" labelPage="Page" />
     </main>
     <ContactCTA />
   </div>

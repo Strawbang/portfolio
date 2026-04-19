@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactCTA from '../components/ContactCTA.astro';
 import ArticlePreview from '../components/ArticlePreview.astro';
-import Pagination from '../components/Pagination.astro';
+import BlogPagination from '../components/BlogPagination.astro';
 import Hero from '../components/Hero.astro';
 import { fetchArticles, deduplicateArticles } from "../services/articles";
 import type { Article } from '../types/article';
@@ -27,6 +27,10 @@ const externalArticles = (await fetchArticles());
 const allPosts = deduplicateArticles([...localPosts, ...externalArticles]);
 
 const allTags = [...new Set(allPosts.flatMap(post => post.tags ?? []))].sort();
+
+const PAGE_SIZE = 9;
+const totalPages = Math.ceil(allPosts.length / PAGE_SIZE);
+const pagedPosts = allPosts.slice(0, PAGE_SIZE);
 
 ---
 
@@ -52,13 +56,19 @@ const allTags = [...new Set(allPosts.flatMap(post => post.tags ?? []))].sort();
       )}
 
       <ul class="gallery">
-        {allPosts.map((post) => (
+        {pagedPosts.map((post) => (
           <li data-tags={(post.tags ?? []).join(',')}>
             <ArticlePreview article={post} />
           </li>
         ))}
       </ul>
-      <Pagination totalItems={allPosts.length} labelPrev="Previous" labelNext="Next" labelPage="Page" />
+      <div id="pagination-nav">
+        <BlogPagination
+          currentPage={1}
+          totalPages={totalPages}
+          nextUrl={totalPages > 1 ? '/blog/page/2/' : undefined}
+        />
+      </div>
     </main>
     <ContactCTA />
   </div>
@@ -79,6 +89,7 @@ const allTags = [...new Set(allPosts.flatMap(post => post.tags ?? []))].sort();
       active.classList.add('active');
       active.setAttribute('aria-pressed', 'true');
     }
+    const paginationNav = document.getElementById('pagination-nav');
     items.forEach(item => {
       if (tag === 'all' || !target) {
         item.style.display = '';
@@ -87,6 +98,9 @@ const allTags = [...new Set(allPosts.flatMap(post => post.tags ?? []))].sort();
         item.style.display = tags.includes(tag) ? '' : 'none';
       }
     });
+    if (paginationNav) {
+      paginationNav.style.display = (tag === 'all' || !target) ? '' : 'none';
+    }
   }
 
   const initialTag = new URLSearchParams(window.location.search).get('tag');

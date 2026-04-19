@@ -1,0 +1,94 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ContactCTA from '../../../components/ContactCTA.astro';
+import ArticlePreview from '../../../components/ArticlePreview.astro';
+import BlogPagination from '../../../components/BlogPagination.astro';
+import Hero from '../../../components/Hero.astro';
+import { fetchArticles, deduplicateArticles } from '../../../services/articles';
+import type { Article } from '../../../types/article';
+
+const PAGE_SIZE = 9;
+
+export async function getStaticPaths() {
+  const localPosts = (await getCollection('blog'))
+    .filter(post => !post.data.draft && post.data.lang !== 'fr')
+    .map(post => ({
+      title: post.data.title,
+      description: post.data.description,
+      publishDate: post.data.publishDate,
+      url: `/blog/${post.slug}/`,
+      imageUrl: post.data.img,
+      platform: post.data.source ?? 'Blog',
+      tags: post.data.tags,
+    } as Article));
+
+  const externalArticles = await fetchArticles();
+  const allPosts = deduplicateArticles([...localPosts, ...externalArticles]);
+
+  const totalPages = Math.ceil(allPosts.length / PAGE_SIZE);
+
+  return Array.from({ length: Math.max(totalPages - 1, 0) }, (_, i) => {
+    const page = i + 2;
+    return {
+      params: { page: String(page) },
+      props: {
+        posts: allPosts.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE),
+        currentPage: page,
+        totalPages,
+      },
+    };
+  });
+}
+
+const { posts, currentPage, totalPages } = Astro.props as {
+  posts: Article[];
+  currentPage: number;
+  totalPages: number;
+};
+
+const prevUrl = currentPage === 2 ? '/blog/' : `/blog/page/${currentPage - 1}/`;
+const nextUrl = currentPage < totalPages ? `/blog/page/${currentPage + 1}/` : undefined;
+---
+
+<BaseLayout
+  title={`Blog — Page ${currentPage} | Djamel Bougouffa`}
+  description="Articles and tutorials on web development, TypeScript, React, Node.js and best practices."
+>
+  <div class="stack gap-20">
+    <main class="wrapper stack gap-8">
+      <Hero
+        title="Blog"
+        tagline="Discover my articles on web development, modern technologies, and programming best practices."
+        align="start"
+      />
+
+      <ul class="gallery">
+        {posts.map((post) => (
+          <li>
+            <ArticlePreview article={post} />
+          </li>
+        ))}
+      </ul>
+
+      <BlogPagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        prevUrl={prevUrl}
+        nextUrl={nextUrl}
+      />
+    </main>
+    <ContactCTA />
+  </div>
+</BaseLayout>
+
+<style>
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+</style>
