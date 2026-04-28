@@ -27,6 +27,7 @@ export const collections = {
 			draft: z.boolean().default(false),
 			lang: z.enum(['en', 'fr']).default('en'),
 			source: z.string().optional(),
+			relatedPosts: z.array(z.string()).optional(),
 		}),
 	}),
 };

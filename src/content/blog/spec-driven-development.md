@@ -9,6 +9,7 @@ canonicalURL: "https://blog.ippon.fr/2026/02/18/spec-driven-development/"
 draft: false
 lang: en
 source: Ippon
+relatedPosts: ["model-context-protocol-mcp-cli-rust-ide"]
 ---
 
 This article was co-written and published on the [Ippon Technologies blog](https://blog.ippon.fr/2026/02/18/spec-driven-development/) (in French).

@@ -6,6 +6,7 @@ import TableOfContents from '../../components/TableOfContents.astro';
 import { calculateReadingTime, getReadingTimeText } from '../../utils/readingTime';
 import BlogPostingSchema from '../../components/BlogPostingSchema.astro';
 import BreadcrumbSchema from '../../components/BreadcrumbSchema.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -122,6 +123,10 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('en-US', 
       </article>
       <TableOfContents headings={headings} />
     </div>
+
+    {post.data.relatedPosts && post.data.relatedPosts.length > 0 && (
+      <RelatedPosts slugs={post.data.relatedPosts} lang="en" />
+    )}
 
     <ContactCTA />
   </div>

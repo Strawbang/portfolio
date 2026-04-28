@@ -6,6 +6,7 @@ tags: ["astro", "javascript", "webdev", "tutorial"]
 img: "/assets/stats-website.webp"
 img_alt: "Métriques de performance du portfolio Astro — score Lighthouse 100/100"
 lang: fr
+relatedPosts: ["model-context-protocol-mcp-cli-rust-ide", "full-remote-bliss-fullstack-devs-jet-lag-advantage"]
 ---
 
 ## Introduction

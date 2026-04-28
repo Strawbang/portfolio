@@ -1,0 +1,170 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+interface Props {
+  slugs: string[];
+  lang: 'en' | 'fr';
+}
+
+const { slugs, lang } = Astro.props;
+
+const allPosts = await getCollection('blog');
+
+const relatedPosts = slugs
+  .map(slug => {
+    const id = lang === 'fr' ? `fr-${slug}` : slug;
+    return allPosts.find(p => p.id.replace(/\.md$/, '') === id);
+  })
+  .filter((p): p is CollectionEntry<'blog'> => p !== undefined && !p.data.draft);
+
+const label = lang === 'fr' ? 'Articles liés' : 'Related articles';
+const basePath = lang === 'fr' ? '/fr/blog' : '/blog';
+---
+
+{relatedPosts.length > 0 && (
+  <section class="related-posts">
+    <h2 class="section-title">{label}</h2>
+    <div class="cards-grid">
+      {relatedPosts.map(post => {
+        const postSlug = post.id.replace(/\.md$/, '').replace(/^fr-/, '');
+        const url = `${basePath}/${postSlug}/`;
+        return (
+          <a href={url} class="card">
+            <div class="card-img-wrap">
+              {post.data.img
+                ? <img src={post.data.img} alt={post.data.img_alt || post.data.title} loading="lazy" decoding="async" width="600" height="338" />
+                : <div class="card-img-placeholder" />
+              }
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">{post.data.title}</h3>
+              <p class="card-desc">{post.data.description}</p>
+              <div class="card-tags">
+                {post.data.tags.slice(0, 3).map(tag => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+)}
+
+<style>
+  .related-posts {
+    padding-block: 2rem;
+    border-top: 1px solid var(--gray-800);
+  }
+
+  .section-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--gray-400);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.5rem;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 1.25rem;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.75rem;
+    background: var(--gradient-subtle);
+    border: 1px solid var(--gray-800);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--theme-transition), border-color var(--theme-transition), transform var(--theme-transition);
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--gray-700);
+    transform: translateY(-3px);
+  }
+
+  .card-img-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background-color: var(--gray-900);
+  }
+
+  .card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .card:hover .card-img-wrap img {
+    transform: scale(1.04);
+  }
+
+  .card-img-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-accent);
+    opacity: 0.15;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 0.5rem;
+    padding: 1rem 1.25rem 1.25rem;
+  }
+
+  .card-title {
+    font-family: var(--font-brand);
+    font-size: var(--text-md);
+    font-weight: 500;
+    color: var(--gray-100);
+    margin: 0;
+    line-height: 1.3;
+    transition: color var(--theme-transition);
+  }
+
+  .card:hover .card-title {
+    color: var(--accent-dark);
+  }
+
+  .card-desc {
+    font-size: var(--text-sm);
+    color: var(--gray-400);
+    margin: 0;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.25rem;
+  }
+
+  .tag {
+    background-color: var(--gray-800);
+    color: var(--gray-500);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: var(--text-sm);
+    font-size: 0.75rem;
+    line-height: 1.6;
+  }
+</style>

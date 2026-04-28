@@ -5,6 +5,7 @@ import ContactCTA from '../../../components/ContactCTA.astro';
 import { calculateReadingTime, getReadingTimeText } from '../../../utils/readingTime';
 import BlogPostingSchema from '../../../components/BlogPostingSchema.astro';
 import BreadcrumbSchema from '../../../components/BreadcrumbSchema.astro';
+import RelatedPosts from '../../../components/RelatedPosts.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -118,6 +119,10 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('fr-FR', 
     <article class="content">
       <Content />
     </article>
+
+    {post.data.relatedPosts && post.data.relatedPosts.length > 0 && (
+      <RelatedPosts slugs={post.data.relatedPosts} lang="fr" />
+    )}
 
     <ContactCTA />
   </div>

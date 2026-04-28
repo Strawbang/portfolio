@@ -6,6 +6,7 @@ tags: ["remote-work", "productivity", "career", "webdev"]
 img: "/assets/full-remote.webp"
 img_alt: "Travail à distance sur plusieurs fuseaux horaires"
 lang: fr
+relatedPosts: ["building-a-blazing-fast-portfolio-with-astro-and-deploying-with-netlify"]
 ---
 
 ## Mon expérience

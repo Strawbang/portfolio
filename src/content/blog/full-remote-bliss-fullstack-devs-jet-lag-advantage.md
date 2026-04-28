@@ -5,6 +5,7 @@ publishDate: "2023-06-21"
 tags: ["remote-work", "productivity", "career", "webdev"]
 img: "/assets/full-remote.webp"
 img_alt: "Remote work across time zones"
+relatedPosts: ["building-a-blazing-fast-portfolio-with-astro-and-deploying-with-netlify"]
 ---
 
 ## About my experience

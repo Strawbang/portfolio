@@ -5,6 +5,7 @@ publishDate: "2023-07-24"
 tags: ["astro", "javascript", "webdev", "tutorial"]
 img: "/assets/stats-website.webp"
 img_alt: "Astro portfolio performance metrics — 100/100 Lighthouse score"
+relatedPosts: ["model-context-protocol-mcp-cli-rust-ide", "full-remote-bliss-fullstack-devs-jet-lag-advantage"]
 ---
 
 ## Introduction
