@@ -69,11 +69,30 @@ export default defineConfig({
 				},
 				// Anthropic / Claude
 				{
-					userAgent: 'Claude',
+					userAgent: 'ClaudeBot',
+					allow: '/',
+				},
+				{
+					userAgent: 'Claude-Web',
 					allow: '/',
 				},
 				{
 					userAgent: 'Anthropic-AI',
+					allow: '/',
+				},
+				// Google Extended (Gemini / AI Overviews)
+				{
+					userAgent: 'Google-Extended',
+					allow: '/',
+				},
+				// Apple
+				{
+					userAgent: 'Applebot-Extended',
+					allow: '/',
+				},
+				// Common Crawl (used to train many LLMs)
+				{
+					userAgent: 'CCBot',
 					allow: '/',
 				},
 				// Baidu
