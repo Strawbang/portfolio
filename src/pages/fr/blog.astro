@@ -38,7 +38,7 @@ const allTags = [...new Set(allPosts.flatMap(post => post.tags ?? []))].sort();
 
       {allTags.length > 0 && (
         <div class="tag-filters" role="group" aria-label="Filtrer par tag">
-          <button class="tag-filter active" data-tag="all">All</button>
+          <button class="tag-filter active" data-tag="all">Tous</button>
           {allTags.map(tag => (
             <button class="tag-filter" data-tag={tag}>{tag}</button>
           ))}
