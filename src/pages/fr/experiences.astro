@@ -5,6 +5,7 @@ import ContactCTA from "../../components/ContactCTA.astro";
 import PortfolioPreview from "../../components/PortfolioPreview.astro";
 import Hero from "../../components/Hero.astro";
 import Grid from "../../components/Grid.astro";
+import ItemListSchema from "../../components/ItemListSchema.astro";
 import { workLabels } from '../../data/pages';
 
 const l = workLabels['fr'];
@@ -14,6 +15,16 @@ const projects = (await getCollection("work", ({ id }) => id.startsWith('fr/')))
 ---
 
 <FrenchBaseLayout title={l.metaTitle} description={l.metaDescription}>
+  <ItemListSchema
+    slot="head"
+    name="Expériences Professionnelles — Djamel Bougouffa"
+    url="https://djamel-bougouffa.com/fr/experiences/"
+    items={projects.map(p => ({
+      name: p.data.title,
+      url: `https://djamel-bougouffa.com/fr/experiences/${p.id.replace(/\.md$/, '').replace(/^fr\//, '')}/`,
+      description: p.data.description,
+    }))}
+  />
   <div class="stack gap-20">
     <main class="wrapper stack gap-8">
       <Hero title={l.heroTitle} tagline={l.heroTagline} align="start" />

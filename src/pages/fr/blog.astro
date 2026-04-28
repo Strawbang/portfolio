@@ -4,6 +4,7 @@ import FrenchBaseLayout from '../../layouts/FrenchBaseLayout.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
 import ArticlePreview from '../../components/ArticlePreview.astro';
 import Hero from '../../components/Hero.astro';
+import ItemListSchema from '../../components/ItemListSchema.astro';
 import type { Article } from '../../types/article';
 import { blogLabels } from '../../data/pages';
 
@@ -28,6 +29,16 @@ const allTags = [...new Set(allPosts.flatMap(post => post.tags ?? []))].sort();
 ---
 
 <FrenchBaseLayout title={l.metaTitle} description={l.metaDescription}>
+  <ItemListSchema
+    slot="head"
+    name="Blog — Djamel Bougouffa"
+    url="https://djamel-bougouffa.com/fr/blog/"
+    items={allPosts.map(p => ({
+      name: p.title,
+      url: `https://djamel-bougouffa.com${p.url}`,
+      description: p.description,
+    }))}
+  />
   <div class="stack gap-20">
     <main class="wrapper stack gap-8">
       <Hero
