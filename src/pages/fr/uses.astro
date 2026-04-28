@@ -1,0 +1,268 @@
+---
+import FrenchBaseLayout from "../../layouts/FrenchBaseLayout.astro";
+import ContactCTA from "../../components/ContactCTA.astro";
+import Hero from "../../components/Hero.astro";
+import Icon from "../../components/Icon.astro";
+---
+
+<FrenchBaseLayout
+  title="Utilise — Djamel Bougouffa"
+  description="Le matériel, les logiciels, outils et applications que j'utilise au quotidien en tant qu'ingénieur logiciel fullstack en full remote."
+>
+  <div class="stack gap-20">
+    <main class="wrapper uses">
+      <Hero
+        title="Utilise"
+        tagline="Matériel, logiciels et outils de mon quotidien. Inspiré par uses.tech."
+        align="start"
+      />
+
+      <section class="section-container">
+        <h2 class="section-title">Matériel</h2>
+        <div class="content">
+          <div class="items-grid">
+            <div class="item-card">
+              <h3><Icon icon="desktop" size="1.2em" /> Poste de travail</h3>
+              <ul>
+                <li><strong>MacBook Pro 14"</strong> — M3 Pro, 18 Go RAM</li>
+                <li><strong>Écran externe</strong> — 27" 4K</li>
+                <li><strong>Clavier</strong> — Keychron K2</li>
+                <li><strong>Souris</strong> — Logitech MX Master 3</li>
+              </ul>
+            </div>
+            <div class="item-card">
+              <h3><Icon icon="pencil-line" size="1.2em" /> Bureau</h3>
+              <ul>
+                <li><strong>Bureau</strong> — Assis/debout Flexispot</li>
+                <li><strong>Siège</strong> — Herman Miller Aeron</li>
+                <li><strong>Webcam</strong> — Logitech Brio 4K</li>
+                <li><strong>Micro</strong> — Blue Yeti</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-container">
+        <h2 class="section-title">Éditeur & Terminal</h2>
+        <div class="content">
+          <div class="items-grid">
+            <div class="item-card">
+              <h3><Icon icon="code" size="1.2em" /> IDE</h3>
+              <ul>
+                <li><strong>Windsurf</strong> — IDE principal avec Cascade AI</li>
+                <li><strong>VS Code</strong> — éditions rapides</li>
+                <li><strong>RustRover</strong> — pour le code Rust intensif</li>
+                <li><strong>Thème</strong> — One Dark Pro</li>
+                <li><strong>Police</strong> — JetBrains Mono</li>
+              </ul>
+            </div>
+            <div class="item-card">
+              <h3><Icon icon="terminal-window" size="1.2em" /> Terminal</h3>
+              <ul>
+                <li><strong>iTerm2</strong> avec tmux</li>
+                <li><strong>Shell</strong> — Zsh + Oh My Zsh</li>
+                <li><strong>Thème</strong> — Powerlevel10k</li>
+                <li><strong>zsh-autosuggestions</strong> + <strong>zsh-syntax-highlighting</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-container">
+        <h2 class="section-title">Stack de développement</h2>
+        <div class="content">
+          <div class="items-grid">
+            <div class="item-card">
+              <h3><Icon icon="code" size="1.2em" /> Langages & Frameworks</h3>
+              <ul>
+                <li><strong>TypeScript</strong> — premier choix pour tout ce qui est JS/TS</li>
+                <li><strong>Rust</strong> — CLI, code critique en performance, outillage IA</li>
+                <li><strong>React</strong> + <strong>Next.js</strong> — frontend</li>
+                <li><strong>Node.js</strong> / <strong>Express</strong> — APIs backend</li>
+                <li><strong>Astro</strong> — sites statiques (ce portfolio !)</li>
+              </ul>
+            </div>
+            <div class="item-card">
+              <h3><Icon icon="rocket-launch" size="1.2em" /> IA & Outillage agentique</h3>
+              <ul>
+                <li><strong>Windsurf</strong> — coding agentique avec Cascade</li>
+                <li><strong>MCP</strong> — exposition d'outils internes aux agents IA</li>
+                <li><strong>RAG</strong> — pipelines de génération augmentée</li>
+                <li><strong>Tree-sitter</strong> — analyse AST pour le code</li>
+              </ul>
+            </div>
+            <div class="item-card">
+              <h3><Icon icon="devops-logo" size="1.2em" /> DevOps & Infrastructure</h3>
+              <ul>
+                <li><strong>Docker</strong> + <strong>Docker Compose</strong></li>
+                <li><strong>Kubernetes</strong> — orchestration de conteneurs</li>
+                <li><strong>GitHub Actions</strong> — CI/CD</li>
+                <li><strong>Netlify</strong> — déploiements frontend</li>
+              </ul>
+            </div>
+            <div class="item-card">
+              <h3><Icon icon="github-logo" size="1.2em" /> Outils CLI indispensables</h3>
+              <ul>
+                <li><strong>ripgrep</strong> — recherche rapide</li>
+                <li><strong>fd</strong> — meilleur find</li>
+                <li><strong>bat</strong> — meilleur cat</li>
+                <li><strong>jq</strong> — JSON dans le terminal</li>
+                <li><strong>gh</strong> — GitHub CLI</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-container">
+        <h2 class="section-title">Apps & Productivité</h2>
+        <div class="content">
+          <div class="items-grid">
+            <div class="item-card">
+              <h3><Icon icon="pencil-line" size="1.2em" /> Écriture & Notes</h3>
+              <ul>
+                <li><strong>Obsidian</strong> — base de connaissances personnelle</li>
+                <li><strong>Notion</strong> — suivi de projets & docs</li>
+                <li><strong>Medium</strong> / <strong>Dev.to</strong> — articles techniques</li>
+              </ul>
+            </div>
+            <div class="item-card">
+              <h3><Icon icon="paper-plane-tilt" size="1.2em" /> Communication</h3>
+              <ul>
+                <li><strong>Slack</strong> — communication d'équipe</li>
+                <li><strong>Discord</strong> — communautés dev</li>
+                <li><strong>Arc</strong> — navigateur principal</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-container">
+        <h2 class="section-title">Full remote</h2>
+        <div class="content">
+          <p class="section-intro">
+            En full remote depuis 2020. Mon setup est optimisé pour la concentration, la communication asynchrone et rester efficace à travers les fuseaux horaires — un sujet que j'ai exploré dans <a href="/fr/blog/full-remote-bliss-fullstack-devs-jet-lag-advantage/">L'avantage du décalage horaire</a>.
+          </p>
+          <div class="items-grid">
+            <div class="item-card">
+              <h3><Icon icon="strategy" size="1.2em" /> Ce qui m'aide à rester productif</h3>
+              <ul>
+                <li>Time-blocking + sessions de deep work</li>
+                <li>Communication async-first</li>
+                <li>Focus mono-tâche avec Pomodoro</li>
+                <li>Revue hebdomadaire le vendredi</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <ContactCTA />
+  </div>
+</FrenchBaseLayout>
+
+<style>
+  .uses {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+
+  .section-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: var(--gray-200);
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-size: var(--text-xl);
+    color: var(--gray-0);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--gray-800);
+    padding-bottom: 0.5rem;
+  }
+
+  .section-intro {
+    margin-bottom: 1.5rem;
+    font-size: var(--text-lg);
+    line-height: 1.7;
+  }
+
+  .section-intro a {
+    color: var(--accent-regular);
+    text-decoration: underline;
+  }
+
+  .items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .item-card {
+    background-color: var(--gray-999);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .item-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .item-card h3 {
+    color: var(--accent-regular);
+    font-size: var(--text-md);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .item-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .item-card li {
+    padding-left: 1rem;
+    position: relative;
+    font-size: var(--text-sm);
+    line-height: 1.5;
+  }
+
+  .item-card li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent-regular);
+  }
+
+  @media (min-width: 50em) {
+    .uses {
+      display: grid;
+      grid-template-columns: 1fr 60% 1fr;
+    }
+
+    .uses > :global(:first-child) {
+      grid-column-start: 2;
+    }
+
+    .section-container {
+      display: contents;
+      font-size: var(--text-lg);
+    }
+  }
+</style>

@@ -1,0 +1,268 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactCTA from "../components/ContactCTA.astro";
+import Hero from "../components/Hero.astro";
+import Icon from "../components/Icon.astro";
+---
+
+<BaseLayout
+  title="Uses — Djamel Bougouffa"
+  description="The hardware, software, tools and apps I use daily as a fullstack software engineer working full remote."
+>
+  <div class="stack gap-20">
+    <main class="wrapper uses">
+      <Hero
+        title="Uses"
+        tagline="Hardware, software, and tools I use daily. Inspired by uses.tech."
+        align="start"
+      />
+
+      <section class="section-container">
+        <h2 class="section-title">Hardware</h2>
+        <div class="content">
+          <div class="items-grid">
+            <div class="item-card">
+              <h3><Icon icon="desktop" size="1.2em" /> Workstation</h3>
+              <ul>
+                <li><strong>MacBook Pro 14"</strong> — M3 Pro, 18 GB RAM</li>
+                <li><strong>External monitor</strong> — 27" 4K</li>
+                <li><strong>Keyboard</strong> — Keychron K2</li>
+                <li><strong>Mouse</strong> — Logitech MX Master 3</li>
+              </ul>
+            </div>
+            <div class="item-card">
+              <h3><Icon icon="pencil-line" size="1.2em" /> Desk setup</h3>
+              <ul>
+                <li><strong>Desk</strong> — Sit/stand Flexispot</li>
+                <li><strong>Chair</strong> — Herman Miller Aeron</li>
+                <li><strong>Webcam</strong> — Logitech Brio 4K</li>
+                <li><strong>Microphone</strong> — Blue Yeti</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-container">
+        <h2 class="section-title">Editor & Terminal</h2>
+        <div class="content">
+          <div class="items-grid">
+            <div class="item-card">
+              <h3><Icon icon="code" size="1.2em" /> IDE</h3>
+              <ul>
+                <li><strong>Windsurf</strong> — primary IDE with Cascade AI</li>
+                <li><strong>VS Code</strong> — fallback and quick edits</li>
+                <li><strong>RustRover</strong> — for heavy Rust work</li>
+                <li><strong>Theme</strong> — One Dark Pro</li>
+                <li><strong>Font</strong> — JetBrains Mono</li>
+              </ul>
+            </div>
+            <div class="item-card">
+              <h3><Icon icon="terminal-window" size="1.2em" /> Terminal</h3>
+              <ul>
+                <li><strong>iTerm2</strong> with tmux</li>
+                <li><strong>Shell</strong> — Zsh + Oh My Zsh</li>
+                <li><strong>Theme</strong> — Powerlevel10k</li>
+                <li><strong>zsh-autosuggestions</strong> + <strong>zsh-syntax-highlighting</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-container">
+        <h2 class="section-title">Development stack</h2>
+        <div class="content">
+          <div class="items-grid">
+            <div class="item-card">
+              <h3><Icon icon="code" size="1.2em" /> Languages & Frameworks</h3>
+              <ul>
+                <li><strong>TypeScript</strong> — first choice for everything JS/TS</li>
+                <li><strong>Rust</strong> — CLI tools, performance-critical code, AI tooling</li>
+                <li><strong>React</strong> + <strong>Next.js</strong> — frontend</li>
+                <li><strong>Node.js</strong> / <strong>Express</strong> — backend APIs</li>
+                <li><strong>Astro</strong> — static sites (this portfolio!)</li>
+              </ul>
+            </div>
+            <div class="item-card">
+              <h3><Icon icon="rocket-launch" size="1.2em" /> AI & Agentic tooling</h3>
+              <ul>
+                <li><strong>Windsurf</strong> — agentic coding with Cascade</li>
+                <li><strong>MCP</strong> — exposing internal tools to AI agents</li>
+                <li><strong>RAG</strong> — retrieval-augmented generation pipelines</li>
+                <li><strong>Tree-sitter</strong> — AST parsing for code analysis</li>
+              </ul>
+            </div>
+            <div class="item-card">
+              <h3><Icon icon="devops-logo" size="1.2em" /> DevOps & Infrastructure</h3>
+              <ul>
+                <li><strong>Docker</strong> + <strong>Docker Compose</strong></li>
+                <li><strong>Kubernetes</strong> — container orchestration</li>
+                <li><strong>GitHub Actions</strong> — CI/CD</li>
+                <li><strong>Netlify</strong> — frontend deployments</li>
+              </ul>
+            </div>
+            <div class="item-card">
+              <h3><Icon icon="github-logo" size="1.2em" /> CLI tools I love</h3>
+              <ul>
+                <li><strong>ripgrep</strong> — fast search</li>
+                <li><strong>fd</strong> — better find</li>
+                <li><strong>bat</strong> — better cat</li>
+                <li><strong>jq</strong> — JSON in terminal</li>
+                <li><strong>gh</strong> — GitHub CLI</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-container">
+        <h2 class="section-title">Apps & Productivity</h2>
+        <div class="content">
+          <div class="items-grid">
+            <div class="item-card">
+              <h3><Icon icon="pencil-line" size="1.2em" /> Writing & Notes</h3>
+              <ul>
+                <li><strong>Obsidian</strong> — personal knowledge base</li>
+                <li><strong>Notion</strong> — project tracking & docs</li>
+                <li><strong>Medium</strong> / <strong>Dev.to</strong> — technical writing</li>
+              </ul>
+            </div>
+            <div class="item-card">
+              <h3><Icon icon="paper-plane-tilt" size="1.2em" /> Communication</h3>
+              <ul>
+                <li><strong>Slack</strong> — team communication</li>
+                <li><strong>Discord</strong> — dev communities</li>
+                <li><strong>Arc</strong> — browser of choice</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-container">
+        <h2 class="section-title">Remote work</h2>
+        <div class="content">
+          <p class="section-intro">
+            I've been working full remote since 2020. My setup is optimized for focus, async communication, and staying sharp across timezones — something I wrote about in <a href="/blog/full-remote-bliss-fullstack-devs-jet-lag-advantage/">The Jet Lag Advantage</a>.
+          </p>
+          <div class="items-grid">
+            <div class="item-card">
+              <h3><Icon icon="strategy" size="1.2em" /> What helps me stay productive</h3>
+              <ul>
+                <li>Time-blocking + deep work sessions</li>
+                <li>Async-first communication</li>
+                <li>Single-task focus with Pomodoro</li>
+                <li>Weekly review every Friday</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <ContactCTA />
+  </div>
+</BaseLayout>
+
+<style>
+  .uses {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+
+  .section-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: var(--gray-200);
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-size: var(--text-xl);
+    color: var(--gray-0);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--gray-800);
+    padding-bottom: 0.5rem;
+  }
+
+  .section-intro {
+    margin-bottom: 1.5rem;
+    font-size: var(--text-lg);
+    line-height: 1.7;
+  }
+
+  .section-intro a {
+    color: var(--accent-regular);
+    text-decoration: underline;
+  }
+
+  .items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .item-card {
+    background-color: var(--gray-999);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .item-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .item-card h3 {
+    color: var(--accent-regular);
+    font-size: var(--text-md);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .item-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .item-card li {
+    padding-left: 1rem;
+    position: relative;
+    font-size: var(--text-sm);
+    line-height: 1.5;
+  }
+
+  .item-card li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent-regular);
+  }
+
+  @media (min-width: 50em) {
+    .uses {
+      display: grid;
+      grid-template-columns: 1fr 60% 1fr;
+    }
+
+    .uses > :global(:first-child) {
+      grid-column-start: 2;
+    }
+
+    .section-container {
+      display: contents;
+      font-size: var(--text-lg);
+    }
+  }
+</style>
