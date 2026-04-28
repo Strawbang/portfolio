@@ -21,10 +21,10 @@ import Icon from "../../components/Icon.astro";
           <form
             name="contact-fr"
             method="POST"
+            action="/fr/contact/success/"
             data-netlify="true"
             netlify-honeypot="bot-field"
             class="contact-form"
-            novalidate
           >
             <input type="hidden" name="form-name" value="contact-fr" />
             <p class="hidden">
@@ -56,7 +56,6 @@ import Icon from "../../components/Icon.astro";
               <Icon icon="paper-plane-tilt" size="1.2em" />
             </button>
 
-            <p class="success-message" aria-live="polite"></p>
           </form>
         </div>
 
@@ -87,40 +86,6 @@ import Icon from "../../components/Icon.astro";
   </div>
 </FrenchBaseLayout>
 
-<script>
-  const form = document.querySelector('.contact-form') as HTMLFormElement;
-  const successMsg = document.querySelector('.success-message') as HTMLParagraphElement;
-  const submitBtn = form?.querySelector('.submit-btn') as HTMLButtonElement;
-
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Envoi en cours…';
-
-    try {
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(form) as any).toString(),
-      });
-
-      if (res.ok) {
-        form.reset();
-        successMsg.textContent = '✓ Message envoyé ! Je vous répondrai dans les plus brefs délais.';
-        successMsg.classList.add('visible');
-        submitBtn.textContent = 'Envoyer le message';
-        submitBtn.disabled = false;
-      } else {
-        throw new Error('Erreur réseau');
-      }
-    } catch {
-      successMsg.textContent = '✗ Une erreur est survenue. Réessayez ou contactez-moi directement par email.';
-      successMsg.classList.add('visible', 'error');
-      submitBtn.textContent = 'Envoyer le message';
-      submitBtn.disabled = false;
-    }
-  });
-</script>
 
 <style>
   .contact {
@@ -218,26 +183,6 @@ import Icon from "../../components/Icon.astro";
   .submit-btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
-  }
-
-  .success-message {
-    display: none;
-    font-size: var(--text-md);
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-    background-color: color-mix(in srgb, var(--accent-regular) 10%, transparent);
-    border: 1px solid var(--accent-regular);
-    color: var(--accent-regular);
-  }
-
-  .success-message.visible {
-    display: block;
-  }
-
-  .success-message.error {
-    background-color: color-mix(in srgb, red 10%, transparent);
-    border-color: red;
-    color: red;
   }
 
   .info-section {
