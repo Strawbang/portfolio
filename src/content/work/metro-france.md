@@ -6,9 +6,16 @@ img_alt: Parking of METRO France Nanterre
 description: |
   Full-Stack Engineer at METRO France — GCP, Kubernetes, TypeScript, React, Node.js, GraphQL across 93 warehouses nationwide
 tags:
-  - Dev
-  - Scrum
-  - DevOps
+  - Front-End
+  - Back-End
+  - Cloud
+keywords:
+  - TypeScript
+  - React
+  - Node.js
+  - GraphQL
+  - GCP
+  - Kubernetes
 ---
 
 ### Revolutionizing Product Development at METRO France

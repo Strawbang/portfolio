@@ -2,7 +2,8 @@
 title: "Full-Remote Bliss: Fullstack Dev's Jet Lag Advantage"
 description: "How working remotely across time zones can transform jet lag from an inconvenience into a productivity and personal growth advantage."
 publishDate: "2023-06-21"
-tags: ["remote-work", "productivity", "career", "webdev"]
+tags: ["Business & Trends"]
+keywords: ["Remote Work", "Productivity", "Career"]
 img: "/assets/full-remote.webp"
 img_alt: "Remote work across time zones"
 relatedPosts: ["building-a-blazing-fast-portfolio-with-astro-and-deploying-with-netlify"]

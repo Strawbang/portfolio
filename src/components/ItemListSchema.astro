@@ -1,0 +1,31 @@
+---
+interface Item {
+  name: string;
+  url: string;
+  description?: string;
+}
+
+interface Props {
+  name: string;
+  url: string;
+  items: Item[];
+}
+
+const { name, url, items } = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name,
+  url,
+  itemListElement: items.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: item.name,
+    url: item.url,
+    ...(item.description && { description: item.description }),
+  })),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)}></script>

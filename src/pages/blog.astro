@@ -5,6 +5,7 @@ import ContactCTA from '../components/ContactCTA.astro';
 import ArticlePreview from '../components/ArticlePreview.astro';
 import BlogPagination from '../components/BlogPagination.astro';
 import Hero from '../components/Hero.astro';
+import ItemListSchema from '../components/ItemListSchema.astro';
 import { fetchArticles, deduplicateArticles } from "../services/articles";
 import type { Article } from '../types/article';
 
@@ -39,6 +40,16 @@ const pagedPosts = allPosts.slice(0, PAGE_SIZE);
   title="Blog | Djamel Bougouffa - Full-Stack Developer"
   description="Articles and tutorials on web development, TypeScript, React, Node.js and best practices."
 >
+  <ItemListSchema
+    slot="head"
+    name="Blog — Djamel Bougouffa"
+    url="https://djamel-bougouffa.com/blog/"
+    items={allPosts.map(p => ({
+      name: p.title,
+      url: `https://djamel-bougouffa.com${p.url}`,
+      description: p.description,
+    }))}
+  />
   <div class="stack gap-20">
     <main class="wrapper stack gap-8">
       <Hero

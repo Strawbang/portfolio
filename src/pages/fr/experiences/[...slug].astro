@@ -40,6 +40,7 @@ const { Content } = await render(entry);
 		url={`/fr/experiences/${entry.id.replace(/\.md$/, '').replace(/^fr\//, '')}/`}
 		imageUrl={entry.data.img}
 		tags={entry.data.tags}
+		keywords={entry.data.keywords}
 		publishDate={entry.data.publishDate.toISOString()}
 		lang="fr"
 	/>

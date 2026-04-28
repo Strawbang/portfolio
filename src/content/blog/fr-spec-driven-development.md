@@ -2,7 +2,8 @@
 title: "Spec-Driven Development : de la spécification au code avec l'IA"
 description: "Découvrez le Spec-Driven Development (SDD) et comment l'IA, avec Kiro, transforme une spécification en code structuré et vérifié par les tests."
 publishDate: 2026-02-18
-tags: ["ai-agents", "llm", "architecture", "devtools", "tutorial"]
+tags: ["IA", "Software Engineering"]
+keywords: ["Agents IA", "LLM", "Architecture", "Outils Développeur", "Kiro"]
 img: "https://blog.ippon.fr/content/images/2026/02/spec-driven-developement.png"
 img_alt: "Spec-Driven Development avec l'IA"
 canonicalURL: "https://blog.ippon.fr/2026/02/18/spec-driven-development/"

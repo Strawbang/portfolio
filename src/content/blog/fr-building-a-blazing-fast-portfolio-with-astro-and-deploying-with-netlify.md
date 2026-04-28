@@ -2,7 +2,8 @@
 title: "Créer un portfolio ultra-rapide avec Astro et le déployer sur Netlify"
 description: "Comment créer un portfolio performant avec Astro et le thème Portfolio, puis le déployer facilement sur Netlify."
 publishDate: "2023-07-24"
-tags: ["astro", "javascript", "webdev", "tutorial"]
+tags: ["Front-End", "Software Engineering"]
+keywords: ["Astro", "JavaScript", "Netlify", "Développement Web", "Tutoriel"]
 img: "/assets/stats-website.webp"
 img_alt: "Métriques de performance du portfolio Astro — score Lighthouse 100/100"
 lang: fr

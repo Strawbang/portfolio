@@ -6,6 +6,10 @@ img_alt: SYSTRAN by ChapsVision logo
 description: |
   Full-Stack Engineer at SYSTRAN by ChapsVision — TypeScript, Next.js, NLP platform, AI-powered translation, legacy modernization, Agile
 tags:
+  - Front-End
+  - Back-End
+  - Agility
+keywords:
   - TypeScript
   - Next.js
   - NLP

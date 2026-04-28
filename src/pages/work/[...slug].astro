@@ -43,6 +43,7 @@ const backLabel = isFr ? 'Expériences' : 'Experience';
 		url={`/work/${entry.id.replace(/\.md$/, '')}/`}
 		imageUrl={entry.data.img}
 		tags={entry.data.tags}
+		keywords={entry.data.keywords}
 		publishDate={entry.data.publishDate.toISOString()}
 	/>
 	<BreadcrumbSchema

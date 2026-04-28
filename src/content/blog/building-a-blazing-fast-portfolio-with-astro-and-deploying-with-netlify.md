@@ -2,7 +2,8 @@
 title: "Building a Blazing-Fast Portfolio with Astro and Deploying with Netlify"
 description: "How to create a lightning-fast portfolio using Astro with the Portfolio theme and deploy it effortlessly with Netlify."
 publishDate: "2023-07-24"
-tags: ["astro", "javascript", "webdev", "tutorial"]
+tags: ["Front-End", "Software Engineering"]
+keywords: ["Astro", "JavaScript", "Netlify", "Web Development", "Tutorial"]
 img: "/assets/stats-website.webp"
 img_alt: "Astro portfolio performance metrics — 100/100 Lighthouse score"
 relatedPosts: ["model-context-protocol-mcp-cli-rust-ide", "full-remote-bliss-fullstack-devs-jet-lag-advantage"]

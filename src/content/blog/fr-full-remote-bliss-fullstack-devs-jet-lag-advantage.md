@@ -2,7 +2,8 @@
 title: "Full-Remote Bliss : l'avantage du jet lag pour les devs fullstack"
 description: "Comment travailler à distance sur plusieurs fuseaux horaires peut transformer le jet lag d'une contrainte en levier de productivité et de croissance personnelle."
 publishDate: "2023-06-21"
-tags: ["remote-work", "productivity", "career", "webdev"]
+tags: ["Vision métier & tendances"]
+keywords: ["Full Remote", "Productivité", "Carrière"]
 img: "/assets/full-remote.webp"
 img_alt: "Travail à distance sur plusieurs fuseaux horaires"
 lang: fr

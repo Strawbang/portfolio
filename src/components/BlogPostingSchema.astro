@@ -7,6 +7,7 @@ export interface Props {
   datePublished: string;
   dateModified?: string;
   tags?: string[];
+  keywords?: string[];
   lang?: string;
 }
 
@@ -18,8 +19,10 @@ const {
   datePublished,
   dateModified,
   tags = [],
+  keywords = [],
   lang = 'en',
 } = Astro.props;
+const allKeywords = [...tags, ...keywords];
 
 const siteUrl = 'https://djamel-bougouffa.com';
 
@@ -47,7 +50,7 @@ const schema: Record<string, unknown> = {
     '@type': 'WebPage',
     '@id': url,
   },
-  ...(tags.length > 0 && { keywords: tags.join(', ') }),
+  ...(allKeywords.length > 0 && { keywords: allKeywords.join(', ') }),
 };
 ---
 

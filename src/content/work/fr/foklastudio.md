@@ -6,10 +6,15 @@ img_alt: Website of Fokal Studio
 description: |
   Ingénieur Full-Stack chez Fokal Studio — développement web client, CMS Headless Directus, PHP, architecture composants, DevOps
 tags:
-  - Dev
+  - Front-End
+  - Back-End
   - DevOps
-  - Prototype
-  - Lead
+keywords:
+  - PHP
+  - Directus
+  - Headless CMS
+  - Tech Lead
+  - Architecture Composants
 ---
 
 ### Transformation digitale chez Fokal Studio

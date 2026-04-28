@@ -46,7 +46,7 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('fr-FR', 
   type="article"
   publishedTime={post.data.publishDate.toISOString()}
   updatedTime={post.data.updatedDate?.toISOString()}
-  tags={post.data.tags}
+  tags={[...post.data.tags, ...(post.data.keywords ?? [])]}
 >
   <BlogPostingSchema
     slot="head"
@@ -57,6 +57,7 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('fr-FR', 
     datePublished={post.data.publishDate.toISOString()}
     dateModified={post.data.updatedDate?.toISOString()}
     tags={post.data.tags}
+    keywords={post.data.keywords}
     lang="fr"
   />
   <BreadcrumbSchema

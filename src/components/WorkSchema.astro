@@ -5,11 +5,13 @@ export interface Props {
   url: string;
   imageUrl?: string;
   tags?: string[];
+  keywords?: string[];
   publishDate?: string;
   lang?: string;
 }
 
-const { title, description, url, imageUrl, tags = [], publishDate, lang = 'en' } = Astro.props;
+const { title, description, url, imageUrl, tags = [], keywords = [], publishDate, lang = 'en' } = Astro.props;
+const allKeywords = [...tags, ...keywords];
 const siteUrl = 'https://djamel-bougouffa.com';
 
 const schema: Record<string, unknown> = {
@@ -22,7 +24,7 @@ const schema: Record<string, unknown> = {
   ...(imageUrl && {
     image: imageUrl.startsWith('http') ? imageUrl : `${siteUrl}${imageUrl}`,
   }),
-  ...(tags.length > 0 && { keywords: tags.join(', ') }),
+  ...(allKeywords.length > 0 && { keywords: allKeywords.join(', ') }),
   ...(publishDate && { dateCreated: publishDate }),
   author: {
     '@type': 'Person',

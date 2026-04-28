@@ -6,10 +6,16 @@ img_alt: Website of Ma Formation Médicale
 description: |
   Ingénieur Full-Stack chez Ma Formation Médicale — migration PHP vers JavaScript, +40% performance, architecture composants, Docker Swarm, Jenkins, Traefik
 tags:
-  - Dev
+  - Front-End
+  - Back-End
   - DevOps
-  - Prototype
-  - Lead
+keywords:
+  - JavaScript
+  - PHP
+  - Docker Swarm
+  - Jenkins
+  - Traefik
+  - CI/CD
 ---
 
 ### Transformation UI/UX et ingénierie chez Ma Formation Médicale
