@@ -24,7 +24,8 @@ export const routes: Record<string, Record<string, string>> = {
   fr: {
     'work': 'experiences',
     'about': 'a-propos',
-    'blog': 'blog'
+    'blog': 'blog',
+    'contact': 'contact'
   },
   ja: {
     'work': 'work',
@@ -99,6 +100,7 @@ export const ui = {
     'nav.about': 'About',
     'nav.work': 'Experience',
     'nav.blog': 'Blog',
+    'nav.contact': 'Contact',
     'cta.title': 'Interested in working together?',
     'cta.button': 'Send Me a Message',
     'skills.fullstack': 'Full Stack',
@@ -113,6 +115,7 @@ export const ui = {
     'nav.about': 'À propos',
     'nav.work': 'Expériences',
     'nav.blog': 'Blog',
+    'nav.contact': 'Contact',
     'cta.title': 'Intéressé par une collaboration ?',
     'cta.button': 'Envoyez-moi un message',
     'skills.fullstack': 'Full Stack',

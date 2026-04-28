@@ -1,0 +1,309 @@
+---
+import FrenchBaseLayout from "../../layouts/FrenchBaseLayout.astro";
+import Hero from "../../components/Hero.astro";
+import Icon from "../../components/Icon.astro";
+---
+
+<FrenchBaseLayout
+  title="Contact — Djamel Bougouffa"
+  description="Contactez Djamel Bougouffa — Ingénieur Logiciel Full-Stack basé à Paris. Ouvert aux nouvelles opportunités, collaborations et discussions techniques."
+>
+  <div class="stack gap-20">
+    <main class="wrapper contact">
+      <Hero
+        title="Me contacter"
+        tagline="Un projet, une opportunité, ou juste envie de parler tech ? Je serai ravi d'échanger."
+        align="start"
+      />
+
+      <div class="contact-layout">
+        <div class="form-section">
+          <form
+            name="contact-fr"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            class="contact-form"
+            novalidate
+          >
+            <input type="hidden" name="form-name" value="contact-fr" />
+            <p class="hidden">
+              <label>Ne remplissez pas ce champ : <input name="bot-field" /></label>
+            </p>
+
+            <div class="field">
+              <label for="name">Nom <span class="required">*</span></label>
+              <input type="text" id="name" name="name" required placeholder="Jean Dupont" />
+            </div>
+
+            <div class="field">
+              <label for="email">Email <span class="required">*</span></label>
+              <input type="email" id="email" name="email" required placeholder="jean@exemple.com" />
+            </div>
+
+            <div class="field">
+              <label for="subject">Sujet</label>
+              <input type="text" id="subject" name="subject" placeholder="Opportunité, projet, question…" />
+            </div>
+
+            <div class="field">
+              <label for="message">Message <span class="required">*</span></label>
+              <textarea id="message" name="message" required rows="6" placeholder="Dites-moi ce que vous avez en tête…"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">
+              Envoyer le message
+              <Icon icon="paper-plane-tilt" size="1.2em" />
+            </button>
+
+            <p class="success-message" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <aside class="info-section">
+          <div class="info-card">
+            <h3><Icon icon="paper-plane-tilt" size="1.2em" /> Email</h3>
+            <a href="mailto:dbougouffa@gmail.com">dbougouffa@gmail.com</a>
+          </div>
+          <div class="info-card">
+            <h3><Icon icon="linkedin-logo" size="1.2em" /> LinkedIn</h3>
+            <a href="https://www.linkedin.com/in/djamel-bougouffa" target="_blank" rel="noopener noreferrer">
+              djamel-bougouffa
+            </a>
+          </div>
+          <div class="info-card">
+            <h3><Icon icon="github-logo" size="1.2em" /> GitHub</h3>
+            <a href="https://github.com/strawbang" target="_blank" rel="noopener noreferrer">
+              strawbang
+            </a>
+          </div>
+          <div class="info-card availability">
+            <h3><Icon icon="rocket-launch" size="1.2em" /> Disponibilité</h3>
+            <p>Ouvert aux nouvelles opportunités — full remote ou région parisienne.</p>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </div>
+</FrenchBaseLayout>
+
+<script>
+  const form = document.querySelector('.contact-form') as HTMLFormElement;
+  const successMsg = document.querySelector('.success-message') as HTMLParagraphElement;
+  const submitBtn = form?.querySelector('.submit-btn') as HTMLButtonElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Envoi en cours…';
+
+    try {
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form) as any).toString(),
+      });
+
+      if (res.ok) {
+        form.reset();
+        successMsg.textContent = '✓ Message envoyé ! Je vous répondrai dans les plus brefs délais.';
+        successMsg.classList.add('visible');
+        submitBtn.textContent = 'Envoyer le message';
+        submitBtn.disabled = false;
+      } else {
+        throw new Error('Erreur réseau');
+      }
+    } catch {
+      successMsg.textContent = '✗ Une erreur est survenue. Réessayez ou contactez-moi directement par email.';
+      successMsg.classList.add('visible', 'error');
+      submitBtn.textContent = 'Envoyer le message';
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+
+<style>
+  .contact {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .contact-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  label {
+    font-size: var(--text-sm);
+    color: var(--gray-300);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .required {
+    color: var(--accent-regular);
+  }
+
+  input,
+  textarea {
+    background-color: var(--gray-999);
+    border: 1px solid var(--gray-800);
+    border-radius: 0.5rem;
+    color: var(--gray-0);
+    font-family: inherit;
+    font-size: var(--text-md);
+    padding: 0.75rem 1rem;
+    transition: border-color 0.2s ease;
+    width: 100%;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--gray-600);
+  }
+
+  input:focus,
+  textarea:focus {
+    border-color: var(--accent-regular);
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-regular) 20%, transparent);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 160px;
+  }
+
+  .submit-btn {
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--accent-regular);
+    color: var(--accent-text-over);
+    border: none;
+    border-radius: 999rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: var(--text-md);
+    font-weight: 600;
+    padding: 0.875rem 2rem;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+  }
+
+  .submit-btn:hover:not(:disabled) {
+    background-color: var(--accent-dark);
+    transform: translateY(-1px);
+  }
+
+  .submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .success-message {
+    display: none;
+    font-size: var(--text-md);
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    background-color: color-mix(in srgb, var(--accent-regular) 10%, transparent);
+    border: 1px solid var(--accent-regular);
+    color: var(--accent-regular);
+  }
+
+  .success-message.visible {
+    display: block;
+  }
+
+  .success-message.error {
+    background-color: color-mix(in srgb, red 10%, transparent);
+    border-color: red;
+    color: red;
+  }
+
+  .info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .info-card {
+    background-color: var(--gray-999);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .info-card h3 {
+    color: var(--accent-regular);
+    font-size: var(--text-md);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .info-card a {
+    color: var(--gray-200);
+    text-decoration: underline transparent;
+    text-underline-offset: 0.25em;
+    transition: text-decoration-color 0.2s;
+  }
+
+  .info-card a:hover {
+    text-decoration-color: currentColor;
+  }
+
+  .info-card p {
+    color: var(--gray-300);
+    font-size: var(--text-sm);
+  }
+
+  .availability {
+    border-left: 3px solid var(--accent-regular);
+  }
+
+  @media (min-width: 50em) {
+    .contact {
+      display: grid;
+      grid-template-columns: 1fr 60% 1fr;
+    }
+
+    .contact > :global(:first-child) {
+      grid-column-start: 2;
+    }
+
+    .contact-layout {
+      grid-column: 2 / 4;
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    .form-section {
+      flex: 2;
+    }
+
+    .info-section {
+      flex: 1;
+    }
+  }
+</style>
