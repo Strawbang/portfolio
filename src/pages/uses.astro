@@ -181,11 +181,16 @@ import Icon from "../components/Icon.astro";
   }
 
   .section-title {
+    grid-column-start: 1;
     font-size: var(--text-xl);
     color: var(--gray-0);
     margin-bottom: 1rem;
     border-bottom: 1px solid var(--gray-800);
     padding-bottom: 0.5rem;
+  }
+
+  .content {
+    grid-column: 2 / 4;
   }
 
   .section-intro {
