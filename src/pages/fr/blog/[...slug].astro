@@ -6,6 +6,7 @@ import { calculateReadingTime, getReadingTimeText } from '../../../utils/reading
 import BlogPostingSchema from '../../../components/BlogPostingSchema.astro';
 import BreadcrumbSchema from '../../../components/BreadcrumbSchema.astro';
 import RelatedPosts from '../../../components/RelatedPosts.astro';
+import TableOfContents from '../../../components/TableOfContents.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -20,7 +21,7 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 const readingTime = calculateReadingTime(post.body ?? '');
 const readingTimeText = getReadingTimeText(readingTime, 'fr');
 
@@ -116,9 +117,12 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('fr-FR', 
       )}
     </header>
 
-    <article class="content">
-      <Content />
-    </article>
+    <div class="post-body">
+      <article class="content">
+        <Content />
+      </article>
+      <TableOfContents headings={headings} />
+    </div>
 
     {post.data.relatedPosts && post.data.relatedPosts.length > 0 && (
       <RelatedPosts slugs={post.data.relatedPosts} lang="fr" />
@@ -213,6 +217,10 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('fr-FR', 
     width: 100%;
     height: auto;
     border-radius: 0.5rem;
+    display: block;
+  }
+
+  .post-body {
     display: block;
   }
 
@@ -321,6 +329,19 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('fr-FR', 
 
     .title {
       font-size: var(--text-5xl);
+    }
+  }
+
+  @media (min-width: 72em) {
+    .post-body {
+      display: grid;
+      grid-template-columns: 1fr 18rem;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .content {
+      margin-inline: 0;
     }
   }
 </style>
