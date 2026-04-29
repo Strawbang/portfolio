@@ -1,10 +1,6 @@
 ---
 import "../styles/global.css";
-import "@fontsource/public-sans/400.css";
-import "@fontsource/public-sans/700.css";
-import "@fontsource/public-sans/400-italic.css";
-import "@fontsource/rubik/500.css";
-import "@fontsource/rubik/600.css";
+import { Font } from "astro:assets";
 import { languages, routes, defaultLang, showDefaultLang } from '../i18n/ui';
 import { getLangFromUrl } from '../i18n/utils';
 
@@ -89,6 +85,8 @@ const ogLocaleMap: Record<string, string> = {
 const ogLocale = ogLocaleMap[currentLang] ?? 'en_US';
 ---
 
+<Font cssVariable="--font-public-sans" preload />
+<Font cssVariable="--font-rubik" />
 <meta charset="UTF-8" />
 <meta name="description" content={description} />
 <meta name="viewport" content="width=device-width, initial-scale=1" />

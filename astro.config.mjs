@@ -1,6 +1,6 @@
 import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 import { readFileSync, readdirSync } from 'fs';
 import { join, basename } from 'path';
 
@@ -36,6 +36,29 @@ const lastmodMap = buildLastmodMap();
 
 // https://astro.build/config
 export default defineConfig({
+	fonts: [
+		{
+			provider: fontProviders.fontsource(),
+			name: 'Public Sans',
+			cssVariable: '--font-public-sans',
+			weights: [400, 700],
+			styles: ['normal'],
+		},
+		{
+			provider: fontProviders.fontsource(),
+			name: 'Public Sans',
+			cssVariable: '--font-public-sans',
+			weights: [400],
+			styles: ['italic'],
+		},
+		{
+			provider: fontProviders.fontsource(),
+			name: 'Rubik',
+			cssVariable: '--font-rubik',
+			weights: [500, 600],
+			styles: ['normal'],
+		},
+	],
 	site: 'https://djamel-bougouffa.com',
 	integrations: [
 		robotsTxt({
@@ -205,7 +228,10 @@ export default defineConfig({
 		'/fr/articles': '/fr/blog',
 		'/work/fr/[...slug]': '/work/[...slug]',
 	},
-	// experimental: { assets: true },
+	experimental: {
+		rustCompiler: true,
+		queuedRendering: { enabled: true },
+	},
 	i18n: {
 		defaultLocale: 'en',
 		locales: ['en', 'fr', 'ja', 'zh', 'th', 'vi', 'ms', 'ko', 'id', 'tl', 'ar', 'hi', 'de', 'es', 'pt'],

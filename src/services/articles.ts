@@ -121,11 +121,20 @@ export function deduplicateArticles(articles: Article[]): Article[] {
   return Array.from(seenMap.values());
 }
 
+const CACHE_TTL_MS = 5 * 60 * 1000;
+let _cachedArticles: Article[] | null = null;
+let _cacheTime = 0;
+
 export async function fetchArticles(): Promise<Article[]> {
+  if (_cachedArticles && Date.now() - _cacheTime < CACHE_TTL_MS) {
+    return _cachedArticles;
+  }
   const [mediumArticles, devtoArticles] = await Promise.all([
     fetchMediumArticles(CONFIG.medium.username),
     fetchDevToArticles(CONFIG.devto.username)
   ]);
 
-  return deduplicateArticles([...mediumArticles, ...devtoArticles]);
+  _cachedArticles = deduplicateArticles([...mediumArticles, ...devtoArticles]);
+  _cacheTime = Date.now();
+  return _cachedArticles;
 }

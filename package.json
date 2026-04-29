@@ -12,6 +12,7 @@
     "import-articles:dry": "node scripts/import-articles.mjs --dry-run"
   },
   "dependencies": {
+    "@astrojs/compiler-rs": "^0.1.10",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
     "@fontsource/public-sans": "^5.2.7",
