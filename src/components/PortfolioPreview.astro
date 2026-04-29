@@ -37,6 +37,12 @@ const href = isFr ? `/fr/experiences/${slug.replace('fr/', '')}` : `/work/${slug
 		box-shadow: var(--shadow-md);
 	}
 
+	.card:focus-visible {
+		outline: 3px solid var(--accent-regular);
+		outline-offset: 3px;
+		box-shadow: var(--shadow-md);
+	}
+
 	.title {
 		grid-area: 1 / 1 / 2 / 2;
 		z-index: 1;

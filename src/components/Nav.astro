@@ -91,7 +91,12 @@ const iconLinks: {
         textLinks.map(({ label, href }) => (
           <li>
             <a
-              aria-current={Astro.url.pathname === href}
+              aria-current={
+                (Astro.url.pathname === href ||
+                  (href !== translatePath('/') && Astro.url.pathname.startsWith(href)))
+                  ? 'page'
+                  : undefined
+              }
               class:list={[
                 "link",
                 {
@@ -179,6 +184,7 @@ const iconLinks: {
     }
   }
   customElements.define("menu-button", MenuButton);
+
 </script>
 
 <style>
@@ -393,7 +399,7 @@ const iconLinks: {
 
   .social:hover,
   .social:focus {
-    color: var(--accent-text-over);
+    color: var(--accent-regular);
   }
 
   .theme-toggle {

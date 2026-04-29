@@ -30,67 +30,80 @@ export const routes: Record<string, Record<string, string>> = {
   ja: {
     'work': 'work',
     'about': 'about',
-    'blog': 'blog'
+    'blog': 'blog',
+    'contact': 'contact'
   },
   zh: {
     'work': 'work',
     'about': 'about',
-    'blog': 'blog'
+    'blog': 'blog',
+    'contact': 'contact'
   },
   th: {
     'work': 'work',
     'about': 'about',
-    'blog': 'blog'
+    'blog': 'blog',
+    'contact': 'contact'
   },
   vi: {
     'work': 'work',
     'about': 'about',
-    'blog': 'blog'
+    'blog': 'blog',
+    'contact': 'contact'
   },
   ms: {
     'work': 'work',
     'about': 'about',
-    'blog': 'blog'
+    'blog': 'blog',
+    'contact': 'contact'
   },
   ko: {
     'work': 'work',
     'about': 'about',
-    'blog': 'blog'
+    'blog': 'blog',
+    'contact': 'contact'
   },
   id: {
     'work': 'work',
     'about': 'about',
-    'blog': 'blog'
+    'blog': 'blog',
+    'contact': 'contact'
   },
   tl: {
     'work': 'work',
     'about': 'about',
-    'blog': 'blog'
+    'blog': 'blog',
+    'contact': 'contact'
   },
   ar: {
     'work': 'work',
     'about': 'about',
-    'blog': 'blog'
+    'blog': 'blog',
+    'contact': 'contact'
   },
   hi: {
     'work': 'work',
     'about': 'about',
-    'blog': 'blog'
+    'blog': 'blog',
+    'contact': 'contact'
   },
   de: {
     'work': 'work',
     'about': 'about',
-    'blog': 'blog'
+    'blog': 'blog',
+    'contact': 'contact'
   },
   es: {
     'work': 'work',
     'about': 'about',
-    'blog': 'blog'
+    'blog': 'blog',
+    'contact': 'contact'
   },
   pt: {
     'work': 'work',
     'about': 'about',
-    'blog': 'blog'
+    'blog': 'blog',
+    'contact': 'contact'
   }
 }
 
@@ -130,6 +143,7 @@ export const ui = {
     'nav.about': '私について',
     'nav.work': '職務経歴',
     'nav.blog': 'ブログ',
+    'nav.contact': 'お問い合わせ',
     'cta.title': '一緒に働きませんか？',
     'cta.button': 'メッセージを送る',
     'skills.fullstack': 'フルスタック',
@@ -144,6 +158,7 @@ export const ui = {
     'nav.about': '关于我',
     'nav.work': '工作经历',
     'nav.blog': '博客',
+    'nav.contact': '联系',
     'cta.title': '有意合作？',
     'cta.button': '发送消息',
     'skills.fullstack': '全栈开发',
@@ -158,6 +173,7 @@ export const ui = {
     'nav.about': 'เกี่ยวกับฉัน',
     'nav.work': 'ประสบการณ์',
     'nav.blog': 'บทความ',
+    'nav.contact': 'ติดต่อ',
     'cta.title': 'สนใจร่วมงานด้วยกันไหม？',
     'cta.button': 'ส่งข้อความถึงฉัน',
     'skills.fullstack': 'Full Stack',
@@ -172,6 +188,7 @@ export const ui = {
     'nav.about': 'Giới thiệu',
     'nav.work': 'Kinh Nghiệm',
     'nav.blog': 'Bài viết',
+    'nav.contact': 'Liên hệ',
     'cta.title': 'Quan tâm đến việc hợp tác？',
     'cta.button': 'Gửi tin nhắn cho tôi',
     'skills.fullstack': 'Full Stack',
@@ -186,6 +203,7 @@ export const ui = {
     'nav.about': 'Tentang',
     'nav.work': 'Pengalaman',
     'nav.blog': 'Blog',
+    'nav.contact': 'Hubungi',
     'cta.title': 'Berminat untuk bekerjasama？',
     'cta.button': 'Hantar Mesej',
     'skills.fullstack': 'Full Stack',
@@ -200,6 +218,7 @@ export const ui = {
     'nav.about': '소개',
     'nav.work': '경력',
     'nav.blog': '블로그',
+    'nav.contact': '연락',
     'cta.title': '함께 일하고 싶으신가요？',
     'cta.button': '메시지 보내기',
     'skills.fullstack': '풀스택',
@@ -214,6 +233,7 @@ export const ui = {
     'nav.about': 'Tentang',
     'nav.work': 'Pengalaman',
     'nav.blog': 'Blog',
+    'nav.contact': 'Hubungi',
     'cta.title': 'Tertarik untuk bekerja sama？',
     'cta.button': 'Kirim Pesan',
     'skills.fullstack': 'Full Stack',
@@ -228,6 +248,7 @@ export const ui = {
     'nav.about': 'Tungkol',
     'nav.work': 'Karanasan',
     'nav.blog': 'Blog',
+    'nav.contact': 'Makipag-ugnayan',
     'cta.title': 'Interesado bang magtulungan？',
     'cta.button': 'Magpadala ng Mensahe',
     'skills.fullstack': 'Full Stack',
@@ -242,6 +263,7 @@ export const ui = {
     'nav.about': 'من أنا',
     'nav.work': 'تجربتي',
     'nav.blog': 'المدونة',
+    'nav.contact': 'تواصل',
     'cta.title': 'مهتم بالعمل معاً？',
     'cta.button': 'أرسل لي رسالة',
     'skills.fullstack': 'فول ستاك',
@@ -256,6 +278,7 @@ export const ui = {
     'nav.about': 'परिचय',
     'nav.work': 'अनुभव',
     'nav.blog': 'ब्लॉग',
+    'nav.contact': 'संपर्क',
     'cta.title': 'साथ काम करने में रुचि है？',
     'cta.button': 'मुझे संदेश भेजें',
     'skills.fullstack': 'फुल स्टैक',
@@ -270,6 +293,7 @@ export const ui = {
     'nav.about': 'Über mich',
     'nav.work': 'Erfahrung',
     'nav.blog': 'Blog',
+    'nav.contact': 'Kontakt',
     'cta.title': 'Interesse an einer Zusammenarbeit？',
     'cta.button': 'Nachricht senden',
     'skills.fullstack': 'Full Stack',
@@ -284,6 +308,7 @@ export const ui = {
     'nav.about': 'Sobre mí',
     'nav.work': 'Experiencia',
     'nav.blog': 'Blog',
+    'nav.contact': 'Contacto',
     'cta.title': '¿Interesado en trabajar juntos？',
     'cta.button': 'Envíame un mensaje',
     'skills.fullstack': 'Full Stack',
@@ -298,6 +323,7 @@ export const ui = {
     'nav.about': 'Sobre mim',
     'nav.work': 'Experiência',
     'nav.blog': 'Blog',
+    'nav.contact': 'Contato',
     'cta.title': 'Interessado em trabalhar juntos？',
     'cta.button': 'Envie-me uma mensagem',
     'skills.fullstack': 'Full Stack',

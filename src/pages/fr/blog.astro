@@ -40,7 +40,7 @@ const allTags = [...new Set(allPosts.flatMap(post => post.tags ?? []))].sort();
     }))}
   />
   <div class="stack gap-20">
-    <main class="wrapper stack gap-8">
+    <main id="main-content" class="wrapper stack gap-8">
       <Hero
         title={l.heroTitle}
         tagline={l.heroTagline}

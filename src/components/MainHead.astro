@@ -91,7 +91,7 @@ const ogLocale = ogLocaleMap[currentLang] ?? 'en_US';
 
 <meta charset="UTF-8" />
 <meta name="description" content={description} />
-<meta name="viewport" content="width=device-width" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 {!['en', 'fr'].includes(currentLang) && <meta name="robots" content="noindex, follow" />}
 <meta name="generator" content={Astro.generator} />
 <title>{title}</title>
@@ -148,12 +148,27 @@ const ogLocale = ogLocaleMap[currentLang] ?? 'en_US';
       ? "dark"
       : "light";
   };
-  const isDark = getThemePreference() === "dark";
-  document.documentElement.classList[isDark ? "add" : "remove"]("theme-dark");
+
+  const applyTheme = () => {
+    const isDark = getThemePreference() === "dark";
+    document.documentElement.classList[isDark ? "add" : "remove"]("theme-dark");
+  };
+
+  applyTheme();
+
+  // Pause MutationObserver during ClientRouter swap so it doesn't corrupt
+  // localStorage when Astro removes theme-dark from <html> mid-transition.
+  let swapping = false;
+  document.addEventListener("astro:before-swap", () => { swapping = true; });
+  document.addEventListener("astro:after-swap", () => {
+    swapping = false;
+    applyTheme();
+  });
 
   if (typeof localStorage !== "undefined") {
     // Watch the document element and persist user preference when it changes.
     const observer = new MutationObserver(() => {
+      if (swapping) return;
       const isDark = document.documentElement.classList.contains("theme-dark");
       localStorage.setItem("theme", isDark ? "dark" : "light");
     });

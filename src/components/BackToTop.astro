@@ -14,16 +14,18 @@ const { label = 'Back to top' } = Astro.props;
 </button>
 
 <script>
-  const btn = document.getElementById('back-to-top');
-  if (btn) {
-    window.addEventListener('scroll', () => {
-      btn.classList.toggle('visible', window.scrollY > 400);
-    }, { passive: true });
+  let backToTopBtn: HTMLElement | null = null;
 
-    btn.addEventListener('click', () => {
+  document.addEventListener('astro:page-load', () => {
+    backToTopBtn = document.getElementById('back-to-top');
+    backToTopBtn?.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-  }
+  });
+
+  window.addEventListener('scroll', () => {
+    backToTopBtn?.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
 </script>
 
 <style>
@@ -38,11 +40,12 @@ const { label = 'Back to top' } = Astro.props;
     width: 2.75rem;
     height: 2.75rem;
     border-radius: 50%;
-    border: 1px solid var(--gray-800);
+    border: 1px solid var(--gray-400);
     background: var(--gray-999);
     color: var(--gray-300);
     cursor: pointer;
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
     transition: opacity 0.25s ease, background 0.15s ease, color 0.15s ease, transform 0.15s ease;
     box-shadow: var(--shadow-md);
@@ -50,6 +53,7 @@ const { label = 'Back to top' } = Astro.props;
 
   #back-to-top.visible {
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
   }
 
@@ -58,6 +62,11 @@ const { label = 'Back to top' } = Astro.props;
     color: var(--accent-text-over);
     border-color: var(--accent-regular);
     transform: translateY(-2px);
+  }
+
+  #back-to-top:focus-visible {
+    outline: 3px solid var(--accent-regular);
+    outline-offset: 2px;
   }
 
   @media (max-width: 50em) {

@@ -37,12 +37,12 @@ const continents: { label: string; langs: (keyof typeof flags)[] }[] = [
 ---
 
 <div class="language-picker">
-  <button class="current-lang" aria-label="Changer de langue" aria-expanded="false">
+  <button class="current-lang" aria-label="Changer de langue" aria-expanded="false" aria-controls="lang-dropdown">
     <span class="flag" set:html={flags[currentLang]}></span>
     <span class="label">{languages[currentLang]}</span>
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chevron"><polyline points="6 9 12 15 18 9"></polyline></svg>
   </button>
-  <ul class="dropdown-menu">
+  <ul id="lang-dropdown" class="dropdown-menu" inert>
     {continents.map(({ label, langs }, i) => (
       <>
         {i > 0 && <li class="divider" role="separator" aria-hidden="true"></li>}
@@ -61,26 +61,53 @@ const continents: { label: string; langs: (keyof typeof flags)[] }[] = [
 </div>
 
 <script>
-  const pickers = document.querySelectorAll('.language-picker');
-  
-  pickers.forEach(picker => {
-    const button = picker.querySelector('.current-lang');
+  let pickerController = new AbortController();
 
-    button?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const expanded = button.getAttribute('aria-expanded') === 'true';
-      button.setAttribute('aria-expanded', (!expanded).toString());
-      picker.classList.toggle('open');
-    });
+  function initLanguagePickers() {
+    pickerController.abort();
+    pickerController = new AbortController();
+    const signal = pickerController.signal;
 
-    // Fermer le menu si on clique ailleurs
-    document.addEventListener('click', (e) => {
-        if (!picker.contains(e.target as Node)) {
-            button?.setAttribute('aria-expanded', 'false');
-            picker.classList.remove('open');
+    const pickers = document.querySelectorAll('.language-picker');
+
+    pickers.forEach(picker => {
+      const button = picker.querySelector<HTMLButtonElement>('.current-lang');
+      const dropdown = picker.querySelector<HTMLUListElement>('#lang-dropdown');
+
+      const close = () => {
+        button?.setAttribute('aria-expanded', 'false');
+        picker.classList.remove('open');
+        if (dropdown) dropdown.inert = true;
+      };
+
+      const open = () => {
+        button?.setAttribute('aria-expanded', 'true');
+        picker.classList.add('open');
+        if (dropdown) dropdown.inert = false;
+      };
+
+      button?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        expanded ? close() : open();
+      }, { signal });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && picker.classList.contains('open')) {
+          close();
+          button?.focus();
         }
+      }, { signal });
+
+      document.addEventListener('click', (e) => {
+        if (!picker.contains(e.target as Node)) {
+          close();
+        }
+      }, { signal });
     });
-  });
+  }
+
+  document.addEventListener('astro:page-load', initLanguagePickers);
 </script>
 
 <style>
@@ -94,7 +121,7 @@ const continents: { label: string; langs: (keyof typeof flags)[] }[] = [
     align-items: center;
     gap: 0.5rem;
     background: transparent;
-    border: 1px solid var(--gray-800);
+    border: 1px solid var(--gray-400);
     padding: 0.5rem 1rem;
     border-radius: 999rem;
     color: var(--gray-300);
@@ -107,6 +134,11 @@ const continents: { label: string; langs: (keyof typeof flags)[] }[] = [
     border-color: var(--accent-regular);
     color: var(--gray-100);
     background-color: var(--gray-900);
+  }
+
+  .current-lang:focus-visible {
+    outline: 3px solid var(--accent-regular);
+    outline-offset: 2px;
   }
 
   .flag {
@@ -211,9 +243,15 @@ const continents: { label: string; langs: (keyof typeof flags)[] }[] = [
     color: var(--gray-100);
   }
 
+  .dropdown-menu a:focus-visible {
+    outline: 3px solid var(--accent-regular);
+    outline-offset: -2px;
+    background-color: var(--gray-800);
+  }
+
   .dropdown-menu a.active {
-    background-color: var(--accent-subtle-overlay);
-    color: var(--accent-text-over);
+    background-color: var(--accent-regular);
+    color: var(--gray-999);
     font-weight: 500;
   }
 </style>

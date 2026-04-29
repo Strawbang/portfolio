@@ -26,7 +26,7 @@ const projects = (await getCollection("work", ({ id }) => id.startsWith('fr/')))
     }))}
   />
   <div class="stack gap-20">
-    <main class="wrapper stack gap-8">
+    <main id="main-content" class="wrapper stack gap-8">
       <Hero title={l.heroTitle} tagline={l.heroTagline} align="start" />
       <Grid variant="offset">
         {projects.map((project) => (<li><PortfolioPreview project={project} /></li>))}

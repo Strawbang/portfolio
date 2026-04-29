@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Icon from "../../../components/Icon.astro";
+import { languages } from '../../../i18n/ui';
+import { contactLabels, type Lang } from '../../../data/about';
+
+export function getStaticPaths() {
+  return Object.keys(languages)
+    .filter(l => l !== 'en' && l !== 'fr')
+    .map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const l = contactLabels[lang] ?? contactLabels['en'];
+---
+
+<BaseLayout
+  title={l.metaTitle}
+  description={l.metaDescription}
+>
+  <div class="stack gap-20">
+    <main class="wrapper success">
+      <div class="success-content">
+        <span class="icon-wrap"><Icon icon="paper-plane-tilt" size="3em" /></span>
+        <h1>{l.successTitle}</h1>
+        <p>{l.successText}</p>
+        <a href={`/${lang}/`} class="back-btn">{l.backHome}</a>
+      </div>
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+  .success {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+  }
+
+  .success-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+    max-width: 36rem;
+    padding: 4rem 2rem;
+  }
+
+  .icon-wrap {
+    color: var(--accent-regular);
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+    color: var(--gray-0);
+  }
+
+  p {
+    color: var(--gray-300);
+    font-size: var(--text-lg);
+    line-height: 1.6;
+  }
+
+  .back-btn {
+    margin-top: 1rem;
+    color: var(--accent-regular);
+    font-weight: 600;
+    text-decoration: underline transparent;
+    text-underline-offset: 0.25em;
+    transition: text-decoration-color 0.2s;
+  }
+
+  .back-btn:hover {
+    text-decoration-color: currentColor;
+  }
+</style>

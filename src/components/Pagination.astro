@@ -92,7 +92,7 @@ const totalPages = Math.ceil(totalItems / pageSize);
     showPage(0);
   }
 
-  document.addEventListener('DOMContentLoaded', initPagination);
+  document.addEventListener('astro:page-load', initPagination);
 </script>
 
 <style>
@@ -118,7 +118,7 @@ const totalPages = Math.ceil(totalItems / pageSize);
     gap: 0.3rem;
     padding: 0.4rem 0.75rem;
     border-radius: 0.4rem;
-    border: 1px solid var(--gray-800);
+    border: 1px solid var(--gray-400);
     background: var(--gray-999);
     color: var(--gray-300);
     font-size: var(--text-sm);
@@ -130,7 +130,12 @@ const totalPages = Math.ceil(totalItems / pageSize);
   .page-btn:hover:not(:disabled) {
     background: var(--gray-800);
     color: var(--gray-100);
-    border-color: var(--gray-700);
+    border-color: var(--gray-400);
+  }
+
+  .page-btn:focus-visible {
+    outline: 3px solid var(--accent-regular);
+    outline-offset: 2px;
   }
 
   .page-btn:disabled {

@@ -53,9 +53,9 @@ const allArticles = [...externalArticles, ...blogPosts]
 ---
 
 <BaseLayout title="Djamel Bougouffa | Full-Stack Software Engineer & AI/GenAI" description="Portfolio of Djamel Bougouffa, Full-Stack Software Engineer specializing in TypeScript, React, Node.js, DevOps, Rust, RAG and GenAI with 5+ years of experience.">
-  <div class="stack gap-20 lg:gap-48">
+  <main class="stack gap-20 lg:gap-48">
     <div class="wrapper stack gap-8 lg:gap-20">
-      <header class="hero">
+      <div class="hero">
         <Hero
           title="Hello, my name is Djamel Bougouffa"
           tagline="I am a Full-Stack Software Engineer specializing in TypeScript, React, Node.js, DevOps & AI/GenAI"
@@ -78,15 +78,15 @@ const allArticles = [...externalArticles, ...blogPosts]
         </Hero>
 
         <Image src={portrait} alt="Djamel Bougouffa, Full-Stack Software Engineer portrait" width="480" height="620" loading="eager" fetchpriority="high" />
-      </header>
+      </div>
 
       <Skills />
     </div>
 
-    <main class="wrapper stack gap-20 lg:gap-48">
+    <div class="wrapper stack gap-20 lg:gap-48">
       <section class="section with-background with-cta">
         <header class="section-header stack gap-2 lg:gap-4">
-          <h3>Selected Work</h3>
+          <h2>Selected Work</h2>
           <p>
             Take a look below at some of my featured work from the past few years, 
             where I've successfully delivered 7 operational applications across various industries.
@@ -115,7 +115,7 @@ const allArticles = [...externalArticles, ...blogPosts]
 
       <section class="section with-background bg-variant with-cta">
         <header class="section-header stack gap-2 lg:gap-4">
-          <h3>Latest Articles</h3>
+          <h2>Latest Articles</h2>
           <p>My latest articles from my blog, Medium and Dev.to</p>
         </header>
 
@@ -138,10 +138,10 @@ const allArticles = [...externalArticles, ...blogPosts]
           </CallToAction>
         </div>
       </section>
-    </main>
+    </div>
 
     <ContactCTA />
-  </div>
+  </main>
 
   <WebSiteSchema slot="head" lang="en" />
 
@@ -222,29 +222,6 @@ const allArticles = [...externalArticles, ...blogPosts]
     position: relative;
   }
 
-  .with-background::before {
-    --hero-bg: var(--bg-image-subtle-2);
-
-    content: "";
-    position: absolute;
-    pointer-events: none;
-    left: 50%;
-    width: 100vw;
-    aspect-ratio: calc(2.25 / var(--bg-scale));
-    top: 0;
-    transform: translateY(-75%) translateX(-50%);
-    background: url("/assets/backgrounds/noise.png") top center/220px repeat,
-      var(--hero-bg) center center / var(--bg-gradient-size) no-repeat,
-      var(--gray-999);
-    background-blend-mode: overlay, normal, normal, normal;
-    mix-blend-mode: var(--bg-blend-mode);
-    z-index: -1;
-  }
-
-  .with-background.bg-variant::before {
-    --hero-bg: var(--bg-image-subtle-1);
-  }
-
   .section-header {
     justify-self: center;
     text-align: center;
@@ -263,7 +240,7 @@ const allArticles = [...externalArticles, ...blogPosts]
     margin: 0;
   }
 
-  .section-header h3 {
+  .section-header h2 {
     font-size: var(--text-2xl);
     color: var(--gray-0);
   }
@@ -284,7 +261,7 @@ const allArticles = [...externalArticles, ...blogPosts]
       font-size: var(--text-lg);
     }
 
-    .section-header h3 {
+    .section-header h2 {
       font-size: var(--text-4xl);
     }
 

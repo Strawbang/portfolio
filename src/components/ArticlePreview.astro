@@ -23,7 +23,7 @@ const imageUrl = article.imageUrl || DEFAULT_IMAGES[article.platform] || DEFAULT
     <div class="image-container">
       <img 
         src={imageUrl} 
-        alt={article.imageAlt || article.title}
+        alt={article.imageAlt || ''}
         loading="lazy"
         decoding="async"
         width="600"
