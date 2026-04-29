@@ -1,18 +1,18 @@
 ---
 title: "How I Use Claude Code and Jira MCP to Modernize Legacy Codebases"
-description: "A practical walkthrough of my workflow using Claude Code, CLAUDE.md, and the Jira MCP to navigate and implement changes in legacy Java codebases — from ticket to pull request."
+description: "A practical walkthrough of my workflow using Claude Code, CLAUDE.md, and the Jira MCP to navigate and implement changes in legacy Java codebases from ticket to pull request."
 publishDate: 2026-04-28
 tags: ["AI", "Software Engineering"]
 keywords: ["Claude Code", "MCP", "Jira", "Java", "Legacy Code", "AI"]
 img: "/assets/claude-code-jira-mcp-legacy-code.webp"
 img_alt: "Claude Code terminal session navigating a legacy codebase with Jira MCP"
 lang: "en"
-draft: true
+relatedPosts: ["model-context-protocol-mcp-cli-rust-ide", "spec-driven-development"]
 ---
 
-Legacy code is the skeleton of every successful company. It runs billing, processes orders, and holds business rules that nobody has fully understood in years. It's not going anywhere — and that's exactly why modernizing it matters.
+Legacy code is the skeleton of every successful company. It runs billing, processes orders, and holds business rules that nobody has fully understood in years. It's not going anywhere, and that's exactly why modernizing it matters.
 
-For the past several months, I've been using **Claude Code** alongside the **Jira MCP** and a carefully crafted `CLAUDE.md` to navigate and implement changes on legacy Java codebases. This article is a practical breakdown of that workflow — what it looks like, why it works, and where it still fails.
+For the past several months, I've been using **Claude Code** alongside the **Jira MCP** and a carefully crafted `CLAUDE.md` to navigate and implement changes on legacy Java codebases. This article is a practical breakdown of that workflow: what it looks like, why it works, and where it still fails.
 
 ![Workflow diagram: Jira MCP and CLAUDE.md feed into Claude Code, which navigates the legacy codebase and outputs a pull request](/assets/blog/claude-code-jira-mcp-workflow.svg)
 
@@ -34,11 +34,11 @@ My setup has three components:
 
 ### 1. Claude Code
 
-[Claude Code](https://claude.ai/code) is Anthropic's agentic coding tool. It runs in your terminal, has access to your filesystem, can execute commands, and iterates on its own. Unlike a chat interface, it doesn't just suggest code — it reads files, makes changes, runs tests, and fixes errors.
+[Claude Code](https://claude.ai/code) is Anthropic's agentic coding tool. It runs in your terminal, has access to your filesystem, can execute commands, and iterates on its own. Unlike a chat interface, it doesn't just suggest code it reads files, makes changes, runs tests, and fixes errors.
 
 What makes it powerful for legacy work is that it can navigate a large codebase without me directing every step. I give it a task and context, and it figures out which files to read.
 
-### 2. CLAUDE.md — The Project Handbook
+### 2. CLAUDE.md The Project Handbook
 
 Every project gets a `CLAUDE.md` at the root. This file is Claude Code's onboarding document. It tells the agent what it needs to know before touching anything.
 
@@ -64,12 +64,12 @@ docker compose down           # stop all containers
 ./mvnw test -pl api                # run unit tests for api module
 
 ### Database
-# PostgreSQL — localhost:5432, db: appdb, user: appuser
+# PostgreSQL localhost:5432, db: appdb, user: appuser
 ./scripts/db-reset.sh              # drop + recreate + seed local DB
 ./scripts/db-load-dump.sh prod     # load anonymized prod dump (slow, ~5min)
 
-# Oracle (legacy ERP) — read-only, localhost:1521
-# Never write directly — use the dedicated OracleService wrapper
+# Oracle (legacy ERP) read-only, localhost:1521
+# Never write directly use the dedicated OracleService wrapper
 
 ## Architecture
 - api/          REST controllers + business logic
@@ -79,20 +79,20 @@ docker compose down           # stop all containers
 - common/       DTOs, utils, shared constants
 
 ## Known landmines
-- Oracle ERP is read-only — never attempt a write, it will corrupt downstream data
-- OrderService.createOrder() is NOT idempotent — always check for duplicates first
+- Oracle ERP is read-only never attempt a write, it will corrupt downstream data
+- OrderService.createOrder() is NOT idempotent always check for duplicates first
 - LegacyCodeMapper uses reflection, adding new fields breaks silently without tests
-- Do NOT add @Transactional to scheduler jobs — they hold connections for minutes
+- Do NOT add @Transactional to scheduler jobs they hold connections for minutes
 
 ## Git
 Branches: main (prod), develop (integration), PROJ-XXXX-short-description (feature)
-Commits: always prefix with ticket — "PROJ-123: add VAT calculation for EU orders"
+Commits: always prefix with ticket "PROJ-123: add VAT calculation for EU orders"
 Push: --force-with-lease only, never --force
 ```
 
 This file is the difference between Claude Code making a confident, correct change and blindly breaking something. The more specific you are, the better the results.
 
-The **Known landmines** section is the most valuable part. These are the things that would take a new developer weeks to discover. Writing them down once saves everyone — including the agent — from painful regressions.
+The **Known landmines** section is the most valuable part. These are the things that would take a new developer weeks to discover. Writing them down once saves everyone including the agent from painful regressions.
 
 ### 3. Jira MCP
 
@@ -117,15 +117,15 @@ But the most powerful thing I've built on top of this is a **custom skill in `CL
 | `/sonar [app\|connector]`  | Run local SonarQube analysis                             |
 ```
 
-The `/test-ticket` skill is the one that changed how I work. I give it a ticket reference, Claude Code reads the acceptance criteria from Jira, maps them to the right Playwright test files, runs them, and reports back. The full feedback loop — write code, test against the actual ticket — without leaving the terminal.
+The `/test-ticket` skill is the one that changed how I work. I give it a ticket reference, Claude Code reads the acceptance criteria from Jira, maps them to the right Playwright test files, runs them, and reports back. The full feedback loop write code, test against the actual ticket without leaving the terminal.
 
-**Honest caveat though**: it burns a significant number of tokens per run. Reading the ticket, navigating the test files, running Playwright, interpreting results — it all adds up. On a complex ticket with multiple acceptance criteria, a single `/test-ticket` run can cost more than the rest of the session combined. I still use it, but selectively — not as a default step on every change.
+**Honest caveat though**: it burns a significant number of tokens per run. Reading the ticket, navigating the test files, running Playwright, interpreting results it all adds up. On a complex ticket with multiple acceptance criteria, a single `/test-ticket` run can cost more than the rest of the session combined. I still use it, but selectively not as a default step on every change.
 
 ## The Workflow: From Ticket to Implementation
 
 Here's how a typical session looks.
 
-### Step 1 — Kick off with a ticket reference
+### Step 1 Kick off with a ticket reference
 
 I open a terminal in the project root and start Claude Code with a simple prompt:
 
@@ -136,7 +136,7 @@ Use CLAUDE.md for project context before touching any files.
 
 That's it. Claude Code reads `CLAUDE.md` first, then calls the Jira MCP to fetch the ticket, reads the description and acceptance criteria, and starts exploring the codebase.
 
-### Step 2 — Claude Code explores the codebase
+### Step 2 Claude Code explores the codebase
 
 Based on the ticket content, the agent searches for relevant files. For a ticket like *"Fix incorrect VAT calculation for B2B orders in Germany"*, it will:
 
@@ -147,15 +147,15 @@ Based on the ticket content, the agent searches for relevant files. For a ticket
 
 This is the archaeology phase. Doing it manually takes 30-60 minutes on an unfamiliar codebase. Claude Code does it in 2-3 minutes.
 
-### Step 3 — Implementation with guardrails
+### Step 3 Implementation with guardrails
 
 Claude Code proposes changes based on what it found. Because `CLAUDE.md` establishes the constraints (no Lombok, amounts in cents, don't touch `legacy_` tables), the changes respect the project's existing conventions.
 
 If the agent is uncertain, it asks. If it finds something suspicious in the code that might be related to the ticket, it surfaces it.
 
-### Step 4 — Review and iterate
+### Step 4 Review and iterate
 
-I review the diff, run the tests, and iterate. Claude Code doesn't replace the review — it compresses the time spent before the review.
+I review the diff, run the tests, and iterate. Claude Code doesn't replace the review it compresses the time spent before the review.
 
 ## What Actually Works Well
 
@@ -185,7 +185,7 @@ Honesty matters here. This workflow isn't magic.
 
 ## The CLAUDE.md Is the Real Unlock
 
-If I had to name the single most impactful part of this setup, it's the `CLAUDE.md` — not the model, not the tools.
+If I had to name the single most impactful part of this setup, it's the `CLAUDE.md` not the model, not the tools.
 
 A good `CLAUDE.md` captures institutional knowledge that would otherwise live only in the heads of the people who've worked on the project longest. Writing it forces you to articulate things that are usually implicit. And once it exists, any developer (human or AI) onboards faster.
 
@@ -193,12 +193,8 @@ I update it every time I discover something that surprised me during a session. 
 
 ## Conclusion
 
-The combination of Claude Code, Jira MCP, and a well-maintained `CLAUDE.md` doesn't eliminate the hard parts of legacy modernization. It compresses the time spent on the mechanical parts — reading code, tracing flows, writing boilerplate — so that more of your time goes to judgment, architecture, and actual problem-solving.
+The combination of Claude Code, Jira MCP, and a well-maintained `CLAUDE.md` doesn't eliminate the hard parts of legacy modernization. It compresses the time spent on the mechanical parts reading code, tracing flows, writing boilerplate so that more of your time goes to judgment, architecture, and actual problem-solving.
 
 That shift is worth more than any individual feature the tools provide.
 
 If you're working on a legacy codebase and haven't tried this workflow, start with the `CLAUDE.md`. Even without Claude Code, forcing yourself to write down what the project needs newcomers to know is the most valuable 30 minutes you'll spend this week.
-
----
-
-*I work at [Ippon Technologies](https://ippon.tech) on legacy modernization projects using AI tooling. If your team is dealing with the same challenges, feel free to [reach out](/contact/).*
