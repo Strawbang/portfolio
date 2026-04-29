@@ -1,7 +1,7 @@
 ---
 title: METRO France
 publishDate: 2023-06-15 00:00:00
-img: /assets/metro-france.png
+img: /assets/optimized/metro-france.webp
 img_alt: Parking of METRO France Nanterre
 description: |
   Ingénieur Full-Stack chez METRO France — GCP, Kubernetes, TypeScript, React, Node.js, GraphQL sur 93 entrepôts à l'échelle nationale

@@ -4,7 +4,7 @@ description: "Un retour d'expérience concret sur mon workflow avec Claude Code,
 publishDate: 2026-04-28
 tags: ["IA", "Software Engineering"]
 keywords: ["Claude Code", "MCP", "Jira", "Java", "Legacy Code", "IA"]
-img: "/assets/claude-code-jira-mcp-legacy-code.png"
+img: "/assets/claude-code-jira-mcp-legacy-code.webp"
 img_alt: "Session Claude Code dans le terminal naviguant une codebase legacy avec le Jira MCP"
 lang: "fr"
 draft: true

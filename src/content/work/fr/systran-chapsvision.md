@@ -1,7 +1,7 @@
 ---
 title: SYSTRAN by ChapsVision
 publishDate: 2025-01-01 00:00:00
-img: /assets/systran.png
+img: /assets/optimized/systran.webp
 img_alt: Logo SYSTRAN by ChapsVision
 description: |
   Ingénieur Full-Stack chez SYSTRAN by ChapsVision — TypeScript, Next.js, plateforme NLP, traduction IA, modernisation legacy, Agile

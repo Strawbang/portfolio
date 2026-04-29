@@ -1,7 +1,7 @@
 ---
 title: Fokal Studio
 publishDate: 2023-05-15 00:00:00
-img: /assets/fokal-studio.png
+img: /assets/optimized/fokal-studio.webp
 img_alt: Website of Fokal Studio
 description: |
   Ingénieur Full-Stack chez Fokal Studio — développement web client, CMS Headless Directus, PHP, architecture composants, DevOps

@@ -228,6 +228,10 @@ export default defineConfig({
 		'/fr/articles': '/fr/blog',
 		'/work/fr/[...slug]': '/work/[...slug]',
 	},
+	image: {
+		layout: 'constrained',
+		responsiveStyles: true,
+	},
 	experimental: {
 		rustCompiler: true,
 		queuedRendering: { enabled: true },

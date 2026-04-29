@@ -1,7 +1,7 @@
 ---
 title: Ippon Technologies
 publishDate: 2025-11-01 00:00:00
-img: /assets/ippon.png
+img: /assets/optimized/ippon.webp
 img_alt: Ippon Technologies logo
 description: |
   Full-Stack Engineer at Ippon Technologies — Rust CLI, AI-driven legacy modernization, RAG, Tree-sitter AST parsing, MCP agentic workflows, TypeScript

@@ -28,6 +28,7 @@ const imageUrl = article.imageUrl || DEFAULT_IMAGES[article.platform] || DEFAULT
         decoding="async"
         width="600"
         height="338"
+        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
       />
       <div class="platform-badges">
         {(article.platform === 'Blog'

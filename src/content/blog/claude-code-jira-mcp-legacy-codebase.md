@@ -4,7 +4,7 @@ description: "A practical walkthrough of my workflow using Claude Code, CLAUDE.m
 publishDate: 2026-04-28
 tags: ["AI", "Software Engineering"]
 keywords: ["Claude Code", "MCP", "Jira", "Java", "Legacy Code", "AI"]
-img: "/assets/claude-code-jira-mcp-legacy-code.png"
+img: "/assets/claude-code-jira-mcp-legacy-code.webp"
 img_alt: "Claude Code terminal session navigating a legacy codebase with Jira MCP"
 lang: "en"
 draft: true
