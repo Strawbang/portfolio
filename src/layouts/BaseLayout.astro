@@ -18,9 +18,10 @@ interface Props {
 	publishedTime?: string | undefined;
 	updatedTime?: string | undefined;
 	tags?: string[];
+	alternates?: { lang: string; url: string }[];
 }
 
-const { title, description, canonicalURL, image, type, publishedTime, updatedTime, tags } = Astro.props;
+const { title, description, canonicalURL, image, type, publishedTime, updatedTime, tags, alternates } = Astro.props;
 
 import { getLangFromUrl } from '../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
@@ -37,6 +38,7 @@ const lang = getLangFromUrl(Astro.url);
 			publishedTime={publishedTime}
 			updatedTime={updatedTime}
 			tags={tags}
+			alternates={alternates}
 		/>
 		<ClientRouter />
 		<slot name="head" />

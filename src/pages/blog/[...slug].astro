@@ -25,6 +25,14 @@ const { Content, remarkPluginFrontmatter, headings } = await render(post);
 const readingTime = calculateReadingTime(post.body ?? '');
 const readingTimeText = getReadingTimeText(readingTime, 'en');
 
+const siteUrl = 'https://djamel-bougouffa.com';
+const enSlug = post.id.replace(/\.md$/, '');
+const frSlug = enSlug; // FR article strips 'fr-' prefix, resulting in same slug
+const hreflangAlternates = [
+  { lang: 'en', url: `${siteUrl}/blog/${enSlug}/` },
+  { lang: 'fr', url: `${siteUrl}/fr/blog/${frSlug}/` },
+];
+
 const formattedDate = post.data.publishDate.toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'long',
@@ -47,6 +55,7 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('en-US', 
   publishedTime={post.data.publishDate.toISOString()}
   updatedTime={post.data.updatedDate?.toISOString()}
   tags={[...post.data.tags, ...(post.data.keywords ?? [])]}
+  alternates={hreflangAlternates}
 >
   <BlogPostingSchema
     slot="head"

@@ -25,6 +25,14 @@ const { Content, headings } = await render(post);
 const readingTime = calculateReadingTime(post.body ?? '');
 const readingTimeText = getReadingTimeText(readingTime, 'fr');
 
+const siteUrl = 'https://djamel-bougouffa.com';
+const frSlug = post.id.replace(/\.md$/, '').replace(/^fr-/, '');
+const enSlug = frSlug; // EN article uses the same slug without the 'fr-' prefix
+const hreflangAlternates = [
+  { lang: 'en', url: `${siteUrl}/blog/${enSlug}/` },
+  { lang: 'fr', url: `${siteUrl}/fr/blog/${frSlug}/` },
+];
+
 const formattedDate = post.data.publishDate.toLocaleDateString('fr-FR', {
   year: 'numeric',
   month: 'long',
@@ -47,6 +55,7 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('fr-FR', 
   publishedTime={post.data.publishDate.toISOString()}
   updatedTime={post.data.updatedDate?.toISOString()}
   tags={[...post.data.tags, ...(post.data.keywords ?? [])]}
+  alternates={hreflangAlternates}
 >
   <BlogPostingSchema
     slot="head"
