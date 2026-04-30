@@ -122,7 +122,9 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('fr-FR', 
       <article class="content">
         <Content />
       </article>
-      <TableOfContents headings={headings} />
+      <div class="toc-wrapper">
+        <TableOfContents headings={headings} />
+      </div>
     </div>
 
     {post.data.relatedPosts && post.data.relatedPosts.length > 0 && (
@@ -225,10 +227,14 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('fr-FR', 
     display: block;
   }
 
+  .toc-wrapper {
+    display: none;
+  }
+
   .content {
     max-width: 65ch;
     margin-inline: auto;
-    font-size: var(--text-lg);
+    font-size: var(--text-md);
     line-height: 1.8;
     color: var(--gray-300);
   }
@@ -333,7 +339,17 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('fr-FR', 
     }
   }
 
+  @media (min-width: 50em) {
+    .content {
+      font-size: var(--text-lg);
+    }
+  }
+
   @media (min-width: 72em) {
+    .toc-wrapper {
+      display: block;
+    }
+
     .post-body {
       display: grid;
       grid-template-columns: 1fr 18rem;
