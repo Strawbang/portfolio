@@ -3,6 +3,9 @@ title: METRO France
 publishDate: 2023-06-15 00:00:00
 img: /assets/optimized/metro-france.webp
 img_alt: Parking of METRO France Nanterre
+role: Fullstack Developer
+startDate: 2022-03-01
+endDate: 2024-03-31
 description: |
   Full-Stack Engineer at METRO France — GCP, Kubernetes, TypeScript, React, Node.js, GraphQL across 93 warehouses nationwide
 tags:

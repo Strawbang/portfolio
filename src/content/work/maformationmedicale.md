@@ -3,6 +3,9 @@ title: Ma Formation Médicale
 publishDate: 2023-07-15 00:00:00
 img: /assets/optimized/maformationmedicale.webp
 img_alt: Website of Ma Formation Médicale
+role: Fullstack Developer
+startDate: 2020-09-01
+endDate: 2022-02-28
 description: |
   Full-Stack Engineer at Ma Formation Médicale — PHP to JavaScript migration, +40% performance, component architecture, Docker Swarm, Jenkins, Traefik DevOps
 tags:

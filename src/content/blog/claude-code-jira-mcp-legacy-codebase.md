@@ -8,6 +8,7 @@ img: "/assets/claude-code-jira-mcp-legacy-code.webp"
 img_alt: "Claude Code terminal session navigating a legacy codebase with Jira MCP"
 lang: "en"
 relatedPosts: ["model-context-protocol-mcp-cli-rust-ide", "spec-driven-development"]
+relatedWork: ["ippon-technologies"]
 ---
 
 Legacy code is the skeleton of every successful company. It runs billing, processes orders, and holds business rules that nobody has fully understood in years. It's not going anywhere, and that's exactly why modernizing it matters.

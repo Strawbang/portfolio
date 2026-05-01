@@ -12,6 +12,10 @@ export const collections = {
 			keywords: z.array(z.string()).optional(),
 			img: z.string(),
 			img_alt: z.string().optional(),
+			role: z.string().optional(),
+			startDate: z.coerce.date().optional(),
+			endDate: z.coerce.date().optional(),
+			relatedPosts: z.array(z.string()).optional(),
 		}),
 	}),
 	blog: defineCollection({
@@ -30,6 +34,7 @@ export const collections = {
 			lang: z.enum(['en', 'fr']).default('en'),
 			source: z.string().optional(),
 			relatedPosts: z.array(z.string()).optional(),
+			relatedWork: z.array(z.string()).optional(),
 		}),
 	}),
 };

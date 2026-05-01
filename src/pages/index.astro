@@ -28,8 +28,8 @@ import portrait from "../../public/assets/portrait.png"
 const projects = (await getCollection("work", ({ id }) => {
 		return !id.startsWith('fr/');
    }))
-  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-  .slice(0, 4);
+  .sort((a, b) => (b.data.startDate ?? b.data.publishDate).valueOf() - (a.data.startDate ?? a.data.publishDate).valueOf())
+  .slice(0, 3);
 
 const externalArticles = await fetchArticles();
 
@@ -94,7 +94,7 @@ const allArticles = [...externalArticles, ...blogPosts]
         </header>
 
         <div class="gallery">
-          <Grid variant="offset">
+          <ul class="projects-grid">
             {
               projects.map((project) => (
                 <li>
@@ -102,7 +102,7 @@ const allArticles = [...externalArticles, ...blogPosts]
                 </li>
               ))
             }
-          </Grid>
+          </ul>
         </div>
 
         <div class="cta">
@@ -231,7 +231,8 @@ const allArticles = [...externalArticles, ...blogPosts]
   }
 
 
-  .articles-grid {
+  .articles-grid,
+  .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1.5rem;

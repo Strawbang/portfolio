@@ -24,12 +24,17 @@ const resume = resumeFiles['en'];
           <p>{l.backgroundIntro}</p>
           {experiences.map(exp => (
             <div class="experience-item">
-              <h3>{exp.company}</h3>
+              <h3>
+                {exp.slug
+                  ? <a href={`/work/${exp.slug}`}>{exp.company}</a>
+                  : exp.company}
+              </h3>
               <p class="experience-meta">{exp.role['en']} | {exp.period['en']}</p>
               <p>{exp.description['en']}</p>
             </div>
           ))}
           <p>{l.backgroundOutro}</p>
+          <a class="cta-link" href="/work/">{l.seeAllExperiences} →</a>
         </div>
       </section>
 
@@ -257,6 +262,27 @@ const resume = resumeFiles['en'];
   .content :global(a:hover),
   .content :global(a:focus) {
     text-decoration-color: currentColor;
+  }
+
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: var(--accent-regular);
+    color: var(--accent-text-over);
+    border-radius: 999rem;
+    font-family: var(--font-brand);
+    font-weight: 500;
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: background var(--theme-transition);
+  }
+
+  .cta-link:hover {
+    background: var(--accent-dark);
+    text-decoration: none;
   }
 
   @media (min-width: 50em) {

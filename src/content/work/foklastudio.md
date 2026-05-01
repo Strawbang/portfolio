@@ -3,6 +3,9 @@ title: Fokal Studio
 publishDate: 2023-05-15 00:00:00
 img: /assets/optimized/fokal-studio.webp
 img_alt: Website of Fokal Studio
+role: Full-Stack Software Engineer
+startDate: 2018-11-01
+endDate: 2020-05-31
 description: |
   Full-Stack Engineer at Fokal Studio — client web development, Headless CMS with Directus, PHP, component architecture, DevOps
 tags:

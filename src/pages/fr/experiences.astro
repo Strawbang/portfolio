@@ -11,7 +11,7 @@ import { workLabels } from '../../data/pages';
 const l = workLabels['fr'];
 
 const projects = (await getCollection("work", ({ id }) => id.startsWith('fr/')))
-  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+  .sort((a, b) => (b.data.startDate ?? b.data.publishDate).valueOf() - (a.data.startDate ?? a.data.publishDate).valueOf());
 ---
 
 <FrenchBaseLayout title={l.metaTitle} description={l.metaDescription}>
@@ -28,10 +28,21 @@ const projects = (await getCollection("work", ({ id }) => id.startsWith('fr/')))
   <div class="stack gap-20">
     <main id="main-content" class="wrapper stack gap-8">
       <Hero title={l.heroTitle} tagline={l.heroTagline} align="start" />
-      <Grid variant="offset">
+      <ul class="projects-grid">
         {projects.map((project) => (<li><PortfolioPreview project={project} /></li>))}
-      </Grid>
+      </ul>
     </main>
     <ContactCTA />
   </div>
 </FrenchBaseLayout>
+
+<style>
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+</style>

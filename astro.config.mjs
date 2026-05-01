@@ -167,6 +167,7 @@ export default defineConfig({
 		sitemap({
 			filter: (page) => {
 			if (page.includes('/og/')) return false;
+			if (page.includes('/fr/uses')) return false;
 			const url = new URL(page);
 			const parts = url.pathname.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
 			const noIndexLocales = ['ja', 'zh', 'th', 'vi', 'ms', 'ko', 'id', 'tl', 'ar', 'hi', 'de', 'es', 'pt'];

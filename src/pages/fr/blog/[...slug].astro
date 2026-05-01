@@ -6,6 +6,7 @@ import { calculateReadingTime, getReadingTimeText } from '../../../utils/reading
 import BlogPostingSchema from '../../../components/BlogPostingSchema.astro';
 import BreadcrumbSchema from '../../../components/BreadcrumbSchema.astro';
 import RelatedPosts from '../../../components/RelatedPosts.astro';
+import RelatedWork from '../../../components/RelatedWork.astro';
 import TableOfContents from '../../../components/TableOfContents.astro';
 
 export async function getStaticPaths() {
@@ -135,6 +136,10 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('fr-FR', 
         <TableOfContents headings={headings} />
       </div>
     </div>
+
+    {post.data.relatedWork && post.data.relatedWork.length > 0 && (
+      <RelatedWork slugs={post.data.relatedWork} lang="fr" />
+    )}
 
     {post.data.relatedPosts && post.data.relatedPosts.length > 0 && (
       <RelatedPosts slugs={post.data.relatedPosts} lang="fr" />

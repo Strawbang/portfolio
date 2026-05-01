@@ -1,0 +1,161 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+interface Props {
+  slugs: string[];
+  lang: 'en' | 'fr';
+}
+
+const { slugs, lang } = Astro.props;
+
+const allWork = await getCollection('work');
+
+const relatedWork = slugs
+  .map(slug => {
+    const id = lang === 'fr' ? `fr/${slug}` : slug;
+    return allWork.find(w => w.id.replace(/\.md$/, '') === id);
+  })
+  .filter((w): w is CollectionEntry<'work'> => w !== undefined);
+
+const label = lang === 'fr' ? 'Expérience liée' : 'Related experience';
+const basePath = lang === 'fr' ? '/fr/experiences' : '/work';
+---
+
+{relatedWork.length > 0 && (
+  <section class="related-work">
+    <h2 class="section-title">{label}</h2>
+    <div class="cards-grid">
+      {relatedWork.map(work => {
+        const workSlug = work.id.replace(/\.md$/, '').replace(/^fr\//, '');
+        const url = `${basePath}/${workSlug}/`;
+        return (
+          <a href={url} class="card">
+            <div class="card-img-wrap">
+              <img src={work.data.img} alt={work.data.img_alt || work.data.title} loading="lazy" decoding="async" width="600" height="338" />
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">{work.data.title}</h3>
+              <p class="card-desc">{work.data.description.trim()}</p>
+              {work.data.keywords && (
+                <div class="card-tags">
+                  {work.data.keywords.slice(0, 4).map(k => (
+                    <span class="tag">{k}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+)}
+
+<style>
+  .related-work {
+    padding-block: 2rem;
+    border-top: 1px solid var(--gray-800);
+  }
+
+  .section-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--gray-400);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.5rem;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 1.25rem;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.75rem;
+    background: var(--gradient-subtle);
+    border: 1px solid var(--gray-800);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--theme-transition), border-color var(--theme-transition), transform var(--theme-transition);
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--gray-700);
+    transform: translateY(-3px);
+  }
+
+  .card-img-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background-color: var(--gray-900);
+  }
+
+  .card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .card:hover .card-img-wrap img {
+    transform: scale(1.04);
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 0.5rem;
+    padding: 1rem 1.25rem 1.25rem;
+  }
+
+  .card-title {
+    font-family: var(--font-brand);
+    font-size: var(--text-md);
+    font-weight: 500;
+    color: var(--gray-100);
+    margin: 0;
+    line-height: 1.3;
+    transition: color var(--theme-transition);
+  }
+
+  .card:hover .card-title {
+    color: var(--accent-dark);
+  }
+
+  .card-desc {
+    font-size: var(--text-sm);
+    color: var(--gray-400);
+    margin: 0;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.25rem;
+  }
+
+  .tag {
+    background-color: var(--accent-regular);
+    color: var(--accent-text-over);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    line-height: 1.6;
+  }
+</style>

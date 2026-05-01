@@ -8,6 +8,7 @@ img: "/assets/claude-code-jira-mcp-legacy-code.webp"
 img_alt: "Session Claude Code dans le terminal naviguant une codebase legacy avec le Jira MCP"
 lang: "fr"
 relatedPosts: ["model-context-protocol-mcp-cli-rust-ide", "spec-driven-development"]
+relatedWork: ["ippon-technologies"]
 ---
 
 Le code legacy, c'est le squelette de chaque entreprise qui a réussi. Il gère la facturation, traite les commandes, et contient des règles métier que personne ne comprend plus vraiment depuis des années. Il ne va nulle part et c'est précisément pour ça que le moderniser est essentiel.

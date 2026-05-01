@@ -11,6 +11,7 @@ draft: false
 lang: en
 source: Ippon
 relatedPosts: ["spec-driven-development"]
+relatedWork: ["ippon-technologies"]
 ---
 
 This article was published on the [Ippon Technologies blog](https://blog.ippon.fr/2026/03/11/model-context-protocol-mcp-cli-rust-ide/) (in French).

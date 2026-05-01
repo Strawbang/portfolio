@@ -3,6 +3,8 @@ title: Ippon Technologies
 publishDate: 2025-11-01 00:00:00
 img: /assets/optimized/ippon.webp
 img_alt: Ippon Technologies logo
+role: Full-Stack Software Engineer
+startDate: 2025-11-01
 description: |
   Full-Stack Engineer at Ippon Technologies — Rust CLI, AI-driven legacy modernization, RAG, Tree-sitter AST parsing, MCP agentic workflows, TypeScript
 tags:
@@ -15,6 +17,10 @@ keywords:
   - MCP
   - RAG
   - Tree-sitter
+relatedPosts:
+  - claude-code-jira-mcp-legacy-codebase
+  - model-context-protocol-mcp-cli-rust-ide
+  - spec-driven-development
 ---
 
 ### Spearheading AI-Driven Legacy Modernization at Ippon Technologies
