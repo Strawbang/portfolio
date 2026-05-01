@@ -5,12 +5,11 @@ import ContactCTA from '../../../components/ContactCTA.astro';
 import ArticlePreview from '../../../components/ArticlePreview.astro';
 import BlogPagination from '../../../components/BlogPagination.astro';
 import Hero from '../../../components/Hero.astro';
-import { fetchArticles, deduplicateArticles } from '../../../services/articles';
 import type { Article } from '../../../types/article';
 
 export async function getStaticPaths() {
   const PAGE_SIZE = 9;
-  const localPosts = (await getCollection('blog'))
+  const allPosts = (await getCollection('blog'))
     .filter(post => !post.data.draft && post.data.lang !== 'fr')
     .map(post => ({
       title: post.data.title,
@@ -20,10 +19,8 @@ export async function getStaticPaths() {
       imageUrl: post.data.img,
       platform: post.data.source ?? 'Blog',
       tags: post.data.tags,
-    } as Article));
-
-  const externalArticles = await fetchArticles();
-  const allPosts = deduplicateArticles([...localPosts, ...externalArticles]);
+    } as Article))
+    .sort((a, b) => b.publishDate.getTime() - a.publishDate.getTime());
 
   const totalPages = Math.ceil(allPosts.length / PAGE_SIZE);
 

@@ -7,7 +7,6 @@ import Icon from "../../components/Icon.astro";
 import Pill from "../../components/Pill.astro";
 import PortfolioPreview from "../../components/PortfolioPreview.astro";
 import ArticlePreview from "../../components/ArticlePreview.astro";
-import { fetchArticles } from "../../services/articles";
 import SchemaOrgPerson from "../../components/SchemaOrgPerson.astro";
 import ContactCTA from "../../components/ContactCTA.astro";
 import Skills from "../../components/Skills.astro";
@@ -33,9 +32,7 @@ const projects = (await getCollection("work", ({ id }) => !id.startsWith('fr/'))
   .sort((a, b) => (b.data.startDate ?? b.data.publishDate).valueOf() - (a.data.startDate ?? a.data.publishDate).valueOf())
   .slice(0, 3);
 
-const externalArticles = await fetchArticles();
-
-const blogPosts = (await getCollection('blog'))
+const allArticles = (await getCollection('blog'))
   .filter(post => !post.data.draft && post.data.lang !== 'fr')
   .map(post => ({
     title: post.data.title,
@@ -44,9 +41,7 @@ const blogPosts = (await getCollection('blog'))
     platform: 'Blog' as const,
     publishDate: post.data.publishDate,
     imageUrl: post.data.img
-  }));
-
-const allArticles = [...externalArticles, ...blogPosts]
+  }))
   .sort((a, b) => b.publishDate.getTime() - a.publishDate.getTime())
   .slice(0, 3);
 ---
