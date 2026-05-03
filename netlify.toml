@@ -4,3 +4,88 @@
 
 [build.environment]
   NODE_VERSION = "22"
+
+[build.processing.css]
+  bundle = false
+  minify = false
+
+[build.processing.js]
+  bundle = false
+  minify = false
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.images]
+  compress = true
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[redirects]]
+  from = "http://djamel-bougouffa.com/*"
+  to = "https://djamel-bougouffa.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.djamel-bougouffa.com/*"
+  to = "https://djamel-bougouffa.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.djamel-bougouffa.com/*"
+  to = "https://djamel-bougouffa.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fr/travaux"
+  to = "/fr/experiences"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fr/travaux/*"
+  to = "/fr/experiences/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles"
+  to = "/blog"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fr/articles"
+  to = "/fr/blog"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/work/fr/*"
+  to = "/work/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/404"
+  status = 404
