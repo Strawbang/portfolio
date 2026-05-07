@@ -7,7 +7,7 @@ role: Ingénieur Logiciel Full-Stack
 startDate: 2025-01-01
 endDate: 2025-04-30
 description: |
-  Ingénieur Full-Stack chez SYSTRAN by ChapsVision — TypeScript, Next.js, plateforme NLP, traduction IA, modernisation legacy, Agile
+  Ingénieur Full-Stack chez SYSTRAN by ChapsVision : TypeScript, Next.js, plateforme NLP, traduction IA, modernisation legacy, Agile
 tags:
   - Front-End
   - Back-End
@@ -17,11 +17,24 @@ keywords:
   - Next.js
   - NLP
   - Agile
+engagementType: company
+teamSize: "~6"
+companySize: "~200"
+context: legacy
+workplace: Hybrid
+stack:
+  Frontend:
+    - TypeScript
+    - Next.js
+  Domain:
+    - NLP
+  Methodology:
+    - Agile
 ---
 
 ### Faire progresser la technologie linguistique chez SYSTRAN by ChapsVision
 
-<p>SYSTRAN by ChapsVision est un pionnier du Traitement Automatique du Langage Naturel (NLP) alimenté par l'IA, fournissant des solutions de traduction et d'intelligence linguistique aux gouvernements, aux agences de défense et aux entreprises mondiales. En tant qu'Ingénieur Logiciel Full-Stack (janvier – avril 2025), j'ai rejoint une équipe internationale pluridisciplinaire pour développer et améliorer les applications web de cette plateforme NLP.</p>
+<p>SYSTRAN est un pionnier du Traitement Automatique du Langage Naturel (NLP) fondé en 1968, fournissant des solutions de traduction et d'intelligence linguistique aux gouvernements, aux agences de défense et aux entreprises mondiales. La société avait été rachetée par <strong>ChapsVision</strong>, un groupe français spécialisé dans l'IA et la cybersécurité, avant mon arrivée. En tant qu'Ingénieur Logiciel Full-Stack (janvier – avril 2025), j'ai rejoint une équipe internationale pluridisciplinaire pour développer et améliorer les applications web de cette plateforme NLP.</p>
 
 #### Développement front-end et amélioration de l'UX
 
@@ -37,4 +50,4 @@ keywords:
 
 #### Impact
 
-<p>Au-delà des contributions techniques, cette mission a approfondi mon expertise dans le développement web adjacent au NLP et renforcé ma communication professionnelle en anglais dans un environnement produit international exigeant — une base précieuse pour le travail centré sur l'IA entrepris ensuite chez Ippon Technologies.</p>
+<p>Au-delà des contributions techniques, cette mission a approfondi mon expertise dans le développement web adjacent au NLP et renforcé ma communication professionnelle en anglais dans un environnement produit international exigeant, une base précieuse pour le travail centré sur l'IA entrepris ensuite chez Ippon Technologies.</p>

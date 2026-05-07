@@ -48,7 +48,7 @@ Le travail à distance peut brouiller les frontières entre vie professionnelle 
 
 ### Communication et collaboration efficaces
 
-Le travail à distance repose largement sur une communication et une collaboration efficaces. Adopter des outils numériques — plateformes de gestion de projet, messagerie instantanée, visioconférence — est indispensable pour maintenir des interactions fluides avec des collègues répartis sur différents fuseaux. Des canaux de communication clairs et transparents permettent d'établir les attentes, d'assurer l'alignement et de créer une cohésion d'équipe.
+Le travail à distance repose largement sur une communication et une collaboration efficaces. Adopter des outils numériques (plateformes de gestion de projet, messagerie instantanée, visioconférence) est indispensable pour maintenir des interactions fluides avec des collègues répartis sur différents fuseaux. Des canaux de communication clairs et transparents permettent d'établir les attentes, d'assurer l'alignement et de créer une cohésion d'équipe.
 
 ## Conclusion
 

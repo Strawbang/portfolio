@@ -27,84 +27,19 @@ export const routes: Record<string, Record<string, string>> = {
     'blog': 'blog',
     'contact': 'contact'
   },
-  ja: {
-    'work': 'work',
-    'about': 'about',
-    'blog': 'blog',
-    'contact': 'contact'
-  },
-  zh: {
-    'work': 'work',
-    'about': 'about',
-    'blog': 'blog',
-    'contact': 'contact'
-  },
-  th: {
-    'work': 'work',
-    'about': 'about',
-    'blog': 'blog',
-    'contact': 'contact'
-  },
-  vi: {
-    'work': 'work',
-    'about': 'about',
-    'blog': 'blog',
-    'contact': 'contact'
-  },
-  ms: {
-    'work': 'work',
-    'about': 'about',
-    'blog': 'blog',
-    'contact': 'contact'
-  },
-  ko: {
-    'work': 'work',
-    'about': 'about',
-    'blog': 'blog',
-    'contact': 'contact'
-  },
-  id: {
-    'work': 'work',
-    'about': 'about',
-    'blog': 'blog',
-    'contact': 'contact'
-  },
-  tl: {
-    'work': 'work',
-    'about': 'about',
-    'blog': 'blog',
-    'contact': 'contact'
-  },
-  ar: {
-    'work': 'work',
-    'about': 'about',
-    'blog': 'blog',
-    'contact': 'contact'
-  },
-  hi: {
-    'work': 'work',
-    'about': 'about',
-    'blog': 'blog',
-    'contact': 'contact'
-  },
-  de: {
-    'work': 'work',
-    'about': 'about',
-    'blog': 'blog',
-    'contact': 'contact'
-  },
-  es: {
-    'work': 'work',
-    'about': 'about',
-    'blog': 'blog',
-    'contact': 'contact'
-  },
-  pt: {
-    'work': 'work',
-    'about': 'about',
-    'blog': 'blog',
-    'contact': 'contact'
-  }
+  ja: { 'work': 'work', 'about': 'about', 'blog': 'blog', 'contact': 'contact' },
+  zh: { 'work': 'work', 'about': 'about', 'blog': 'blog', 'contact': 'contact' },
+  th: { 'work': 'work', 'about': 'about', 'blog': 'blog', 'contact': 'contact' },
+  vi: { 'work': 'work', 'about': 'about', 'blog': 'blog', 'contact': 'contact' },
+  ms: { 'work': 'work', 'about': 'about', 'blog': 'blog', 'contact': 'contact' },
+  ko: { 'work': 'work', 'about': 'about', 'blog': 'blog', 'contact': 'contact' },
+  id: { 'work': 'work', 'about': 'about', 'blog': 'blog', 'contact': 'contact' },
+  tl: { 'work': 'work', 'about': 'about', 'blog': 'blog', 'contact': 'contact' },
+  ar: { 'work': 'work', 'about': 'about', 'blog': 'blog', 'contact': 'contact' },
+  hi: { 'work': 'work', 'about': 'about', 'blog': 'blog', 'contact': 'contact' },
+  de: { 'work': 'work', 'about': 'about', 'blog': 'blog', 'contact': 'contact' },
+  es: { 'work': 'work', 'about': 'about', 'blog': 'blog', 'contact': 'contact' },
+  pt: { 'work': 'work', 'about': 'about', 'blog': 'blog', 'contact': 'contact' },
 }
 
 export const ui = {

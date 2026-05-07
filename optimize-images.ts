@@ -31,7 +31,8 @@ const imagesToOptimize: string[] = [
   'systran.png',
   'portrait.png',
   'metro-france.png',
-  'ippon.png'
+  'ippon.png',
+  'wemanity.webp'
 ];
 
 // Créer le répertoire cible s'il n'existe pas

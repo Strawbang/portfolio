@@ -5,7 +5,7 @@ publishDate: "2023-07-24"
 tags: ["Front-End", "Software Engineering"]
 keywords: ["Astro", "JavaScript", "Netlify", "Développement Web", "Tutoriel"]
 img: "/assets/stats-website.webp"
-img_alt: "Métriques de performance du portfolio Astro — score Lighthouse 100/100"
+img_alt: "Métriques de performance du portfolio Astro, score Lighthouse 100/100"
 lang: fr
 relatedPosts: ["model-context-protocol-mcp-cli-rust-ide", "full-remote-bliss-fullstack-devs-jet-lag-advantage"]
 ---

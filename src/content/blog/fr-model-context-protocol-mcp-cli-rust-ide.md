@@ -16,13 +16,13 @@ relatedWork: ["ippon-technologies"]
 
 Cet article a été publié sur le [blog Ippon Technologies](https://blog.ippon.fr/2026/03/11/model-context-protocol-mcp-cli-rust-ide/).
 
-Le **Model Context Protocol (MCP)** permet d'exposer des outils internes à un agent IA directement dans l'IDE — sans plugin spécifique, sans intégration ad hoc. Plutôt que de donner des suggestions, l'agent peut exécuter de vraies actions sur votre codebase.
+Le **Model Context Protocol (MCP)** permet d'exposer des outils internes à un agent IA directement dans l'IDE, sans plugin spécifique, sans intégration ad hoc. Plutôt que de donner des suggestions, l'agent peut exécuter de vraies actions sur votre codebase.
 
 ## Le problème que MCP résout
 
-Les agents IA intégrés aux IDE sont excellents pour comprendre le contexte — analyser du code, expliquer des erreurs, suggérer des refactors. Mais dès qu'il faut exécuter une action réelle (lancer un script interne, déclencher une logique métier, valider des sorties), une boucle inefficace apparaît : l'agent propose → on exécute ailleurs → on recolle la sortie dans le chat. À chaque fois.
+Les agents IA intégrés aux IDE sont excellents pour comprendre le contexte : analyser du code, expliquer des erreurs, suggérer des refactors. Mais dès qu'il faut exécuter une action réelle (lancer un script interne, déclencher une logique métier, valider des sorties), une boucle inefficace apparaît : l'agent propose → on exécute ailleurs → on recolle la sortie dans le chat. À chaque fois.
 
-MCP comble ce fossé en fournissant un **standard pour exposer des capacités** — CLIs, APIs, services internes — via un contrat structuré directement consommable par un IDE ou un assistant IA.
+MCP comble ce fossé en fournissant un **standard pour exposer des capacités** (CLIs, APIs, services internes) via un contrat structuré directement consommable par un IDE ou un assistant IA.
 
 ## MCP vs REST : pas juste une API de plus
 
@@ -58,14 +58,14 @@ L'approche "plugin intelligent" se heurte rapidement à des problèmes structure
 
 ## 3 principes de design pour des outils agent-ready
 
-1. **Outputs orientés décision** — ne pas dumper de l'état, renvoyer ce dont l'agent a besoin pour agir.
-2. **Erreurs actionnables** — `code + message + recoveryHint` structurés pour que l'agent puisse se corriger sans intervention humaine.
-3. **Tools atomiques et composables** — `analyze_module()` → `generate_patch()` → `apply_patch()` → `run_tests()`. Un outil, une intention. L'agent orchestre.
+1. **Outputs orientés décision :** ne pas dumper de l'état, renvoyer ce dont l'agent a besoin pour agir.
+2. **Erreurs actionnables :** `code + message + recoveryHint` structurés pour que l'agent puisse se corriger sans intervention humaine.
+3. **Tools atomiques et composables :** `analyze_module()` → `generate_patch()` → `apply_patch()` → `run_tests()`. Un outil, une intention. L'agent orchestre.
 
 ## Rendre un CLI agent-ready (3 changements)
 
-1. **JSON-first sur stdout** — sortie machine stable et prévisible ; les logs humains vont sur stderr.
-2. **Logs séparés** — ne pas mélanger résultat et logs de diagnostic.
-3. **Erreurs catégorisées** — code d'erreur + message + hint de recovery.
+1. **JSON-first sur stdout :** sortie machine stable et prévisible ; les logs humains vont sur stderr.
+2. **Logs séparés :** ne pas mélanger résultat et logs de diagnostic.
+3. **Erreurs catégorisées :** code d'erreur + message + hint de recovery.
 
 Retrouvez l'article complet sur le blog Ippon : [Model Context Protocol (MCP) : exposer un CLI Rust dans votre IDE](https://blog.ippon.fr/2026/03/11/model-context-protocol-mcp-cli-rust-ide/)

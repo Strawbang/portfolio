@@ -21,6 +21,14 @@ function formatDate(date: Date) {
 const period = data.startDate
 	? `${formatDate(data.startDate)} – ${data.endDate ? formatDate(data.endDate) : presentLabel}`
 	: null;
+
+const engagementLabel = data.engagementType
+	? data.engagementType === 'esn'
+		? 'ESN'
+		: data.engagementType === 'company'
+			? (isFr ? 'Entreprise' : 'Company')
+			: (isFr ? 'Mission client' : 'Client Mission')
+	: null;
 ---
 
 <article class="card">
@@ -29,9 +37,18 @@ const period = data.startDate
 			<img src={data.img} alt={data.img_alt || ''} loading="lazy" decoding="async" width="600" height="338" />
 		</div>
 		<div class="card-body">
-			<h3 class="title">{data.title}</h3>
+			<div class="title-row">
+				<h3 class="title">{data.title}</h3>
+				{engagementLabel && <span class={`engagement-badge ${data.engagementType}`}>{engagementLabel}</span>}
+			</div>
 			{data.role && <p class="role">{data.role}</p>}
 			{period && <p class="period">{period}</p>}
+			{(data.workplace || data.context) && (
+				<div class="meta-row">
+					{data.workplace && <span class="meta-item">🌐 {data.workplace}</span>}
+					{data.context && <span class="meta-item">🔄 {data.context === 'legacy' ? 'Legacy' : data.context === 'greenfield' ? 'Greenfield' : 'Hybrid'}</span>}
+				</div>
+			)}
 			{keywords.length > 0 && (
 				<footer>
 					{keywords.map((k) => <span class="pill">{k}</span>)}
@@ -113,6 +130,53 @@ const period = data.startDate
 		font-size: var(--text-sm);
 		color: var(--gray-400);
 		margin: 0;
+	}
+
+	.meta-row {
+		display: flex;
+		gap: 0.75rem;
+		flex-wrap: wrap;
+		margin-top: 0.1rem;
+	}
+
+	.meta-item {
+		font-size: 0.72rem;
+		color: var(--gray-400);
+	}
+
+	.title-row {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+	}
+
+	.engagement-badge {
+		font-size: 0.65rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		padding: 0.15rem 0.5rem;
+		border-radius: 999px;
+		white-space: nowrap;
+	}
+
+	.engagement-badge.esn {
+		background-color: var(--gray-800);
+		color: var(--gray-300);
+		border: 1px solid var(--gray-700);
+	}
+
+	.engagement-badge.company {
+		background-color: color-mix(in srgb, var(--gray-500) 15%, transparent);
+		color: var(--gray-200);
+		border: 1px solid color-mix(in srgb, var(--gray-500) 40%, transparent);
+	}
+
+	.engagement-badge.client {
+		background-color: color-mix(in srgb, var(--accent-regular) 15%, transparent);
+		color: var(--accent-regular);
+		border: 1px solid color-mix(in srgb, var(--accent-regular) 40%, transparent);
 	}
 
 	footer {

@@ -19,6 +19,7 @@
     "@fontsource/rubik": "^5.2.8",
     "@resvg/resvg-js": "^2.6.2",
     "astro": "^6.1.8",
+    "mermaid": "^11.14.0",
     "satori": "^0.19.2"
   },
   "devDependencies": {

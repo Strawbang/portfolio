@@ -7,6 +7,7 @@ import BlogPostingSchema from '../../../components/BlogPostingSchema.astro';
 import BreadcrumbSchema from '../../../components/BreadcrumbSchema.astro';
 import RelatedPosts from '../../../components/RelatedPosts.astro';
 import RelatedWork from '../../../components/RelatedWork.astro';
+import MermaidInit from '../../../components/MermaidInit.astro';
 import TableOfContents from '../../../components/TableOfContents.astro';
 
 export async function getStaticPaths() {
@@ -145,6 +146,7 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('fr-FR', 
       <RelatedPosts slugs={post.data.relatedPosts} lang="fr" />
     )}
 
+    <MermaidInit />
     <ContactCTA />
   </div>
 </FrenchBaseLayout>
@@ -306,6 +308,10 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('fr-FR', 
     border-radius: 0.25rem;
     font-size: 0.9em;
     font-family: 'Courier New', monospace;
+  }
+
+  .content :global(.mermaid-diagram) {
+    margin-inline: -2rem;
   }
 
   .content :global(pre) {

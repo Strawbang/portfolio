@@ -7,7 +7,7 @@ role: Développeur Full-Stack
 startDate: 2022-03-01
 endDate: 2024-03-31
 description: |
-  Ingénieur Full-Stack chez METRO France — GCP, Kubernetes, TypeScript, React, Node.js, GraphQL sur 93 entrepôts à l'échelle nationale
+  Ingénieur Full-Stack chez METRO France : GCP, Kubernetes, TypeScript, React, Node.js, GraphQL sur 93 entrepôts à l'échelle nationale
 tags:
   - Front-End
   - Back-End
@@ -19,15 +19,42 @@ keywords:
   - GraphQL
   - GCP
   - Kubernetes
+  - TypeORM
+  - GitHub Actions
+  - Scrum
+relatedPosts:
+  - software-craftsmanship-ai-era
+  - stack-standardization-80-percent-faster
+relatedWork:
+  - wemanity
+engagementType: client
+teamSize: "~6"
+companySize: "~3000"
+context: legacy
+workplace: Hybrid
+stack:
+  Frontend:
+    - TypeScript
+    - React
+  Backend:
+    - Node.js
+    - GraphQL
+    - TypeORM
+  DevOps:
+    - GCP
+    - Kubernetes
+    - GitHub Actions
+  Methodology:
+    - Agile Scrum
 ---
 
 ### Révolutionner le développement produit chez METRO France
 
-<p>METRO France est l'un des plus grands réseaux de distribution en gros du pays, opérant 93 entrepôts cash-and-carry et servant des centaines de milliers de clients professionnels. En tant qu'Ingénieur Logiciel Full-Stack, j'ai rejoint une équipe produit pluridisciplinaire et conduit des changements structurels qui ont fondamentalement accéléré la façon dont l'entreprise conçoit et livre ses produits digitaux.</p>
+<p>METRO France est l'un des plus grands réseaux de distribution en gros du pays, opérant 93 entrepôts cash-and-carry et servant des centaines de milliers de clients professionnels. En tant que consultant déployé via Wemanity Group, j'ai rejoint une équipe produit pluridisciplinaire et conduit des changements structurels qui ont fondamentalement accéléré la façon dont l'entreprise conçoit et livre ses produits digitaux.</p>
 
 #### Standardisation technologique sur l'ensemble des produits
 
-<p>L'un des premiers défis était la fragmentation des technologies, architectures et processus entre les différents produits. J'ai piloté la mise en place de standards uniformes — une stack technique commune basée sur TypeScript, React, Node.js, TypeORM et GraphQL — permettant aux équipes d'aller plus vite, de réduire les silos de connaissance et d'onboarder les nouveaux ingénieurs plus efficacement. Cette standardisation a à elle seule généré une accélération de 80% des cycles de création de produits.</p>
+<p>L'un des premiers défis était la fragmentation des technologies, architectures et processus entre les différents produits. J'ai piloté la mise en place de standards uniformes (une stack technique commune basée sur TypeScript, React, Node.js, TypeORM et GraphQL), permettant aux équipes d'aller plus vite, de réduire les silos de connaissance et d'onboarder les nouveaux ingénieurs plus efficacement. Cette standardisation a à elle seule généré une accélération de 80% des cycles de création de produits.</p>
 
 #### Infrastructure cloud-native avec GCP et Kubernetes
 
@@ -40,7 +67,3 @@ keywords:
 #### Scrum et collaboration transverse
 
 <p>Dans un cadre Agile Scrum, j'ai collaboré avec les product owners, designers et ingénieurs QA pour livrer de la valeur incrementale à chaque sprint. L'approche structurée a permis à l'équipe de maintenir l'élan sur les travaux d'infrastructure long terme tout en livrant continuellement des fonctionnalités utilisateur.</p>
-
-#### Stack technique
-
-<p>TypeScript · React · Node.js · TypeORM · GraphQL · GCP · Kubernetes · GitHub Actions · Scrum</p>

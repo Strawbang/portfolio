@@ -6,7 +6,6 @@ tags: ["AI", "Software Engineering"]
 keywords: ["AI Agents", "LLM", "Architecture", "Developer Tools", "Kiro"]
 img: "https://blog.ippon.fr/content/images/2026/02/spec-driven-developement.png"
 img_alt: "Spec-Driven Development with AI"
-canonicalURL: "https://blog.ippon.fr/2026/02/18/spec-driven-development/"
 draft: false
 lang: en
 source: Ippon
@@ -20,13 +19,13 @@ This article was co-written and published on the [Ippon Technologies blog](https
 
 ## The core idea
 
-SDD is a development approach where a formalized specification — requirements, acceptance criteria, invariants — becomes the central artifact of the project. It's versioned alongside the code and serves as the reference for design, implementation, and testing.
+SDD is a development approach where a formalized specification (requirements, acceptance criteria, invariants) becomes the central artifact of the project. It's versioned alongside the code and serves as the reference for design, implementation, and testing.
 
 What makes an approach truly Spec-Driven isn't the presence of a "requirements document". It's three principles:
 
-- **The spec acts as a contract** — if an implementation deviates from it, that's a defect, not a valid variant.
-- **Every decision is traceable** — a component answers a requirement, a test checks an acceptance criterion, a validation protects an invariant.
-- **The spec is alive** — it evolves at the same pace as the code, versioned in the same repository and reviewed in the same cycle.
+- **The spec acts as a contract:** if an implementation deviates from it, that's a defect, not a valid variant.
+- **Every decision is traceable:** a component answers a requirement, a test checks an acceptance criterion, a validation protects an invariant.
+- **The spec is alive:** it evolves at the same pace as the code, versioned in the same repository and reviewed in the same cycle.
 
 ## The SDD cycle
 

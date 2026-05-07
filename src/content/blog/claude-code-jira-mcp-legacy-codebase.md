@@ -194,7 +194,7 @@ I update it every time I discover something that surprised me during a session. 
 
 ## Conclusion
 
-The combination of Claude Code, Jira MCP, and a well-maintained `CLAUDE.md` doesn't eliminate the hard parts of legacy modernization. It compresses the time spent on the mechanical parts reading code, tracing flows, writing boilerplate so that more of your time goes to judgment, architecture, and actual problem-solving.
+The combination of Claude Code, Jira MCP, and a well-maintained `CLAUDE.md` doesn't eliminate the hard parts of legacy modernization. It compresses the time spent on the mechanical parts reading code, tracing flows, writing boilerplate, so that more of your time goes to judgment, architecture, and actual problem-solving.
 
 That shift is worth more than any individual feature the tools provide.
 

@@ -168,10 +168,6 @@ export default defineConfig({
 			filter: (page) => {
 			if (page.includes('/og/')) return false;
 			if (page.includes('/fr/uses')) return false;
-			const url = new URL(page);
-			const parts = url.pathname.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
-			const noIndexLocales = ['ja', 'zh', 'th', 'vi', 'ms', 'ko', 'id', 'tl', 'ar', 'hi', 'de', 'es', 'pt'];
-			if (parts.length > 0 && noIndexLocales.includes(parts[0])) return false;
 			return true;
 		},
 			customPages: [],
@@ -204,19 +200,6 @@ export default defineConfig({
 				locales: {
 					en: 'en-US',
 					fr: 'fr-FR',
-					ja: 'ja-JP',
-					zh: 'zh-CN',
-					th: 'th-TH',
-					vi: 'vi-VN',
-					ms: 'ms-MY',
-					ko: 'ko-KR',
-					id: 'id-ID',
-					tl: 'fil-PH',
-					ar: 'ar-SA',
-					hi: 'hi-IN',
-					de: 'de-DE',
-					es: 'es-ES',
-					pt: 'pt-BR',
 				},
 			},
 		}),

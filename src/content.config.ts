@@ -16,6 +16,13 @@ export const collections = {
 			startDate: z.coerce.date().optional(),
 			endDate: z.coerce.date().optional(),
 			relatedPosts: z.array(z.string()).optional(),
+			relatedWork: z.array(z.string()).optional(),
+			engagementType: z.enum(['esn', 'company', 'client']).optional(),
+			teamSize: z.string().optional(),
+			companySize: z.string().optional(),
+			context: z.enum(['legacy', 'greenfield', 'hybrid']).optional(),
+			workplace: z.enum(['Remote', 'Hybrid', 'On-site']).optional(),
+			stack: z.record(z.string(), z.array(z.string())).optional(),
 		}),
 	}),
 	blog: defineCollection({

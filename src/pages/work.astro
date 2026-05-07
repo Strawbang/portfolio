@@ -37,10 +37,16 @@ const projects = (await getCollection("work", ({ id }) => {
         tagline="See my professional experiences below to get an idea of my background and expertise."
         align="start"
       />
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="esn">ESN</button>
+        <button class="filter-btn" data-filter="company">Company</button>
+        <button class="filter-btn" data-filter="client">Client Mission</button>
+      </div>
       <ul class="projects-grid">
         {
           projects.map((project) => (
-            <li>
+            <li data-engagement={project.data.engagementType ?? 'all'}>
               <PortfolioPreview project={project} />
             </li>
           ))
@@ -51,7 +57,53 @@ const projects = (await getCollection("work", ({ id }) => {
   </div>
 </BaseLayout>
 
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const items = document.querySelectorAll<HTMLLIElement>('.projects-grid li');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      items.forEach(item => {
+        const match = filter === 'all' || item.dataset.engagement === filter;
+        item.style.display = match ? '' : 'none';
+      });
+    });
+  });
+</script>
+
 <style>
+  .filter-bar {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 0.35rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--gray-700);
+    background: transparent;
+    color: var(--gray-300);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--font-body);
+  }
+
+  .filter-btn:hover {
+    border-color: var(--accent-regular);
+    color: var(--accent-regular);
+  }
+
+  .filter-btn.active {
+    background-color: var(--accent-regular);
+    border-color: var(--accent-regular);
+    color: var(--accent-text-over);
+  }
+
   .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

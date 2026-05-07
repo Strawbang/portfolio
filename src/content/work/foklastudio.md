@@ -7,7 +7,7 @@ role: Full-Stack Software Engineer
 startDate: 2018-11-01
 endDate: 2020-05-31
 description: |
-  Full-Stack Engineer at Fokal Studio — client web development, Headless CMS with Directus, PHP, component architecture, DevOps
+  Full-Stack Engineer at Fokal Studio: client web development, Headless CMS with Directus, PHP, component architecture, DevOps
 tags:
   - Front-End
   - Back-End
@@ -18,11 +18,24 @@ keywords:
   - Headless CMS
   - Tech Lead
   - Component Architecture
+engagementType: company
+teamSize: "~3"
+companySize: "~15"
+context: greenfield
+workplace: On-site
+stack:
+  Backend:
+    - PHP
+  CMS:
+    - Directus
+    - Headless CMS
+  Architecture:
+    - Component Architecture
 ---
 
 ### Driving Digital Transformation at Fokal Studio
 
-<p>At Fokal Studio, a digital agency specializing in custom web solutions, I worked as a Full-Stack Software Engineer leading development initiatives for a diverse range of clients. My role spanned from technical architecture decisions to hands-on implementation and client delivery.</p>
+<p>Fokal Studio was my first professional experience after finishing my studies, a digital agency delivering custom web solutions for a diverse client base. From day one, I was given full technical ownership of projects, moving between front-end, back-end, and infrastructure depending on what each delivery required. This environment, where there was no safety net of senior engineers to defer to, forced me to develop strong architectural instincts, client communication skills, and delivery discipline early in my career.</p>
 
 #### Key Projects
 
@@ -30,13 +43,11 @@ keywords:
 Led the full redesign and development of a prestigious French school's digital platform using vanilla PHP and a Headless Directus CMS architecture. The decoupled approach gave the editorial team full content autonomy while preserving front-end performance, resulting in a substantial increase in student enrollment inquiries.</p>
 
 <p><strong>High-Profile Restaurant Launch — Private Invitation System</strong><br/>
-Designed and built a private guest list management system for the launch event of a high-end restaurant. The solution handled invitation distribution, RSVP tracking, and guest validation — demonstrating how targeted digital tools can directly support premium business events.</p>
+Designed and built a private guest list management system for the launch event of a high-end restaurant. The solution handled invitation distribution, RSVP tracking, and guest validation, demonstrating how targeted digital tools can directly support premium business events.</p>
 
 <p><strong>Client Website Portfolio</strong><br/>
 Developed and maintained multiple client websites focused on performance, accessibility, and maintainability. These contributions improved clients' average online engagement by 20%, measured through session duration and conversion metrics.</p>
 
-#### Technical Approach
+#### Technical Approach & Early Leadership
 
-<p>I introduced component-based architecture patterns across projects to improve code reusability and reduce delivery time for new features. On the infrastructure side, I set up deployment processes to standardize delivery across client projects.</p>
-
-<p>Working directly with clients, I translated business requirements into technical specifications, managing both the development lifecycle and stakeholder communication — sharpening my ability to bridge business and engineering concerns.</p>
+<p>I introduced component-based architecture patterns across projects to improve code reusability and reduce delivery time for new features. On the infrastructure side, I set up deployment processes to standardize delivery across client projects. Without the structure of a large engineering team, I learned to make architectural decisions autonomously, justify them to non-technical stakeholders, and live with their consequences, a formative experience that shaped how I approach technical ownership to this day.</p>

@@ -73,7 +73,8 @@ function buildAlternateUrl(lang: string): string {
   return `${siteUrl}${prefix}${path}`;
 }
 
-const hreflangLinks = Object.keys(languages).map((lang) => ({
+const activeLocales = ['en', 'fr'];
+const hreflangLinks = activeLocales.map((lang) => ({
   lang,
   url: buildAlternateUrl(lang),
 }));

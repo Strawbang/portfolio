@@ -7,7 +7,7 @@ role: Full-Stack Software Engineer
 startDate: 2025-01-01
 endDate: 2025-04-30
 description: |
-  Full-Stack Engineer at SYSTRAN by ChapsVision — TypeScript, Next.js, NLP platform, AI-powered translation, legacy modernization, Agile
+  Full-Stack Engineer at SYSTRAN by ChapsVision: TypeScript, Next.js, NLP platform, AI-powered translation, legacy modernization, Agile
 tags:
   - Front-End
   - Back-End
@@ -17,11 +17,24 @@ keywords:
   - Next.js
   - NLP
   - Agile
+engagementType: company
+teamSize: "~6"
+companySize: "~200"
+context: legacy
+workplace: Hybrid
+stack:
+  Frontend:
+    - TypeScript
+    - Next.js
+  Domain:
+    - NLP
+  Methodology:
+    - Agile
 ---
 
 ### Advancing Language Technology at SYSTRAN by ChapsVision
 
-<p>SYSTRAN by ChapsVision is a pioneer in AI-powered Natural Language Processing, delivering translation and language intelligence solutions to governments, defense agencies, and global enterprises. As a Full-Stack Software Engineer (January – April 2025), I joined a cross-functional international team building and improving the web applications powering this NLP platform.</p>
+<p>SYSTRAN is a pioneer in AI-powered Natural Language Processing, founded in 1968, delivering translation and language intelligence solutions to governments, defense agencies, and global enterprises. The company had been acquired by <strong>ChapsVision</strong>, a French AI and cybersecurity group, prior to my joining. As a Full-Stack Software Engineer (January – April 2025), I joined a cross-functional international team building and improving the web applications powering this NLP platform.</p>
 
 #### Front-End Development & UX Improvements
 
@@ -29,7 +42,7 @@ keywords:
 
 #### Legacy Modernization Proposals
 
-<p>I conducted a technical audit of parts of the existing codebase and proposed concrete modernization strategies to improve scalability and long-term maintainability. These proposals covered component architecture refactoring, state management improvements, and migration paths to reduce technical debt — positioning the team for faster iteration cycles.</p>
+<p>I conducted a technical audit of parts of the existing codebase and proposed concrete modernization strategies to improve scalability and long-term maintainability. These proposals covered component architecture refactoring, state management improvements, and migration paths to reduce technical debt, positioning the team for faster iteration cycles.</p>
 
 #### Agile Collaboration in a Multicultural Environment
 
@@ -37,4 +50,4 @@ keywords:
 
 #### Impact
 
-<p>Beyond the technical contributions, this mission deepened my expertise in NLP-adjacent web development and reinforced my professional English communication in a high-stakes, international product environment — a valuable foundation for the AI-focused work I took on subsequently at Ippon Technologies.</p>
+<p>Beyond the technical contributions, this mission deepened my expertise in NLP-adjacent web development and reinforced my professional English communication in a high-stakes, international product environment, a valuable foundation for the AI-focused work I took on subsequently at Ippon Technologies.</p>

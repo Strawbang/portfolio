@@ -1,0 +1,133 @@
+---
+interface Props {
+	teamSize?: string;
+	companySize?: string;
+	context?: 'legacy' | 'greenfield' | 'hybrid';
+	workplace?: 'Remote' | 'Hybrid' | 'On-site';
+	keywords?: string[];
+	stack?: Record<string, string[]>;
+	isFr?: boolean;
+}
+
+const { teamSize, companySize, context, workplace, keywords, stack, isFr = false } = Astro.props;
+
+const contextLabel: Record<string, { en: string; fr: string }> = {
+	legacy:     { en: 'Legacy codebase', fr: 'Codebase legacy' },
+	greenfield: { en: 'Greenfield',      fr: 'Greenfield' },
+	hybrid:     { en: 'Hybrid',          fr: 'Hybride' },
+};
+
+const items = [
+	teamSize    && { icon: '👥', label: isFr ? `Équipe ${teamSize}` : `Team ${teamSize}` },
+	companySize && { icon: '🏢', label: isFr ? `${companySize} employés` : `${companySize} employees` },
+	context     && { icon: '🔄', label: isFr ? contextLabel[context].fr : contextLabel[context].en },
+	workplace   && { icon: '🌐', label: workplace },
+].filter(Boolean) as { icon: string; label: string }[];
+
+const stackEntries = stack ? Object.entries(stack) : null;
+const hasContent = items.length > 0 || stackEntries?.length || (keywords && keywords.length > 0);
+---
+
+{hasContent && (
+	<div class="context-card">
+		{items.length > 0 && (
+			<div class="context-items">
+				{items.map(item => (
+					<span class="context-item">
+						<span class="icon">{item.icon}</span>
+						{item.label}
+					</span>
+				))}
+			</div>
+		)}
+		{stackEntries && stackEntries.length > 0 && (
+			<div class="stack-categories">
+				{stackEntries.map(([category, techs]) => (
+					<div class="stack-row">
+						<span class="stack-label">{category}</span>
+						<div class="stack-pills">
+							{techs.map(t => <span class="stack-pill">{t}</span>)}
+						</div>
+					</div>
+				))}
+			</div>
+		)}
+		{!stackEntries && keywords && keywords.length > 0 && (
+			<div class="stack-row">
+				<span class="stack-label">Stack</span>
+				<div class="stack-pills">
+					{keywords.map(k => <span class="stack-pill">{k}</span>)}
+				</div>
+			</div>
+		)}
+	</div>
+)}
+
+<style>
+	.context-card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		padding: 1rem 1.25rem;
+		background-color: var(--gray-999);
+		border: 1px solid var(--gray-800);
+		border-radius: 0.75rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.context-items {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem 1.25rem;
+	}
+
+	.context-item {
+		display: flex;
+		align-items: center;
+		gap: 0.35rem;
+		font-size: var(--text-sm);
+		color: var(--gray-300);
+	}
+
+	.icon {
+		font-size: 0.9rem;
+	}
+
+	.stack-categories {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+
+	.stack-row {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		flex-wrap: wrap;
+	}
+
+	.stack-label {
+		font-size: 0.7rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--gray-500);
+		white-space: nowrap;
+	}
+
+	.stack-pills {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.3rem;
+	}
+
+	.stack-pill {
+		background-color: color-mix(in srgb, var(--accent-regular) 12%, transparent);
+		color: var(--accent-regular);
+		border: 1px solid color-mix(in srgb, var(--accent-regular) 30%, transparent);
+		padding: 0.1rem 0.5rem;
+		border-radius: 999px;
+		font-size: 0.72rem;
+		font-family: var(--font-body);
+	}
+</style>

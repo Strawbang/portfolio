@@ -8,6 +8,7 @@ import BlogPostingSchema from '../../components/BlogPostingSchema.astro';
 import BreadcrumbSchema from '../../components/BreadcrumbSchema.astro';
 import RelatedPosts from '../../components/RelatedPosts.astro';
 import RelatedWork from '../../components/RelatedWork.astro';
+import MermaidInit from '../../components/MermaidInit.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -145,6 +146,7 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('en-US', 
       <RelatedPosts slugs={post.data.relatedPosts} lang="en" />
     )}
 
+    <MermaidInit />
     <ContactCTA />
   </div>
 </BaseLayout>
@@ -306,6 +308,10 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('en-US', 
     border-radius: 0.25rem;
     font-size: 0.9em;
     font-family: 'Courier New', monospace;
+  }
+
+  .content :global(.mermaid-diagram) {
+    margin-inline: -2rem;
   }
 
   .content :global(pre) {

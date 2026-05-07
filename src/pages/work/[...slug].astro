@@ -11,6 +11,7 @@ import OptimizedImage from '../../components/OptimizedImage.astro';
 import WorkSchema from '../../components/WorkSchema.astro';
 import BreadcrumbSchema from '../../components/BreadcrumbSchema.astro';
 import RelatedPosts from '../../components/RelatedPosts.astro';
+import WorkContextCard from '../../components/WorkContextCard.astro';
 
 interface Props {
 	entry: CollectionEntry<'work'>;
@@ -80,6 +81,15 @@ const workAlternates = [
 			<main class="wrapper">
 				<div class="stack gap-10 content">
 					{entry.data.img && <OptimizedImage src={entry.data.img} alt={entry.data.img_alt || ''} />}
+					<WorkContextCard
+						teamSize={entry.data.teamSize}
+						companySize={entry.data.companySize}
+						context={entry.data.context}
+						workplace={entry.data.workplace}
+						keywords={entry.data.keywords}
+						stack={entry.data.stack}
+						isFr={false}
+					/>
 					<div class="content">
 						<Content />
 					</div>

@@ -20,13 +20,13 @@ Le **Spec-Driven Development (SDD)** propose un changement simple mais radical :
 
 ## L'idée centrale
 
-Le SDD est une approche où la spécification formalisée — exigences, critères d'acceptation, invariants — devient l'artefact central du projet. Elle est versionnée avec le code et sert de référence pour le design, l'implémentation et les tests.
+Le SDD est une approche où la spécification formalisée (exigences, critères d'acceptation, invariants) devient l'artefact central du projet. Elle est versionnée avec le code et sert de référence pour le design, l'implémentation et les tests.
 
 Ce qui définit réellement une approche Spec-Driven, ce n'est pas la présence d'un document « requirements ». Ce sont trois principes :
 
-- **La spec agit comme un contrat** — si une implémentation s'en écarte, c'est un défaut, pas une variante acceptable.
-- **Chaque décision est traçable** — un composant répond à une exigence, un test vérifie un critère d'acceptation, une validation protège un invariant.
-- **La spec est vivante** — elle évolue au même rythme que le code, versionnée dans le même repository et intégrée au même cycle de revue.
+- **La spec agit comme un contrat :** si une implémentation s'en écarte, c'est un défaut, pas une variante acceptable.
+- **Chaque décision est traçable :** un composant répond à une exigence, un test vérifie un critère d'acceptation, une validation protège un invariant.
+- **La spec est vivante :** elle évolue au même rythme que le code, versionnée dans le même repository et intégrée au même cycle de revue.
 
 ## Le cycle SDD
 
