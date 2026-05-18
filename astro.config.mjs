@@ -168,6 +168,7 @@ export default defineConfig({
 			filter: (page) => {
 			if (page.includes('/og/')) return false;
 			if (page.includes('/fr/uses')) return false;
+			if (page.includes('/contact/success')) return false;
 			return true;
 		},
 			customPages: [],
@@ -200,6 +201,19 @@ export default defineConfig({
 				locales: {
 					en: 'en-US',
 					fr: 'fr-FR',
+					ja: 'ja-JP',
+					zh: 'zh-CN',
+					th: 'th-TH',
+					vi: 'vi-VN',
+					ms: 'ms-MY',
+					ko: 'ko-KR',
+					id: 'id-ID',
+					tl: 'fil-PH',
+					ar: 'ar-SA',
+					hi: 'hi-IN',
+					de: 'de-DE',
+					es: 'es-ES',
+					pt: 'pt-BR',
 				},
 			},
 		}),
