@@ -23,8 +23,6 @@ relatedPosts:
   - claude-code-jira-mcp-legacy-codebase
   - model-context-protocol-mcp-cli-rust-ide
   - spec-driven-development
-relatedWork:
-  - rustkit-ai
 engagementType: esn
 companySize: "~600"
 context: legacy
@@ -63,6 +61,6 @@ stack:
 
 <p>Un résultat clé de ces initiatives est une capacité "Chat with Code" : une interface interactive permettant aux ingénieurs rejoignant des projets legacy d'interroger la base de code en langage naturel. Cela a considérablement réduit le temps d'onboarding sur les systèmes complexes, donnant aux nouveaux membres de l'équipe un point de départ productif dès le premier jour.</p>
 
-#### Open Source : rustkit-ai
+#### Publications sur le Blog Tech Ippon
 
-<p>Les composants fondamentaux construits durant cette phase R&D ont été extraits et open-sourcés sous forme de <a href="https://rustkit-ai.github.io/">rustkit-ai</a> — une organisation publiant des outils de développement AI-native en Rust. Les cinq outils publiés (<code>aimemo</code>, <code>trimcp</code>, <code>tersify</code>, <code>semtree</code>, <code>semstore</code>) sont tous sous licence MIT, disponibles sur crates.io, et compatibles avec Claude Code, Cursor, Windsurf et GitHub Copilot.</p>
+<p>Dans la culture de partage de connaissance d'Ippon, j'ai publié des articles techniques sur le <a href="https://blog.ippon.fr/author/djamel-bougouffa/" rel="noopener">Blog Tech Ippon</a> couvrant des sujets explorés durant la phase R&D.</p>
