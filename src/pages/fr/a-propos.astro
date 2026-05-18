@@ -5,6 +5,7 @@ import Hero from "../../components/Hero.astro";
 import Icon from "../../components/Icon.astro";
 import CallToAction from "../../components/CallToAction.astro";
 import SchemaOrgPerson from '../../components/SchemaOrgPerson.astro';
+import CareerTimeline from '../../components/CareerTimeline.astro';
 import { experiences, education, skills, spokenLanguages, contact, resumeFiles, aboutLabels } from '../../data/about';
 
 const lang = 'fr';
@@ -23,17 +24,18 @@ const resume = resumeFiles[lang];
         <h2 class="section-title">{l.sectionBackground}</h2>
         <div class="content">
           <p>{l.backgroundIntro}</p>
-          {experiences.map(exp => (
-            <div class="experience-item">
-              <h3>
-                {exp.slug
-                  ? <a href={`/fr/experiences/${exp.slug}`}>{exp.company}</a>
-                  : exp.company}
-              </h3>
-              <p class="experience-meta">{exp.role[lang] ?? exp.role['en']} | {exp.period[lang] ?? exp.period['en']}</p>
-              <p>{exp.description[lang] ?? exp.description['en']}</p>
-            </div>
-          ))}
+          <CareerTimeline
+            currentLabel="En cours"
+            items={experiences.map(exp => ({
+              title: exp.company,
+              href: exp.slug ? `/fr/experiences/${exp.slug}` : undefined,
+              subtitle: exp.role[lang] ?? exp.role['en'],
+              period: exp.period[lang] ?? exp.period['en'],
+              description: exp.description[lang] ?? exp.description['en'],
+              isCurrent: (exp.period[lang] ?? exp.period['en']).toLowerCase().includes('present') ||
+                         (exp.period[lang] ?? exp.period['en']).toLowerCase().includes('présent'),
+            }))}
+          />
           <p>{l.backgroundOutro}</p>
           <a class="cta-link" href="/fr/experiences/">{l.seeAllExperiences} →</a>
         </div>
@@ -42,14 +44,14 @@ const resume = resumeFiles[lang];
       <section class="section-container">
         <h2 class="section-title">{l.sectionEducation}</h2>
         <div class="content">
-          {education.map(edu => (
-            <div class="education-item">
-              <h3>{edu.degree[lang] ?? edu.degree['en']}</h3>
-              <p class="education-meta">{edu.field[lang] ?? edu.field['en']} | {edu.period}</p>
-              <p>{edu.institution}</p>
-              <p class="education-skills">{edu.skills}</p>
-            </div>
-          ))}
+          <CareerTimeline
+            items={education.map(edu => ({
+              title: edu.degree[lang] ?? edu.degree['en'],
+              subtitle: edu.field[lang] ?? edu.field['en'],
+              period: edu.period,
+              extra: `${edu.institution} · ${edu.skills}`,
+            }))}
+          />
         </div>
       </section>
 

@@ -5,6 +5,7 @@ import Hero from "../components/Hero.astro";
 import Icon from "../components/Icon.astro";
 import CallToAction from "../components/CallToAction.astro";
 import SchemaOrgPerson from '../components/SchemaOrgPerson.astro';
+import CareerTimeline from '../components/CareerTimeline.astro';
 import { experiences, education, skills, spokenLanguages, contact, resumeFiles, aboutLabels } from '../data/about';
 
 const l = aboutLabels['en'];
@@ -22,17 +23,17 @@ const resume = resumeFiles['en'];
         <h2 class="section-title">{l.sectionBackground}</h2>
         <div class="content">
           <p>{l.backgroundIntro}</p>
-          {experiences.map(exp => (
-            <div class="experience-item">
-              <h3>
-                {exp.slug
-                  ? <a href={`/work/${exp.slug}`}>{exp.company}</a>
-                  : exp.company}
-              </h3>
-              <p class="experience-meta">{exp.role['en']} | {exp.period['en']}</p>
-              <p>{exp.description['en']}</p>
-            </div>
-          ))}
+          <CareerTimeline
+            currentLabel="Current"
+            items={experiences.map(exp => ({
+              title: exp.company,
+              href: exp.slug ? `/work/${exp.slug}` : undefined,
+              subtitle: exp.role['en'],
+              period: exp.period['en'],
+              description: exp.description['en'],
+              isCurrent: exp.period['en'].toLowerCase().includes('present'),
+            }))}
+          />
           <p>{l.backgroundOutro}</p>
           <a class="cta-link" href="/work/">{l.seeAllExperiences} →</a>
         </div>
@@ -41,14 +42,14 @@ const resume = resumeFiles['en'];
       <section class="section-container">
         <h2 class="section-title">{l.sectionEducation}</h2>
         <div class="content">
-          {education.map(edu => (
-            <div class="education-item">
-              <h3>{edu.degree['en']}</h3>
-              <p class="education-meta">{edu.field['en']} | {edu.period}</p>
-              <p>{edu.institution}</p>
-              <p class="education-skills">{edu.skills}</p>
-            </div>
-          ))}
+          <CareerTimeline
+            items={education.map(edu => ({
+              title: edu.degree['en'],
+              subtitle: edu.field['en'],
+              period: edu.period,
+              extra: `${edu.institution} · ${edu.skills}`,
+            }))}
+          />
         </div>
       </section>
 
@@ -200,18 +201,6 @@ const resume = resumeFiles['en'];
   .content h3 {
     color: var(--accent-regular);
     font-size: var(--text-lg);
-    margin-bottom: 0.5rem;
-  }
-
-  .experience-item, .education-item {
-    margin-bottom: 1.5rem;
-    padding-left: 1rem;
-    border-left: 2px solid var(--accent-regular);
-  }
-
-  .experience-meta, .education-meta {
-    font-style: italic;
-    color: var(--gray-300);
     margin-bottom: 0.5rem;
   }
 

@@ -1,0 +1,163 @@
+---
+export interface TimelineEntry {
+  title: string;
+  href?: string;
+  subtitle: string;
+  period: string;
+  description?: string;
+  extra?: string;
+  isCurrent?: boolean;
+}
+
+interface Props {
+  items: TimelineEntry[];
+  currentLabel?: string;
+}
+
+const { items, currentLabel = 'Current' } = Astro.props;
+---
+
+<ul class="timeline" role="list">
+  {items.map((item) => (
+    <li class={`timeline-item${item.isCurrent ? ' is-current' : ''}`}>
+      <div class="timeline-track" aria-hidden="true">
+        <span class="timeline-dot" />
+        <span class="timeline-connector" />
+      </div>
+      <div class="timeline-body">
+        <div class="timeline-header">
+          <span class="timeline-period">{item.period}</span>
+          {item.isCurrent && <span class="timeline-badge">{currentLabel}</span>}
+        </div>
+        <h3 class="timeline-title">
+          {item.href
+            ? <a href={item.href}>{item.title}</a>
+            : item.title}
+        </h3>
+        <p class="timeline-subtitle">{item.subtitle}</p>
+        {item.extra && <p class="timeline-extra">{item.extra}</p>}
+        {item.description && <p class="timeline-description">{item.description}</p>}
+      </div>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem 0 0;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 1.25rem;
+    padding-bottom: 2rem;
+  }
+
+  .timeline-item:last-child {
+    padding-bottom: 0;
+  }
+
+  /* --- Track: dot + connector stacked vertically --- */
+  .timeline-track {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 1rem;
+  }
+
+  .timeline-dot {
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 50%;
+    background: var(--gray-600);
+    flex-shrink: 0;
+    margin-top: 0.3rem;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+
+  .is-current .timeline-dot {
+    background: var(--accent-regular);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-regular) 25%, transparent);
+  }
+
+  .timeline-connector {
+    flex: 1;
+    width: 2px;
+    min-height: 0.75rem;
+    background: var(--gray-800);
+    margin-top: 0.3rem;
+    border-radius: 1px;
+  }
+
+  .timeline-item:last-child .timeline-connector {
+    display: none;
+  }
+
+  /* --- Content --- */
+  .timeline-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.25rem;
+  }
+
+  .timeline-period {
+    font-size: var(--text-sm);
+    color: var(--gray-400);
+    font-style: italic;
+  }
+
+  .timeline-badge {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--accent-regular);
+    color: var(--accent-text-over);
+    padding: 0.15rem 0.55rem;
+    border-radius: 999rem;
+    line-height: 1.4;
+  }
+
+  .timeline-title {
+    font-size: var(--text-lg);
+    color: var(--accent-regular);
+    margin: 0 0 0.2rem;
+  }
+
+  .timeline-title a {
+    color: inherit;
+    text-decoration: 1px solid underline transparent;
+    text-underline-offset: 0.25em;
+    transition: color 0.2s, text-decoration-color 0.2s;
+  }
+
+  .timeline-title a:hover {
+    color: var(--accent-dark);
+    text-decoration-color: currentColor;
+  }
+
+  .timeline-subtitle {
+    font-size: var(--text-sm);
+    color: var(--gray-300);
+    font-style: italic;
+    margin: 0 0 0.35rem;
+  }
+
+  .timeline-extra {
+    font-size: var(--text-sm);
+    color: var(--gray-400);
+    margin: 0 0 0.35rem;
+  }
+
+  .timeline-description {
+    font-size: var(--text-sm);
+    color: var(--gray-200);
+    line-height: 1.65;
+    margin: 0;
+  }
+</style>

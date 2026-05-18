@@ -27,13 +27,15 @@ const engagementLabel = data.engagementType
 		? 'ESN'
 		: data.engagementType === 'company'
 			? (isFr ? 'Entreprise' : 'Company')
-			: (isFr ? 'Mission client' : 'Client Mission')
+			: data.engagementType === 'opensource'
+				? 'Open Source'
+				: (isFr ? 'Mission client' : 'Client Mission')
 	: null;
 ---
 
 <article class="card">
 	<a href={href} class="card-link">
-		<div class="image-container">
+		<div class={`image-container${data.imgType === 'logo' ? ' logo' : ''}`}>
 			<img src={data.img} alt={data.img_alt || ''} loading="lazy" decoding="async" width="600" height="338" />
 		</div>
 		<div class="card-body">
@@ -94,6 +96,15 @@ const engagementLabel = data.engagementType
 		height: 100%;
 		object-fit: cover;
 		transition: transform 0.3s ease;
+	}
+
+	.image-container.logo {
+		background-color: var(--gray-900);
+	}
+
+	.image-container.logo img {
+		object-fit: contain;
+		padding: 1.5rem;
 	}
 
 	.card:hover .image-container img {
@@ -177,6 +188,12 @@ const engagementLabel = data.engagementType
 		background-color: color-mix(in srgb, var(--accent-regular) 15%, transparent);
 		color: var(--accent-regular);
 		border: 1px solid color-mix(in srgb, var(--accent-regular) 40%, transparent);
+	}
+
+	.engagement-badge.opensource {
+		background-color: color-mix(in srgb, #f74c00 15%, transparent);
+		color: #f74c00;
+		border: 1px solid color-mix(in srgb, #f74c00 40%, transparent);
 	}
 
 	footer {

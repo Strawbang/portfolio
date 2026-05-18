@@ -64,6 +64,19 @@ stack:
 
 <p>A key milestone was the design and development of an innovative employee bonus management product deployed across all 93 METRO France warehouses nationwide. The system automated bonus calculation and distribution, replacing spreadsheet-based workflows with a reliable, auditable digital solution. The impact was significant: staff turnover decreased across warehouses, operational efficiency improved, and the overall employee experience was meaningfully enhanced.</p>
 
+#### In-Store Ordering Kiosks & Digital Customer Journey
+
+<p>I contributed to the development of in-store ordering kiosks deployed across METRO France warehouses. These kiosks allow professional clients to order heavy or bulky products directly from the warehouse floor, with dedicated pickup within 30 minutes. The system integrates with METRO's broader click-and-collect infrastructure, connecting online ordering, in-store terminals, and order status tracking.</p>
+
+<p>A key feature I worked on was the order status display screen — a real-time, auto-scrolling interface showing live preparation status across active orders. Deployed across all warehouse locations, this touchpoint sits at the intersection of physical retail and digital operations, improving throughput and client experience simultaneously.</p>
+
+<p>These kiosks are part of METRO France's wider in-store digitalization push, which also includes self-scanning, cash management terminals, and mobile payment — all converging toward a fully digital client journey in cash-and-carry retail.</p>
+
 #### Scrum & Cross-Team Collaboration
 
 <p>Working within an Agile Scrum framework, I collaborated with product owners, designers, and QA engineers to deliver incremental value at each sprint. The structured approach allowed the team to maintain momentum on long-running infrastructure work while continuously delivering user-facing features.</p>
+
+#### References
+
+- [METRO France Lyon-Gerland — in-store ordering kiosks for heavy products](https://www.metro.fr/halles/lyon-gerland)
+- [Clic & Retrait — METRO France click-and-collect service](https://www.metro.fr/service/approvisionnement/clic-retrait)
