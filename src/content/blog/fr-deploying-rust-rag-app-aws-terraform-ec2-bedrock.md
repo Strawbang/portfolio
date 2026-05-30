@@ -1,5 +1,5 @@
 ---
-title: "Déployer une app RAG Rust sur AWS avec Terraform : pourquoi on a choisi EC2 plutôt que Bedrock"
+title: "Déployer une app RAG Rust sur AWS avec Terraform : pourquoi j'ai choisi EC2 plutôt que Bedrock"
 description: "Retour d'expérience concret sur le déploiement d'une application RAG en Rust sur AWS EC2 avec Terraform — gestion des données Qdrant sur EBS, CI/CD GitLab sans credentials statiques, et les vrais arbitrages entre self-hosting et AWS Bedrock."
 publishDate: 2026-05-30
 tags: ["DevOps", "AWS", "Rust"]
@@ -10,23 +10,23 @@ lang: "fr"
 relatedPosts: ["model-context-protocol-mcp-cli-rust-ide", "claude-code-jira-mcp-legacy-codebase"]
 ---
 
-Quand on a commencé à construire un système RAG en Rust pour documenter automatiquement des codebases legacy, la première question de production n'était pas sur le modèle ni sur les embeddings. C'était : où est-ce qu'on fait tourner ça ?
+Quand j'ai commencé à construire un système RAG en Rust pour documenter automatiquement des codebases legacy, la première question de production n'était pas sur le modèle ni sur les embeddings. C'était : où est-ce que je fais tourner ça ?
 
-La réponse évidente en 2026, c'est AWS Bedrock. C'est managé, ça scale, et AWS le pousse fort. On a choisi EC2. Cet article explique pourquoi, et détaille l'infrastructure Terraform qu'on a construite pour que ça tourne correctement.
+La réponse évidente en 2026, c'est AWS Bedrock. C'est managé, ça scale, et AWS le pousse fort. J'ai choisi EC2. Cet article explique pourquoi, et détaille l'infrastructure Terraform que j'ai construite pour que ça tourne correctement.
 
 ## Pourquoi pas Bedrock ?
 
-Bedrock est le bon choix pour beaucoup d'équipes. Mais pas pour nous, pour trois raisons.
+Bedrock est le bon choix pour beaucoup d'équipes. Mais pas pour moi, pour trois raisons.
 
-**On avait besoin de Qdrant.** L'application utilise [Qdrant](https://qdrant.tech) comme base de données vectorielle — un moteur de recherche de similarité haute performance écrit en Rust. Le store vectoriel natif de Bedrock, c'est Amazon OpenSearch Serverless ou pgvector. Migrer vers l'un ou l'autre aurait signifié réécrire la logique de requêtes principale et perdre des fonctionnalités dont on dépendait : collections nommées, filtrage de payload, métriques de distance fine.
+**J'avais besoin de Qdrant.** L'application utilise [Qdrant](https://qdrant.tech) comme base de données vectorielle — un moteur de recherche de similarité haute performance écrit en Rust. Le store vectoriel natif de Bedrock, c'est Amazon OpenSearch Serverless ou pgvector. Migrer vers l'un ou l'autre aurait signifié réécrire la logique de requêtes principale et perdre des fonctionnalités dont je dépendais : collections nommées, filtrage de payload, métriques de distance fine.
 
-**On fait tourner un binaire Rust, pas du Python.** La plupart des tutos Bedrock supposent LangChain + Python. Notre backend est un binaire Rust compilé. L'overhead d'adapter l'architecture à Lambda (cold starts, taille du binaire, async runtime) ne valait pas le coup pour un outil interne à trafic prévisible.
+**Je fais tourner un binaire Rust, pas du Python.** La plupart des tutos Bedrock supposent LangChain + Python. Mon backend est un binaire Rust compilé. L'overhead d'adapter l'architecture à Lambda (cold starts, taille du binaire, async runtime) ne valait pas le coup pour un outil interne à trafic prévisible.
 
 **La prédictibilité des coûts comptait.** Bedrock facture au token consommé. Pour un outil qui indexe des codebases Java entières — parfois des millions de tokens par projet — la facturation devient imprévisible. Un EC2 `t3.medium` à ~30€/mois est plus facile à raisonner.
 
 ## La stack
 
-Avant d'entrer dans Terraform, voici ce qu'on déploie :
+Avant d'entrer dans Terraform, voici ce que je déploie :
 
 - **Backend** : binaire Rust packagé en image Docker, faisant tourner le moteur RAG, l'API HTTP et le serveur MCP
 - **Frontend** : app Angular servie via nginx dans un second conteneur Docker
@@ -116,11 +116,11 @@ resource "aws_volume_attachment" "data" {
 }
 ```
 
-Le `prevent_destroy = true` signifie que Terraform refusera d'exécuter tout plan qui supprimerait ce volume. C'est un garde-fou contre un `terraform destroy` accidentel. Si on a vraiment besoin de le supprimer, on retire le bloc lifecycle, on applique, puis on détruit.
+Le `prevent_destroy = true` signifie que Terraform refusera d'exécuter tout plan qui supprimerait ce volume. C'est un garde-fou contre un `terraform destroy` accidentel. Si j'ai vraiment besoin de le supprimer, je retire le bloc lifecycle, j'applique, puis je détruis.
 
 Sur l'instance, `/data` est monté depuis ce volume au démarrage via `user_data`. Les bases SQLite et les collections Qdrant vivent toutes là. L'instance est remplaçable ; le volume de données ne l'est pas.
 
-On a aussi mis en place des sauvegardes AWS Backup quotidiennes :
+J'ai aussi mis en place des sauvegardes AWS Backup quotidiennes :
 
 ```hcl
 resource "aws_backup_plan" "daily" {
@@ -138,11 +138,11 @@ resource "aws_backup_plan" "daily" {
 }
 ```
 
-Sept jours de snapshots quotidiens. Si quelque chose corrompt le storage Qdrant, on restaure depuis la sauvegarde de la nuit précédente.
+Sept jours de snapshots quotidiens. Si quelque chose corrompt le storage Qdrant, je restaure depuis la sauvegarde de la nuit précédente.
 
 ### Secrets Manager pour les clés LLM
 
-Ne jamais mettre des clés API dans `terraform.tfvars` ou dans des variables d'environnement dans `user_data`. On utilise Secrets Manager :
+Ne jamais mettre des clés API dans `terraform.tfvars` ou dans des variables d'environnement dans `user_data`. J'utilise Secrets Manager :
 
 ```hcl
 resource "aws_secretsmanager_secret" "openrouter_api_key" {
@@ -160,7 +160,7 @@ resource "aws_secretsmanager_secret_version" "openrouter_api_key" {
 }
 ```
 
-Le `ignore_changes = [secret_string]` est essentiel : Terraform crée le secret avec un placeholder, puis on met la vraie valeur via CLI. Les `terraform apply` suivants n'écraseront pas ce qu'on a défini manuellement.
+Le `ignore_changes = [secret_string]` est essentiel : Terraform crée le secret avec un placeholder, puis je mets la vraie valeur via CLI. Les `terraform apply` suivants n'écraseront pas ce que j'ai défini manuellement.
 
 ```bash
 aws secretsmanager put-secret-value \
@@ -172,7 +172,7 @@ L'instance EC2 a un rôle IAM avec la permission de lire ces secrets. Le `user_d
 
 ### ALB avec TLS automatique
 
-L'ALB gère la terminaison TLS. Si on fournit un `domain_name` et un `zone_id` Route 53, Terraform crée et valide automatiquement un certificat ACM :
+L'ALB gère la terminaison TLS. Si je fournis un `domain_name` et un `zone_id` Route 53, Terraform crée et valide automatiquement un certificat ACM :
 
 ```hcl
 resource "aws_acm_certificate" "main" {
@@ -188,11 +188,11 @@ resource "aws_acm_certificate" "main" {
 
 Le HTTP sur le port 80 redirige vers HTTPS avec un 301. La politique TLS est `ELBSecurityPolicy-TLS13-1-2-2021-06`, qui impose TLS 1.3 et 1.2 uniquement.
 
-Sans domaine, la stack fonctionne quand même — on obtient un endpoint DNS ALB en HTTP uniquement. Pratique pour les environnements de staging.
+Sans domaine, la stack fonctionne quand même — j'obtiens un endpoint DNS ALB en HTTP uniquement. Pratique pour les environnements de staging.
 
 ## CI/CD sans credentials long-lived
 
-L'approche classique pour GitLab CI → AWS consiste à créer un utilisateur IAM, générer des access keys et les stocker dans les variables CI. Ça marche, mais on se retrouve avec des credentials statiques qui n'expirent jamais et sont stockés dans les paramètres GitLab pour toujours.
+L'approche classique pour GitLab CI → AWS consiste à créer un utilisateur IAM, générer des access keys et les stocker dans les variables CI. Ça marche, mais vous vous retrouvez avec des credentials statiques qui n'expirent jamais et sont stockés dans les paramètres GitLab pour toujours.
 
 La meilleure approche : la **fédération OIDC**. GitLab génère un JWT signé pour chaque exécution de pipeline. AWS vérifie le JWT auprès du provider OIDC de GitLab et émet des credentials temporaires. Aucune clé statique nulle part.
 
@@ -247,11 +247,11 @@ Le rôle CI a uniquement la permission de pusher vers ECR et de déclencher des 
 
 ## Ce que je referais différemment
 
-**ECS Fargate pour les conteneurs applicatifs, EC2 pour Qdrant.** Les conteneurs applicatifs (backend, frontend) sont stateless — ils sont parfaits pour Fargate. La seule raison pour laquelle on a tout gardé sur EC2, c'était la simplicité opérationnelle au départ. Avec Fargate pour l'app et une instance EC2 dédiée pour Qdrant, on obtient des déploiements rolling et une meilleure isolation des pannes.
+**ECS Fargate pour les conteneurs applicatifs, EC2 pour Qdrant.** Les conteneurs applicatifs (backend, frontend) sont stateless — ils sont parfaits pour Fargate. La seule raison pour laquelle j'ai tout gardé sur EC2, c'était la simplicité opérationnelle au départ. Avec Fargate pour l'app et une instance EC2 dédiée pour Qdrant, on obtient des déploiements rolling et une meilleure isolation des pannes.
 
 **RDS PostgreSQL plutôt que SQLite pour les métadonnées.** SQLite fonctionne bien pour une instance unique, mais crée des problèmes dès qu'on veut scaler horizontalement ou faire du blue/green deployment. Le coût de migration est faible ; le gain en flexibilité future est élevé.
 
-**Mettre en place les alarmes CloudWatch dès le premier jour.** On a ajouté le monitoring après le premier incident en production. L'alarme sur le compteur d'hôtes unhealthy de l'ALB devrait être la première chose qu'on crée, pas la dernière.
+**Mettre en place les alarmes CloudWatch dès le premier jour.** J'ai ajouté le monitoring après le premier incident en production. L'alarme sur le compteur d'hôtes unhealthy de l'ALB devrait être la première chose qu'on crée, pas la dernière.
 
 ## Conclusion
 

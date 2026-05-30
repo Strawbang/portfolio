@@ -1,5 +1,5 @@
 ---
-title: "Deploying a Self-Hosted RAG App on AWS with Terraform: Why We Chose EC2 Over Bedrock"
+title: "Deploying a Self-Hosted RAG App on AWS with Terraform: Why I Chose EC2 Over Bedrock"
 description: "A practical breakdown of deploying a Rust RAG application on AWS EC2 using Terraform — covering stateful Qdrant data on EBS, GitLab OIDC for credential-free CI/CD, and the real trade-offs between self-hosting and AWS Bedrock."
 publishDate: 2026-05-30
 tags: ["DevOps", "AWS", "Rust"]
@@ -10,23 +10,23 @@ lang: "en"
 relatedPosts: ["model-context-protocol-mcp-cli-rust-ide", "claude-code-jira-mcp-legacy-codebase"]
 ---
 
-When we started building a Rust-based RAG system for automatically documenting legacy codebases, the first production question wasn't about the model or the embeddings. It was about where to run it.
+When I started building a Rust-based RAG system for automatically documenting legacy codebases, the first production question wasn't about the model or the embeddings. It was about where to run it.
 
-The obvious answer in 2026 is AWS Bedrock. It's managed, it scales, and AWS pushes it hard. We chose EC2 instead. This article explains why, and walks through the Terraform infrastructure we built to make it work reliably.
+The obvious answer in 2026 is AWS Bedrock. It's managed, it scales, and AWS pushes it hard. I chose EC2 instead. This article explains why, and walks through the Terraform infrastructure I built to make it work reliably.
 
 ## Why Not Bedrock?
 
-Bedrock is the right choice for a lot of teams. But it wasn't right for us, for three reasons.
+Bedrock is the right choice for a lot of teams. But it wasn't right for me, for three reasons.
 
-**We needed Qdrant.** The application uses [Qdrant](https://qdrant.tech) as its vector database — a high-performance similarity search engine written in Rust. Bedrock's native vector store is Amazon OpenSearch Serverless or pgvector. Migrating to either would have meant rewriting core query logic and losing features we depended on: named collections, payload filtering, and fine-grained distance metrics.
+**I needed Qdrant.** The application uses [Qdrant](https://qdrant.tech) as its vector database — a high-performance similarity search engine written in Rust. Bedrock's native vector store is Amazon OpenSearch Serverless or pgvector. Migrating to either would have meant rewriting core query logic and losing features I depended on: named collections, payload filtering, and fine-grained distance metrics.
 
-**We run a Rust binary, not Python.** Most Bedrock tutorials assume LangChain + Python. Our backend is a compiled Rust binary. The overhead of adapting our architecture to Lambda (cold starts, binary size, async runtime) was not worth it for an internal tool with predictable traffic.
+**I run a Rust binary, not Python.** Most Bedrock tutorials assume LangChain + Python. My backend is a compiled Rust binary. The overhead of adapting my architecture to Lambda (cold starts, binary size, async runtime) was not worth it for an internal tool with predictable traffic.
 
 **Cost predictability mattered.** Bedrock charges per token consumed. For a tool that indexes entire Java codebases — sometimes millions of tokens per project — the billing becomes unpredictable. A single EC2 `t3.medium` at ~$30/month is easier to reason about.
 
 ## The Stack
 
-Before getting into Terraform, here's what we're deploying:
+Before getting into Terraform, here's what I'm deploying:
 
 - **Backend**: Rust binary packaged as a Docker image, running the RAG engine, HTTP API, and MCP server
 - **Frontend**: Angular app served via nginx in a second Docker container
@@ -120,7 +120,7 @@ The `prevent_destroy = true` means Terraform will refuse to execute any plan tha
 
 On the instance, `/data` is mounted from this volume at boot via `user_data`. SQLite databases and Qdrant collections both live there. The instance is replaceable; the data volume is not.
 
-We also set up daily AWS Backup:
+I also set up daily AWS Backup:
 
 ```hcl
 resource "aws_backup_plan" "daily" {
@@ -247,11 +247,11 @@ The CI role only has permission to push to ECR and trigger SSM commands on the E
 
 ## What I Would Do Differently
 
-**Use ECS Fargate for the application containers, keep EC2 for Qdrant.** The application containers (backend, frontend) are stateless — they're perfect for Fargate. The only reason we kept everything on EC2 was operational simplicity at the start. With Fargate for the app and a dedicated EC2 instance for Qdrant, you get rolling deployments and better fault isolation.
+**Use ECS Fargate for the application containers, keep EC2 for Qdrant.** The application containers (backend, frontend) are stateless — they're perfect for Fargate. The only reason I kept everything on EC2 was operational simplicity at the start. With Fargate for the app and a dedicated EC2 instance for Qdrant, you get rolling deployments and better fault isolation.
 
 **Use RDS PostgreSQL instead of SQLite for metadata.** SQLite works fine for a single instance, but it creates problems the moment you want to scale horizontally or run blue/green deployments. The switch cost is low; the future flexibility gain is high.
 
-**Set up CloudWatch alarms from day one.** We added monitoring after the first production incident. The ALB unhealthy host count alarm should be the first thing you create, not the last.
+**Set up CloudWatch alarms from day one.** I added monitoring after the first production incident. The ALB unhealthy host count alarm should be the first thing you create, not the last.
 
 ## Conclusion
 
