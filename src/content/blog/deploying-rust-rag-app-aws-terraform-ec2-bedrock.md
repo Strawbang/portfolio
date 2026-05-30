@@ -1,7 +1,7 @@
 ---
 title: "Deploying a Self-Hosted RAG App on AWS with Terraform: Why We Chose EC2 Over Bedrock"
 description: "A practical breakdown of deploying a Rust RAG application on AWS EC2 using Terraform — covering stateful Qdrant data on EBS, GitLab OIDC for credential-free CI/CD, and the real trade-offs between self-hosting and AWS Bedrock."
-publishDate: 2026-05-21
+publishDate: 2026-05-30
 tags: ["DevOps", "AWS", "Rust"]
 keywords: ["Terraform", "AWS", "EC2", "Qdrant", "RAG", "Rust", "Bedrock", "self-hosted", "GitLab CI", "OIDC", "IaC"]
 img: "/assets/deploying-rust-rag-aws-terraform.png"
