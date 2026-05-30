@@ -17,11 +17,11 @@ export const GET: APIRoute = async () => {
   const lines: string[] = [
     '# Djamel Bougouffa',
     '',
-    '> Full-Stack Software Engineer based in Paris, France. Specializing in TypeScript, React, Node.js, Rust, MCP, and agentic AI workflows. Currently at Ippon Technologies building AI-driven legacy modernization tools.',
+    '> Full-Stack Software Engineer based in Paris, France. Specializing in TypeScript, React, Node.js, Angular, Rust, MCP, and legacy modernization. Currently on a mission at SUEZ IWS via Ippon Technologies, modernizing the Pléco B2B extranet.',
     '',
     '## About',
     '',
-    `- [About](${site}/about/): Professional background, experience (Ippon Technologies, SYSTRAN, Wemanity), skills, education, and contact`,
+    `- [About](${site}/about/): Professional background, experience (SUEZ IWS via Ippon Technologies, SYSTRAN, Wemanity), skills, education, and contact`,
     `- [Uses](${site}/uses/): Hardware and software setup — MacBook Pro M4, Windsurf, TypeScript, Rust, Docker, Kubernetes`,
     `- [Experience](${site}/work/): Portfolio of professional projects`,
     '',
