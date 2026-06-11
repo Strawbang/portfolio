@@ -169,6 +169,8 @@ export default defineConfig({
 			if (page.includes('/og/')) return false;
 			if (page.includes('/fr/uses')) return false;
 			if (page.includes('/contact/success')) return false;
+			const otherLangs = ['ja', 'zh', 'th', 'vi', 'ms', 'ko', 'id', 'tl', 'ar', 'hi', 'de', 'es', 'pt'];
+			if (otherLangs.some(lang => page.includes(`/${lang}/`) || page.endsWith(`/${lang}`))) return false;
 			return true;
 		},
 			customPages: [],
