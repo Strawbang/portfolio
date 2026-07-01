@@ -19,3 +19,6 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# local embedding cache (semtree/fastembed)
+.fastembed_cache/
