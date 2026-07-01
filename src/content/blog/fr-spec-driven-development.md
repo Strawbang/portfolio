@@ -37,7 +37,7 @@ La discipline clé est de séparer le *quoi* du *comment* : on s'accorde sur les
 ## SDD vs BDD vs PDD
 
 - **BDD** formalise le comportement via des tests (Given/When/Then). Le SDD organise tout le projet autour de la spec. Les deux peuvent coexister.
-- **PDD** (Prompt-Driven Development) optimise l'échange avec l'IA via des prompts — efficace pour prototyper, mais le prompt est éphémère. Le SDD utilise les prompts comme outil, la spec reste la référence.
+- **PDD** (Prompt-Driven Development) optimise l'échange avec l'IA via des prompts : efficace pour prototyper, mais le prompt est éphémère. Le SDD utilise les prompts comme outil, la spec reste la référence.
 
 ## Ce que l'IA change vraiment
 

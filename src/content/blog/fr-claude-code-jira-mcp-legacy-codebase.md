@@ -1,6 +1,6 @@
 ---
 title: "Comment j'utilise Claude Code et Jira MCP pour moderniser les codebases legacy"
-description: "Comment je connecte Claude Code à Jira via MCP pour passer du ticket à la pull request sur du legacy Java — ma config exacte, CLAUDE.md et résultats concrets."
+description: "Comment je connecte Claude Code à Jira via MCP pour passer du ticket à la pull request sur du legacy Java : ma config exacte, CLAUDE.md et résultats concrets."
 publishDate: 2026-04-28
 tags: ["IA", "Software Engineering"]
 keywords: ["Claude Code", "MCP", "Jira", "Java", "Legacy Code", "IA"]

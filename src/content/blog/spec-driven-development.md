@@ -36,7 +36,7 @@ The key discipline is separating *what* from *how*: you agree on expected behavi
 ## SDD vs BDD vs PDD
 
 - **BDD** formalizes behavior through tests (Given/When/Then). SDD structures the entire project around the spec. Both can coexist.
-- **PDD** (Prompt-Driven Development) optimizes the exchange with AI via prompts — effective for prototyping, but the prompt is ephemeral. SDD uses prompts as a tool while the spec remains the reference.
+- **PDD** (Prompt-Driven Development) optimizes the exchange with AI via prompts: effective for prototyping, but the prompt is ephemeral. SDD uses prompts as a tool while the spec remains the reference.
 
 ## What AI changes
 

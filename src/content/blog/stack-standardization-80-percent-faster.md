@@ -53,7 +53,7 @@ The key insight: **a standard only sticks if it's better for the teams, not just
 The shared base configuration made the standard concrete from day one:
 
 ```json
-// tsconfig.base.json — inherited by all products
+// tsconfig.base.json (inherited by all products)
 {
   "compilerOptions": {
     "target": "ES2022",
@@ -83,7 +83,7 @@ New products were started on the new stack by default. Existing products were mi
 The shared CI/CD template removed weeks of infrastructure setup per project:
 
 ```yaml
-# .github/workflows/ci.yml — reusable across all products
+# .github/workflows/ci.yml (reusable across all products)
 name: CI
 on: [push, pull_request]
 jobs:

@@ -1,6 +1,6 @@
 ---
 title: "Deploying a Self-Hosted RAG App on AWS with Terraform: Why I Chose EC2 Over Bedrock"
-description: "A practical breakdown of deploying a Rust RAG application on AWS EC2 using Terraform — covering stateful Qdrant data on EBS, GitLab OIDC for credential-free CI/CD, and the real trade-offs between self-hosting and AWS Bedrock."
+description: "A practical breakdown of deploying a Rust RAG application on AWS EC2 using Terraform: stateful Qdrant data on EBS, GitLab OIDC for credential-free CI/CD, and the real trade-offs between self-hosting and AWS Bedrock."
 publishDate: 2026-05-30
 tags: ["DevOps", "AWS", "Rust"]
 keywords: ["Terraform", "AWS", "EC2", "Qdrant", "RAG", "Rust", "Bedrock", "self-hosted", "GitLab CI", "OIDC", "IaC"]
@@ -18,11 +18,11 @@ The obvious answer in 2026 is AWS Bedrock. It's managed, it scales, and AWS push
 
 Bedrock is the right choice for a lot of teams. But it wasn't right for me, for three reasons.
 
-**I needed Qdrant.** The application uses [Qdrant](https://qdrant.tech) as its vector database — a high-performance similarity search engine written in Rust. Bedrock's native vector store is Amazon OpenSearch Serverless or pgvector. Migrating to either would have meant rewriting core query logic and losing features I depended on: named collections, payload filtering, and fine-grained distance metrics.
+**I needed Qdrant.** The application uses [Qdrant](https://qdrant.tech) as its vector database, a high-performance similarity search engine written in Rust. Bedrock's native vector store is Amazon OpenSearch Serverless or pgvector. Migrating to either would have meant rewriting core query logic and losing features I depended on: named collections, payload filtering, and fine-grained distance metrics.
 
 **I run a Rust binary, not Python.** Most Bedrock tutorials assume LangChain + Python. My backend is a compiled Rust binary. The overhead of adapting my architecture to Lambda (cold starts, binary size, async runtime) was not worth it for an internal tool with predictable traffic.
 
-**Cost predictability mattered.** Bedrock charges per token consumed. For a tool that indexes entire Java codebases — sometimes millions of tokens per project — the billing becomes unpredictable. A single EC2 `t3.medium` at ~$30/month is easier to reason about.
+**Cost predictability mattered.** Bedrock charges per token consumed. For a tool that indexes entire Java codebases (sometimes millions of tokens per project), the billing becomes unpredictable. A single EC2 `t3.medium` at ~$30/month is easier to reason about.
 
 ## The Stack
 
@@ -31,7 +31,7 @@ Before getting into Terraform, here's what I'm deploying:
 - **Backend**: Rust binary packaged as a Docker image, running the RAG engine, HTTP API, and MCP server
 - **Frontend**: Angular app served via nginx in a second Docker container
 - **Vector store**: Qdrant, running as a Docker container on the same instance
-- **Database**: SQLite for project metadata (no RDS — keeps costs down)
+- **Database**: SQLite for project metadata (no RDS, which keeps costs down)
 - **LLM provider**: OpenRouter (calls Claude, GPT-4, etc. via a single API)
 
 Everything runs on one EC2 instance behind an Application Load Balancer. Not microservices. Not Kubernetes. One instance with Docker Compose.
@@ -88,7 +88,7 @@ terraform init \
   -backend-config="dynamodb_table=my-app-tflock"
 ```
 
-The DynamoDB table provides state locking — critical if multiple engineers or CI pipelines run Terraform concurrently.
+The DynamoDB table provides state locking, which is critical if multiple engineers or CI pipelines run Terraform concurrently.
 
 ### The Stateful Problem: Qdrant on EBS
 
@@ -188,7 +188,7 @@ resource "aws_acm_certificate" "main" {
 
 HTTP on port 80 redirects to HTTPS with a 301. The TLS policy is `ELBSecurityPolicy-TLS13-1-2-2021-06`, which enforces TLS 1.3 and 1.2 only.
 
-Without a domain, the stack still works — you get an HTTP-only ALB DNS endpoint. Useful for staging environments.
+Without a domain, the stack still works: you get an HTTP-only ALB DNS endpoint. Useful for staging environments.
 
 ## CI/CD Without Long-Lived Credentials
 
@@ -210,7 +210,7 @@ resource "aws_iam_role" "gitlab_ci" {
 }
 ```
 
-The trust policy restricts which pipelines can assume the role — only `main` branch and tags of the specific project:
+The trust policy restricts which pipelines can assume the role: only `main` branch and tags of the specific project:
 
 ```hcl
 condition {
@@ -247,7 +247,7 @@ The CI role only has permission to push to ECR and trigger SSM commands on the E
 
 ## What I Would Do Differently
 
-**Use ECS Fargate for the application containers, keep EC2 for Qdrant.** The application containers (backend, frontend) are stateless — they're perfect for Fargate. The only reason I kept everything on EC2 was operational simplicity at the start. With Fargate for the app and a dedicated EC2 instance for Qdrant, you get rolling deployments and better fault isolation.
+**Use ECS Fargate for the application containers, keep EC2 for Qdrant.** The application containers (backend, frontend) are stateless: they're perfect for Fargate. The only reason I kept everything on EC2 was operational simplicity at the start. With Fargate for the app and a dedicated EC2 instance for Qdrant, you get rolling deployments and better fault isolation.
 
 **Use RDS PostgreSQL instead of SQLite for metadata.** SQLite works fine for a single instance, but it creates problems the moment you want to scale horizontally or run blue/green deployments. The switch cost is low; the future flexibility gain is high.
 
@@ -257,8 +257,8 @@ The CI role only has permission to push to ECR and trigger SSM commands on the E
 
 Choosing EC2 over Bedrock wasn't ideological. It was a pragmatic response to three constraints: Qdrant as the vector store, a compiled Rust binary, and cost predictability for a variable indexing workload.
 
-The Terraform infrastructure described here — roughly 500 lines across eight files — provisions a production-grade deployment with TLS, daily backups, credential-free CI/CD, and protected persistent storage. It's not the simplest setup, but each piece earns its place.
+The Terraform infrastructure described here (roughly 500 lines across eight files) provisions a production-grade deployment with TLS, daily backups, credential-free CI/CD, and protected persistent storage. It's not the simplest setup, but each piece earns its place.
 
 If you're running a self-hosted AI application and have similar constraints, the EC2 + EBS + Secrets Manager pattern is worth considering. The operational burden is real, but the control and cost profile often justify it.
 
-The full Terraform template from this article — generalized and ready to fork — is available at [github.com/Strawbang/terraform-aws-ai-stack](https://github.com/Strawbang/terraform-aws-ai-stack).
+The full Terraform template from this article, generalized and ready to fork, is available at [github.com/Strawbang/terraform-aws-ai-stack](https://github.com/Strawbang/terraform-aws-ai-stack).

@@ -36,11 +36,11 @@ TDD in particular changes the dynamic: writing the test first forces you to defi
 
 I've stopped treating test coverage as a metric. I treat it as a precondition. If the AI makes a change that isn't covered by tests, either the tests come first or the change doesn't happen.
 
-Some in the craftsmanship community argue that TDD doesn't apply the same way when AI is writing the code — and they're right that the *mechanics* change. The classic Red → Green → Refactor cycle was designed for a human writing both the test and the implementation, where the act of coding is itself a design activity.
+Some in the craftsmanship community argue that TDD doesn't apply the same way when AI is writing the code, and they're right that the *mechanics* change. The classic Red → Green → Refactor cycle was designed for a human writing both the test and the implementation, where the act of coding is itself a design activity.
 
 With AI, that part changes. But the contract the test creates doesn't.
 
-The test written before the implementation still defines what "correct" means. It still forces you to think through the expected behavior before generating anything. The AI writes the Green — but you own the Red. And the Refactor is entirely yours. What disappears is the design-through-implementation feedback loop. What remains — and what matters most on legacy codebases with AI — is the safety contract.
+The test written before the implementation still defines what "correct" means. It still forces you to think through the expected behavior before generating anything. The AI writes the Green, but you own the Red. And the Refactor is entirely yours. What disappears is the design-through-implementation feedback loop. What remains, and what matters most on legacy codebases with AI, is the safety contract.
 
 Concretely, before asking an AI to touch any business logic, I write a characterization test first:
 
@@ -60,7 +60,7 @@ void shouldApplyReducedVatRateForB2bGermanOrders() {
     assertThat(vat).isEqualByComparingTo(new BigDecimal("190"));
 }
 
-// Step 2: now the AI has a target — and a safety net
+// Step 2: now the AI has a target, and a safety net
 ```
 
 Without that test, the AI would have refactored `calculateVat()` to use a constant `VAT_RATE = 0.20`: clean, consistent, and silently wrong for every B2B German order.
@@ -76,7 +76,7 @@ Clean code is documentation that never goes stale. In AI-assisted development, w
 A variable named `result` is technical debt. A variable named `eligibleInvoicesForRecovery` is self-documenting. The AI doesn't care. Your team does.
 
 ```java
-// What AI often generates — correct, unreadable
+// What AI often generates: correct, unreadable
 BigDecimal r = o.getA().multiply(getR(o.getC(), o.getT()));
 
 // What craftsmanship demands
@@ -99,7 +99,7 @@ This is also where the Boy Scout Rule earns its keep: *leave the code a little b
 git log --oneline
 # a3f9c12 refactor order processing
 # (touches: OrderService, VatCalculator, InvoiceGenerator,
-#  PaymentProcessor, OrderRepository, OrderMapper — 847 lines changed)
+#  PaymentProcessor, OrderRepository, OrderMapper: 847 lines changed)
 
 # What craftsmanship looks like
 # 1f2a3b4 PROJ-421: extract VatRateResolver from OrderService
@@ -119,19 +119,19 @@ The discipline is in the refactoring step that follows. Before merging, ask: doe
 This isn't the AI's job. It's yours. AI is good at executing. It's not good at knowing when something is already done correctly somewhere else in a 200k-line codebase. That's institutional knowledge. That's craftsmanship.
 
 ```java
-// AI generated this in OrderService — looks fine in isolation
+// AI generated this in OrderService: looks fine in isolation
 private BigDecimal applyDiscount(BigDecimal amount, String customerType) {
     if ("B2B".equals(customerType)) return amount.multiply(new BigDecimal("0.90"));
     return amount;
 }
 
-// But this already existed in PricingService — for 3 years
+// But this already existed in PricingService, for 3 years
 public BigDecimal applyCustomerDiscount(BigDecimal basePrice, CustomerType type) {
     return basePrice.multiply(discountConfig.getRateFor(type));
 }
 ```
 
-Two implementations of the same logic, diverging silently. The AI didn't know. You do — if you look.
+Two implementations of the same logic, diverging silently. The AI didn't know. You do, if you look.
 
 ### 5. Collective Ownership Requires Explicit Standards
 
@@ -146,9 +146,9 @@ The fix is explicit: a `CLAUDE.md`, a `CONTRIBUTING.md`, linting rules with no e
 
 ## Non-negotiable rules
 - Never modify `LegacyOrderMapper` without characterization tests first
-- All monetary values in **cents (Long)** — never BigDecimal in the DB layer
-- VAT rates live in `VatRateConfig` — never hardcode them
-- Do NOT add `@Transactional` to scheduler jobs — they hold connections for minutes
+- All monetary values in **cents (Long)**, never BigDecimal in the DB layer
+- VAT rates live in `VatRateConfig`: never hardcode them
+- Do NOT add `@Transactional` to scheduler jobs: they hold connections for minutes
 
 ## Before any refactoring
 1. Write tests that describe current behavior
@@ -164,7 +164,7 @@ But `CLAUDE.md` is a *soft* constraint: the AI reads it if you configure it to. 
 For hexagonal architecture specifically, `eslint-plugin-boundaries` enforces layer isolation at the import level:
 
 ```js
-// .eslintrc — architectural boundaries as linting rules
+// .eslintrc: architectural boundaries as linting rules
 "boundaries/element-types": ["error", {
   default: "disallow",
   rules: [
@@ -182,7 +182,7 @@ If the AI generates `import { PrismaClient } from '@prisma/client'` inside your 
 
 For Java, you have three options depending on how far you want to go:
 
-**ArchUnit** — enforced as a test assertion, useful on legacy codebases where restructuring isn't an option:
+**ArchUnit**: enforced as a test assertion, useful on legacy codebases where restructuring isn't an option:
 
 ```java
 @Test
@@ -194,29 +194,29 @@ void domainShouldNotDependOnInfrastructure() {
 }
 ```
 
-**Multi-module Maven/Gradle** — structural enforcement. If `domain` doesn't declare `infrastructure` as a dependency, the import physically can't compile:
+**Multi-module Maven/Gradle**: structural enforcement. If `domain` doesn't declare `infrastructure` as a dependency, the import physically can't compile:
 
 ```xml
-<!-- domain/pom.xml — infrastructure simply isn't here -->
+<!-- domain/pom.xml: infrastructure simply isn't here -->
 <dependencies>
     <!-- no infrastructure dependency = no possible import -->
 </dependencies>
 ```
 
-**JPMS (Java 9+)** — the most native option. `module-info.java` declares exactly what each module can see. No `requires infrastructure` means a compile error, full stop:
+**JPMS (Java 9+)**: the most native option. `module-info.java` declares exactly what each module can see. No `requires infrastructure` means a compile error, full stop:
 
 ```java
 // domain/src/main/java/module-info.java
 module com.example.domain {
     exports com.example.domain.model;
     exports com.example.domain.port;
-    // no 'requires infrastructure' — import is a compile error
+    // no 'requires infrastructure': import is a compile error
 }
 ```
 
 On a greenfield project, multi-module or JPMS is the right answer. ArchUnit shines on legacy codebases where you can't restructure yet but need the guardrail immediately.
 
-This is the difference between *guidelines* and *governance*. `CLAUDE.md` tells the AI what to do. The linter — or the compiler — makes it impossible to do otherwise.
+This is the difference between *guidelines* and *governance*. `CLAUDE.md` tells the AI what to do. The linter, or the compiler, makes it impossible to do otherwise.
 
 ## What AI Actually Changes
 
@@ -224,7 +224,7 @@ To be fair: AI does change some things.
 
 **Exploration is faster.** Understanding a new codebase, tracing a data flow, finding where a bug lives. AI compresses this from hours to minutes. This is genuinely good. The archaeology part of software work is the least craft-intensive part anyway.
 
-**Boilerplate is gone.** Writing a CRUD endpoint, a DTO, a mapper — these things no longer require craft. They require a clear spec. That's a net positive: it shifts focus to where judgment actually matters.
+**Boilerplate is gone.** Writing a CRUD endpoint, a DTO, a mapper: these things no longer require craft. They require a clear spec. That's a net positive: it shifts focus to where judgment actually matters.
 
 **The craft is in the constraints.** The skill is no longer in typing. It's in defining what is correct before generating. The specification, the test, the `CLAUDE.md`, the review: these are the craft surfaces. They've always been the most important parts. AI just makes it obvious.
 
@@ -243,7 +243,7 @@ Software Craftsmanship is the discipline that keeps you honest in that loop.
 
 The principles didn't get replaced. They became the job.
 
-And if you're leading a team, your responsibility is double: not just practicing these standards yourself, but making them the baseline everyone — human and AI — operates from.
+And if you're leading a team, your responsibility is double: not just practicing these standards yourself, but making them the baseline everyone, human and AI, operates from.
 
 ## Key Takeaways
 
@@ -252,4 +252,4 @@ And if you're leading a team, your responsibility is double: not just practicing
 - **Keep changes small and reversible.** AI generates large diffs by default. Your discipline is in constraining it: one concept per commit, reviewable in 15 minutes.
 - **Refactoring is your job, not the AI's.** AI doesn't know what already exists in a 200k-line codebase. You do.
 - **Explicit standards enable collective ownership.** Without a `CLAUDE.md`, a `CONTRIBUTING.md`, and enforced linting, AI-assisted development accelerates divergence across your team.
-- **The risk multiplies without discipline.** An undisciplined team with AI doesn't write bad code slowly — it writes bad code fast.
+- **The risk multiplies without discipline.** An undisciplined team with AI doesn't write bad code slowly: it writes bad code fast.

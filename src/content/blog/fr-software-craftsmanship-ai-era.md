@@ -60,7 +60,7 @@ void shouldApplyReducedVatRateForB2bGermanOrders() {
     assertThat(vat).isEqualByComparingTo(new BigDecimal("190"));
 }
 
-// Étape 2 : maintenant l'IA a une cible — et un filet de sécurité
+// Étape 2 : maintenant l'IA a une cible, et un filet de sécurité
 ```
 
 Sans ce test, l'IA aurait refactorisé `calculateVat()` pour utiliser une constante `VAT_RATE = 0.20` : propre, cohérent, et silencieusement faux pour toutes les commandes B2B allemandes.
@@ -76,7 +76,7 @@ Le code propre est une documentation qui ne vieillit jamais mal. Dans le dévelo
 Une variable nommée `result` est de la dette technique. Une variable nommée `facturesEligiblesAuRecouvrement` est autodocumentée. L'IA s'en fiche. Votre équipe, non.
 
 ```java
-// Ce que l'IA génère souvent — correct, illisible
+// Ce que l'IA génère souvent : correct, illisible
 BigDecimal r = o.getA().multiply(getR(o.getC(), o.getT()));
 
 // Ce que le craftsmanship exige
@@ -99,7 +99,7 @@ C'est aussi là que la règle du Boy Scout prend tout son sens : *laissez le cod
 git log --oneline
 # a3f9c12 refactor order processing
 # (touche : OrderService, VatCalculator, InvoiceGenerator,
-#  PaymentProcessor, OrderRepository, OrderMapper — 847 lignes modifiées)
+#  PaymentProcessor, OrderRepository, OrderMapper : 847 lignes modifiées)
 
 # Ce que le craftsmanship donne
 # 1f2a3b4 PROJ-421: extraire VatRateResolver de OrderService
@@ -119,13 +119,13 @@ La discipline, c'est l'étape de refactoring qui suit. Avant de merger, posez-vo
 Ce n'est pas le travail de l'IA. C'est le vôtre. L'IA est bonne pour exécuter. Elle n'est pas bonne pour savoir quand quelque chose est déjà fait correctement ailleurs dans une codebase de 200k lignes. C'est la connaissance institutionnelle. C'est le craftsmanship.
 
 ```java
-// L'IA a généré ça dans OrderService — correct en isolation
+// L'IA a généré ça dans OrderService : correct en isolation
 private BigDecimal appliquerRemise(BigDecimal montant, String typeClient) {
     if ("B2B".equals(typeClient)) return montant.multiply(new BigDecimal("0.90"));
     return montant;
 }
 
-// Mais ça existait déjà dans PricingService — depuis 3 ans
+// Mais ça existait déjà dans PricingService, depuis 3 ans
 public BigDecimal appliquerRemiseClient(BigDecimal prixBase, TypeClient type) {
     return prixBase.multiply(configRemise.getTauxPour(type));
 }
@@ -146,9 +146,9 @@ La solution est explicite : un `CLAUDE.md`, un `CONTRIBUTING.md`, des règles de
 
 ## Règles non négociables
 - Ne jamais modifier `LegacyOrderMapper` sans tests de caractérisation d'abord
-- Toutes les valeurs monétaires en **centimes (Long)** — jamais BigDecimal en base de données
-- Les taux de TVA vivent dans `VatRateConfig` — ne jamais les coder en dur
-- Ne PAS ajouter `@Transactional` aux jobs du scheduler — ils maintiennent des connexions pendant des minutes
+- Toutes les valeurs monétaires en **centimes (Long)**, jamais BigDecimal en base de données
+- Les taux de TVA vivent dans `VatRateConfig` : ne jamais les coder en dur
+- Ne PAS ajouter `@Transactional` aux jobs du scheduler : ils maintiennent des connexions pendant des minutes
 
 ## Avant tout refactoring
 1. Écrire des tests qui décrivent le comportement actuel
@@ -164,7 +164,7 @@ Mais le `CLAUDE.md` est une contrainte *douce* : l'IA le respecte si vous le con
 Pour l'architecture hexagonale en particulier, `eslint-plugin-boundaries` impose l'isolation des couches au niveau des imports :
 
 ```js
-// .eslintrc — les frontières architecturales comme règles de linting
+// .eslintrc : les frontières architecturales comme règles de linting
 "boundaries/element-types": ["error", {
   default: "disallow",
   rules: [
@@ -182,7 +182,7 @@ Si l'IA génère `import { PrismaClient } from '@prisma/client'` à l'intérieur
 
 En Java, vous avez trois options selon jusqu'où vous souhaitez aller :
 
-**ArchUnit** — appliqué comme assertion de test, utile sur les codebases legacy où restructurer n'est pas une option :
+**ArchUnit** : appliqué comme assertion de test, utile sur les codebases legacy où restructurer n'est pas une option :
 
 ```java
 @Test
@@ -194,23 +194,23 @@ void domainShouldNotDependOnInfrastructure() {
 }
 ```
 
-**Multi-module Maven/Gradle** — contrainte structurelle. Si `domain` ne déclare pas `infrastructure` comme dépendance, l'import ne peut physiquement pas compiler :
+**Multi-module Maven/Gradle** : contrainte structurelle. Si `domain` ne déclare pas `infrastructure` comme dépendance, l'import ne peut physiquement pas compiler :
 
 ```xml
-<!-- domain/pom.xml — infrastructure n'est tout simplement pas là -->
+<!-- domain/pom.xml : infrastructure n'est tout simplement pas là -->
 <dependencies>
     <!-- pas de dépendance infrastructure = aucun import possible -->
 </dependencies>
 ```
 
-**JPMS (Java 9+)** — l'option la plus native. `module-info.java` déclare exactement ce que chaque module peut voir. Pas de `requires infrastructure` = erreur de compilation, point final :
+**JPMS (Java 9+)** : l'option la plus native. `module-info.java` déclare exactement ce que chaque module peut voir. Pas de `requires infrastructure` = erreur de compilation, point final :
 
 ```java
 // domain/src/main/java/module-info.java
 module com.example.domain {
     exports com.example.domain.model;
     exports com.example.domain.port;
-    // pas de 'requires infrastructure' — l'import est une erreur de compilation
+    // pas de 'requires infrastructure' : l'import est une erreur de compilation
 }
 ```
 
@@ -224,7 +224,7 @@ Pour être honnête : l'IA change bien certaines choses.
 
 **L'exploration est plus rapide.** Comprendre une nouvelle codebase, tracer un flux de données, trouver où vit un bug. L'IA compresse ça de plusieurs heures à quelques minutes. C'est genuinement bon. La partie archéologie du travail logiciel est de toute façon la moins porteuse de valeur artisanale.
 
-**Le boilerplate a disparu.** Écrire un endpoint CRUD, un DTO, un mapper — ces choses ne nécessitent plus de craft. Elles nécessitent une spec claire. C'est un gain net : ça déplace le focus là où le jugement compte vraiment.
+**Le boilerplate a disparu.** Écrire un endpoint CRUD, un DTO, un mapper : ces choses ne nécessitent plus de craft. Elles nécessitent une spec claire. C'est un gain net : ça déplace le focus là où le jugement compte vraiment.
 
 **Le craft est dans les contraintes.** La compétence n'est plus dans la frappe. Elle est dans la définition de ce qui est correct avant de générer. La spécification, le test, le `CLAUDE.md`, la revue : ce sont les surfaces du craft. Elles ont toujours été les parties les plus importantes. L'IA ne fait que le rendre évident.
 
@@ -243,7 +243,7 @@ Le Software Craftsmanship est la discipline qui vous garde honnête dans cette b
 
 Les principes n'ont pas été remplacés. Ils sont devenus le travail.
 
-Et si vous managez une équipe, votre responsabilité est double : pratiquer ces standards vous-même, mais aussi en faire le socle commun depuis lequel tout le monde — humain et IA — opère.
+Et si vous managez une équipe, votre responsabilité est double : pratiquer ces standards vous-même, mais aussi en faire le socle commun depuis lequel tout le monde, humain et IA, opère.
 
 ## Points clés à retenir
 
@@ -252,4 +252,4 @@ Et si vous managez une équipe, votre responsabilité est double : pratiquer ces
 - **Gardez les changements petits et réversibles.** L'IA génère de grands diffs par défaut. Votre discipline est de la contraindre : un concept par commit, relisible en 15 minutes.
 - **Le refactoring est votre travail, pas celui de l'IA.** L'IA ne sait pas ce qui existe déjà ailleurs dans une codebase de 200k lignes. Vous, si.
 - **Les standards explicites permettent l'ownership collectif.** Sans `CLAUDE.md`, sans `CONTRIBUTING.md`, sans linting appliqué, le développement assisté par IA accélère la divergence dans votre équipe.
-- **Le risque se multiplie sans discipline.** Une équipe sans rigueur avec l'IA n'écrit pas du mauvais code lentement — elle en écrit vite.
+- **Le risque se multiplie sans discipline.** Une équipe sans rigueur avec l'IA n'écrit pas du mauvais code lentement : elle en écrit vite.
