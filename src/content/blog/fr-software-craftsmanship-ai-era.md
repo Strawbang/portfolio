@@ -4,7 +4,7 @@ description: "Un agent IA a silencieusement cassé une règle métier vieille de
 publishDate: 2026-05-04
 tags: ["Software Engineering"]
 keywords: ["Software Craftsmanship", "Clean Code", "TDD", "Software Engineering", "Bonnes Pratiques", "IA"]
-img: "/assets/software-craftmanship-ai-era.png"
+img: "/assets/software-craftmanship-ai-era.webp"
 img_alt: "Un développeur qui relit du code à l'écran, les principes du craftsmanship à l'ère de l'IA"
 lang: "fr"
 relatedPosts: ["claude-code-jira-mcp-legacy-codebase", "spec-driven-development", "stack-standardization-80-percent-faster"]

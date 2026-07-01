@@ -4,7 +4,7 @@ description: "Retour d'expérience concret sur le déploiement d'une application
 publishDate: 2026-05-30
 tags: ["DevOps", "AWS", "Rust"]
 keywords: ["Terraform", "AWS", "EC2", "Qdrant", "RAG", "Rust", "Bedrock", "self-hosted", "GitLab CI", "OIDC", "IaC"]
-img: "/assets/deploying-rust-rag-aws-terraform.png"
+img: "/assets/deploying-rust-rag-aws-terraform.webp"
 img_alt: "Infrastructure AWS EC2 pour une application RAG Rust avec Terraform (schéma généré)"
 lang: "fr"
 relatedPosts: ["model-context-protocol-mcp-cli-rust-ide", "claude-code-jira-mcp-legacy-codebase"]

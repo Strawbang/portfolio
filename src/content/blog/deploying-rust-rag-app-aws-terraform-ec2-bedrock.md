@@ -4,7 +4,7 @@ description: "A practical breakdown of deploying a Rust RAG application on AWS E
 publishDate: 2026-05-30
 tags: ["DevOps", "AWS", "Rust"]
 keywords: ["Terraform", "AWS", "EC2", "Qdrant", "RAG", "Rust", "Bedrock", "self-hosted", "GitLab CI", "OIDC", "IaC"]
-img: "/assets/deploying-rust-rag-aws-terraform.png"
+img: "/assets/deploying-rust-rag-aws-terraform.webp"
 img_alt: "AWS EC2 infrastructure for a self-hosted Rust RAG app with Terraform"
 lang: "en"
 relatedPosts: ["model-context-protocol-mcp-cli-rust-ide", "claude-code-jira-mcp-legacy-codebase"]

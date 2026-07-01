@@ -4,7 +4,7 @@ description: "An AI agent silently broke a 10-year-old business rule on a legacy
 publishDate: 2026-05-04
 tags: ["Software Engineering"]
 keywords: ["Software Craftsmanship", "Clean Code", "TDD", "Software Engineering", "Best Practices", "AI"]
-img: "/assets/software-craftmanship-ai-era.png"
+img: "/assets/software-craftmanship-ai-era.webp"
 img_alt: "A developer reviewing code on screen, craftsmanship principles in the age of AI"
 lang: "en"
 relatedPosts: ["claude-code-jira-mcp-legacy-codebase", "spec-driven-development", "stack-standardization-80-percent-faster"]
