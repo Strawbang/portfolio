@@ -169,8 +169,6 @@ export default defineConfig({
 			if (page.includes('/og/')) return false;
 			if (page.includes('/fr/uses')) return false;
 			if (page.includes('/contact/success')) return false;
-			const otherLangs = ['ja', 'zh', 'th', 'vi', 'ms', 'ko', 'id', 'tl', 'ar', 'hi', 'de', 'es', 'pt'];
-			if (otherLangs.some(lang => page.includes(`/${lang}/`) || page.endsWith(`/${lang}`))) return false;
 			return true;
 		},
 			customPages: [],
@@ -203,19 +201,7 @@ export default defineConfig({
 				locales: {
 					en: 'en-US',
 					fr: 'fr-FR',
-					ja: 'ja-JP',
-					zh: 'zh-CN',
-					th: 'th-TH',
-					vi: 'vi-VN',
-					ms: 'ms-MY',
-					ko: 'ko-KR',
-					id: 'id-ID',
 					tl: 'fil-PH',
-					ar: 'ar-SA',
-					hi: 'hi-IN',
-					de: 'de-DE',
-					es: 'es-ES',
-					pt: 'pt-BR',
 				},
 			},
 		}),
@@ -238,7 +224,7 @@ export default defineConfig({
 	},
 	i18n: {
 		defaultLocale: 'en',
-		locales: ['en', 'fr', 'ja', 'zh', 'th', 'vi', 'ms', 'ko', 'id', 'tl', 'ar', 'hi', 'de', 'es', 'pt'],
+		locales: ['en', 'fr'],
 		routing: {
 			prefixDefaultLocale: false,
 		},
