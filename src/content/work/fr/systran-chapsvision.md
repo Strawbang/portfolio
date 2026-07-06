@@ -1,5 +1,7 @@
 ---
 title: SYSTRAN by ChapsVision
+relatedWork:
+  - metro-france
 publishDate: 2025-01-01 00:00:00
 img: /assets/optimized/systran.webp
 img_alt: Logo SYSTRAN by ChapsVision

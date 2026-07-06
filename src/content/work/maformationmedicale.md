@@ -1,5 +1,7 @@
 ---
 title: Ma Formation Médicale
+relatedWork:
+  - foklastudio
 publishDate: 2023-07-15 00:00:00
 img: /assets/optimized/maformationmedicale.webp
 img_alt: Website of Ma Formation Médicale

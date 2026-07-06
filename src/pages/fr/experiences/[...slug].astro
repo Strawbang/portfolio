@@ -11,6 +11,7 @@ import OptimizedImage from '../../../components/OptimizedImage.astro';
 import WorkSchema from '../../../components/WorkSchema.astro';
 import BreadcrumbSchema from '../../../components/BreadcrumbSchema.astro';
 import RelatedPosts from '../../../components/RelatedPosts.astro';
+import RelatedWork from '../../../components/RelatedWork.astro';
 import WorkContextCard from '../../../components/WorkContextCard.astro';
 
 interface Props {
@@ -95,6 +96,9 @@ const workAlternates = [
 			</main>
 		</div>
 		<div class="wrapper">
+			{entry.data.relatedWork && entry.data.relatedWork.length > 0 && (
+				<RelatedWork slugs={entry.data.relatedWork} lang="fr" />
+			)}
 			{entry.data.relatedPosts && entry.data.relatedPosts.length > 0 && (
 				<RelatedPosts slugs={entry.data.relatedPosts} lang="fr" />
 			)}

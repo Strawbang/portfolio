@@ -68,9 +68,9 @@ stack:
 
 <p>J'ai contribué au développement des bornes de commande déployées dans les Halles METRO France. Ces bornes permettent aux clients professionnels de commander des produits lourds ou volumineux directement depuis la Halle, avec un retrait dédié en 30 minutes maximum. Le système s'intègre à l'infrastructure click-and-collect de METRO, reliant la commande en ligne, les terminaux en Halle et le suivi des statuts de commande.</p>
 
-<p>Une fonctionnalité clé sur laquelle j'ai travaillé est l'écran de suivi des commandes — une interface temps réel avec défilement automatique affichant le statut de préparation des commandes en cours. Déployé dans toutes les Halles, ce point de contact se situe à l'intersection du retail physique et des opérations digitales, améliorant simultanément le débit et l'expérience client.</p>
+<p>Une fonctionnalité clé sur laquelle j'ai travaillé est l'écran de suivi des commandes, une interface temps réel avec défilement automatique affichant le statut de préparation des commandes en cours. Déployé dans toutes les Halles, ce point de contact se situe à l'intersection du retail physique et des opérations digitales, améliorant simultanément le débit et l'expérience client.</p>
 
-<p>Ces bornes s'inscrivent dans la démarche plus large de digitalisation en Halle chez METRO France, qui inclut également le self-scanning, les automates de gestion des espèces et le paiement mobile — convergeant vers un parcours client entièrement digitalisé dans le cash-and-carry.</p>
+<p>Ces bornes s'inscrivent dans la démarche plus large de digitalisation en Halle chez METRO France, qui inclut également le self-scanning, les automates de gestion des espèces et le paiement mobile, convergeant vers un parcours client entièrement digitalisé dans le cash-and-carry.</p>
 
 #### Scrum et collaboration transverse
 
@@ -78,5 +78,5 @@ stack:
 
 #### Références
 
-- [METRO France Lyon-Gerland — bornes de commande pour produits lourds/volumineux](https://www.metro.fr/halles/lyon-gerland)
-- [Clic & Retrait — service click-and-collect METRO France](https://www.metro.fr/service/approvisionnement/clic-retrait)
+- [METRO France Lyon-Gerland, bornes de commande pour produits lourds/volumineux](https://www.metro.fr/halles/lyon-gerland)
+- [Clic & Retrait, service click-and-collect METRO France](https://www.metro.fr/service/approvisionnement/clic-retrait)
