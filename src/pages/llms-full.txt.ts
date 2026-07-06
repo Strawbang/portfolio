@@ -10,7 +10,7 @@ export const GET: APIRoute = async () => {
     .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 
   const lines: string[] = [
-    '# Djamel Bougouffa — Full Content',
+    '# Djamel Bougouffa: Full Content',
     '',
     '> Full-Stack Software Engineer based in Paris, France. TypeScript, React, Node.js, Rust, MCP, RAG, agentic AI.',
     '> Portfolio: https://djamel-bougouffa.com',

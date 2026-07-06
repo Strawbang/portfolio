@@ -31,7 +31,7 @@ const allTags = [...new Set(allPosts.flatMap(post => post.tags ?? []))].sort();
 <FrenchBaseLayout title={l.metaTitle} description={l.metaDescription}>
   <ItemListSchema
     slot="head"
-    name="Blog — Djamel Bougouffa"
+    name="Blog | Djamel Bougouffa"
     url="https://djamel-bougouffa.com/fr/blog/"
     items={allPosts.map(p => ({
       name: p.title,

@@ -22,7 +22,7 @@ export const GET: APIRoute = async () => {
     '## About',
     '',
     `- [About](${site}/about/): Professional background, experience (SUEZ IWS via Ippon Technologies, SYSTRAN, Wemanity), skills, education, and contact`,
-    `- [Uses](${site}/uses/): Hardware and software setup — MacBook Pro M4, Windsurf, TypeScript, Rust, Docker, Kubernetes`,
+    `- [Uses](${site}/uses/): Hardware and software setup: MacBook Pro M4, Windsurf, TypeScript, Rust, Docker, Kubernetes`,
     `- [Experience](${site}/work/): Portfolio of professional projects`,
     '',
     '## Blog (English)',

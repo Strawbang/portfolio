@@ -17,7 +17,7 @@ const projects = (await getCollection("work", ({ id }) => id.startsWith('fr/')))
 <FrenchBaseLayout title={l.metaTitle} description={l.metaDescription}>
   <ItemListSchema
     slot="head"
-    name="Expériences Professionnelles — Djamel Bougouffa"
+    name="Expériences Professionnelles | Djamel Bougouffa"
     url="https://djamel-bougouffa.com/fr/experiences/"
     items={projects.map(p => ({
       name: p.data.title,
