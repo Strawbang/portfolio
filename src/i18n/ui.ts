@@ -10,6 +10,7 @@ export const showDefaultLang = false;
 export const routes: Record<string, Record<string, string>> = {
   fr: {
     'work': 'experiences',
+    'projects': 'projets',
     'about': 'a-propos',
     'blog': 'blog',
     'contact': 'contact'
@@ -21,6 +22,7 @@ export const ui = {
     'nav.home': 'Home',
     'nav.about': 'About',
     'nav.work': 'Experience',
+    'nav.projects': 'Projects',
     'nav.blog': 'Blog',
     'nav.contact': 'Contact',
     'cta.title': 'Interested in working together?',
@@ -36,6 +38,7 @@ export const ui = {
     'nav.home': 'Accueil',
     'nav.about': 'À propos',
     'nav.work': 'Expériences',
+    'nav.projects': 'Projets',
     'nav.blog': 'Blog',
     'nav.contact': 'Contact',
     'cta.title': 'Intéressé par une collaboration ?',

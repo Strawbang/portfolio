@@ -1,0 +1,334 @@
+---
+import { featured, ossOrg, ossTools, projectsLabels, type ProjectLang } from '../data/projects';
+import { getCratesDownloadMap, sumDownloads } from '../data/crates';
+
+interface Props {
+  lang: ProjectLang;
+}
+
+const { lang } = Astro.props;
+const l = projectsLabels[lang];
+
+const dlMap = await getCratesDownloadMap();
+const locale = lang === 'fr' ? 'fr-FR' : 'en-US';
+const dlWord = lang === 'fr' ? 'téléchargements' : 'downloads';
+
+// Internal link to the detailed rustkit-ai experience page (SEO + builder↔consultant bridge).
+const workHref = lang === 'fr' ? '/fr/experiences/rustkit-ai' : '/work/rustkit-ai';
+const bridgeText = lang === 'fr'
+  ? "Cet outillage est né d'un besoin réel rencontré en mission client."
+  : 'This tooling grew out of real R&D on client missions.';
+const bridgeCta = lang === 'fr' ? "Voir l'expérience rustkit-ai" : 'See the rustkit-ai experience';
+---
+
+<section class="stack gap-8">
+  <!-- Products -->
+  <div class="group-block">
+    <h2 class="group-heading">{l.productsHeading}</h2>
+
+    <article class="featured">
+      <div class="featured-band"></div>
+      <div class="featured-body">
+        <div class="featured-head">
+          <img class="featured-logo" src="/assets/gotogother-logo.svg" alt="Go Togother logo" width="44" height="44" />
+          <h3 class="featured-name">{featured.name}</h3>
+          <span class="status">{featured.status[lang]}</span>
+        </div>
+        <p class="featured-tagline">{featured.tagline[lang]}</p>
+        <p class="featured-desc">{featured.description[lang]}</p>
+        <p class="featured-role">{featured.role[lang]}</p>
+        <ul class="highlights">
+          {featured.highlights.map((h) => <li>{h[lang]}</li>)}
+        </ul>
+        <ul class="tags">
+          {featured.stack.map((s) => <li class="tag">{s}</li>)}
+        </ul>
+        <a class="btn" href={featured.href} target="_blank" rel="noopener">
+          {featured.cta[lang]}
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
+  </div>
+
+  <!-- Open source -->
+  <div class="group-block">
+    <div class="oss-header">
+      <a class="oss-emblem-link" href={ossOrg.site} target="_blank" rel="noopener" aria-label={ossOrg.name}>
+        <img class="oss-emblem" src="/assets/optimized/rustkit-ai.webp" alt="rustkit-ai logo" width="56" height="56" loading="lazy" />
+      </a>
+      <h2 class="group-heading">{l.ossHeading}</h2>
+    </div>
+    <p class="oss-intro">{ossOrg.intro[lang]}</p>
+    <p class="oss-bridge">{bridgeText} <a class="oss-bridge-link" href={workHref}>{bridgeCta}</a></p>
+
+    <div class="install">
+      <span class="install-hint">{l.installHint}</span>
+      <code class="install-cmd">{ossOrg.install}</code>
+    </div>
+
+    <ul class="oss-grid">
+      {ossTools.map((tool) => {
+        const dl = sumDownloads(dlMap, tool.crates);
+        const cratesUrl = `https://crates.io/crates/${tool.crates[0]}`;
+        return (
+        <li class="oss-card">
+          <span class="oss-name">{tool.name}</span>
+          <span class="oss-desc">{tool.desc[lang]}</span>
+          <ul class="tags">
+            {tool.tags.map((t) => <li class="tag">{t}</li>)}
+          </ul>
+          <div class="oss-foot">
+            {dl > 0 && (
+              <a class="oss-dl" href={cratesUrl} target="_blank" rel="noopener">
+                {dl.toLocaleString(locale)} {dlWord} ↗
+              </a>
+            )}
+            <a class="oss-repo" href={tool.href} target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </li>
+        );
+      })}
+    </ul>
+
+    <div class="org-links">
+      <a class="org-link" href={ossOrg.site} target="_blank" rel="noopener">
+        {l.siteCta} ↗
+      </a>
+      <a class="org-link" href={ossOrg.href} target="_blank" rel="noopener">
+        {l.ossOrgCta} ↗
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .group-block { display: flex; flex-direction: column; gap: 1.2rem; }
+
+  .group-heading {
+    font-family: var(--font-brand);
+    font-size: var(--text-xl);
+    color: var(--gray-0);
+    letter-spacing: -0.01em;
+  }
+
+  /* ---- Featured product ------------------------------------------------ */
+  .featured {
+    max-width: 52rem;
+    border: 1px solid var(--gray-800);
+    border-radius: 0.7rem;
+    overflow: hidden;
+    background: var(--gray-900);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .featured:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+  .featured-band { height: 8px; background: var(--gradient-accent); }
+  .featured-body { padding: 1.6rem; display: flex; flex-direction: column; gap: 1rem; }
+
+  .featured-head {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+  .featured-logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    flex-shrink: 0;
+  }
+  .featured-name {
+    font-family: var(--font-brand);
+    font-size: var(--text-2xl);
+    color: var(--gray-0);
+  }
+  .status {
+    display: inline-flex;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999rem;
+    font-size: var(--text-sm);
+    font-family: var(--font-brand);
+    color: var(--accent-text-over);
+    background: var(--accent-regular);
+    white-space: nowrap;
+  }
+  .featured-tagline { color: var(--gray-100); font-size: var(--text-lg); }
+  .featured-desc { color: var(--gray-300); font-size: var(--text-base); max-width: 60ch; }
+  .featured-role {
+    color: var(--gray-200);
+    font-family: var(--font-brand);
+    font-size: var(--text-sm);
+  }
+
+  .highlights {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 60ch;
+  }
+  .highlights li {
+    position: relative;
+    padding-left: 1.3rem;
+    color: var(--gray-300);
+    font-size: var(--text-sm);
+    line-height: 1.5;
+  }
+  .highlights li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-regular);
+  }
+
+  /* ---- Tags ------------------------------------------------------------ */
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; padding: 0; margin: 0; }
+  .tag {
+    display: inline-flex;
+    padding: 0.28rem 0.7rem;
+    font-size: 0.78rem;
+    border-radius: 999rem;
+    color: var(--gray-200);
+    background: var(--accent-subtle-overlay);
+    border: 1px solid var(--gray-700);
+    white-space: nowrap;
+  }
+
+  /* ---- Buttons / links ------------------------------------------------- */
+  .btn {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 999rem;
+    color: var(--accent-text-over);
+    text-decoration: none;
+    background: var(--gradient-accent);
+    box-shadow: var(--shadow-md);
+    font-family: var(--font-brand);
+    font-size: var(--text-md);
+    transition: transform 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+
+  /* ---- Open source ----------------------------------------------------- */
+  .oss-header {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+  }
+  .oss-emblem-link {
+    display: block;
+    line-height: 0;
+    flex-shrink: 0;
+    border-radius: 12px;
+    transition: transform 0.2s ease;
+  }
+  .oss-emblem-link:hover { transform: translateY(-2px); }
+  .oss-emblem {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 1px solid var(--gray-800);
+  }
+  .oss-intro { color: var(--gray-300); font-size: var(--text-md); max-width: 65ch; }
+  .oss-bridge { color: var(--gray-400); font-size: var(--text-sm); max-width: 65ch; }
+  .oss-bridge-link {
+    color: var(--accent-dark);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .oss-bridge-link:hover { color: var(--accent-regular); }
+
+  .install {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--gray-800);
+    border-radius: 0.6rem;
+    background: var(--gray-900);
+  }
+  .install-hint { color: var(--gray-400); font-size: var(--text-sm); }
+  .install-cmd {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: var(--text-sm);
+    color: var(--accent-dark);
+  }
+
+  .oss-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .oss-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    height: 100%;
+    padding: 1.2rem;
+    border: 1px solid var(--gray-800);
+    border-radius: 0.6rem;
+    background: var(--gray-900);
+    text-decoration: none;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .oss-card:hover {
+    border-color: var(--accent-regular);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+  .oss-name {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: var(--text-md);
+    color: var(--gray-0);
+    font-weight: 600;
+  }
+  .oss-desc { color: var(--gray-300); font-size: var(--text-sm); flex: 1; }
+  .oss-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 0.2rem;
+  }
+  .oss-dl {
+    font-size: var(--text-sm);
+    color: var(--gray-400);
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .oss-dl:hover { color: var(--accent-dark); }
+  .oss-repo {
+    font-size: var(--text-sm);
+    font-family: var(--font-brand);
+    color: var(--accent-dark);
+    white-space: nowrap;
+  }
+
+  .org-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.5rem;
+  }
+  .org-link {
+    font-family: var(--font-brand);
+    font-size: var(--text-md);
+    color: var(--accent-dark);
+    text-decoration: none;
+  }
+  .org-link:hover { text-decoration: underline; }
+</style>

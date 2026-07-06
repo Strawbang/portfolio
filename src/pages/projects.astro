@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactCTA from "../components/ContactCTA.astro";
+import Hero from "../components/Hero.astro";
+import ItemListSchema from "../components/ItemListSchema.astro";
+import ProjectsContent from "../components/ProjectsContent.astro";
+import { featured, ossTools, projectsLabels } from "../data/projects";
+
+const l = projectsLabels['en'];
+
+const schemaItems = [
+  { name: featured.name, url: featured.href, description: featured.tagline.en },
+  ...ossTools.map((t) => ({ name: t.name, url: t.href, description: t.desc.en })),
+];
+---
+
+<BaseLayout title={l.metaTitle} description={l.metaDescription}>
+  <ItemListSchema
+    slot="head"
+    name="Projects | Djamel Bougouffa"
+    url="https://djamel-bougouffa.com/projects/"
+    items={schemaItems}
+  />
+  <div class="stack gap-20">
+    <main id="main-content" class="wrapper stack gap-8">
+      <Hero title={l.heroTitle} tagline={l.heroTagline} align="start" />
+      <ProjectsContent lang="en" />
+    </main>
+    <ContactCTA />
+  </div>
+</BaseLayout>

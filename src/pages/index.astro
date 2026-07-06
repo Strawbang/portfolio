@@ -53,12 +53,12 @@ const allArticles = (await getCollection('blog'))
       <div class="hero">
         <Hero
           title="Hello, my name is Djamel Bougouffa"
-          tagline="I am a Full-Stack Software Engineer specializing in TypeScript, React, Node.js, DevOps & AI/GenAI"
+          tagline="Full-stack engineer and consultant. I modernize legacy systems on client missions, and build my own products and open-source AI tooling."
           align="start"
         >
           <div class="roles">
-            <Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
-            <Pill><Icon icon="rocket-launch" size="1.33em" /> AI/GenAI</Pill>
+            <Pill><Icon icon="strategy" size="1.33em" /> Consultant</Pill>
+            <Pill><Icon icon="rocket-launch" size="1.33em" /> Builder</Pill>
             <Pill><Icon icon="devops-logo" size="1.33em" /> DevOps</Pill>
             <Pill><Icon icon="desktop" size="1.33em" /> Remote</Pill>
           </div>
@@ -110,6 +110,23 @@ const allArticles = (await getCollection('blog'))
 
       <section class="section with-background bg-variant with-cta">
         <header class="section-header stack gap-2 lg:gap-4">
+          <h2>Products &amp; Open Source</h2>
+          <p>
+            Beyond client missions, I build and ship my own products and open-source
+            developer tools, from a full-stack carpooling marketplace to a suite of Rust tools.
+          </p>
+        </header>
+
+        <div class="cta">
+          <CallToAction href="/projects/">
+            View Projects
+            <Icon icon="arrow-right" size="1.2em" />
+          </CallToAction>
+        </div>
+      </section>
+
+      <section class="section with-background with-cta">
+        <header class="section-header stack gap-2 lg:gap-4">
           <h2>Latest Articles</h2>
           <p>My latest articles from my blog, Medium and Dev.to</p>
         </header>
@@ -144,7 +161,7 @@ const allArticles = (await getCollection('blog'))
   <SchemaOrgPerson
     name="Djamel Bougouffa"
     jobTitle="Full-Stack Software Engineer"
-    description="Full-Stack Software Engineer with over 5 years of experience. Currently on a client mission at SUEZ IWS via Ippon Technologies, modernizing the Pléco B2B extranet — migrating a legacy Liferay UI to Angular micro-frontends, rebuilding the CI/CD pipeline, and security hardening for industrial hazardous waste management. Experienced in AI/GenAI, Rust, RAG, and Model Context Protocol (MCP)."
+    description="Full-Stack Software Engineer with over 5 years of experience. Currently on a client mission at SUEZ IWS via Ippon Technologies, modernizing the Pléco B2B extranet: migrating a legacy Liferay UI to Angular micro-frontends, rebuilding the CI/CD pipeline, and security hardening for industrial hazardous waste management. Experienced in AI/GenAI, Rust, RAG, and Model Context Protocol (MCP)."
     image="https://djamel-bougouffa.com/assets/at-work.webp"
     url="https://djamel-bougouffa.com/about/"
     email="djamel.bougouffa@gmail.com"

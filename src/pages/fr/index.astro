@@ -43,8 +43,9 @@ const allArticles = (await getCollection('blog'))
       <div class="hero">
         <Hero title={l.heroGreeting} tagline={l.heroTagline} align="start">
           <div class="roles">
-            <Pill><Icon icon="code" size="1.33em" /> {l.pillDeveloper}</Pill>
-            <Pill><Icon icon="devops-logo" size="1.33em" /> {l.pillDevops}</Pill>
+            <Pill><Icon icon="strategy" size="1.33em" /> Consultant</Pill>
+            <Pill><Icon icon="rocket-launch" size="1.33em" /> Builder</Pill>
+            <Pill><Icon icon="devops-logo" size="1.33em" /> DevOps</Pill>
             <Pill><Icon icon="desktop" size="1.33em" /> {l.pillRemote}</Pill>
           </div>
           <div class="download">
@@ -89,6 +90,23 @@ const allArticles = (await getCollection('blog'))
       </section>
 
       <section class="section with-background bg-variant with-cta">
+        <header class="section-header stack gap-2 lg:gap-4">
+          <h2>Produits &amp; Open Source</h2>
+          <p>
+            Au-delà des missions client, je conçois et publie mes propres produits et
+            outils open source, d'une marketplace de covoiturage full-stack à une suite d'outils Rust.
+          </p>
+        </header>
+
+        <div class="cta">
+          <CallToAction href="/fr/projets/">
+            Voir les projets
+            <Icon icon="arrow-right" size="1.2em" />
+          </CallToAction>
+        </div>
+      </section>
+
+      <section class="section with-background with-cta">
         <header class="section-header stack gap-2 lg:gap-4">
           <h2>{l.sectionBlogTitle}</h2>
           <p>{l.sectionBlogDesc}</p>
