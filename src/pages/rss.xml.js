@@ -13,6 +13,12 @@ export async function GET(context) {
   // the site itself (no extra deps).
   const container = await AstroContainer.create();
   const base = context.site.toString().replace(/\/$/, '');
+  const absUrl = (url) => (url.startsWith('http') ? url : `${base}${url}`);
+
+  // dev.to tag rules: lowercase, alphanumeric only, max 4. Best-effort — dev.to's
+  // RSS import may still require setting tags by hand on the draft.
+  const devtoTags = (tags = []) =>
+    tags.map(t => t.toLowerCase().replace(/[^a-z0-9]/g, '')).filter(Boolean).slice(0, 4);
 
   const items = await Promise.all(publishedPosts.map(async (post) => {
     const { Content } = await render(post);
@@ -22,12 +28,19 @@ export async function GET(context) {
       .replace(/src="\//g, `src="${base}/`)
       .replace(/href="\//g, `href="${base}/`);
 
+    // Prepend the cover image so dev.to's RSS import picks it up as the cover
+    // (the frontmatter `img` is otherwise not part of the rendered body).
+    if (post.data.img) {
+      const alt = (post.data.img_alt || post.data.title || '').replace(/"/g, '&quot;');
+      content = `<img src="${absUrl(post.data.img)}" alt="${alt}" />\n${content}`;
+    }
+
     return {
       title: post.data.title,
       description: post.data.description,
       pubDate: post.data.publishDate,
       link: `/blog/${post.id.replace(/\.md$/, '')}/`,
-      categories: post.data.tags,
+      categories: devtoTags(post.data.tags),
       content,
       customData: post.data.canonicalURL
         ? `<atom:link href="${post.data.canonicalURL}" rel="canonical" />`
