@@ -6,7 +6,7 @@ tags: ["AI", "Software Engineering", "Architecture"]
 keywords: ["hexagonal architecture AI agents", "ports and adapters", "AI coding agents", "Claude Code", "agent-friendly architecture", "legacy Java refactoring", "AI code review", "software design for AI"]
 img: "/assets/blog/hexagonal-architecture-ai-agents.webp"
 img_alt: "A hexagonal ports-and-adapters diagram with an AI agent working on the outer adapters while the domain core stays protected"
-draft: true
+draft: false
 lang: "en"
 relatedPosts: ["software-craftsmanship-ai-era", "claude-code-jira-mcp-legacy-codebase"]
 relatedWork: ["rustkit-ai"]
