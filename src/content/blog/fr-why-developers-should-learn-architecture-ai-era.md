@@ -1,12 +1,12 @@
 ---
 title: "L'IA écrit le code maintenant, raison de plus pour maîtriser l'architecture"
 description: "L'IA n'a pas rendu les développeurs obsolètes. Elle a déplacé la valeur. Écrire du code se banalise ; décider de la forme du système, non. Voici pourquoi l'architecture et le craft sont devenus les compétences qui prennent de la valeur, et pourquoi le développeur « classique » a intérêt à monter en compétence dès maintenant."
-publishDate: 2026-07-15
+publishDate: 2026-07-16
 tags: ["IA", "Software Engineering", "Tech Leadership"]
 keywords: ["architecture logicielle ère IA", "compétences développeur IA", "piloter les agents de code IA", "se former au craft", "carrière développeur IA", "Claude Code", "jugement de conception", "montée en compétence IA"]
 img: "/assets/blog/why-developers-should-learn-architecture-ai-era.webp"
 img_alt: "Un développeur pilotant un agent IA depuis un schéma d'architecture plutôt qu'en tapant le code ligne par ligne"
-draft: true
+draft: false
 lang: "fr"
 relatedPosts: ["hexagonal-architecture-ai-agents", "software-craftsmanship-ai-era"]
 relatedWork: ["rustkit-ai"]

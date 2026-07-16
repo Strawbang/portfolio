@@ -1,12 +1,12 @@
 ---
 title: "AI Writes the Code Now, Which Is Exactly Why You Should Master Architecture"
 description: "AI didn't make developers obsolete. It moved the value. Typing code is being commoditized; deciding how the system should be shaped is not. Here's why architecture and craft just became the skills that appreciate, and why the 'classic' implementer should start leveling up now."
-publishDate: 2026-07-15
+publishDate: 2026-07-16
 tags: ["AI", "Software Engineering", "Tech Leadership"]
 keywords: ["software architecture AI era", "developer skills AI", "steering AI coding agents", "learn software craftsmanship", "AI coding career", "Claude Code", "design judgment AI", "upskilling developers AI"]
 img: "/assets/blog/why-developers-should-learn-architecture-ai-era.webp"
 img_alt: "A developer directing an AI agent from an architecture diagram rather than typing code line by line"
-draft: true
+draft: false
 lang: "en"
 relatedPosts: ["hexagonal-architecture-ai-agents", "software-craftsmanship-ai-era"]
 relatedWork: ["rustkit-ai"]
