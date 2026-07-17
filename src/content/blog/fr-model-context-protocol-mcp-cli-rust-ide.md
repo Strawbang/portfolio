@@ -14,7 +14,7 @@ relatedPosts: ["spec-driven-development"]
 relatedWork: ["ippon-technologies"]
 ---
 
-Cet article a été publié sur le [blog Ippon Technologies](https://blog.ippon.fr/2026/03/11/model-context-protocol-mcp-cli-rust-ide/).
+**Réponse rapide :** Le Model Context Protocol (MCP) permet à un agent IA, dans votre IDE, d'appeler directement vos propres outils, sans plugin spécifique. Vous gardez votre CLI Rust comme moteur, vous l'enveloppez dans un petit serveur MCP TypeScript qui déclare ses capacités, et n'importe quel host compatible MCP (Claude Code, Cursor, Windsurf) peut alors exécuter de vraies actions sur votre codebase au lieu de simplement les suggérer.
 
 Le **Model Context Protocol (MCP)** permet d'exposer des outils internes à un agent IA directement dans l'IDE, sans plugin spécifique, sans intégration ad hoc. Plutôt que de donner des suggestions, l'agent peut exécuter de vraies actions sur votre codebase.
 
@@ -68,4 +68,20 @@ L'approche "plugin intelligent" se heurte rapidement à des problèmes structure
 2. **Logs séparés :** ne pas mélanger résultat et logs de diagnostic.
 3. **Erreurs catégorisées :** code d'erreur + message + hint de recovery.
 
-Retrouvez l'article complet sur le blog Ippon : [Model Context Protocol (MCP) : exposer un CLI Rust dans votre IDE](https://blog.ippon.fr/2026/03/11/model-context-protocol-mcp-cli-rust-ide/)
+## Questions fréquentes
+
+### Qu'est-ce que le Model Context Protocol (MCP) ?
+
+MCP est un standard ouvert qui permet à un agent IA de découvrir et d'appeler des capacités externes (CLIs, APIs, services internes) via un contrat structuré. Le host découvre dynamiquement les outils déclarés, et l'agent décide comment les enchaîner : le même outil fonctionne ainsi dans n'importe quel IDE ou assistant compatible MCP.
+
+### En quoi MCP diffère-t-il d'une API REST ?
+
+REST expose des endpoints et laisse l'orchestration à un client connu à l'avance. MCP expose des capacités déclarées (`tools`, `resources`, `prompts`) qu'un host découvre à l'exécution, et renvoie des réponses structurées qu'un agent peut interpréter et replanifier. REST expose des services ; MCP expose des actions pilotables par un agent.
+
+### Faut-il réécrire son CLI Rust pour le rendre agent-ready ?
+
+Pas de réécriture, trois ajustements. Émettre du JSON lisible par machine sur stdout et envoyer les logs humains sur stderr, séparer résultat et diagnostic, et renvoyer des erreurs catégorisées (code, message, hint de recovery) pour que l'agent se corrige sans intervention humaine.
+
+---
+
+Cet article a d'abord été publié sur le [blog Ippon Technologies](https://blog.ippon.fr/2026/03/11/model-context-protocol-mcp-cli-rust-ide/).

@@ -24,7 +24,10 @@ const allPosts = (await getCollection('blog'))
 
 const allTags = [...new Set(allPosts.flatMap(post => post.tags ?? []))].sort();
 
-const PAGE_SIZE = 9;
+// Keep every published post reachable in one click from /blog/ (a well-crawled
+// page). Splitting onto /blog/page/2/ starved older posts of internal link
+// equity, leaving several "Discovered - currently not indexed" in GSC.
+const PAGE_SIZE = 24;
 const totalPages = Math.ceil(allPosts.length / PAGE_SIZE);
 const pagedPosts = allPosts.slice(0, PAGE_SIZE);
 

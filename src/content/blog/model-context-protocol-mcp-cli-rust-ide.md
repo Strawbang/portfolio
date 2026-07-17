@@ -13,7 +13,7 @@ relatedPosts: ["spec-driven-development"]
 relatedWork: ["ippon-technologies"]
 ---
 
-This article was published on the [Ippon Technologies blog](https://blog.ippon.fr/2026/03/11/model-context-protocol-mcp-cli-rust-ide/) (in French).
+**Quick answer:** The Model Context Protocol (MCP) lets an AI agent inside your IDE call your own tools directly, with no IDE-specific plugin. You keep your Rust CLI as the engine, wrap it in a small TypeScript MCP server that declares its capabilities, and any MCP-compatible host (Claude Code, Cursor, Windsurf) can then run real actions on your codebase instead of just suggesting them.
 
 The **Model Context Protocol (MCP)** allows you to expose internal tools to an AI agent directly in your IDE, without IDE-specific plugins, without ad hoc integrations. Instead of giving suggestions, the agent can execute real actions on your codebase.
 
@@ -67,4 +67,20 @@ The "smart plugin" approach hits structural problems fast: the N-IDE effect (eve
 2. **Separated logs:** don't mix result and diagnostic output.
 3. **Categorized errors:** error code + message + recovery hint.
 
-Read the full article on the Ippon blog: [Model Context Protocol (MCP): Exposing a Rust CLI to Your IDE](https://blog.ippon.fr/2026/03/11/model-context-protocol-mcp-cli-rust-ide/)
+## Frequently asked questions
+
+### What is the Model Context Protocol (MCP)?
+
+MCP is an open standard that lets an AI agent discover and call external capabilities (CLIs, APIs, internal services) through a structured contract. The host discovers the declared tools dynamically, and the agent decides how to chain them, so the same tool works across any MCP-compatible IDE or assistant.
+
+### How is MCP different from a REST API?
+
+REST exposes endpoints and leaves orchestration to a client that is known in advance. MCP exposes declared capabilities (`tools`, `resources`, `prompts`) that a host discovers at runtime, and returns structured responses an agent can interpret and re-plan around. REST exposes services; MCP exposes actions an agent can use.
+
+### Do I need to rewrite my Rust CLI to make it agent-ready?
+
+No rewrite, three adjustments. Emit machine-readable JSON on stdout and send human logs to stderr, keep result and diagnostic output separated, and return categorized errors (code, message, recovery hint) so the agent can self-correct without a human in the loop.
+
+---
+
+This article was first published, in French, on the [Ippon Technologies blog](https://blog.ippon.fr/2026/03/11/model-context-protocol-mcp-cli-rust-ide/).

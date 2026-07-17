@@ -6,11 +6,13 @@ import Icon from "../../components/Icon.astro";
 import CallToAction from "../../components/CallToAction.astro";
 import SchemaOrgPerson from '../../components/SchemaOrgPerson.astro';
 import CareerTimeline from '../../components/CareerTimeline.astro';
-import { experiences, education, skills, spokenLanguages, contact, resumeFiles, aboutLabels } from '../../data/about';
+import FaqSection from '../../components/FaqSection.astro';
+import { experiences, education, skills, spokenLanguages, contact, resumeFiles, aboutLabels, aboutFaq } from '../../data/about';
 
 const lang = 'fr';
 const l = aboutLabels[lang];
 const resume = resumeFiles[lang];
+const faq = aboutFaq['fr'];
 ---
 
 <FrenchBaseLayout title={l.metaTitle} description={l.metaDescription}>
@@ -139,6 +141,7 @@ const resume = resumeFiles[lang];
           </CallToAction>
         </div>
       </section>
+      <FaqSection heading={faq.heading} items={faq.items} />
     </main>
 
     <ContactCTA />

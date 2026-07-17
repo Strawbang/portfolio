@@ -7,7 +7,7 @@ keywords: ["Claude Code", "MCP", "Jira", "Java", "Legacy Code", "AI"]
 img: "/assets/claude-code-jira-mcp-legacy-code.webp"
 img_alt: "Claude Code terminal session navigating a legacy codebase with Jira MCP"
 lang: "en"
-relatedPosts: ["model-context-protocol-mcp-cli-rust-ide", "spec-driven-development"]
+relatedPosts: ["model-context-protocol-mcp-cli-rust-ide", "spec-driven-development", "stack-standardization-80-percent-faster"]
 relatedWork: ["ippon-technologies"]
 ---
 

@@ -8,7 +8,7 @@ img: "/assets/blog/hexagonal-architecture-ai-agents.webp"
 img_alt: "A hexagonal ports-and-adapters diagram with an AI agent working on the outer adapters while the domain core stays protected"
 draft: false
 lang: "en"
-relatedPosts: ["software-craftsmanship-ai-era", "claude-code-jira-mcp-legacy-codebase"]
+relatedPosts: ["software-craftsmanship-ai-era", "claude-code-jira-mcp-legacy-codebase", "stack-standardization-80-percent-faster"]
 relatedWork: ["rustkit-ai"]
 ---
 

@@ -6,10 +6,12 @@ import Icon from "../components/Icon.astro";
 import CallToAction from "../components/CallToAction.astro";
 import SchemaOrgPerson from '../components/SchemaOrgPerson.astro';
 import CareerTimeline from '../components/CareerTimeline.astro';
-import { experiences, education, skills, spokenLanguages, contact, resumeFiles, aboutLabels } from '../data/about';
+import FaqSection from '../components/FaqSection.astro';
+import { experiences, education, skills, spokenLanguages, contact, resumeFiles, aboutLabels, aboutFaq } from '../data/about';
 
 const l = aboutLabels['en'];
 const resume = resumeFiles['en'];
+const faq = aboutFaq['en'];
 ---
 
 <BaseLayout title={l.metaTitle} description={l.metaDescription}>
@@ -141,6 +143,7 @@ const resume = resumeFiles['en'];
           </CallToAction>
         </div>
       </section>
+      <FaqSection heading={faq.heading} items={faq.items} />
     </main>
 
     <ContactCTA />
@@ -149,7 +152,7 @@ const resume = resumeFiles['en'];
   <SchemaOrgPerson
     name="Djamel Bougouffa"
     jobTitle="Full-Stack Software Engineer"
-    description="Full-Stack Software Engineer with over 5 years of experience. Currently on a client mission at SUEZ IWS via Ippon Technologies, modernizing the Pléco B2B extranet: migrating a legacy Liferay UI to Angular micro-frontends, rebuilding the CI/CD pipeline, and security hardening for industrial hazardous waste management. Experienced in AI/GenAI, Rust, RAG, and Model Context Protocol (MCP)."
+    description="Full-Stack Software Engineer with over 5 years of experience, remote-first and open to opportunities worldwide. He builds and ships his own products and open-source developer tools (Rust, MCP, RAG) and brings the same end-to-end ownership and software craft to client teams, currently at Ippon Technologies. Experienced across TypeScript, React, Node.js, Rust, AI/GenAI, and DevOps."
     image="https://djamel-bougouffa.com/assets/at-work.webp"
     url="https://djamel-bougouffa.com/about/"
     email={contact.email}
@@ -159,7 +162,7 @@ const resume = resumeFiles['en'];
     workLocation={{ name: "Paris, France" }}
     worksFor={{ name: "Ippon Technologies", url: "https://www.ippon.fr/" }}
     knowsAbout={["TypeScript", "React", "Node.js", "Rust", "RAG", "GenAI", "MCP", "LLM Integration", "DevOps", "Docker", "Kubernetes", "Next.js"]}
-    seeks="Open to new opportunities as a Full-Stack Software Engineer with expertise in AI/GenAI, Rust, RAG, and legacy modernization"
+    seeks="Open to remote full-stack engineering roles worldwide, focused on product building, software craft, AI/GenAI, and Rust."
     availableForHire={true}
   />
 </BaseLayout>

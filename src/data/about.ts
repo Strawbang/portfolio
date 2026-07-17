@@ -65,6 +65,64 @@ export const spokenLanguages = [
 
 export type Lang = 'en'|'fr'|'ja'|'zh'|'th'|'vi'|'ms'|'ko'|'id'|'tl'|'ar'|'hi'|'de'|'es'|'pt';
 
+// FAQ used both as a visible accordion and as FAQPage structured data (AEO).
+// Questions are phrased as real search queries so AI answer engines
+// (ChatGPT, Perplexity, Google AI Overviews) can extract and cite them.
+export interface FaqItem { question: string; answer: string; }
+
+export const aboutFaq: Record<'en' | 'fr', { heading: string; items: FaqItem[] }> = {
+  en: {
+    heading: 'Frequently asked questions',
+    items: [
+      {
+        question: 'Who is Djamel Bougouffa?',
+        answer: 'Djamel Bougouffa is a Full-Stack Software Engineer with over 5 years of experience, based in Paris and remote-first. He builds and ships his own products and open-source developer tools (Rust, MCP, RAG) and brings the same end-to-end ownership to client teams, currently at Ippon Technologies.',
+      },
+      {
+        question: 'Is Djamel Bougouffa available for remote work?',
+        answer: 'Yes. Djamel is remote-first and open to full-stack engineering opportunities worldwide, as well as roles in the Paris area. He is most interested in product building, software craft, AI/GenAI, and Rust.',
+      },
+      {
+        question: 'What technologies does Djamel Bougouffa specialize in?',
+        answer: 'His core stack is TypeScript, React, Node.js, and Rust. He also works hands-on with AI tooling (RAG, MCP, and LLM integration) and DevOps practices including Docker, Kubernetes, and CI/CD pipelines.',
+      },
+      {
+        question: 'What open-source tools has Djamel Bougouffa built?',
+        answer: 'He builds the rustkit-ai ecosystem in Rust: trimcp, an MCP proxy that compresses tool output to save tokens, and semtree, an on-device semantic code search tool using tree-sitter and local embeddings. Both run without API keys.',
+      },
+      {
+        question: 'How can I contact Djamel Bougouffa?',
+        answer: 'You can reach Djamel through the contact page on this site, by email, or on LinkedIn and GitHub. He usually replies within a day or two.',
+      },
+    ],
+  },
+  fr: {
+    heading: 'Questions fréquentes',
+    items: [
+      {
+        question: 'Qui est Djamel Bougouffa ?',
+        answer: "Djamel Bougouffa est un Ingénieur Logiciel Full-Stack avec plus de 5 ans d'expérience, basé à Paris et à l'aise en télétravail. Il conçoit et livre ses propres produits et outils open source (Rust, MCP, RAG) et apporte ce même sens de l'ownership aux équipes client, actuellement chez Ippon Technologies.",
+      },
+      {
+        question: 'Djamel Bougouffa est-il disponible en télétravail ?',
+        answer: "Oui. Djamel travaille en télétravail et est ouvert à des opportunités d'ingénierie full-stack partout dans le monde, ainsi qu'à des postes en région parisienne. Il s'intéresse surtout au développement de produits, au software craft, à l'IA/GenAI et à Rust.",
+      },
+      {
+        question: 'Dans quelles technologies Djamel Bougouffa est-il spécialisé ?',
+        answer: "Son socle technique repose sur TypeScript, React, Node.js et Rust. Il travaille aussi concrètement avec les outils IA (RAG, MCP, intégration LLM) et les pratiques DevOps : Docker, Kubernetes et pipelines CI/CD.",
+      },
+      {
+        question: 'Quels outils open source Djamel Bougouffa a-t-il créés ?',
+        answer: "Il développe l'écosystème rustkit-ai en Rust : trimcp, un proxy MCP qui compresse la sortie des outils pour économiser des tokens, et semtree, un outil de recherche sémantique de code en local basé sur tree-sitter et des embeddings locaux. Les deux fonctionnent sans clé API.",
+      },
+      {
+        question: 'Comment contacter Djamel Bougouffa ?',
+        answer: "Vous pouvez joindre Djamel via la page contact de ce site, par email, ou sur LinkedIn et GitHub. Il répond généralement sous un à deux jours.",
+      },
+    ],
+  },
+};
+
 export const aboutLabels: Record<Lang, {
   title: string; tagline: string; metaTitle: string; metaDescription: string;
   sectionBackground: string; sectionEducation: string; sectionSkills: string;
@@ -76,8 +134,8 @@ export const aboutLabels: Record<Lang, {
   imgAlt: string;
   seeAllExperiences: string;
 }> = {
-  en: { title: 'About Me', tagline: 'Discover my background, skills, and expertise as a Full-Stack Software Engineer.', metaTitle: 'About | Djamel Bougouffa', metaDescription: 'Djamel Bougouffa, Full-Stack Engineer specializing in legacy modernization, AI integration (RAG, MCP, LLM), and DevOps. Based in Paris, currently at Ippon Technologies.', sectionBackground: 'Background', sectionEducation: 'Education', sectionSkills: 'Skills', sectionLanguages: 'Languages', sectionContact: 'Contact', sectionResume: 'Resume', backgroundIntro: "Hello! I'm a Full-Stack Software Engineer with over 5 years of experience, currently on a mission at SUEZ IWS via Ippon Technologies. I specialize in legacy modernization, web development, and DevOps, having delivered multiple operational applications across various industries.", backgroundOutro: "Beyond web development, I have hands-on experience with AI-driven tools, including RAG, MCP, and LLM integration, as well as DevOps practices with Docker, Kubernetes, and CI/CD pipelines. I'm well-versed in Agile and Scrum methodologies.", resumeText: 'Want a copy of my resume? Download it here:', resumeDownload: 'Download Resume', skillFrontend: 'Frontend', skillBackend: 'Backend', skillAi: 'AI & GenAI', skillDevops: 'DevOps', skillMethodologies: 'Methodologies', skillArchitecture: 'Architecture', skillTools: 'Tools', imgAlt: 'Djamel Bougouffa working at his desk with multiple monitors showing code', seeAllExperiences: 'See all my experiences' },
-  fr: { title: 'À Propos', tagline: "Découvrez mon parcours, mes compétences et mon expertise en tant qu'Ingénieur Logiciel Full-Stack.", metaTitle: 'À Propos | Djamel Bougouffa', metaDescription: "Djamel Bougouffa, Ingénieur Full-Stack spécialisé en modernisation legacy, intégration IA (RAG, MCP, LLM) et DevOps. Basé à Paris, en mission chez Ippon Technologies.", sectionBackground: 'Parcours', sectionEducation: 'Formation', sectionSkills: 'Compétences', sectionLanguages: 'Langues', sectionContact: 'Contact', sectionResume: 'CV', backgroundIntro: "Bonjour ! Je suis un Ingénieur Logiciel Full-Stack avec plus de 5 ans d'expérience, actuellement en mission chez SUEZ IWS via Ippon Technologies. Je me spécialise dans la modernisation de systèmes legacy, le développement web et le DevOps, avec plusieurs applications livrées dans des secteurs variés.", backgroundOutro: "Au-delà du développement web, j'ai une expérience concrète avec les outils pilotés par l'IA (RAG, MCP, intégration LLM) ainsi qu'avec les pratiques DevOps : Docker, Kubernetes et pipelines CI/CD. Je maîtrise les méthodologies Agile et Scrum.", resumeText: 'Vous souhaitez une copie de mon CV ? Téléchargez-le ici :', resumeDownload: 'Télécharger le CV', skillFrontend: 'Frontend', skillBackend: 'Backend', skillAi: 'IA & GenAI', skillDevops: 'DevOps', skillMethodologies: 'Méthodologies', skillArchitecture: 'Architecture', skillTools: 'Outils', imgAlt: 'Djamel Bougouffa travaillant à son bureau avec plusieurs écrans affichant du code', seeAllExperiences: 'Voir toutes mes expériences' },
+  en: { title: 'About Me', tagline: 'Discover my background, skills, and expertise as a Full-Stack Software Engineer.', metaTitle: 'About | Djamel Bougouffa', metaDescription: 'Djamel Bougouffa, remote-first Full-Stack Software Engineer open to opportunities worldwide. Builds products and open-source tools (Rust, MCP, RAG) and brings end-to-end ownership and software craft to client teams.', sectionBackground: 'Background', sectionEducation: 'Education', sectionSkills: 'Skills', sectionLanguages: 'Languages', sectionContact: 'Contact', sectionResume: 'Resume', backgroundIntro: "Hello! I'm a Full-Stack Software Engineer with over 5 years of experience, remote-first and open to working worldwide. I take products from idea to production, from responsive web apps to my own open-source tools, and I bring that same end-to-end ownership to client teams, currently at Ippon Technologies.", backgroundOutro: "Beyond web development, I have hands-on experience with AI-driven tools, including RAG, MCP, and LLM integration, as well as DevOps practices with Docker, Kubernetes, and CI/CD pipelines. I'm well-versed in Agile and Scrum methodologies.", resumeText: 'Want a copy of my resume? Download it here:', resumeDownload: 'Download Resume', skillFrontend: 'Frontend', skillBackend: 'Backend', skillAi: 'AI & GenAI', skillDevops: 'DevOps', skillMethodologies: 'Methodologies', skillArchitecture: 'Architecture', skillTools: 'Tools', imgAlt: 'Djamel Bougouffa working at his desk with multiple monitors showing code', seeAllExperiences: 'See all my experiences' },
+  fr: { title: 'À Propos', tagline: "Découvrez mon parcours, mes compétences et mon expertise en tant qu'Ingénieur Logiciel Full-Stack.", metaTitle: 'À Propos | Djamel Bougouffa', metaDescription: "Djamel Bougouffa, Ingénieur Logiciel Full-Stack en télétravail, ouvert à des opportunités partout dans le monde. Il conçoit des produits et outils open source (Rust, MCP, RAG) et apporte ownership et craft aux équipes client.", sectionBackground: 'Parcours', sectionEducation: 'Formation', sectionSkills: 'Compétences', sectionLanguages: 'Langues', sectionContact: 'Contact', sectionResume: 'CV', backgroundIntro: "Bonjour ! Je suis un Ingénieur Logiciel Full-Stack avec plus de 5 ans d'expérience, à l'aise en télétravail et ouvert à travailler partout dans le monde. Je mène des produits de l'idée à la production, des applications web réactives à mes propres outils open source, et j'apporte ce même sens de l'ownership aux équipes client, actuellement chez Ippon Technologies.", backgroundOutro: "Au-delà du développement web, j'ai une expérience concrète avec les outils pilotés par l'IA (RAG, MCP, intégration LLM) ainsi qu'avec les pratiques DevOps : Docker, Kubernetes et pipelines CI/CD. Je maîtrise les méthodologies Agile et Scrum.", resumeText: 'Vous souhaitez une copie de mon CV ? Téléchargez-le ici :', resumeDownload: 'Télécharger le CV', skillFrontend: 'Frontend', skillBackend: 'Backend', skillAi: 'IA & GenAI', skillDevops: 'DevOps', skillMethodologies: 'Méthodologies', skillArchitecture: 'Architecture', skillTools: 'Outils', imgAlt: 'Djamel Bougouffa travaillant à son bureau avec plusieurs écrans affichant du code', seeAllExperiences: 'Voir toutes mes expériences' },
   de: { title: 'Über mich', tagline: 'Entdecken Sie meinen Hintergrund, meine Fähigkeiten und Expertise als Full-Stack Software Engineer.', metaTitle: 'Über mich | Djamel Bougouffa', metaDescription: 'Über Djamel Bougouffa: Full-Stack Software Engineer mit Erfahrung in TypeScript, React, Node.js und DevOps.', sectionBackground: 'Hintergrund', sectionEducation: 'Ausbildung', sectionSkills: 'Fähigkeiten', sectionLanguages: 'Sprachen', sectionContact: 'Kontakt', sectionResume: 'Lebenslauf', backgroundIntro: 'Hallo! Ich bin ein engagierter Entwickler, der sich auf Webentwicklung und DevOps spezialisiert hat. In den letzten Jahren habe ich mit mehreren Unternehmen zusammengearbeitet und 7 operative Anwendungen erfolgreich erstellt.', backgroundOutro: 'Meine Expertise erstreckt sich auf verschiedene RDBMS wie MySQL, und ich habe praktische Erfahrung mit DevOps-Tools einschließlich Swarm und Kubernetes.', resumeText: 'Möchten Sie eine Kopie meines Lebenslaufs? Laden Sie ihn hier herunter:', resumeDownload: 'Lebenslauf herunterladen', skillFrontend: 'Frontend', skillBackend: 'Backend', skillAi: 'KI & GenAI', skillDevops: 'DevOps', skillMethodologies: 'Methoden', skillArchitecture: 'Architektur', skillTools: 'Werkzeuge', imgAlt: 'Djamel Bougouffa arbeitet an seinem Schreibtisch mit mehreren Monitoren, die Code zeigen', seeAllExperiences: 'See all my experiences' },
   es: { title: 'Sobre mí', tagline: 'Descubre mi trayectoria, habilidades y experiencia como Ingeniero de Software Full-Stack.', metaTitle: 'Sobre mí | Djamel Bougouffa', metaDescription: 'Sobre Djamel Bougouffa: Ingeniero de Software Full-Stack con experiencia en TypeScript, React, Node.js y DevOps.', sectionBackground: 'Experiencia', sectionEducation: 'Educación', sectionSkills: 'Habilidades', sectionLanguages: 'Idiomas', sectionContact: 'Contacto', sectionResume: 'Currículum', backgroundIntro: '¡Hola! Soy un desarrollador dedicado especializado en desarrollo web y DevOps. En los últimos años, he colaborado con múltiples empresas, lo que ha llevado a la creación exitosa de 7 aplicaciones operativas.', backgroundOutro: 'Mi experiencia se extiende a varios RDBMS como MySQL, y tengo experiencia práctica con herramientas DevOps incluyendo Swarm y Kubernetes.', resumeText: '¿Quieres una copia de mi currículum? Descárgalo aquí:', resumeDownload: 'Descargar Currículum', skillFrontend: 'Frontend', skillBackend: 'Backend', skillAi: 'IA & GenAI', skillDevops: 'DevOps', skillMethodologies: 'Metodologías', skillArchitecture: 'Arquitectura', skillTools: 'Herramientas', imgAlt: 'Djamel Bougouffa trabajando en su escritorio con múltiples monitores mostrando código', seeAllExperiences: 'See all my experiences' },
   pt: { title: 'Sobre mim', tagline: 'Descubra meu histórico, habilidades e expertise como Engenheiro de Software Full-Stack.', metaTitle: 'Sobre mim | Djamel Bougouffa', metaDescription: 'Sobre Djamel Bougouffa: Engenheiro de Software Full-Stack com experiência em TypeScript, React, Node.js e DevOps.', sectionBackground: 'Histórico', sectionEducation: 'Educação', sectionSkills: 'Habilidades', sectionLanguages: 'Idiomas', sectionContact: 'Contato', sectionResume: 'Currículo', backgroundIntro: 'Olá! Sou um desenvolvedor dedicado especializado em desenvolvimento web e DevOps. Nos últimos anos, colaborei com várias empresas, levando à criação bem-sucedida de 7 aplicações operacionais.', backgroundOutro: 'Minha expertise se estende a vários RDBMS como MySQL, e tenho experiência prática com ferramentas DevOps incluindo Swarm e Kubernetes.', resumeText: 'Quer uma cópia do meu currículo? Baixe aqui:', resumeDownload: 'Baixar Currículo', skillFrontend: 'Frontend', skillBackend: 'Backend', skillAi: 'IA & GenAI', skillDevops: 'DevOps', skillMethodologies: 'Metodologias', skillArchitecture: 'Arquitetura', skillTools: 'Ferramentas', imgAlt: 'Djamel Bougouffa trabalhando em sua mesa com vários monitores mostrando código', seeAllExperiences: 'See all my experiences' },
