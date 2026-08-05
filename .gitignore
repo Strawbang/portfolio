@@ -22,3 +22,19 @@ pnpm-debug.log*
 
 # local embedding cache (semtree/fastembed)
 .fastembed_cache/
+
+# syndication export artifacts (scripts/syndicate.mjs)
+syndication/
+
+# interview-prep area: stays local, never deployed from this public repo
+/public/prep/
+/src/pages/prep/
+/src/components/prep/
+/src/data/prep/
+/src/layouts/PrepLayout.astro
+/scripts/gen-prep-sql-seed.mjs
+
+# personal planning documents (LinkedIn editorial calendar, comms strategy)
+*.xlsx
+*.docx
+.~lock.*#

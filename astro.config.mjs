@@ -169,6 +169,8 @@ export default defineConfig({
 			if (page.includes('/og/')) return false;
 			if (page.includes('/fr/uses')) return false;
 			if (page.includes('/contact/success')) return false;
+			// Interview-prep area: kept out of this repo and never listed.
+			if (page.includes('/prep')) return false;
 			return true;
 		},
 			customPages: [],
