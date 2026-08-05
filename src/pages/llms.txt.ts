@@ -17,7 +17,7 @@ export const GET: APIRoute = async () => {
   const lines: string[] = [
     '# Djamel Bougouffa',
     '',
-    '> Full-Stack Software Engineer based in Paris, France. Specializing in TypeScript, React, Node.js, Angular, Rust, MCP, and legacy modernization. Currently on a mission at SUEZ IWS via Ippon Technologies, modernizing the Pléco B2B extranet.',
+    '> Remote-first Full-Stack Software Engineer with 5+ years of experience, open to opportunities worldwide. Builds and ships his own products and open-source developer tools (Rust, MCP, RAG), and brings end-to-end ownership and software craft to client teams (currently at Ippon Technologies). Skilled across TypeScript, React, Node.js, Angular, Rust, and AI/GenAI.',
     '',
     '## About',
     '',
