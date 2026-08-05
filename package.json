@@ -9,7 +9,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "import-articles": "node scripts/import-articles.mjs",
-    "import-articles:dry": "node scripts/import-articles.mjs --dry-run"
+    "import-articles:dry": "node scripts/import-articles.mjs --dry-run",
+    "syndicate": "node scripts/syndicate.mjs"
   },
   "dependencies": {
     "@astrojs/compiler-rs": "^0.1.10",
