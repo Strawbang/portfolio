@@ -34,6 +34,11 @@ syndication/
 /src/layouts/PrepLayout.astro
 /scripts/gen-prep-sql-seed.mjs
 
+# LinkedIn carousel deck: unpublished editorial content, stays local
+/slides/
+/scripts/deck-serve.mjs
+/scripts/deck-pdf.mjs
+
 # personal planning documents (LinkedIn editorial calendar, comms strategy)
 *.xlsx
 *.docx
