@@ -15,6 +15,8 @@ interface Props {
   tags?: string[];
   author?: string;
   alternates?: { lang: string; url: string }[];
+  /** Keeps the page out of search engines and AI crawlers. Used by unlisted pages. */
+  noindex?: boolean;
 }
 
 const {
@@ -28,6 +30,7 @@ const {
   tags = [],
   author = "Djamel Bougouffa",
   alternates,
+  noindex = false,
 } = Astro.props;
 
 const siteUrl = "https://djamel-bougouffa.com";
@@ -95,7 +98,16 @@ const ogLocale = ogLocaleMap[currentLang] ?? 'en_US';
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
 <title>{title}</title>
-<link rel="canonical" href={autoCanonical} />
+{!noindex && <link rel="canonical" href={autoCanonical} />}
+
+{noindex && (
+  <>
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="googlebot" content="noindex, nofollow" />
+    <meta name="ClaudeBot" content="noindex, nofollow" />
+    <meta name="GPTBot" content="noindex, nofollow" />
+  </>
+)}
 
 <meta name="author" content={author} />
 
@@ -121,10 +133,10 @@ const ogLocale = ogLocaleMap[currentLang] ?? 'en_US';
 {tags.map(tag => <meta property="article:tag" content={tag} />)}
 
 <!-- hreflang alternate links for all languages -->
-{(alternates ?? hreflangLinks).map(({ lang, url }) => (
+{!noindex && (alternates ?? hreflangLinks).map(({ lang, url }) => (
   <link rel="alternate" hreflang={lang} href={url} />
 ))}
-<link rel="alternate" hreflang="x-default" href={alternates?.find(a => a.lang === 'en')?.url ?? buildAlternateUrl('en')} />
+{!noindex && <link rel="alternate" hreflang="x-default" href={alternates?.find(a => a.lang === 'en')?.url ?? buildAlternateUrl('en')} />}
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
@@ -179,17 +191,21 @@ const ogLocale = ogLocaleMap[currentLang] ?? 'en_US';
   }
 </script>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GRQ7796BSZ"></script>
-<script is:inline>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-GRQ7796BSZ', { send_page_view: false });
-  document.addEventListener('astro:page-load', () => {
-    gtag('event', 'page_view', {
-      page_title: document.title,
-      page_location: window.location.href,
-    });
-  });
-</script>
+<!-- Google tag (gtag.js). Skipped on unlisted pages so private browsing stays out of GA. -->
+{!noindex && (
+  <>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GRQ7796BSZ"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GRQ7796BSZ', { send_page_view: false });
+      document.addEventListener('astro:page-load', () => {
+        gtag('event', 'page_view', {
+          page_title: document.title,
+          page_location: window.location.href,
+        });
+      });
+    </script>
+  </>
+)}

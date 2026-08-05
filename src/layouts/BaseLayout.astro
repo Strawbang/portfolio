@@ -19,9 +19,10 @@ interface Props {
 	updatedTime?: string | undefined;
 	tags?: string[];
 	alternates?: { lang: string; url: string }[];
+	noindex?: boolean;
 }
 
-const { title, description, canonicalURL, image, type, publishedTime, updatedTime, tags, alternates } = Astro.props;
+const { title, description, canonicalURL, image, type, publishedTime, updatedTime, tags, alternates, noindex } = Astro.props;
 
 import { getLangFromUrl } from '../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
@@ -39,6 +40,7 @@ const lang = getLangFromUrl(Astro.url);
 			updatedTime={updatedTime}
 			tags={tags}
 			alternates={alternates}
+			noindex={noindex}
 		/>
 		<ClientRouter />
 		<slot name="head" />
