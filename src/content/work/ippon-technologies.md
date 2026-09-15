@@ -7,7 +7,7 @@ img_alt: Ippon Technologies logo
 role: Full-Stack Software Engineer
 startDate: 2025-11-01
 description: |
-  Designed and built an internal AI platform for legacy modernization at Ippon Technologies: a Rust CLI, a web app and an MCP server on one core, rolled out to 120+ consultants.
+  Designed and built Lumio at Ippon Technologies: an AI platform that documents legacy codebases (Rust CLI, web app and MCP server on one core), rolled out to 120+ consultants and offered to Ippon's clients.
 tags:
   - AI
   - Software Engineering
@@ -42,9 +42,13 @@ stack:
     - Node.js
 ---
 
-### An internal AI platform for legacy modernization
+### Lumio: an AI platform for legacy codebases
 
-<p>Ippon Technologies is a consulting firm of about 600 people working on cloud and software engineering for large clients. Since November 2025 I have split my time between client delivery and internal R&D. The R&D side produced one product: a platform that helps engineers understand and modernize legacy codebases.</p>
+<p>Ippon Technologies is a consulting firm of about 600 people working on cloud and software engineering for large clients. Since November 2025 I have split my time between client delivery and internal R&D. The R&D side produced Lumio, a platform that helps engineers understand and modernize legacy codebases, which Ippon now offers to its clients (<a href="https://fr.ippon.tech/ia-advisory/lumio-documentation-legacy/" rel="noopener">product page, in French</a>).</p>
+
+#### What Lumio does
+
+<p>Lumio imports a codebase from a Git repository, an archive of up to 20 GB or a local path, with sub-project selection in monorepos. It maps the dependencies and generates business and technical documentation linked to the code, refreshed on every re-indexing. Engineers query it in natural language through a chatbot or from the command line. The analysis engine runs on Claude Sonnet 4.6.</p>
 
 #### What I built
 
@@ -62,7 +66,7 @@ stack:
 
 #### Where it stands
 
-<p>The platform is rolled out internally to 120+ consultants.</p>
+<p>Lumio is rolled out internally to 120+ consultants, and Ippon now offers it to its clients.</p>
 
 #### Client delivery
 

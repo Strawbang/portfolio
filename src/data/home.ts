@@ -10,6 +10,8 @@ export interface LedgerEntry {
   org: string;
   fact: string;
   proof: { label: string; href: string };
+  /** Optional second proof, e.g. a third-party page confirming the entry. */
+  secondary?: { label: string; href: string };
   /** Optional recording. The caption must say exactly what the recording shows. */
   media?: { mp4: string; poster: string; caption: string };
 }
@@ -44,10 +46,11 @@ export const home: Record<HomeLang, HomeCopy> = {
     ledger: [
       {
         when: 'Since 2025',
-        title: 'AI platform for legacy modernization',
+        title: 'Lumio, AI documentation for legacy code',
         org: 'Ippon Technologies',
-        fact: 'Designed and built the whole product: a Rust CLI, a web app and an MCP server on one core. Tree-sitter parsing, retrieval, generated documentation, separate workspaces per organization and LLM cost tracking. Rolled out to 120+ consultants.',
+        fact: 'Designed and built Lumio, which Ippon now offers to its clients. It analyzes a codebase (Git repository or archive up to 20 GB), maps its dependencies and generates business and technical documentation linked to the code, queryable in natural language or from the CLI. Rust CLI, web app and MCP server on one core, with per-organization workspaces and LLM cost tracking. Rolled out to 120+ consultants.',
         proof: { label: 'Case study', href: '/work/ippon-technologies/' },
+        secondary: { label: 'Ippon page (FR)', href: 'https://fr.ippon.tech/ia-advisory/lumio-documentation-legacy/' },
       },
       {
         when: 'Since 2025',
@@ -102,10 +105,11 @@ export const home: Record<HomeLang, HomeCopy> = {
     ledger: [
       {
         when: 'Depuis 2025',
-        title: 'Plateforme IA de modernisation legacy',
+        title: 'Lumio, documentation IA du code legacy',
         org: 'Ippon Technologies',
-        fact: "Conception et réalisation de tout le produit : une CLI Rust, une application web et un serveur MCP sur un même cœur. Parsing tree-sitter, recherche, documentation générée, espaces séparés par organisation et suivi des coûts LLM. Déployée auprès de plus de 120 consultants.",
+        fact: "Conception et réalisation de Lumio, qu'Ippon propose aujourd'hui à ses clients. Il analyse une base de code (dépôt Git ou archive jusqu'à 20 Go), cartographie ses dépendances et génère une documentation métier et technique liée au code, interrogeable en langage naturel ou en ligne de commande. CLI Rust, application web et serveur MCP sur un même cœur, avec des espaces par organisation et le suivi des coûts LLM. Déployé auprès de plus de 120 consultants.",
         proof: { label: 'Étude de cas', href: '/fr/experiences/ippon-technologies/' },
+        secondary: { label: 'Page Ippon', href: 'https://fr.ippon.tech/ia-advisory/lumio-documentation-legacy/' },
       },
       {
         when: 'Depuis 2025',

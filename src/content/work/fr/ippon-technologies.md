@@ -7,7 +7,7 @@ img_alt: Logo Ippon Technologies
 role: Ingénieur Logiciel Full-Stack
 startDate: 2025-11-01
 description: |
-  Conception et réalisation d'une plateforme IA interne de modernisation legacy chez Ippon Technologies : une CLI Rust, une application web et un serveur MCP sur un même cœur, déployée auprès de plus de 120 consultants.
+  Conception et réalisation de Lumio chez Ippon Technologies : une plateforme IA qui documente les bases de code legacy (CLI Rust, application web et serveur MCP sur un même cœur), déployée auprès de plus de 120 consultants et proposée aux clients d'Ippon.
 tags:
   - IA
   - Software Engineering
@@ -42,9 +42,13 @@ stack:
     - Node.js
 ---
 
-### Une plateforme IA interne de modernisation legacy
+### Lumio : une plateforme IA pour les bases de code legacy
 
-<p>Ippon Technologies est un cabinet de conseil d'environ 600 personnes, spécialisé dans le cloud et l'ingénierie logicielle pour de grands clients. Depuis novembre 2025, je partage mon temps entre les missions client et la R&D interne. La R&D a donné un produit : une plateforme qui aide les ingénieurs à comprendre et moderniser des bases de code legacy.</p>
+<p>Ippon Technologies est un cabinet de conseil d'environ 600 personnes, spécialisé dans le cloud et l'ingénierie logicielle pour de grands clients. Depuis novembre 2025, je partage mon temps entre les missions client et la R&D interne. La R&D a donné Lumio, une plateforme qui aide les ingénieurs à comprendre et moderniser des bases de code legacy, qu'Ippon propose aujourd'hui à ses clients (<a href="https://fr.ippon.tech/ia-advisory/lumio-documentation-legacy/" rel="noopener">page produit</a>).</p>
+
+#### Ce que fait Lumio
+
+<p>Lumio importe une base de code depuis un dépôt Git, une archive jusqu'à 20 Go ou un chemin local, avec la sélection de sous-projets dans un monorepo. Il cartographie les dépendances et génère une documentation métier et technique liée au code, rafraîchie à chaque ré-indexation. Les ingénieurs l'interrogent en langage naturel via un chatbot ou en ligne de commande. Le moteur d'analyse s'appuie sur Claude Sonnet 4.6.</p>
 
 #### Ce que j'ai construit
 
@@ -62,7 +66,7 @@ stack:
 
 #### Où en est la plateforme
 
-<p>Elle est déployée en interne auprès de plus de 120 consultants.</p>
+<p>Lumio est déployé en interne auprès de plus de 120 consultants, et Ippon le propose aujourd'hui à ses clients.</p>
 
 #### Missions client
 

@@ -78,7 +78,10 @@ const formatDate = (d: Date) => d.toLocaleDateString(locale, { month: 'short', y
               </figure>
             )}
           </div>
-          <a class="proof" href={e.proof.href}>{e.proof.label}</a>
+          <div class="proofs">
+            <a class="proof" href={e.proof.href}>{e.proof.label}</a>
+            {e.secondary && <a class="proof" href={e.secondary.href} rel="noopener">{e.secondary.label}</a>}
+          </div>
         </li>
       ))}
     </ul>
@@ -268,9 +271,15 @@ const formatDate = (d: Date) => d.toLocaleDateString(locale, { month: 'short', y
     color: var(--gray-200);
   }
 
-  .proof {
-    justify-self: start;
+  .proofs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
     margin-top: 0.4rem;
+  }
+
+  .proof {
     font-size: var(--text-sm);
     font-weight: 600;
     color: var(--link-color);
@@ -415,12 +424,12 @@ const formatDate = (d: Date) => d.toLocaleDateString(locale, { month: 'short', y
     }
 
     .when,
-    .proof {
+    .proofs {
       padding-top: 0.3rem;
     }
 
-    .proof {
-      justify-self: end;
+    .proofs {
+      align-items: flex-end;
       margin-top: 0;
       text-align: right;
     }
