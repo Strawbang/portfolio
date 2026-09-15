@@ -10,7 +10,7 @@ publishDate: 2025-12-01 00:00:00
 img: /assets/optimized/rustkit-ai.webp
 img_alt: rustkit-ai open source organization logo
 imgType: logo
-role: Founder & Open Source Maintainer
+role: Co-founder & Open Source Maintainer
 startDate: 2025-12-01
 description: |
   Open source organization for Rust developer tools used in AI-assisted work. Main project: semtree, semantic code search that runs locally by default, published on crates.io under MIT.
@@ -44,13 +44,13 @@ stack:
 
 ### rustkit-ai: Rust tools for AI-assisted development
 
-<p>rustkit-ai is the open source organization where I publish the Rust tools I build for AI-assisted development. Everything is MIT licensed and published on crates.io.</p>
+<p>rustkit-ai is an open source organization of Rust tools for AI-assisted development, which I co-founded with <a href="https://github.com/GokhanKabar" rel="noopener">Gokhan Kabar</a>. Everything is MIT licensed and published on crates.io.</p>
 
 <p>The tooling was born out of practical needs met during internal R&D work at Ippon Technologies, where the same problems (context loss, token costs, understanding a large codebase) kept coming back on real production code.</p>
 
 #### semtree
 
-**[semtree](https://github.com/rustkit-ai/semtree)** is the main project: semantic code search that runs locally by default.
+**[semtree](https://github.com/rustkit-ai/semtree)** is my main project, which I built and maintain: semantic code search that runs locally by default.
 
 - Parses a codebase with tree-sitter (20 languages) and chunks it along the syntax tree, so a chunk is a function or a class rather than an arbitrary window of lines.
 - Embeds the chunks on your machine with fastembed and stores them in an HNSW index next to the repository.
@@ -62,15 +62,7 @@ stack:
 cargo install semtree-cli
 ```
 
-#### Other tools
-
-**[aimemo](https://github.com/rustkit-ai/aimemo)**
-Persistent memory for AI coding agents. Writes structured context to `CLAUDE.md`, `.cursor/rules`, `.windsurfrules` or `.github/copilot-instructions.md` depending on the editor.
-
-```
-cargo install aimemo
-aimemo setup --claude
-```
+#### My other tools
 
 **[trimcp](https://github.com/rustkit-ai/trimcp)**
 MCP proxy that compresses and caches MCP tool output before it reaches the model. Auto-detects Claude Code and Cursor MCP configurations.
@@ -80,16 +72,13 @@ cargo install trimcp
 trimcp setup
 ```
 
-**[tersify](https://github.com/rustkit-ai/tersify)**
-Strips noise (comments, blank lines, redundant whitespace) from code and text before it goes into an LLM context.
-
-```
-cargo install tersify
-tersify src/main.rs | pbcopy
-```
-
-**[semstore](https://github.com/rustkit-ai/semstore)**
+**[semstore](https://github.com/rustkit-ai/semstore)**, co-written with Gokhan
 Local semantic search for Rust applications: store text, search by meaning, no cloud API required.
+
+#### Also in the organization
+
+<p><a href="https://github.com/GokhanKabar" rel="noopener">Gokhan Kabar</a> builds <a href="https://github.com/rustkit-ai/aimemo">aimemo</a> (persistent memory for AI coding agents), <a href="https://github.com/rustkit-ai/tersify">tersify</a> (strips noise from code and text before it goes into an LLM context) and <a href="https://github.com/rustkit-ai/mcpkill">mcpkill</a> (a semantic cache proxy for MCP servers).</p>
+
 
 #### References
 

@@ -85,7 +85,7 @@ export const aboutFaq: Record<'en' | 'fr', { heading: string; items: FaqItem[] }
       },
       {
         question: 'What open-source tools has Djamel Bougouffa built?',
-        answer: 'He builds the rustkit-ai ecosystem in Rust: trimcp, an MCP proxy that compresses tool output to save tokens, and semtree, an on-device semantic code search tool using tree-sitter and local embeddings. Both run without API keys.',
+        answer: 'He co-founded rustkit-ai, an open-source organization of Rust tools for AI-assisted development, where he built semtree (semantic code search that runs locally by default, with tree-sitter and on-device embeddings) and trimcp (an MCP proxy that compresses tool output to save tokens).',
       },
       {
         question: 'How can I contact Djamel Bougouffa?',
@@ -110,7 +110,7 @@ export const aboutFaq: Record<'en' | 'fr', { heading: string; items: FaqItem[] }
       },
       {
         question: 'Quels outils open source Djamel Bougouffa a-t-il créés ?',
-        answer: "Il développe l'écosystème rustkit-ai en Rust : trimcp, un proxy MCP qui compresse la sortie des outils pour économiser des tokens, et semtree, un outil de recherche sémantique de code en local basé sur tree-sitter et des embeddings locaux. Les deux fonctionnent sans clé API.",
+        answer: "Il a cofondé rustkit-ai, une organisation open source d'outils Rust pour le développement assisté par IA, où il a construit semtree (recherche sémantique de code, locale par défaut, avec tree-sitter et des embeddings calculés sur la machine) et trimcp (un proxy MCP qui compresse la sortie des outils pour économiser des tokens).",
       },
       {
         question: 'Comment contacter Djamel Bougouffa ?',

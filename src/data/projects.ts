@@ -74,8 +74,8 @@ export const ossOrg = {
   href: 'https://github.com/rustkit-ai',
   site: 'https://rustkit-ai.github.io/',
   intro: {
-    en: 'A suite of local-first, privacy-first Rust tools for AI-assisted development. No API keys, no cloud.',
-    fr: "Une suite d'outils Rust local-first et respectueux de la vie privée pour le développement assisté par IA. Aucune clé API, aucun cloud.",
+    en: 'An open-source organization of Rust tools for AI-assisted development, co-founded with Gokhan Kabar. Below, the tools I built.',
+    fr: "Une organisation open source d'outils Rust pour le développement assisté par IA, cofondée avec Gokhan Kabar. Ci-dessous, les outils que j'ai construits.",
   } as Localized,
   install: 'brew install rustkit-ai/tap/semtree',
 };
@@ -102,44 +102,14 @@ export const ossTools: OssTool[] = [
     crates: ['trimcp'],
   },
   {
-    name: 'mcpkill',
-    href: 'https://github.com/rustkit-ai/mcpkill',
-    desc: {
-      en: 'Semantic cache proxy for MCP servers, up to 79% fewer tokens.',
-      fr: 'Proxy de cache sémantique pour serveurs MCP, jusqu’à 79 % de tokens en moins.',
-    },
-    tags: ['Rust', 'MCP', 'cache'],
-    crates: ['mcpkill'],
-  },
-  {
-    name: 'tersify',
-    href: 'https://github.com/rustkit-ai/tersify',
-    desc: {
-      en: 'Compresses code and text for LLMs, up to 50% fewer tokens, meaning preserved.',
-      fr: 'Compresse code et texte pour LLM, jusqu’à 50 % de tokens en moins, sens préservé.',
-    },
-    tags: ['Rust', 'LLM'],
-    crates: ['tersify'],
-  },
-  {
     name: 'semstore',
     href: 'https://github.com/rustkit-ai/semstore',
     desc: {
-      en: 'Local semantic search for Rust apps: store text, search by meaning, no cloud.',
-      fr: 'Recherche sémantique locale pour apps Rust : stocke du texte, cherche par sens, sans cloud.',
+      en: 'Local semantic search for Rust apps: store text, search by meaning, no cloud. Co-written with Gokhan Kabar.',
+      fr: 'Recherche sémantique locale pour apps Rust : stocke du texte, cherche par sens, sans cloud. Coécrit avec Gokhan Kabar.',
     },
     tags: ['Rust', 'embeddings'],
     crates: ['semstore'],
-  },
-  {
-    name: 'aimemo',
-    href: 'https://github.com/rustkit-ai/aimemo',
-    desc: {
-      en: 'Persistent memory for AI coding agents: Claude Code, Cursor, Windsurf, Copilot.',
-      fr: 'Mémoire persistante pour agents de code IA : Claude Code, Cursor, Windsurf, Copilot.',
-    },
-    tags: ['Rust', 'agents'],
-    crates: ['aimemo'],
   },
 ];
 
