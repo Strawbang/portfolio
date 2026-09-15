@@ -2,7 +2,6 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ContactCTA from "../components/ContactCTA.astro";
 import Hero from "../components/Hero.astro";
-import Icon from "../components/Icon.astro";
 import CallToAction from "../components/CallToAction.astro";
 import SchemaOrgPerson from '../components/SchemaOrgPerson.astro';
 import CareerTimeline from '../components/CareerTimeline.astro';
@@ -37,7 +36,7 @@ const faq = aboutFaq['en'];
             }))}
           />
           <p>{l.backgroundOutro}</p>
-          <a class="cta-link" href="/work/">{l.seeAllExperiences} →</a>
+          <a class="cta-link" href="/work/">{l.seeAllExperiences}</a>
         </div>
       </section>
 
@@ -49,7 +48,7 @@ const faq = aboutFaq['en'];
               title: edu.degree['en'],
               subtitle: edu.field['en'],
               period: edu.period,
-              extra: `${edu.institution} · ${edu.skills}`,
+              extra: edu.institution,
             }))}
           />
         </div>
@@ -60,31 +59,31 @@ const faq = aboutFaq['en'];
         <div class="content">
           <div class="skills-grid">
             <div class="skill-category">
-              <h3><Icon icon="code" size="1.33em" /> {l.skillFrontend}</h3>
+              <h3>{l.skillFrontend}</h3>
               <ul class="skill-list">{skills.frontend.map(s => <li>{s}</li>)}</ul>
             </div>
             <div class="skill-category">
-              <h3><Icon icon="terminal-window" size="1.33em" /> {l.skillBackend}</h3>
+              <h3>{l.skillBackend}</h3>
               <ul class="skill-list">{skills.backend.map(s => <li>{s}</li>)}</ul>
             </div>
             <div class="skill-category">
-              <h3><Icon icon="rocket-launch" size="1.33em" /> {l.skillAi}</h3>
+              <h3>{l.skillAi}</h3>
               <ul class="skill-list">{skills.ai.map(s => <li>{s}</li>)}</ul>
             </div>
             <div class="skill-category">
-              <h3><Icon icon="devops-logo" size="1.33em" /> {l.skillDevops}</h3>
+              <h3>{l.skillDevops}</h3>
               <ul class="skill-list">{skills.devops.map(s => <li>{s}</li>)}</ul>
             </div>
             <div class="skill-category">
-              <h3><Icon icon="strategy" size="1.33em" /> {l.skillMethodologies}</h3>
+              <h3>{l.skillMethodologies}</h3>
               <ul class="skill-list">{skills.methodologies.map(s => <li>{s}</li>)}</ul>
             </div>
             <div class="skill-category">
-              <h3><Icon icon="pencil-line" size="1.33em" /> {l.skillArchitecture}</h3>
+              <h3>{l.skillArchitecture}</h3>
               <ul class="skill-list">{skills.architecture.map(s => <li>{s}</li>)}</ul>
             </div>
             <div class="skill-category">
-              <h3><Icon icon="github-logo" size="1.33em" /> {l.skillTools}</h3>
+              <h3>{l.skillTools}</h3>
               <ul class="skill-list">{skills.tools.map(s => <li>{s}</li>)}</ul>
             </div>
           </div>
@@ -110,23 +109,23 @@ const faq = aboutFaq['en'];
         <div class="content">
           <div class="contact-grid">
             <div class="contact-item">
-              <h3><Icon icon="paper-plane-tilt" size="1.33em" /> Email</h3>
+              <h3>Email</h3>
               <p><a href={`mailto:${contact.email}`}>{contact.email}</a></p>
             </div>
             <div class="contact-item">
-              <h3><Icon icon="desktop" size="1.33em" /> Phone</h3>
+              <h3>Phone</h3>
               <p><a href={`tel:${contact.phone}`}>{contact.phone}</a></p>
             </div>
             <div class="contact-item">
-              <h3><Icon icon="linkedin-logo" size="1.33em" /> LinkedIn</h3>
+              <h3>LinkedIn</h3>
               <p><a href={contact.linkedin} target="_blank" rel="noopener noreferrer">{contact.linkedin.replace('https://', '')}</a></p>
             </div>
             <div class="contact-item">
-              <h3><Icon icon="github-logo" size="1.33em" /> GitHub</h3>
+              <h3>GitHub</h3>
               <p><a href={contact.github} target="_blank" rel="noopener noreferrer">{contact.github.replace('https://', '')}</a></p>
             </div>
             <div class="contact-item">
-              <h3><Icon icon="rocket-launch" size="1.33em" /> Portfolio</h3>
+              <h3>Portfolio</h3>
               <p><a href={contact.portfolio} target="_blank" rel="noopener noreferrer">{contact.portfolio.replace('https://', '')}</a></p>
             </div>
           </div>
@@ -139,7 +138,6 @@ const faq = aboutFaq['en'];
           <p>{l.resumeText}</p>
           <CallToAction href={resume}>
             {l.resumeDownload}
-            <Icon icon="arrow-right" size="1.2em" />
           </CallToAction>
         </div>
       </section>
@@ -151,18 +149,18 @@ const faq = aboutFaq['en'];
 
   <SchemaOrgPerson
     name="Djamel Bougouffa"
-    jobTitle="Full-Stack Software Engineer"
-    description="Full-Stack Software Engineer with over 5 years of experience, remote-first and open to opportunities worldwide. He builds and ships his own products and open-source developer tools (Rust, MCP, RAG) and brings the same end-to-end ownership and software craft to client teams, currently at Ippon Technologies. Experienced across TypeScript, React, Node.js, Rust, AI/GenAI, and DevOps."
+    jobTitle="Software Engineer"
+    description="Software engineer with 7+ years of experience, based in France and open to remote roles with international teams. Designs and builds AI tooling for large, long-lived codebases. At Ippon Technologies he built an internal AI platform for legacy modernization (Rust CLI, web app and MCP server), rolled out to 120+ consultants. Maintains semtree, open-source semantic code search in Rust."
     image="https://djamel-bougouffa.com/assets/at-work.webp"
     url="https://djamel-bougouffa.com/about/"
     email={contact.email}
     telephone={contact.phone}
     sameAs={[contact.github, contact.linkedin, "https://twitter.com/strawbang", "https://dev.to/strawbang", "https://medium.com/@strawbang"]}
     knowsLanguage={["en", "fr"]}
-    workLocation={{ name: "Paris, France" }}
+    workLocation={{ name: "France (remote)" }}
     worksFor={{ name: "Ippon Technologies", url: "https://www.ippon.fr/" }}
-    knowsAbout={["TypeScript", "React", "Node.js", "Rust", "RAG", "GenAI", "MCP", "LLM Integration", "DevOps", "Docker", "Kubernetes", "Next.js"]}
-    seeks="Open to remote full-stack engineering roles worldwide, focused on product building, software craft, AI/GenAI, and Rust."
+    knowsAbout={["TypeScript", "React", "Angular", "Node.js", "Java", "Spring Boot", "Rust", "RAG", "GenAI", "MCP", "LLM Integration", "DevOps", "Docker", "Kubernetes", "Next.js"]}
+    seeks="Remote software engineering roles, from France, with French or international teams, in AI tooling, developer tools and products built on large codebases."
     availableForHire={true}
   />
 </BaseLayout>
@@ -176,8 +174,7 @@ const faq = aboutFaq['en'];
 
   img {
     margin-top: 1.5rem;
-    border-radius: 1.5rem;
-    box-shadow: var(--shadow-md);
+    border-radius: 0.75rem;
   }
 
   .section-container {
@@ -202,8 +199,11 @@ const faq = aboutFaq['en'];
   }
 
   .content h3 {
-    color: var(--accent-regular);
-    font-size: var(--text-lg);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--gray-0);
+    font-size: var(--text-md);
     margin-bottom: 0.5rem;
   }
 
@@ -214,16 +214,10 @@ const faq = aboutFaq['en'];
   }
 
   .skill-category, .language-item, .contact-item {
-    background-color: var(--gray-999);
-    border-radius: 0.5rem;
-    padding: 1rem;
-    box-shadow: var(--shadow-sm);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .skill-category:hover, .language-item:hover, .contact-item:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
+    background-color: var(--surface);
+    border: 1px solid var(--gray-800);
+    border-radius: 0.75rem;
+    padding: 1rem 1.25rem;
   }
 
   .skill-list {
@@ -256,25 +250,19 @@ const faq = aboutFaq['en'];
     text-decoration-color: currentColor;
   }
 
-  .cta-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
+  .content .cta-link {
+    display: inline-block;
     margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    background: var(--accent-regular);
-    color: var(--accent-text-over);
-    border-radius: 999rem;
-    font-family: var(--font-brand);
-    font-weight: 500;
-    font-size: var(--text-sm);
-    text-decoration: none;
-    transition: background var(--theme-transition);
+    color: var(--gray-0);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--accent-regular);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.3em;
   }
 
-  .cta-link:hover {
-    background: var(--accent-dark);
-    text-decoration: none;
+  .content .cta-link:hover {
+    color: var(--link-color);
   }
 
   @media (min-width: 50em) {

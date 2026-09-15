@@ -2,11 +2,12 @@
 title: Ippon Technologies
 publishDate: 2025-11-01 00:00:00
 img: /assets/optimized/ippon.webp
+imgType: logo
 img_alt: Logo Ippon Technologies
 role: Ingénieur Logiciel Full-Stack
 startDate: 2025-11-01
 description: |
-  Ingénieur Full-Stack chez Ippon Technologies : CLI Rust, modernisation legacy pilotée par l'IA, RAG, parsing AST Tree-sitter, workflows agentiques MCP, TypeScript
+  Conception et réalisation d'une plateforme IA interne de modernisation legacy chez Ippon Technologies : une CLI Rust, une application web et un serveur MCP sur un même cœur, déployée auprès de plus de 120 consultants.
 tags:
   - IA
   - Software Engineering
@@ -41,26 +42,32 @@ stack:
     - Node.js
 ---
 
-### Modernisation Legacy pilotée par l'IA chez Ippon Technologies
+### Une plateforme IA interne de modernisation legacy
 
-<p>Ippon Technologies est un cabinet de conseil spécialisé dans la transformation digitale, le cloud et l'ingénierie logicielle moderne pour des clients de grande envergure. En tant qu'Ingénieur Logiciel Full-Stack depuis novembre 2025, je pilote des initiatives R&D internes visant à accélérer la modernisation des systèmes legacy, transformant des processus de migration lents et manuels en workflows automatisés assistés par l'IA.</p>
+<p>Ippon Technologies est un cabinet de conseil d'environ 600 personnes, spécialisé dans le cloud et l'ingénierie logicielle pour de grands clients. Depuis novembre 2025, je partage mon temps entre les missions client et la R&D interne. La R&D a donné un produit : une plateforme qui aide les ingénieurs à comprendre et moderniser des bases de code legacy.</p>
 
-#### CLI de modernisation piloté par l'IA en Rust
+#### Ce que j'ai construit
 
-<p>J'ai conçu et développé un outil en ligne de commande en Rust exploitant Tree-sitter pour le parsing d'Arbre Syntaxique Abstrait (AST) de bases de code legacy. Combiné à un pipeline de Retrieval-Augmented Generation (RAG), l'outil génère automatiquement une documentation structurée à partir du code existant, permettant aux ingénieurs de comprendre des systèmes complexes et non documentés en quelques heures plutôt qu'en plusieurs semaines.</p>
+<p>J'ai conçu et construit tout le produit. Il a trois surfaces qui partagent un même cœur :</p>
 
-<p>Le choix de Rust était délibéré : la sécurité mémoire, la quasi-absence d'overhead à l'exécution et la compilation native en font l'outil idéal pour traiter de grandes bases de code rapidement. Tree-sitter fournit un parsing agnostique au langage, permettant à l'outil de supporter plusieurs langages legacy depuis une architecture unifiée.</p>
+<ul>
+  <li><strong>Une CLI Rust</strong> qui analyse les bases de code avec tree-sitter, les découpe en suivant l'arbre syntaxique et les indexe pour la recherche.</li>
+  <li><strong>Une application web</strong> où les ingénieurs indexent leurs projets, lisent la documentation générée, explorent un graphe du code et lui posent des questions.</li>
+  <li><strong>Un serveur MCP</strong> qui donne le même index aux agents de code et aux assistants d'IDE, pour l'exploration, les tests et le refactoring.</li>
+</ul>
 
-#### Workflows agentiques avec le Model Context Protocol (MCP)
+<p>Autour de ce cœur, il y a ce qui en fait un produit plutôt qu'une démo : des espaces séparés par organisation, la gestion des utilisateurs et des accès, les logs, et le suivi de l'usage et du coût des LLM par organisation.</p>
 
-<p>J'ai mis en place des workflows agentiques via le Model Context Protocol (MCP), créant des agents de test autonomes et des assistants de refactoring qui interagissent directement avec les IDEs et les systèmes de fichiers. Ces agents peuvent analyser le code, proposer des refactorisations, exécuter des suites de tests et remonter les résultats, réduisant significativement la charge manuelle sur les tâches de modernisation.</p>
+<p>Le cœur est écrit en Rust pour qu'un seul moteur serve la CLI, l'application web et le serveur MCP, et pour que l'analyse de gros dépôts reste rapide. Tree-sitter rend le parsing indépendant du langage, ce qui compte quand les bases de code concernées mélangent plusieurs langages legacy.</p>
 
-<p>L'approche basée sur MCP permet des agents conscients du contexte qui comprennent la structure complète du projet, rendant les interventions plus précises que les outils d'analyse statique traditionnels.</p>
+#### Où en est la plateforme
 
-#### Expérience développeur & "Chat with Code"
+<p>Elle est déployée en interne auprès de plus de 120 consultants.</p>
 
-<p>Un résultat clé de ces initiatives est une capacité "Chat with Code" : une interface interactive permettant aux ingénieurs rejoignant des projets legacy d'interroger la base de code en langage naturel. Cela a considérablement réduit le temps d'onboarding sur les systèmes complexes, donnant aux nouveaux membres de l'équipe un point de départ productif dès le premier jour.</p>
+#### Missions client
 
-#### Publications sur le Blog Tech Ippon
+<p>En parallèle, je travaille en mission client, actuellement chez <a href="/fr/experiences/suez-iws/">Suez IWS</a> : un extranet B2B réglementé de suivi des déchets dangereux, où j'ai reconstruit la pipeline CI/CD et migré un front Liferay legacy vers des micro frontends Angular.</p>
 
-<p>Dans la culture de partage de connaissance d'Ippon, j'ai publié des articles techniques sur le <a href="https://blog.ippon.fr/author/djamel-bougouffa/" rel="noopener">Blog Tech Ippon</a> couvrant des sujets explorés durant la phase R&D.</p>
+#### Publications
+
+<p>Je publie aussi des articles techniques sur le <a href="https://blog.ippon.fr/author/djamel-bougouffa/" rel="noopener">Blog Tech Ippon</a>, sur des sujets explorés pendant ces travaux de R&D.</p>

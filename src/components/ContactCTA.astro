@@ -1,50 +1,58 @@
 ---
 import CallToAction from "./CallToAction.astro";
-import Icon from "./Icon.astro";
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl } from '../i18n/utils';
+import { contact } from '../data/about';
 
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+
+const copy = lang === 'fr'
+  ? {
+      title: 'Vous recrutez pour un poste en remote ?',
+      text: "Écrivez-moi avec le poste et quelques mots sur l'équipe. Je réponds en général sous deux jours.",
+      button: "M'écrire",
+    }
+  : {
+      title: 'Hiring for a remote engineering role?',
+      text: 'Email me with the role and a few words about the team. I usually reply within two days.',
+      button: 'Email me',
+    };
 ---
 
-<aside aria-labelledby="cta-heading">
-  <h2 id="cta-heading">{t('cta.title')}</h2>
-  <CallToAction href="mailto:dbougouffa@gmail.com">
-    {t('cta.button')}
-    <Icon icon="paper-plane-tilt" size="1.2em" />
-  </CallToAction>
+<aside class="wrapper" aria-labelledby="cta-heading">
+  <div class="inner">
+    <h2 id="cta-heading">{copy.title}</h2>
+    <p>{copy.text}</p>
+    <CallToAction href={`mailto:${contact.email}`}>{copy.button}</CallToAction>
+  </div>
 </aside>
 
 <style>
-  aside {
+  .inner {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 3rem;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding-block: 3.5rem;
     border-top: 1px solid var(--gray-800);
-    border-bottom: 1px solid var(--gray-800);
-    padding: 5rem 1.5rem;
-    background-color: var(--gray-999_40);
-    box-shadow: var(--shadow-sm);
   }
 
   h2 {
-    font-size: var(--text-xl);
-    text-align: center;
-    max-width: 15ch;
+    font-size: var(--text-2xl);
+    max-width: 20ch;
+  }
+
+  p {
+    color: var(--gray-300);
+    max-width: 52ch;
   }
 
   @media (min-width: 50em) {
-    aside {
-      padding: 7.5rem;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-between;
+    .inner {
+      padding-block: 5rem;
     }
 
     h2 {
       font-size: var(--text-3xl);
-      text-align: left;
     }
   }
 </style>

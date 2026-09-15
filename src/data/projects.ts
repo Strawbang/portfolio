@@ -85,11 +85,11 @@ export const ossTools: OssTool[] = [
     name: 'semtree',
     href: 'https://github.com/rustkit-ai/semtree',
     desc: {
-      en: 'Semantic code intelligence: tree-sitter parsing, embeddings and RAG, multi-language.',
-      fr: 'Intelligence de code sémantique : parsing tree-sitter, embeddings et RAG, multi-langage.',
+      en: 'Semantic code search, local by default: tree-sitter parsing, on-device embeddings, hybrid vector and BM25 ranking, MCP server.',
+      fr: 'Recherche sémantique de code, locale par défaut : parsing tree-sitter, embeddings sur la machine, classement hybride vecteurs et BM25, serveur MCP.',
     },
     tags: ['Rust', 'tree-sitter', 'RAG'],
-    crates: ['semtree-core', 'semtree-embed', 'semtree-parse', 'semtree-store', 'semtree-rag', 'semtree-cli'],
+    crates: ['semtree', 'semtree-core', 'semtree-embed', 'semtree-parse', 'semtree-store', 'semtree-rag', 'semtree-analyze', 'semtree-cli', 'semtree-mcp'],
   },
   {
     name: 'trimcp',

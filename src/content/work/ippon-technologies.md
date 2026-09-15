@@ -2,11 +2,12 @@
 title: Ippon Technologies
 publishDate: 2025-11-01 00:00:00
 img: /assets/optimized/ippon.webp
+imgType: logo
 img_alt: Ippon Technologies logo
 role: Full-Stack Software Engineer
 startDate: 2025-11-01
 description: |
-  Full-Stack Engineer at Ippon Technologies: Rust CLI, AI-driven legacy modernization, RAG, Tree-sitter AST parsing, MCP agentic workflows, TypeScript
+  Designed and built an internal AI platform for legacy modernization at Ippon Technologies: a Rust CLI, a web app and an MCP server on one core, rolled out to 120+ consultants.
 tags:
   - AI
   - Software Engineering
@@ -41,26 +42,32 @@ stack:
     - Node.js
 ---
 
-### Spearheading AI-Driven Legacy Modernization at Ippon Technologies
+### An internal AI platform for legacy modernization
 
-<p>Ippon Technologies is a consulting firm specializing in digital transformation, cloud, and modern software engineering for large-scale clients. As a Full-Stack Software Engineer since November 2025, I lead internal R&D initiatives aimed at accelerating legacy modernization, turning slow, manual migration processes into automated, AI-assisted workflows.</p>
+<p>Ippon Technologies is a consulting firm of about 600 people working on cloud and software engineering for large clients. Since November 2025 I have split my time between client delivery and internal R&D. The R&D side produced one product: a platform that helps engineers understand and modernize legacy codebases.</p>
 
-#### AI-Driven Modernization CLI in Rust
+#### What I built
 
-<p>I designed and built a command-line tool in Rust that leverages Tree-sitter for Abstract Syntax Tree (AST) parsing of legacy codebases. Combined with a Retrieval-Augmented Generation (RAG) pipeline, the tool automatically generates structured documentation from existing code, enabling engineers to understand complex, undocumented systems in hours rather than weeks.</p>
+<p>I designed and built the whole product. It has three surfaces that share one core:</p>
 
-<p>The choice of Rust was deliberate: memory safety, near-zero runtime overhead, and native compilation make it ideal for processing large codebases quickly. Tree-sitter provides language-agnostic parsing, allowing the tool to support multiple legacy languages from a unified architecture.</p>
+<ul>
+  <li><strong>A Rust CLI</strong> that parses codebases with tree-sitter, chunks them along the syntax tree and indexes them for retrieval.</li>
+  <li><strong>A web app</strong> where engineers index their projects, read the generated documentation, explore a graph of the code and ask questions about it.</li>
+  <li><strong>An MCP server</strong> that gives coding agents and IDE assistants the same index, for exploration, testing and refactoring tasks.</li>
+</ul>
 
-#### Agentic Workflows with Model Context Protocol (MCP)
+<p>Around that core sit the parts that make it a product rather than a demo: separate workspaces per organization, user and access management, logs, and tracking of LLM usage and cost per organization.</p>
 
-<p>I implemented agentic workflows using the Model Context Protocol (MCP), creating autonomous testing agents and refactoring assistants that interact directly with IDEs and file systems. These agents can analyze code, propose refactors, run test suites, and report results, reducing manual overhead on modernization tasks significantly.</p>
+<p>The core is written in Rust so that one engine serves the CLI, the web app and the MCP server, and so that parsing large repositories stays fast. Tree-sitter keeps the parsing language-agnostic, which matters when the codebases in question span several legacy languages.</p>
 
-<p>The MCP-based approach enables context-aware agents that understand the full project structure, making interventions more precise than traditional static analysis tools.</p>
+#### Where it stands
 
-#### Developer Experience & "Chat with Code"
+<p>The platform is rolled out internally to 120+ consultants.</p>
 
-<p>A key outcome of these initiatives was a "Chat with Code" capability: an interactive interface allowing engineers joining legacy projects to query the codebase in natural language. This dramatically reduced onboarding time on complex systems, giving new team members a productive starting point from day one.</p>
+#### Client delivery
 
-#### Publications on Ippon Tech Blog
+<p>Alongside the platform I work on client engagements, currently <a href="/work/suez-iws/">Suez IWS</a>: a regulated B2B extranet for hazardous-waste tracking, where I rebuilt the CI/CD pipeline and moved a legacy Liferay front end to Angular micro frontends.</p>
 
-<p>As part of the knowledge-sharing culture at Ippon, I published technical articles on the <a href="https://blog.ippon.fr/author/djamel-bougouffa/" rel="noopener">Ippon Tech Blog</a> covering topics explored during the R&D phase.</p>
+#### Writing
+
+<p>I also publish technical articles on the <a href="https://blog.ippon.fr/author/djamel-bougouffa/" rel="noopener">Ippon Tech Blog</a>, on topics explored during this R&D work.</p>

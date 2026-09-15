@@ -127,6 +127,7 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('fr-FR', 
           height="563"
         />
       )}
+
     </header>
 
     <div class="post-body">
@@ -218,18 +219,19 @@ const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('fr-FR', 
   }
 
   .tag {
-    background-color: var(--gray-800);
+    background-color: var(--surface);
     color: var(--gray-300);
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
+    border: 1px solid var(--gray-800);
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.375rem;
     font-size: var(--text-sm);
     text-decoration: none;
-    transition: background-color 0.15s ease, color 0.15s ease;
+    transition: border-color var(--theme-transition), color var(--theme-transition);
   }
 
   .tag:hover {
-    background-color: var(--accent-regular);
-    color: var(--accent-text-over);
+    border-color: var(--gray-600);
+    color: var(--gray-0);
   }
 
   .hero-image {

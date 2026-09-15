@@ -79,7 +79,11 @@ const workAlternates = [
 			</header>
 			<main class="wrapper">
 				<div class="stack gap-10 content">
-					{entry.data.img && <OptimizedImage src={entry.data.img} alt={entry.data.img_alt || ''} />}
+					{entry.data.img && (
+						<div class:list={['media', { logo: entry.data.imgType === 'logo' }]}>
+							<OptimizedImage src={entry.data.img} alt={entry.data.img_alt || ''} />
+						</div>
+					)}
 					<WorkContextCard
 						teamSize={entry.data.teamSize}
 						companySize={entry.data.companySize}
@@ -136,6 +140,10 @@ const workAlternates = [
 		max-width: 54ch;
 	}
 
+	.media.logo {
+		max-width: 12rem;
+	}
+
 	.content {
 		max-width: 65ch;
 		margin-inline: auto;
@@ -154,9 +162,7 @@ const workAlternates = [
 	}
 
 	.content :global(img) {
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-sm);
-		background: var(--gradient-subtle);
+		border-radius: 0.75rem;
 		border: 1px solid var(--gray-800);
 	}
 

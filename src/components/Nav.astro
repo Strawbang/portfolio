@@ -19,24 +19,14 @@ const textLinks: { label: string; href: string }[] = [
   { label: t('nav.contact'), href: translatePath('/contact/') },
 ];
 
-/** Icon links to social media — edit these with links to your profiles! */
+/** Only the profiles a hiring engineer checks; the rest live in the footer. */
 const iconLinks: {
   label: string;
   href: string;
   icon: keyof typeof iconPaths;
 }[] = [
   {
-    label: "Twitter",
-    href: "https://twitter.com/strawbang",
-    icon: "twitter-logo",
-  },
-  {
-    label: "Instagram",
-    href: "https://instagram.com/strawbang",
-    icon: "instagram-logo",
-  },
-  {
-    label: "Linkedin",
+    label: "LinkedIn",
     href: "https://www.linkedin.com/in/djamel-bougouffa",
     icon: "linkedin-logo",
   },
@@ -45,30 +35,12 @@ const iconLinks: {
     href: "https://github.com/strawbang",
     icon: "github-logo",
   },
-  {
-    label: "Dev",
-    href: "https://dev.to/strawbang",
-    icon: "dev-logo",
-  },
-  {
-    label: "Medium",
-    href: "https://medium.com/@strawbang",
-    icon: "medium-logo",
-  },
 ];
 ---
 
 <nav>
   <div class="menu-header">
-    <a href={translatePath('/')} class="site-title">
-      <Icon
-        icon="terminal-window"
-        color="var(--accent-regular)"
-        size="1.6em"
-        gradient
-      />
-      Djamel Bougouffa
-    </a>
+    <a href={translatePath('/')} class="site-title">Djamel Bougouffa</a>
     <div class="header-actions">
       <menu-button>
         <template>
@@ -196,9 +168,12 @@ const iconLinks: {
   nav {
     z-index: 9999;
     position: relative;
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    margin-bottom: 2.5rem;
     font-family: var(--font-brand);
     font-weight: 500;
-    margin-bottom: 3.5rem;
   }
 
   .menu-header {
@@ -216,9 +191,9 @@ const iconLinks: {
   }
 
   .site-title {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
+    font-size: var(--text-md);
+    font-weight: 700;
+    letter-spacing: -0.01em;
     line-height: 1.1;
     color: var(--gray-0);
     text-decoration: none;
@@ -230,24 +205,14 @@ const iconLinks: {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 0;
-    border-radius: 999rem;
+    border: 1px solid var(--gray-800);
+    border-radius: 0.5rem;
     width: 2.75rem;
     height: 2.75rem;
-    color: var(--gray-300);
-    background: radial-gradient(var(--gray-900), var(--gray-800) 150%);
-    box-shadow: var(--shadow-md);
+    color: var(--gray-200);
+    background: var(--surface);
     cursor: pointer;
     flex-shrink: 0;
-  }
-
-  .menu-button::before {
-    position: absolute;
-    inset: -1px;
-    content: "";
-    background: var(--gradient-stroke);
-    border-radius: 999rem;
-    z-index: -1;
   }
 
   .menu-button[hidden] {
@@ -289,8 +254,7 @@ const iconLinks: {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
+    background: rgba(11, 15, 23, 0.45);
     z-index: 998;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -309,12 +273,12 @@ const iconLinks: {
     bottom: 0;
     width: min(85vw, 320px);
     background: var(--gray-999);
+    border-left: 1px solid var(--gray-800);
     z-index: 999;
     display: flex;
     flex-direction: column;
     transform: translateX(100%);
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.3);
     padding-top: env(safe-area-inset-top, 0);
     padding-bottom: env(safe-area-inset-bottom, 0);
   }
@@ -359,7 +323,7 @@ const iconLinks: {
   }
 
   .link:active {
-    color: var(--accent-regular);
+    color: var(--link-color);
   }
 
   .link.active {
@@ -394,13 +358,13 @@ const iconLinks: {
     display: flex;
     padding: var(--icon-padding);
     text-decoration: none;
-    color: var(--accent-dark);
+    color: var(--gray-400);
     transition: color var(--theme-transition);
   }
 
   .social:hover,
-  .social:focus {
-    color: var(--accent-regular);
+  .social:focus-visible {
+    color: var(--gray-0);
   }
 
   .mobile-controls {
@@ -412,10 +376,10 @@ const iconLinks: {
   @media (min-width: 50em) {
     nav {
       display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      grid-template-columns: 1fr auto auto;
       align-items: center;
-      padding: 2.5rem 5rem;
-      gap: 1rem;
+      padding: 2rem 2.5rem;
+      gap: 1.5rem;
     }
 
     .menu-header {
@@ -436,7 +400,7 @@ const iconLinks: {
       transform: none;
       width: auto;
       background: transparent;
-      box-shadow: none;
+      border: 0;
       pointer-events: auto;
     }
 
@@ -449,54 +413,40 @@ const iconLinks: {
     .nav-items {
       position: relative;
       flex-direction: row;
-      font-size: var(--text-sm);
-      border-radius: 999rem;
-      border: 0;
-      padding: 0.5rem 0.5625rem;
-      background: radial-gradient(var(--gray-900), var(--gray-800) 150%);
-      box-shadow: var(--shadow-md);
+      padding: 0;
+      background: none;
       flex: none;
       overflow: visible;
-      gap: 0;
+      gap: 0.125rem;
     }
 
-    .nav-items li {
-      border: none;
-    }
-
+    .nav-items li,
     .nav-items li:first-child {
       border: none;
     }
 
-    .nav-items::before {
-      position: absolute;
-      inset: -1px;
-      content: "";
-      background: var(--gradient-stroke);
-      border-radius: 999rem;
-      z-index: -1;
-    }
-
     .link {
-      padding: 0.5rem 1rem;
-      border-radius: 999rem;
-      font-size: var(--text-sm);
+      padding: 0.45rem 0.7rem;
+      border-radius: 0.375rem;
+      font-size: 0.9375rem;
       border-left: none;
       transition: color var(--theme-transition),
         background-color var(--theme-transition);
     }
 
     .link:hover,
-    .link:focus {
-      color: var(--gray-100);
-      background-color: var(--accent-subtle-overlay);
+    .link:focus-visible {
+      color: var(--gray-0);
+      background-color: var(--gray-900);
     }
 
     .link.active {
-      color: var(--accent-text-over);
-      background-color: var(--accent-regular);
-      padding-left: 1rem;
+      color: var(--gray-0);
+      padding-left: 0.7rem;
       border-left: none;
+      border-radius: 0;
+      background: none;
+      box-shadow: inset 0 -2px 0 var(--accent-regular);
     }
 
     .mobile-bottom-bar {
@@ -520,7 +470,7 @@ const iconLinks: {
     }
   }
 
-  @media (min-width: 60em) {
+  @media (min-width: 64em) {
     .socials {
       display: flex;
       justify-content: flex-end;

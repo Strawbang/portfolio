@@ -108,24 +108,22 @@ const { items, currentLabel = 'Current' } = Astro.props;
   .timeline-period {
     font-size: var(--text-sm);
     color: var(--gray-400);
-    font-style: italic;
+    font-variant-numeric: tabular-nums;
   }
 
   .timeline-badge {
-    font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    font-size: var(--text-xs);
+    font-weight: 600;
     background: var(--accent-regular);
     color: var(--accent-text-over);
-    padding: 0.15rem 0.55rem;
-    border-radius: 999rem;
-    line-height: 1.4;
+    padding: 0.1rem 0.45rem;
+    border-radius: 0.3rem;
+    line-height: 1.5;
   }
 
   .timeline-title {
     font-size: var(--text-lg);
-    color: var(--accent-regular);
+    color: var(--gray-0);
     margin: 0 0 0.2rem;
   }
 
@@ -137,14 +135,13 @@ const { items, currentLabel = 'Current' } = Astro.props;
   }
 
   .timeline-title a:hover {
-    color: var(--accent-dark);
+    color: var(--link-color);
     text-decoration-color: currentColor;
   }
 
   .timeline-subtitle {
     font-size: var(--text-sm);
     color: var(--gray-300);
-    font-style: italic;
     margin: 0 0 0.35rem;
   }
 

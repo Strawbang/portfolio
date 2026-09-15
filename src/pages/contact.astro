@@ -1,18 +1,17 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
-import Icon from "../components/Icon.astro";
 ---
 
 <BaseLayout
   title="Contact | Djamel Bougouffa"
-  description="Get in touch with Djamel Bougouffa, Full-Stack Software Engineer based in Paris. Open to new opportunities, collaborations, and technical discussions."
+  description="Get in touch with Djamel Bougouffa, software engineer based in France. Open to new opportunities, collaborations, and technical discussions."
 >
   <div class="stack gap-20">
     <main id="main-content" class="wrapper contact">
       <Hero
         title="Get in touch"
-        tagline="Have a project, an opportunity, or just want to talk tech? I'd love to hear from you."
+        tagline="For a role, a project or a technical question. I usually reply within two days."
         align="start"
       />
 
@@ -53,7 +52,6 @@ import Icon from "../components/Icon.astro";
 
             <button type="submit" class="submit-btn">
               Send message
-              <Icon icon="paper-plane-tilt" size="1.2em" />
             </button>
 
           </form>
@@ -61,24 +59,24 @@ import Icon from "../components/Icon.astro";
 
         <aside class="info-section" aria-label="Contact information">
           <div class="info-card">
-            <h3><Icon icon="paper-plane-tilt" size="1.2em" /> Email</h3>
+            <h3>Email</h3>
             <a href="mailto:dbougouffa@gmail.com">dbougouffa@gmail.com</a>
           </div>
           <div class="info-card">
-            <h3><Icon icon="linkedin-logo" size="1.2em" /> LinkedIn</h3>
+            <h3>LinkedIn</h3>
             <a href="https://www.linkedin.com/in/djamel-bougouffa" target="_blank" rel="noopener noreferrer">
               djamel-bougouffa
             </a>
           </div>
           <div class="info-card">
-            <h3><Icon icon="github-logo" size="1.2em" /> GitHub</h3>
+            <h3>GitHub</h3>
             <a href="https://github.com/strawbang" target="_blank" rel="noopener noreferrer">
               strawbang
             </a>
           </div>
           <div class="info-card availability">
-            <h3><Icon icon="rocket-launch" size="1.2em" /> Availability</h3>
-            <p>Open to new opportunities, full remote or Paris area.</p>
+            <h3>Availability</h3>
+            <p>Open to remote roles with French and international teams.</p>
           </div>
         </aside>
       </div>
@@ -120,8 +118,6 @@ import Icon from "../components/Icon.astro";
     font-size: var(--text-sm);
     color: var(--gray-300);
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
   }
 
   .required {
@@ -130,8 +126,8 @@ import Icon from "../components/Icon.astro";
 
   input,
   textarea {
-    background-color: var(--gray-999);
-    border: 1px solid var(--gray-400);
+    background-color: var(--surface);
+    border: 1px solid var(--gray-700);
     border-radius: 0.5rem;
     color: var(--gray-0);
     font-family: inherit;
@@ -174,18 +170,18 @@ import Icon from "../components/Icon.astro";
     background-color: var(--accent-regular);
     color: var(--accent-text-over);
     border: none;
-    border-radius: 999rem;
+    border-radius: 0.5rem;
     cursor: pointer;
     font-family: inherit;
     font-size: var(--text-md);
     font-weight: 600;
-    padding: 0.875rem 2rem;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    line-height: 1.1;
+    padding: 0.8em 1.3em;
+    transition: background-color var(--theme-transition);
   }
 
   .submit-btn:hover:not(:disabled) {
-    background-color: var(--accent-dark);
-    transform: translateY(-1px);
+    background-color: color-mix(in srgb, var(--accent-regular) 84%, black);
   }
 
   .submit-btn:disabled {
@@ -200,14 +196,14 @@ import Icon from "../components/Icon.astro";
   }
 
   .info-card {
-    background-color: var(--gray-999);
-    border-radius: 0.5rem;
-    padding: 1.25rem;
-    box-shadow: var(--shadow-sm);
+    background-color: var(--surface);
+    border: 1px solid var(--gray-800);
+    border-radius: 0.75rem;
+    padding: 1.1rem 1.25rem;
   }
 
   .info-card h3 {
-    color: var(--accent-regular);
+    color: var(--gray-0);
     font-size: var(--text-md);
     margin-bottom: 0.5rem;
     display: flex;
@@ -216,14 +212,18 @@ import Icon from "../components/Icon.astro";
   }
 
   .info-card a {
-    color: var(--gray-200);
-    text-decoration: underline transparent;
+    color: var(--gray-0);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--accent-regular);
+    text-decoration-thickness: 2px;
     text-underline-offset: 0.25em;
-    transition: text-decoration-color 0.2s;
+    overflow-wrap: anywhere;
+    transition: color var(--theme-transition);
   }
 
   .info-card a:hover {
-    text-decoration-color: currentColor;
+    color: var(--link-color);
   }
 
   .info-card p {

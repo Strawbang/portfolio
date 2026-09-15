@@ -97,9 +97,9 @@ const localeOptions: (keyof typeof flags)[] = ['en', 'fr'];
     align-items: center;
     gap: 0.5rem;
     background: transparent;
-    border: 1px solid var(--gray-400);
-    padding: 0.5rem 1rem;
-    border-radius: 999rem;
+    border: 1px solid var(--gray-800);
+    padding: 0.4rem 0.7rem;
+    border-radius: 0.5rem;
     color: var(--gray-300);
     cursor: pointer;
     font-size: var(--text-sm);
@@ -107,8 +107,8 @@ const localeOptions: (keyof typeof flags)[] = ['en', 'fr'];
   }
 
   .current-lang:hover, .language-picker.open .current-lang {
-    border-color: var(--accent-regular);
-    color: var(--gray-100);
+    border-color: var(--gray-600);
+    color: var(--gray-0);
     background-color: var(--gray-900);
   }
 
@@ -118,7 +118,7 @@ const localeOptions: (keyof typeof flags)[] = ['en', 'fr'];
   }
 
   .flag {
-    display: inline-block;
+    display: none;
     width: 1.5em;
     height: 1em;
     border-radius: 0.15em;
@@ -226,8 +226,9 @@ const localeOptions: (keyof typeof flags)[] = ['en', 'fr'];
   }
 
   .dropdown-menu a.active {
-    background-color: var(--accent-regular);
-    color: var(--gray-999);
-    font-weight: 500;
+    background-color: var(--gray-900);
+    color: var(--gray-0);
+    font-weight: 600;
+    box-shadow: inset 2px 0 0 var(--accent-regular);
   }
 </style>

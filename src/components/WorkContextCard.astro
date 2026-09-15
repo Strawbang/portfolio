@@ -18,11 +18,11 @@ const contextLabel: Record<string, { en: string; fr: string }> = {
 };
 
 const items = [
-	teamSize    && { icon: '👥', label: isFr ? `Équipe ${teamSize}` : `Team ${teamSize}` },
-	companySize && { icon: '🏢', label: isFr ? `${companySize} employés` : `${companySize} employees` },
-	context     && { icon: '🔄', label: isFr ? contextLabel[context].fr : contextLabel[context].en },
-	workplace   && { icon: '🌐', label: workplace },
-].filter(Boolean) as { icon: string; label: string }[];
+	teamSize    && (isFr ? `Équipe ${teamSize}` : `Team ${teamSize}`),
+	companySize && (isFr ? `${companySize} employés` : `${companySize} employees`),
+	context     && (isFr ? contextLabel[context].fr : contextLabel[context].en),
+	workplace,
+].filter(Boolean) as string[];
 
 const stackEntries = stack ? Object.entries(stack) : null;
 const hasContent = items.length > 0 || stackEntries?.length || (keywords && keywords.length > 0);
@@ -31,34 +31,27 @@ const hasContent = items.length > 0 || stackEntries?.length || (keywords && keyw
 {hasContent && (
 	<div class="context-card">
 		{items.length > 0 && (
-			<div class="context-items">
-				{items.map(item => (
-					<span class="context-item">
-						<span class="icon">{item.icon}</span>
-						{item.label}
-					</span>
-				))}
-			</div>
+			<ul class="context-items" role="list">
+				{items.map((item) => <li>{item}</li>)}
+			</ul>
 		)}
 		{stackEntries && stackEntries.length > 0 && (
-			<div class="stack-categories">
+			<dl class="stack-categories">
 				{stackEntries.map(([category, techs]) => (
 					<div class="stack-row">
-						<span class="stack-label">{category}</span>
-						<div class="stack-pills">
-							{techs.map(t => <span class="stack-pill">{t}</span>)}
-						</div>
+						<dt>{category}</dt>
+						<dd>{techs.map((t) => <span class="stack-pill">{t}</span>)}</dd>
 					</div>
 				))}
-			</div>
+			</dl>
 		)}
 		{!stackEntries && keywords && keywords.length > 0 && (
-			<div class="stack-row">
-				<span class="stack-label">Stack</span>
-				<div class="stack-pills">
-					{keywords.map(k => <span class="stack-pill">{k}</span>)}
+			<dl class="stack-categories">
+				<div class="stack-row">
+					<dt>Stack</dt>
+					<dd>{keywords.map((k) => <span class="stack-pill">{k}</span>)}</dd>
 				</div>
-			</div>
+			</dl>
 		)}
 	</div>
 )}
@@ -67,9 +60,9 @@ const hasContent = items.length > 0 || stackEntries?.length || (keywords && keyw
 	.context-card {
 		display: flex;
 		flex-direction: column;
-		gap: 0.75rem;
-		padding: 1rem 1.25rem;
-		background-color: var(--gray-999);
+		gap: 1rem;
+		padding: 1.1rem 1.25rem;
+		background-color: var(--surface);
 		border: 1px solid var(--gray-800);
 		border-radius: 0.75rem;
 		margin-bottom: 0.5rem;
@@ -78,56 +71,45 @@ const hasContent = items.length > 0 || stackEntries?.length || (keywords && keyw
 	.context-items {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.5rem 1.25rem;
-	}
-
-	.context-item {
-		display: flex;
-		align-items: center;
-		gap: 0.35rem;
+		gap: 0.25rem 1.5rem;
+		padding: 0;
+		list-style: none;
 		font-size: var(--text-sm);
-		color: var(--gray-300);
-	}
-
-	.icon {
-		font-size: 0.9rem;
+		font-weight: 500;
+		color: var(--gray-200);
 	}
 
 	.stack-categories {
 		display: flex;
 		flex-direction: column;
-		gap: 0.4rem;
+		gap: 0.5rem;
 	}
 
 	.stack-row {
-		display: flex;
-		align-items: center;
+		display: grid;
+		grid-template-columns: 5.5rem minmax(0, 1fr);
+		align-items: baseline;
 		gap: 0.75rem;
-		flex-wrap: wrap;
 	}
 
-	.stack-label {
-		font-size: 0.7rem;
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
-		color: var(--gray-500);
-		white-space: nowrap;
+	dt {
+		font-size: var(--text-sm);
+		color: var(--gray-400);
 	}
 
-	.stack-pills {
+	dd {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.3rem;
+		margin: 0;
 	}
 
 	.stack-pill {
-		background-color: color-mix(in srgb, var(--accent-regular) 12%, transparent);
-		color: var(--accent-regular);
-		border: 1px solid color-mix(in srgb, var(--accent-regular) 30%, transparent);
+		background-color: var(--gray-900);
+		color: var(--gray-200);
 		padding: 0.1rem 0.5rem;
-		border-radius: 999px;
-		font-size: 0.72rem;
-		font-family: var(--font-body);
+		border-radius: 0.3rem;
+		font-size: var(--text-xs);
+		line-height: 1.7;
 	}
 </style>

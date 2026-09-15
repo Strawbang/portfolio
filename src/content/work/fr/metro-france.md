@@ -7,7 +7,7 @@ role: Développeur Full-Stack
 startDate: 2022-03-01
 endDate: 2024-03-31
 description: |
-  Ingénieur Full-Stack chez METRO France : GCP, Kubernetes, TypeScript, React, Node.js, GraphQL sur 93 entrepôts à l'échelle nationale
+  Consultant chez METRO France (2022-2024) : responsable du front d'un produit de primes utilisé par plus de 4 000 salariés et 1 000 managers dans 93 entrepôts, et fonctionnalités de bornes de commande et de suivi de commandes.
 tags:
   - Front-End
   - Back-End
@@ -48,33 +48,23 @@ stack:
     - Agile Scrum
 ---
 
-### Révolutionner le développement produit chez METRO France
+### Un produit de primes et la commande en Halle pour 93 entrepôts
 
-<p>METRO France est l'un des plus grands réseaux de distribution en gros du pays, opérant 93 entrepôts cash-and-carry et servant des centaines de milliers de clients professionnels. En tant que consultant déployé via Wemanity Group, j'ai rejoint une équipe produit pluridisciplinaire et conduit des changements structurels qui ont fondamentalement accéléré la façon dont l'entreprise conçoit et livre ses produits digitaux.</p>
+<p>METRO France exploite 93 entrepôts cash-and-carry pour les clients professionnels. De mars 2022 à mars 2024, j'y ai travaillé comme consultant pour Wemanity Group, dans une équipe produit d'environ six personnes.</p>
 
-#### Standardisation technologique sur l'ensemble des produits
+#### Produit de primes sur objectifs
 
-<p>L'un des premiers défis était la fragmentation des technologies, architectures et processus entre les différents produits. J'ai piloté la mise en place de standards uniformes (une stack technique commune basée sur TypeScript, React, Node.js, TypeORM et GraphQL), permettant aux équipes d'aller plus vite, de réduire les silos de connaissance et d'onboarder les nouveaux ingénieurs plus efficacement. Cette standardisation a à elle seule généré une accélération de 80% des cycles de création de produits.</p>
+<p>Les primes des entrepôts étaient gérées dans des tableurs : les directeurs de magasin saisissaient les données à la main, les RH les consolidaient plus tard, et les erreurs s'accumulaient en route. L'équipe a remplacé ce circuit par un produit qui calcule et distribue les primes, utilisé par plus de 4 000 salariés et 1 000 managers dans tout le réseau.</p>
 
-#### Infrastructure cloud-native avec GCP et Kubernetes
+<p>J'étais responsable de son dépôt front (React et TypeScript), structuré en architecture hexagonale et en Atomic Design pour que les règles métier restent en dehors des composants d'interface.</p>
 
-<p>J'ai travaillé avec Google Cloud Platform (GCP) et Kubernetes pour construire et maintenir une infrastructure scalable et résiliente pour les déploiements produits. GitHub Actions a été utilisé pour automatiser les pipelines CI/CD, garantissant des releases fiables, traçables et rapides sur plusieurs produits simultanément. Cette approche cloud-native a remplacé des processus manuels fragiles par des standards de livraison de niveau production.</p>
+#### Bornes de commande et suivi des commandes
 
-#### Produit de gestion des primes employés
+<p>J'ai livré des fonctionnalités de caisse et travaillé sur les bornes de commande en Halle, où les clients professionnels commandent des produits lourds ou volumineux depuis l'entrepôt et les récupèrent en 30 minutes maximum. J'ai aussi travaillé sur l'écran de suivi, qui affiche en temps réel le statut de préparation des commandes en cours. Les deux s'appuient sur le système click-and-collect de METRO : commande en ligne, terminaux en Halle et suivi des commandes.</p>
 
-<p>Un jalon clé fut la conception et le développement d'un produit innovant de gestion des primes employés, déployé sur les 93 entrepôts METRO France à l'échelle nationale. Le système a automatisé le calcul et la distribution des primes, remplaçant des workflows basés sur des tableurs par une solution digitale fiable et auditable. L'impact fut significatif : baisse du turnover dans les entrepôts, amélioration de l'efficacité opérationnelle et meilleure expérience employé.</p>
+#### Une seule stack pour tous les produits
 
-#### Bornes de commande en entrepôt & parcours client digital
-
-<p>J'ai contribué au développement des bornes de commande déployées dans les Halles METRO France. Ces bornes permettent aux clients professionnels de commander des produits lourds ou volumineux directement depuis la Halle, avec un retrait dédié en 30 minutes maximum. Le système s'intègre à l'infrastructure click-and-collect de METRO, reliant la commande en ligne, les terminaux en Halle et le suivi des statuts de commande.</p>
-
-<p>Une fonctionnalité clé sur laquelle j'ai travaillé est l'écran de suivi des commandes, une interface temps réel avec défilement automatique affichant le statut de préparation des commandes en cours. Déployé dans toutes les Halles, ce point de contact se situe à l'intersection du retail physique et des opérations digitales, améliorant simultanément le débit et l'expérience client.</p>
-
-<p>Ces bornes s'inscrivent dans la démarche plus large de digitalisation en Halle chez METRO France, qui inclut également le self-scanning, les automates de gestion des espèces et le paiement mobile, convergeant vers un parcours client entièrement digitalisé dans le cash-and-carry.</p>
-
-#### Scrum et collaboration transverse
-
-<p>Dans un cadre Agile Scrum, j'ai collaboré avec les product owners, designers et ingénieurs QA pour livrer de la valeur incrementale à chaque sprint. L'approche structurée a permis à l'équipe de maintenir l'élan sur les travaux d'infrastructure long terme tout en livrant continuellement des fonctionnalités utilisateur.</p>
+<p>À mon arrivée, chaque produit avait ses propres technologies, conventions et déploiements. Nous nous sommes alignés sur une stack commune (TypeScript, React, Node.js, TypeORM et GraphQL, sur GCP et Kubernetes, avec GitHub Actions pour la CI/CD), puis nous avons ajouté des composants, des configurations et un modèle de CI/CD partagés. L'équipe a mesuré des cycles de création de produit raccourcis de 80 % ensuite. J'explique comment, et ce que ça a coûté, dans <a href="/fr/blog/stack-standardization-80-percent-faster/">un article dédié</a>.</p>
 
 #### Références
 

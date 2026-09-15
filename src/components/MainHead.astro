@@ -20,8 +20,8 @@ interface Props {
 }
 
 const {
-  title = "Djamel Bougouffa | Full-Stack Engineer & AI Tooling",
-  description = "Portfolio of Djamel Bougouffa, Full-Stack Software Engineer specializing in legacy modernization, AI tooling, and Rust. Based in Paris.",
+  title = "Djamel Bougouffa | Software Engineer, AI Tooling for Large Codebases",
+  description = "Portfolio of Djamel Bougouffa, software engineer building AI tooling for large, long-lived codebases (Rust, TypeScript, MCP). Based in France, open to remote roles.",
   canonicalURL,
   image = "/assets/portrait.png",
   type = "website",
@@ -91,9 +91,8 @@ const ogLocaleMap: Record<string, string> = {
 const ogLocale = ogLocaleMap[currentLang] ?? 'en_US';
 ---
 
-<Font cssVariable="--font-public-sans" preload />
-<Font cssVariable="--font-rubik" />
 <meta charset="UTF-8" />
+<Font cssVariable="--font-schibsted" preload />
 <meta name="description" content={description} />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
@@ -146,7 +145,9 @@ const ogLocale = ogLocaleMap[currentLang] ?? 'en_US';
 <meta property="twitter:image" content={fullImageUrl} />
 <meta name="twitter:creator" content="@strawbang" />
 
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link rel="alternate" type="application/rss+xml" title="Djamel Bougouffa | Blog" href={currentLang === 'fr' ? '/fr/rss.xml' : '/rss.xml'} />
 

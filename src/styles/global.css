@@ -1,73 +1,71 @@
-/* Global variables */
+/* Global variables
+ *
+ * Identity: cool paper, blue-black ink, one cobalt accent used the way an
+ * editor uses a blue pencil (links, marks, focus). No gradients, no glow.
+ * The --gray-* scale keeps its historical meaning: 0 is the strongest ink,
+ * 999 is the page. Every component reads these, so the palette lives here.
+ */
 :root {
 	/* Colors */
-	--gray-0: #090b11;
-	--gray-50: #141925;
-	--gray-100: #283044;
-	--gray-200: #3d4663;
-	--gray-300: #505d84;
-	--gray-400: #5e6d9e;
-	--gray-500: #8490b5;
-	--gray-600: #a3acc8;
-	--gray-700: #c3cadb;
-	--gray-800: #e3e6ee;
-	--gray-900: #f3f4f7;
-	--gray-999-basis: 0, 0%, 100%;
+	--gray-0: #0b0f17;
+	--gray-50: #141a24;
+	--gray-100: #1d2430;
+	--gray-200: #2c3442;
+	--gray-300: #485163;
+	--gray-400: #5e6779;
+	--gray-500: #7e8797;
+	--gray-600: #a2a9b6;
+	--gray-700: #c4c9d2;
+	--gray-800: #dde1e8;
+	--gray-900: #eef0f4;
+	--gray-999-basis: 220, 23%, 98%;
 	--gray-999_40: hsla(var(--gray-999-basis), 0.4);
-	--gray-999: #ffffff;
+	--gray-999: #f8f9fb;
+	--surface: #ffffff;
 
-	--accent-light: #a78bfa;
-	--accent-regular: #6d28d9;
-	--accent-dark: #2e1065;
-	--accent-overlay: hsla(263, 80%, 65%, 0.25);
+	--accent-light: #dce3ff;
+	--accent-regular: #2a44c8;
+	--accent-dark: #1a2b85;
+	--accent-overlay: hsla(229, 66%, 48%, 0.1);
 	--accent-subtle-overlay: var(--accent-overlay);
-	--accent-text-over: var(--gray-999);
+	--accent-text-over: #ffffff;
 
 	--link-color: var(--accent-regular);
 
-	/* Gradients */
-	--gradient-stop-1: var(--accent-light);
+	/* Gradients: kept as tokens for older components, now flat on purpose. */
+	--gradient-stop-1: #4a63e0;
 	--gradient-stop-2: var(--accent-regular);
 	--gradient-stop-3: var(--accent-dark);
-	--gradient-subtle: linear-gradient(150deg, var(--gray-900) 19%, var(--gray-999) 150%);
-	--gradient-accent: linear-gradient(
-		150deg,
-		var(--gradient-stop-1),
-		var(--gradient-stop-2),
-		var(--gradient-stop-3)
-	);
-	--gradient-accent-orange: linear-gradient(
-		150deg,
-		var(--accent-light),
-		var(--accent-regular),
-		var(--accent-dark)
-	);
-	--gradient-stroke: linear-gradient(180deg, var(--gray-900), var(--gray-700));
+	--gradient-subtle: linear-gradient(var(--gray-900), var(--gray-900));
+	--gradient-accent: linear-gradient(var(--accent-regular), var(--accent-regular));
+	--gradient-accent-orange: var(--gradient-accent);
+	--gradient-stroke: linear-gradient(var(--gray-800), var(--gray-800));
 
 	/* Shadows */
-	--shadow-sm: 0px 6px 3px rgba(9, 11, 17, 0.01), 0px 4px 2px rgba(9, 11, 17, 0.01),
-		0px 2px 2px rgba(9, 11, 17, 0.02), 0px 0px 1px rgba(9, 11, 17, 0.03);
-	--shadow-md: 0px 28px 11px rgba(9, 11, 17, 0.01), 0px 16px 10px rgba(9, 11, 17, 0.03),
-		0px 7px 7px rgba(9, 11, 17, 0.05), 0px 2px 4px rgba(9, 11, 17, 0.06);
-	--shadow-lg: 0px 62px 25px rgba(9, 11, 17, 0.01), 0px 35px 21px rgba(9, 11, 17, 0.05),
-		0px 16px 16px rgba(9, 11, 17, 0.1), 0px 4px 9px rgba(9, 11, 17, 0.12);
+	--shadow-sm: 0 1px 2px rgba(11, 15, 23, 0.06);
+	--shadow-md: 0 1px 2px rgba(11, 15, 23, 0.05), 0 12px 24px -12px rgba(11, 15, 23, 0.14);
+	--shadow-lg: 0 2px 4px rgba(11, 15, 23, 0.05), 0 28px 48px -20px rgba(11, 15, 23, 0.22);
 
-	/* Text Sizes */
+	/* Text sizes: a major-third scale */
+	--text-xs: 0.75rem;
 	--text-sm: 0.875rem;
 	--text-base: 1rem;
 	--text-md: 1.125rem;
 	--text-lg: 1.25rem;
-	--text-xl: 1.625rem;
-	--text-2xl: 2.125rem;
-	--text-3xl: 2.625rem;
-	--text-4xl: 3.5rem;
-	--text-5xl: 4.5rem;
+	--text-xl: 1.5rem;
+	--text-2xl: 2rem;
+	--text-3xl: 2.5rem;
+	--text-4xl: 3.25rem;
+	--text-5xl: 4.25rem;
+	--text-display: clamp(3.25rem, 1.4rem + 7.2vw, 7.75rem);
 
-	/* Fonts */
+	/* Fonts: one family carries the whole voice */
 	--font-system: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
 		Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-	--font-body: var(--font-public-sans), var(--font-system);
-	--font-brand: var(--font-rubik), var(--font-system);
+	--font-sans: var(--font-schibsted), var(--font-system);
+	--font-body: var(--font-sans);
+	--font-brand: var(--font-sans);
+	--font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
 
 	/* Transitions */
 	--theme-transition: 0.2s ease-in-out;
@@ -75,44 +73,36 @@
 
 :root.theme-dark {
 	--gray-0: #ffffff;
-	--gray-50: #f3f4f7;
-	--gray-100: #e3e6ee;
-	--gray-200: #c3cadb;
-	--gray-300: #a3acc8;
-	--gray-400: #8490b5;
-	--gray-500: #6474a2;
-	--gray-600: #505d84;
-	--gray-700: #3d4663;
-	--gray-800: #283044;
-	--gray-900: #141925;
-	--gray-999-basis: 225, 31%, 5%;
-	--gray-999: #090b11;
+	--gray-50: #f1f3f7;
+	--gray-100: #e3e7ee;
+	--gray-200: #cbd1db;
+	--gray-300: #a8b0be;
+	--gray-400: #8b94a4;
+	--gray-500: #6c7586;
+	--gray-600: #525a6a;
+	--gray-700: #3a4150;
+	--gray-800: #272d39;
+	--gray-900: #181d26;
+	--gray-999-basis: 222, 25%, 7%;
+	--gray-999: #0e1218;
+	--surface: #141922;
 
-	--accent-light: #2e1065;
-	--accent-regular: #6d28d9;
-	--accent-dark: #a78bfa;
-	--accent-overlay: hsla(263, 80%, 65%, 0.25);
-	--accent-subtle-overlay: hsla(263, 60%, 35%, 0.33);
-	--accent-text-over: var(--gray-0);
+	--accent-light: #1b2766;
+	--accent-regular: #4f6beb;
+	--accent-dark: #a3b3ff;
+	--accent-overlay: hsla(229, 90%, 70%, 0.14);
+	--accent-subtle-overlay: hsla(229, 70%, 60%, 0.16);
+	--accent-text-over: #ffffff;
 
 	--link-color: var(--accent-dark);
 
-	--gradient-stop-1: #5b21b6;
-	--gradient-subtle: linear-gradient(150deg, var(--gray-900) 19%, var(--gray-999) 81%);
-	--gradient-accent-orange: linear-gradient(
-		150deg,
-		var(--accent-dark),
-		var(--accent-regular),
-		var(--accent-light)
-	);
-	--gradient-stroke: linear-gradient(180deg, var(--gray-600), var(--gray-800));
+	--gradient-stop-1: #7d92f5;
+	--gradient-stop-2: var(--accent-regular);
+	--gradient-stop-3: var(--accent-dark);
 
-	--shadow-sm: 0px 6px 3px rgba(255, 255, 255, 0.01), 0px 4px 2px rgba(255, 255, 255, 0.01),
-		0px 2px 2px rgba(255, 255, 255, 0.02), 0px 0px 1px rgba(255, 255, 255, 0.03);
-	--shadow-md: 0px 28px 11px rgba(255, 255, 255, 0.01), 0px 16px 10px rgba(255, 255, 255, 0.03),
-		0px 7px 7px rgba(255, 255, 255, 0.05), 0px 2px 4px rgba(255, 255, 255, 0.06);
-	--shadow-lg: 0px 62px 25px rgba(255, 255, 255, 0.01), 0px 35px 21px rgba(255, 255, 255, 0.05),
-		0px 16px 16px rgba(255, 255, 255, 0.1), 0px 4px 9px rgba(255, 255, 255, 0.12);
+	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+	--shadow-md: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 24px -12px rgba(0, 0, 0, 0.6);
+	--shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.4), 0 28px 48px -20px rgba(0, 0, 0, 0.7);
 }
 
 html,
@@ -125,8 +115,10 @@ body {
 	background-color: var(--gray-999);
 	color: var(--gray-200);
 	font-family: var(--font-body);
+	font-size: 1.0625rem;
 	-webkit-font-smoothing: antialiased;
-	line-height: 1.5;
+	line-height: 1.6;
+	font-variant-numeric: proportional-nums;
 }
 
 *,
@@ -143,6 +135,26 @@ img {
 
 a {
 	color: var(--link-color);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+	outline: 2px solid var(--accent-regular);
+	outline-offset: 3px;
+	border-radius: 2px;
+}
+
+::selection {
+	background: var(--accent-light);
+	color: var(--gray-0);
+}
+
+code,
+kbd,
+pre,
+samp {
+	font-family: var(--font-mono);
 }
 
 h1,
@@ -152,16 +164,21 @@ h4,
 h5 {
 	line-height: 1.1;
 	font-family: var(--font-brand);
-	font-weight: 600;
-	color: var(--gray-100);
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	color: var(--gray-50);
+	text-wrap: balance;
 }
 
 h1 {
 	font-size: var(--text-5xl);
+	font-weight: 800;
+	letter-spacing: -0.035em;
 }
 
 h2 {
 	font-size: var(--text-4xl);
+	letter-spacing: -0.03em;
 }
 
 h3 {
@@ -174,6 +191,10 @@ h4 {
 
 h5 {
 	font-size: var(--text-xl);
+}
+
+p {
+	text-wrap: pretty;
 }
 
 /* Utilities */
@@ -192,9 +213,19 @@ h5 {
 
 .wrapper {
 	width: 100%;
-	max-width: 83rem;
+	max-width: 76rem;
 	margin-inline: auto;
-	padding-inline: 1.5rem;
+	padding-inline: 1.25rem;
+}
+
+@media (min-width: 50em) {
+	.wrapper {
+		padding-inline: 2.5rem;
+	}
+}
+
+.tabular {
+	font-variant-numeric: tabular-nums;
 }
 
 h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
@@ -255,5 +286,15 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
 	}
 	.lg\:gap-48 {
 		gap: 12rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
 	}
 }

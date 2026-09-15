@@ -1,0 +1,446 @@
+---
+// Home page body, shared by / and /fr/. The page files keep only their
+// layout, meta and structured data.
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import portrait from '../../public/assets/portrait.png';
+import { home, type HomeLang } from '../data/home';
+import { contact, resumeFiles } from '../data/about';
+
+interface Props {
+  lang: HomeLang;
+}
+
+const { lang } = Astro.props;
+const c = home[lang];
+const resume = resumeFiles[lang];
+const locale = lang === 'fr' ? 'fr-FR' : 'en-GB';
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft && (lang === 'fr' ? p.data.lang === 'fr' : p.data.lang !== 'fr'))
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 4)
+  .map((p) => {
+    const slug = p.id.replace(/\.md$/, '').replace(/^fr-/, '');
+    return {
+      title: p.data.title,
+      description: p.data.description,
+      date: p.data.publishDate,
+      href: lang === 'fr' ? `/fr/blog/${slug}/` : `/blog/${slug}/`,
+    };
+  });
+
+const formatDate = (d: Date) => d.toLocaleDateString(locale, { month: 'short', year: 'numeric' });
+---
+
+<main class="home">
+  <section class="intro wrapper" aria-labelledby="intro-name">
+    <div class="intro-text">
+      <h1 id="intro-name" class="name"><span>Djamel</span> <span>Bougouffa</span></h1>
+      <p class="lead">{c.lead}</p>
+      <p class="status">{c.status}</p>
+      <ul class="actions" role="list">
+        <li><a class="button" href={resume}>{c.resumeLabel}</a></li>
+        <li><a class="text-link" href={contact.github} rel="me">GitHub</a></li>
+        <li><a class="text-link" href={`mailto:${contact.email}`}>{c.emailLabel}</a></li>
+      </ul>
+    </div>
+    <Image
+      class="portrait"
+      src={portrait}
+      alt={c.portraitAlt}
+      width={440}
+      height={550}
+      loading="eager"
+      fetchpriority="high"
+    />
+  </section>
+
+  <section class="built wrapper" aria-labelledby="built-title">
+    <div class="section-head">
+      <h2 id="built-title">{c.builtTitle}</h2>
+      <p>{c.builtIntro}</p>
+    </div>
+    <ul class="ledger" role="list">
+      {c.ledger.map((e) => (
+        <li class="entry">
+          <p class="when">{e.when}</p>
+          <div class="what">
+            <h3>{e.title}</h3>
+            <p class="org">{e.org}</p>
+            <p class="fact">{e.fact}</p>
+            {e.media && (
+              <figure class="demo">
+                <video controls muted loop playsinline preload="none" poster={e.media.poster} width="1200" height="720" aria-label={e.media.caption}>
+                  <source src={e.media.mp4} type="video/mp4" />
+                </video>
+                <figcaption>{e.media.caption}</figcaption>
+              </figure>
+            )}
+          </div>
+          <a class="proof" href={e.proof.href}>{e.proof.label}</a>
+        </li>
+      ))}
+    </ul>
+    <a class="more" href={c.allWorkHref}>{c.allWorkLabel}</a>
+  </section>
+
+  <section class="writing wrapper" aria-labelledby="writing-title">
+    <div class="section-head row">
+      <h2 id="writing-title">{c.writingTitle}</h2>
+      <a class="more" href={c.allPostsHref}>{c.allPostsLabel}</a>
+    </div>
+    <ul class="posts" role="list">
+      {posts.map((p) => (
+        <li>
+          <a href={p.href} class="post">
+            <time datetime={p.date.toISOString()}>{formatDate(p.date)}</time>
+            <span class="post-title">{p.title}</span>
+            <span class="post-desc">{p.description}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="reach wrapper" aria-labelledby="reach-title">
+    <h2 id="reach-title">{c.contactTitle}</h2>
+    <p>{c.contactText}</p>
+    <a class="email" href={`mailto:${contact.email}`}>{contact.email}</a>
+  </section>
+</main>
+
+<style>
+  .home {
+    display: flex;
+    flex-direction: column;
+    gap: 5.5rem;
+    padding-bottom: 4rem;
+  }
+
+  /* Intro: the name is the one loud thing on the page. */
+  .intro {
+    display: grid;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .name {
+    font-size: var(--text-display);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    color: var(--gray-0);
+  }
+
+  .name span {
+    display: block;
+  }
+
+  .lead {
+    margin-top: 2rem;
+    max-width: 40ch;
+    font-size: var(--text-lg);
+    line-height: 1.45;
+    color: var(--gray-100);
+  }
+
+  .status {
+    margin-top: 0.75rem;
+    color: var(--gray-400);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.75rem;
+    margin-top: 2rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.8em 1.3em;
+    border-radius: 0.5rem;
+    background: var(--accent-regular);
+    color: var(--accent-text-over);
+    font-weight: 600;
+    line-height: 1.1;
+    text-decoration: none;
+    transition: background-color var(--theme-transition);
+  }
+
+  .button:hover {
+    background: color-mix(in srgb, var(--accent-regular) 84%, black);
+  }
+
+  .text-link,
+  .more {
+    color: var(--gray-0);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--accent-regular);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.3em;
+    transition: color var(--theme-transition);
+  }
+
+  .text-link:hover,
+  .more:hover {
+    color: var(--link-color);
+  }
+
+  .portrait {
+    order: -1;
+    width: 100%;
+    max-width: 8rem;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 0.75rem;
+  }
+
+  /* Shared section heads */
+  .section-head {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-head.row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .section-head h2 {
+    font-size: var(--text-2xl);
+  }
+
+  .section-head p {
+    color: var(--gray-400);
+    max-width: 52ch;
+  }
+
+  /* Ledger: what was built, and where to verify it. */
+  .ledger {
+    padding: 0;
+    list-style: none;
+    border-top: 2px solid var(--gray-0);
+  }
+
+  .entry {
+    display: grid;
+    gap: 0.35rem;
+    padding-block: 1.5rem;
+    border-bottom: 1px solid var(--gray-800);
+  }
+
+  .when {
+    color: var(--link-color);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .what h3 {
+    font-size: var(--text-lg);
+    letter-spacing: -0.015em;
+    color: var(--gray-0);
+  }
+
+  .org {
+    margin-top: 0.2rem;
+    color: var(--gray-400);
+    font-size: var(--text-sm);
+    font-weight: 500;
+  }
+
+  .fact {
+    margin-top: 0.6rem;
+    max-width: 68ch;
+    color: var(--gray-200);
+  }
+
+  .proof {
+    justify-self: start;
+    margin-top: 0.4rem;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--link-color);
+  }
+
+  .demo {
+    margin-top: 1.25rem;
+    max-width: 44rem;
+  }
+
+  .demo video {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    border: 1px solid var(--gray-800);
+    background: #1a1a1a;
+  }
+
+  .demo figcaption {
+    margin-top: 0.5rem;
+    font-size: var(--text-sm);
+    color: var(--gray-400);
+  }
+
+  .built .more {
+    display: inline-block;
+    margin-top: 1.75rem;
+  }
+
+  /* Writing */
+  .posts {
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--gray-800);
+  }
+
+  .post {
+    display: grid;
+    gap: 0.25rem;
+    padding-block: 1.25rem;
+    border-bottom: 1px solid var(--gray-800);
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .post time {
+    color: var(--gray-400);
+    font-size: var(--text-sm);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .post-title {
+    font-size: var(--text-md);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--gray-0);
+  }
+
+  .post-desc {
+    max-width: 72ch;
+    color: var(--gray-300);
+    font-size: var(--text-sm);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .post:hover .post-title,
+  .post:focus-visible .post-title {
+    color: var(--link-color);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  /* Contact */
+  .reach {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .reach h2 {
+    max-width: 22ch;
+    font-size: var(--text-2xl);
+  }
+
+  .reach p {
+    max-width: 52ch;
+    color: var(--gray-300);
+  }
+
+  .email {
+    margin-top: 0.5rem;
+    font-size: var(--text-xl);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--gray-0);
+    text-decoration: underline;
+    text-decoration-color: var(--accent-regular);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 0.22em;
+    overflow-wrap: anywhere;
+  }
+
+  .email:hover {
+    color: var(--link-color);
+  }
+
+  @media (min-width: 50em) {
+    .home {
+      gap: 8rem;
+    }
+
+    .intro {
+      grid-template-columns: minmax(0, 1fr) 18rem;
+      gap: 4rem;
+      padding-top: 1.5rem;
+    }
+
+    .lead {
+      font-size: var(--text-xl);
+    }
+
+    .portrait {
+      order: 0;
+      max-width: none;
+      margin-top: 1.1rem;
+    }
+
+    .section-head h2 {
+      font-size: var(--text-3xl);
+    }
+
+    .entry {
+      grid-template-columns: 8.5rem minmax(0, 1fr) 10rem;
+      column-gap: 2rem;
+      padding-block: 1.75rem;
+    }
+
+    .when,
+    .proof {
+      padding-top: 0.3rem;
+    }
+
+    .proof {
+      justify-self: end;
+      margin-top: 0;
+      text-align: right;
+    }
+
+    .post {
+      grid-template-columns: 8.5rem minmax(0, 1fr);
+      column-gap: 2rem;
+    }
+
+    .post time {
+      grid-row: span 2;
+      padding-top: 0.15rem;
+    }
+
+    .reach h2 {
+      font-size: var(--text-4xl);
+    }
+
+    .email {
+      font-size: var(--text-3xl);
+    }
+  }
+</style>

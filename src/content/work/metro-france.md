@@ -7,7 +7,7 @@ role: Fullstack Developer
 startDate: 2022-03-01
 endDate: 2024-03-31
 description: |
-  Full-Stack Engineer at METRO France: GCP, Kubernetes, TypeScript, React, Node.js, GraphQL across 93 warehouses nationwide
+  Consultant at METRO France (2022-2024): led the front-end of a bonus product used by 4,000+ employees and 1,000 managers across 93 warehouses, and shipped in-store ordering kiosk and order-tracking features.
 tags:
   - Front-End
   - Back-End
@@ -48,33 +48,23 @@ stack:
     - Agile Scrum
 ---
 
-### Revolutionizing Product Development at METRO France
+### A bonus product and in-store ordering for 93 warehouses
 
-<p>METRO France is one of the country's largest wholesale distribution networks, operating 93 cash-and-carry warehouses and serving hundreds of thousands of professional clients. As a consultant deployed via Wemanity Group, I joined a cross-functional product team and drove structural changes that fundamentally accelerated how the company builds and ships digital products.</p>
+<p>METRO France runs 93 cash-and-carry warehouses for professional customers. From March 2022 to March 2024 I worked there as a consultant from Wemanity Group, in a product team of about six people.</p>
 
-#### Standardizing Technology Across Products
+#### Bonus-by-objectives product
 
-<p>One of the first challenges was the fragmentation of technologies, architectures, and processes across different products. I led the implementation of uniform standards (a shared tech stack based on TypeScript, React, Node.js, TypeORM, and GraphQL), enabling teams to move faster, reduce knowledge silos, and onboard new engineers more efficiently. This standardization alone resulted in an 80% acceleration in product creation cycles.</p>
+<p>Warehouse bonuses were managed in spreadsheets: store managers entered data by hand, HR consolidated it later, and errors crept in along the way. The team replaced that with a product that calculates and distributes bonuses, used by 4,000+ employees and 1,000 managers across the network.</p>
 
-#### Cloud-Native Infrastructure with GCP & Kubernetes
+<p>I led its front-end repository (React and TypeScript), structured with hexagonal architecture and Atomic Design so that business rules stayed out of the UI components.</p>
 
-<p>I worked with Google Cloud Platform (GCP) and Kubernetes to build and maintain a scalable, resilient infrastructure for product deployments. GitHub Actions was used to automate CI/CD pipelines, ensuring that releases across multiple products were reliable, traceable, and fast. This cloud-native approach replaced fragile manual processes with production-grade delivery standards.</p>
+#### In-store ordering kiosks and order tracking
 
-#### Employee Bonus Management Product
+<p>I shipped point-of-sale features and worked on the in-store ordering kiosks, where professional customers order heavy or bulky products from the warehouse floor and collect them within 30 minutes. I also worked on the order status screen, which shows the preparation status of active orders in real time. Both connect to METRO's click-and-collect system: online orders, in-store terminals and order tracking.</p>
 
-<p>A key milestone was the design and development of an innovative employee bonus management product deployed across all 93 METRO France warehouses nationwide. The system automated bonus calculation and distribution, replacing spreadsheet-based workflows with a reliable, auditable digital solution. The impact was significant: staff turnover decreased across warehouses, operational efficiency improved, and the overall employee experience was meaningfully enhanced.</p>
+#### One stack across products
 
-#### In-Store Ordering Kiosks & Digital Customer Journey
-
-<p>I contributed to the development of in-store ordering kiosks deployed across METRO France warehouses. These kiosks allow professional clients to order heavy or bulky products directly from the warehouse floor, with dedicated pickup within 30 minutes. The system integrates with METRO's broader click-and-collect infrastructure, connecting online ordering, in-store terminals, and order status tracking.</p>
-
-<p>A key feature I worked on was the order status display screen, a real-time, auto-scrolling interface showing live preparation status across active orders. Deployed across all warehouse locations, this touchpoint sits at the intersection of physical retail and digital operations, improving throughput and client experience simultaneously.</p>
-
-<p>These kiosks are part of METRO France's wider in-store digitalization push, which also includes self-scanning, cash management terminals, and mobile payment, all converging toward a fully digital client journey in cash-and-carry retail.</p>
-
-#### Scrum & Cross-Team Collaboration
-
-<p>Working within an Agile Scrum framework, I collaborated with product owners, designers, and QA engineers to deliver incremental value at each sprint. The structured approach allowed the team to maintain momentum on long-running infrastructure work while continuously delivering user-facing features.</p>
+<p>When I arrived, each product had its own technologies, conventions and deployment setup. We aligned on one stack (TypeScript, React, Node.js, TypeORM and GraphQL, on GCP and Kubernetes, with GitHub Actions for CI/CD), then added shared components, shared configs and a CI/CD template. The team measured product creation cycles 80% shorter afterwards. I explain how, and what it cost, in <a href="/blog/stack-standardization-80-percent-faster/">a dedicated article</a>.</p>
 
 #### References
 

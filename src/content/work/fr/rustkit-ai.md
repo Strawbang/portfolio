@@ -13,7 +13,7 @@ imgType: logo
 role: Fondateur & Mainteneur Open Source
 startDate: 2025-12-01
 description: |
-  Organisation open source développant des outils AI-native en Rust : mémoire persistante, compression de tokens, intelligence sémantique du code et proxy MCP. Publié sur crates.io, sous licence MIT.
+  Organisation open source d'outils Rust pour le développement assisté par IA. Projet principal : semtree, une recherche sémantique de code locale par défaut, publiée sur crates.io sous licence MIT.
 tags:
   - Open Source
   - IA
@@ -42,47 +42,54 @@ stack:
     - MCP
 ---
 
-### rustkit-ai : Outils de développement AI-native en Rust
+### rustkit-ai : des outils Rust pour le développement assisté par IA
 
-<p>rustkit-ai est une organisation open source que j'ai fondée pour construire des outils qui résolvent les vrais points de friction dans le développement assisté par l'IA : perte de contexte entre les sessions, coûts en tokens qui s'accumulent, et absence de recherche sémantique locale. Tous les outils sont sous licence MIT, publiés sur crates.io, et fonctionnent immédiatement avec les principaux agents de code IA.</p>
+<p>rustkit-ai est l'organisation open source où je publie les outils Rust que je construis pour le développement assisté par IA. Tout est sous licence MIT et publié sur crates.io.</p>
 
-<p>Ces outils sont nés de besoins pratiques rencontrés lors de travaux R&D internes chez Ippon Technologies, où les mêmes problèmes (perte de contexte, coûts en tokens, intelligence du code) apparaissaient régulièrement sur des bases de code de production réelles.</p>
+<p>Ces outils sont nés de besoins concrets rencontrés pendant la R&D interne chez Ippon Technologies, où les mêmes problèmes (perte de contexte, coût des tokens, compréhension d'une grosse base de code) revenaient sur du vrai code de production.</p>
 
-#### Outils
+#### semtree
 
-**[aimemo](https://github.com/rustkit-ai/aimemo)** `v0.1.11`
-Mémoire persistante pour les agents de code IA. Écrit un contexte structuré dans `CLAUDE.md`, `.cursor/rules`, `.windsurfrules` ou `.github/copilot-instructions.md` selon l'éditeur. Une seule commande pour la configuration, zéro configuration manuelle. Compatible avec Claude Code, Cursor, Windsurf et GitHub Copilot.
+**[semtree](https://github.com/rustkit-ai/semtree)** est le projet principal : une recherche sémantique de code, locale par défaut.
+
+- Analyse une base de code avec tree-sitter (20 langages) et la découpe en suivant l'arbre syntaxique : un morceau correspond à une fonction ou une classe, pas à une fenêtre arbitraire de lignes.
+- Calcule les embeddings sur votre machine avec fastembed et les range dans un index HNSW à côté du dépôt.
+- Classe les résultats en combinant similarité vectorielle et BM25 (hybride par défaut), avec des modes purement sémantique ou purement lexical.
+- Place l'embedder et le stockage vectoriel derrière des traits : un modèle Ollama local ou une API distante peut remplacer ceux par défaut.
+- Se distribue en bibliothèque, en CLI et en serveur MCP pour les agents de code, découpée en 9 crates sur crates.io.
+
+```
+cargo install semtree-cli
+```
+
+#### Autres outils
+
+**[aimemo](https://github.com/rustkit-ai/aimemo)**
+Mémoire persistante pour les agents de code IA. Écrit un contexte structuré dans `CLAUDE.md`, `.cursor/rules`, `.windsurfrules` ou `.github/copilot-instructions.md` selon l'éditeur.
 
 ```
 cargo install aimemo
 aimemo setup --claude
 ```
 
-**[trimcp](https://github.com/rustkit-ai/trimcp)** `v0.1.3`
-Proxy MCP qui réduit les coûts LLM en tokens de 60 à 90% via la compression et la mise en cache des sorties des outils MCP avant qu'elles n'atteignent le modèle. Détecte automatiquement les configurations MCP de Claude Code et Cursor.
+**[trimcp](https://github.com/rustkit-ai/trimcp)**
+Proxy MCP qui compresse et met en cache la sortie des outils MCP avant qu'elle n'atteigne le modèle. Détecte automatiquement les configurations MCP de Claude Code et Cursor.
 
 ```
 cargo install trimcp
 trimcp setup
 ```
 
-**[tersify](https://github.com/rustkit-ai/tersify)** `v0.5.1`
-Compresse le code et le texte pour les LLM en supprimant le bruit (commentaires, lignes vides, espaces redondants), réduisant les tokens jusqu'à 50% sans perte de sens. Utile comme étape de prétraitement avant d'injecter du code dans un contexte LLM.
+**[tersify](https://github.com/rustkit-ai/tersify)**
+Retire le bruit (commentaires, lignes vides, espaces redondants) du code et du texte avant de l'injecter dans un contexte LLM.
 
 ```
 cargo install tersify
 tersify src/main.rs | pbcopy
 ```
 
-**[semtree](https://github.com/rustkit-ai/semtree)** `v0.1.5`
-Intelligence sémantique du code en Rust, parsing Tree-sitter, embeddings et RAG pour les bases de code multi-langages. Parse et indexe Rust, Python, JavaScript, TypeScript et Go depuis une architecture unifiée.
-
-```
-cargo install semtree-cli
-```
-
-**[semstore](https://github.com/rustkit-ai/semstore)** `v0.1.0`
-Recherche sémantique locale pour les applications Rust, stocker du texte, rechercher par sens, sans API cloud. Embeddings on-device qui fonctionnent partout où Rust tourne.
+**[semstore](https://github.com/rustkit-ai/semstore)**
+Recherche sémantique locale pour les applications Rust : stocker du texte, chercher par le sens, sans API cloud.
 
 #### Références
 

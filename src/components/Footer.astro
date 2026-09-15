@@ -1,80 +1,62 @@
 ---
-import Icon from "./Icon.astro";
 const currentYear = new Date().getFullYear();
 ---
 
-<footer aria-label="Site footer">
-  <div class="group">
-    <p>
-      Designed & Developed in Paris with <a href="https://astro.build/">Astro</a
-      >
-      <Icon icon="rocket-launch" size="1.2em" />
+<footer class="wrapper" aria-label="Site footer">
+  <div class="inner">
+    <p>&copy; {currentYear} Djamel Bougouffa. Built with <a href="https://astro.build/">Astro</a>.</p>
+    <p class="links">
+      <a href="/uses">Uses</a>
+      <a href="https://www.linkedin.com/in/djamel-bougouffa">LinkedIn</a>
+      <a href="https://github.com/strawbang">GitHub</a>
+      <a href="https://github.com/rustkit-ai">rustkit-ai</a>
+      <a href="https://dev.to/strawbang">Dev.to</a>
+      <a href="https://medium.com/@strawbang">Medium</a>
+      <a href="/rss.xml">RSS</a>
     </p>
-    <p>&copy; {currentYear} Djamel Bougouffa</p>
   </div>
-  <p class="socials">
-    <a href="/uses">Uses</a>
-    <a href="https://twitter.com/strawbang"> Twitter</a>
-    <a href="https://www.instagram.com/strawbang"> Instagram</a>
-    <a href="https://www.linkedin.com/in/djamel-bougouffa"> LinkedIn</a>
-    <a href="https://github.com/strawbang"> GitHub</a>
-    <a href="https://github.com/rustkit-ai"> rustkit-ai</a>
-    <a href="https://dev.to/strawbang"> Dev</a>
-    <a href="https://medium.com/@strawbang"> Medium</a>
-  </p>
 </footer>
+
 <style>
   footer {
+    margin-top: auto;
+  }
+
+  .inner {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
-    margin-top: auto;
-    padding: 3rem 2rem 3rem;
-    text-align: center;
+    gap: 1rem;
+    padding-block: 2rem 2.5rem;
+    border-top: 1px solid var(--gray-800);
     color: var(--gray-400);
     font-size: var(--text-sm);
   }
 
-  footer a {
-    color: var(--gray-400);
-    text-decoration: 1px solid underline transparent;
+  a {
+    color: var(--gray-300);
+    text-decoration: underline;
+    text-decoration-color: transparent;
     text-underline-offset: 0.25em;
-    transition: text-decoration-color var(--theme-transition);
+    transition: text-decoration-color var(--theme-transition), color var(--theme-transition);
   }
 
-  footer a:hover,
-  footer a:focus {
-    text-decoration-color: currentColor;
+  a:hover,
+  a:focus-visible {
+    color: var(--gray-0);
+    text-decoration-color: var(--accent-regular);
   }
 
-  .group {
+  .links {
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .socials {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
     flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
   }
 
   @media (min-width: 50em) {
-    footer {
+    .inner {
       flex-direction: row;
       justify-content: space-between;
-      padding: 2.5rem 5rem;
-    }
-
-    .group {
-      flex-direction: row;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .socials {
-      justify-content: flex-end;
+      align-items: baseline;
     }
   }
 </style>

@@ -2,6 +2,7 @@
 title: Wemanity Group
 publishDate: 2024-03-01 00:00:00
 img: /assets/optimized/wemanity.webp
+imgType: logo
 img_alt: Wemanity Group logo
 role: Full-Stack Software Engineer
 startDate: 2022-03-01

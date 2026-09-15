@@ -81,7 +81,11 @@ const workAlternates = [
 			</header>
 			<main class="wrapper">
 				<div class="stack gap-10 content">
-					{entry.data.img && <OptimizedImage src={entry.data.img} alt={entry.data.img_alt || ''} />}
+					{entry.data.img && (
+						<div class:list={['media', { logo: entry.data.imgType === 'logo' }]}>
+							<OptimizedImage src={entry.data.img} alt={entry.data.img_alt || ''} />
+						</div>
+					)}
 					<WorkContextCard
 						teamSize={entry.data.teamSize}
 						companySize={entry.data.companySize}
@@ -136,6 +140,10 @@ const workAlternates = [
 	.description {
 		font-size: var(--text-lg);
 		max-width: 54ch;
+	}
+
+	.media.logo {
+		max-width: 12rem;
 	}
 
 	.content {

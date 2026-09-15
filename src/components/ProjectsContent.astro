@@ -118,12 +118,11 @@ const bridgeCta = lang === 'fr' ? "Voir l'expérience rustkit-ai" : 'See the rus
     border: 1px solid var(--gray-800);
     border-radius: 0.7rem;
     overflow: hidden;
-    background: var(--gray-900);
-    box-shadow: var(--shadow-sm);
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    background: var(--surface);
+    transition: border-color var(--theme-transition);
   }
-  .featured:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
-  .featured-band { height: 8px; background: var(--gradient-accent); }
+  .featured:hover { border-color: var(--gray-600); }
+  .featured-band { display: none; }
   .featured-body { padding: 1.6rem; display: flex; flex-direction: column; gap: 1rem; }
 
   .featured-head {
@@ -145,12 +144,13 @@ const bridgeCta = lang === 'fr' ? "Voir l'expérience rustkit-ai" : 'See the rus
   }
   .status {
     display: inline-flex;
-    padding: 0.3rem 0.8rem;
-    border-radius: 999rem;
-    font-size: var(--text-sm);
-    font-family: var(--font-brand);
-    color: var(--accent-text-over);
-    background: var(--accent-regular);
+    padding: 0.15rem 0.5rem;
+    border-radius: 0.3rem;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--gray-200);
+    background: var(--gray-900);
+    border: 1px solid var(--gray-800);
     white-space: nowrap;
   }
   .featured-tagline { color: var(--gray-100); font-size: var(--text-lg); }
@@ -192,12 +192,12 @@ const bridgeCta = lang === 'fr' ? "Voir l'expérience rustkit-ai" : 'See the rus
   .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; padding: 0; margin: 0; }
   .tag {
     display: inline-flex;
-    padding: 0.28rem 0.7rem;
-    font-size: 0.78rem;
-    border-radius: 999rem;
-    color: var(--gray-200);
-    background: var(--accent-subtle-overlay);
-    border: 1px solid var(--gray-700);
+    padding: 0.1rem 0.5rem;
+    font-size: var(--text-xs);
+    line-height: 1.7;
+    border-radius: 0.3rem;
+    color: var(--gray-300);
+    background: var(--gray-900);
     white-space: nowrap;
   }
 
@@ -207,17 +207,17 @@ const bridgeCta = lang === 'fr' ? "Voir l'expérience rustkit-ai" : 'See the rus
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.7rem 1.5rem;
-    border-radius: 999rem;
+    padding: 0.8em 1.3em;
+    border-radius: 0.5rem;
     color: var(--accent-text-over);
     text-decoration: none;
-    background: var(--gradient-accent);
-    box-shadow: var(--shadow-md);
-    font-family: var(--font-brand);
+    background: var(--accent-regular);
+    font-weight: 600;
     font-size: var(--text-md);
-    transition: transform 0.15s ease;
+    line-height: 1.1;
+    transition: background-color var(--theme-transition);
   }
-  .btn:hover { transform: translateY(-2px); }
+  .btn:hover { background: color-mix(in srgb, var(--accent-regular) 84%, black); }
 
   /* ---- Open source ----------------------------------------------------- */
   .oss-header {
@@ -232,7 +232,7 @@ const bridgeCta = lang === 'fr' ? "Voir l'expérience rustkit-ai" : 'See the rus
     border-radius: 12px;
     transition: transform 0.2s ease;
   }
-  .oss-emblem-link:hover { transform: translateY(-2px); }
+  .oss-emblem-link:hover { opacity: 0.85; }
   .oss-emblem {
     width: 56px;
     height: 56px;
@@ -243,11 +243,11 @@ const bridgeCta = lang === 'fr' ? "Voir l'expérience rustkit-ai" : 'See the rus
   .oss-intro { color: var(--gray-300); font-size: var(--text-md); max-width: 65ch; }
   .oss-bridge { color: var(--gray-400); font-size: var(--text-sm); max-width: 65ch; }
   .oss-bridge-link {
-    color: var(--accent-dark);
+    color: var(--link-color);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
-  .oss-bridge-link:hover { color: var(--accent-regular); }
+  .oss-bridge-link:hover { color: var(--gray-0); }
 
   .install {
     display: flex;
@@ -263,7 +263,7 @@ const bridgeCta = lang === 'fr' ? "Voir l'expérience rustkit-ai" : 'See the rus
   .install-cmd {
     font-family: ui-monospace, 'SF Mono', Menlo, monospace;
     font-size: var(--text-sm);
-    color: var(--accent-dark);
+    color: var(--gray-0);
   }
 
   .oss-grid {
@@ -281,15 +281,13 @@ const bridgeCta = lang === 'fr' ? "Voir l'expérience rustkit-ai" : 'See the rus
     height: 100%;
     padding: 1.2rem;
     border: 1px solid var(--gray-800);
-    border-radius: 0.6rem;
-    background: var(--gray-900);
+    border-radius: 0.75rem;
+    background: var(--surface);
     text-decoration: none;
-    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    transition: border-color var(--theme-transition);
   }
   .oss-card:hover {
-    border-color: var(--accent-regular);
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
+    border-color: var(--gray-600);
   }
   .oss-name {
     font-family: ui-monospace, 'SF Mono', Menlo, monospace;
@@ -311,11 +309,11 @@ const bridgeCta = lang === 'fr' ? "Voir l'expérience rustkit-ai" : 'See the rus
     white-space: nowrap;
     text-decoration: none;
   }
-  .oss-dl:hover { color: var(--accent-dark); }
+  .oss-dl:hover { color: var(--gray-0); }
   .oss-repo {
     font-size: var(--text-sm);
-    font-family: var(--font-brand);
-    color: var(--accent-dark);
+    font-weight: 600;
+    color: var(--link-color);
     white-space: nowrap;
   }
 
@@ -327,8 +325,12 @@ const bridgeCta = lang === 'fr' ? "Voir l'expérience rustkit-ai" : 'See the rus
   .org-link {
     font-family: var(--font-brand);
     font-size: var(--text-md);
-    color: var(--accent-dark);
-    text-decoration: none;
+    font-weight: 600;
+    color: var(--gray-0);
+    text-decoration: underline;
+    text-decoration-color: var(--accent-regular);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.3em;
   }
-  .org-link:hover { text-decoration: underline; }
+  .org-link:hover { color: var(--link-color); }
 </style>
