@@ -36,7 +36,7 @@ export interface HomeCopy {
 
 export const home: Record<HomeLang, HomeCopy> = {
   en: {
-    lead: 'Software engineer with 7+ years of experience. I design and build AI tooling for large, long-lived codebases: code parsing, retrieval, agents over MCP, and the product on top.',
+    lead: 'Senior software engineer with 7+ years of experience. I design and build AI tooling for large, long-lived codebases: code parsing, retrieval, agents over MCP, and the product on top.',
     status: 'Based in France. Open to remote roles with international teams.',
     resumeLabel: 'Download resume',
     emailLabel: 'Email me',
@@ -95,7 +95,7 @@ export const home: Record<HomeLang, HomeCopy> = {
     contactText: 'Email me with the role and a few words about the team. I usually reply within two days.',
   },
   fr: {
-    lead: "Ingénieur logiciel, plus de 7 ans d'expérience. Je conçois et construis de l'outillage IA pour les bases de code volumineuses et anciennes : parsing du code, recherche, agents via MCP, et le produit par-dessus.",
+    lead: "Ingénieur logiciel senior, plus de 7 ans d'expérience. Je conçois et construis de l'outillage IA pour les bases de code volumineuses et anciennes : parsing du code, recherche, agents via MCP, et le produit par-dessus.",
     status: "Basé en France. Ouvert au remote, pour des équipes en France ou à l'international.",
     resumeLabel: 'Télécharger le CV',
     emailLabel: "M'écrire",

@@ -44,7 +44,7 @@ stack:
 
 ### Lumio: an AI platform for legacy codebases
 
-<p>Ippon Technologies is a consulting firm of about 600 people working on cloud and software engineering for large clients. Since November 2025 I have split my time between client delivery and internal R&D. The R&D side produced Lumio, a platform that helps engineers understand and modernize legacy codebases, which Ippon now offers to its clients (<a href="https://fr.ippon.tech/ia-advisory/lumio-documentation-legacy/" rel="noopener">product page, in French</a>).</p>
+<p>Ippon Technologies is a consulting firm of about 600 people working on cloud and software engineering for large clients. Since November 2025 I have split my time between client delivery and internal R&D. The R&D side produced Lumio, a platform that helps engineers understand and modernize legacy codebases, which Ippon now offers to its clients (<a href="https://fr.ippon.tech/ia-advisory/lumio-documentation-legacy/" rel="noopener">product page, in French</a>; <a href="https://fr.linkedin.com/posts/ippon-technologies_comprendre-une-application-ancienne-ou-un-activity-7511092942816669699-SSAH" rel="noopener">launch post on LinkedIn</a>).</p>
 
 #### What Lumio does
 

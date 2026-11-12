@@ -12,7 +12,7 @@ export const GET: APIRoute = async () => {
   const lines: string[] = [
     '# Djamel Bougouffa: Full Content',
     '',
-    '> Software engineer based in France, open to remote roles with international teams. TypeScript, React, Node.js, Rust, MCP, RAG, agentic AI.',
+    '> Senior software engineer based in France, open to remote roles with international teams. TypeScript, React, Node.js, Rust, MCP, RAG, agentic AI.',
     '> Portfolio: https://djamel-bougouffa.com',
     '',
     '---',

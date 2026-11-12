@@ -17,7 +17,7 @@ export const GET: APIRoute = async () => {
   const lines: string[] = [
     '# Djamel Bougouffa',
     '',
-    '> Software engineer with 7+ years of experience, based in France and open to remote roles with international teams. Designs and builds AI tooling for large, long-lived codebases: tree-sitter parsing, retrieval, agents over MCP, and the product on top. At Ippon Technologies he built Lumio, an AI platform that documents legacy codebases (Rust CLI, web app and MCP server), rolled out to 120+ consultants. Maintains semtree, open-source semantic code search in Rust. Works across Rust, TypeScript, React, Node.js, Angular and Java.',
+    '> Senior software engineer with 7+ years of experience, based in France and open to remote roles with international teams. Designs and builds AI tooling for large, long-lived codebases: tree-sitter parsing, retrieval, agents over MCP, and the product on top. At Ippon Technologies he built Lumio, an AI platform that documents legacy codebases (Rust CLI, web app and MCP server), rolled out to 120+ consultants. Maintains semtree, open-source semantic code search in Rust. Works across Rust, TypeScript, React, Node.js, Angular and Java.',
     '',
     '## About',
     '',
