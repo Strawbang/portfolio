@@ -52,7 +52,7 @@ stack:
 
 #### What I built
 
-<p>I designed and built the whole product. It has three surfaces that share one core:</p>
+<p>I designed and built the product. It has three surfaces that share one core:</p>
 
 <ul>
   <li><strong>A Rust CLI</strong> that parses codebases with tree-sitter, chunks them along the syntax tree and indexes them for retrieval.</li>

@@ -52,7 +52,7 @@ stack:
 
 #### Ce que j'ai construit
 
-<p>J'ai conçu et construit tout le produit. Il a trois surfaces qui partagent un même cœur :</p>
+<p>J'ai conçu et construit le produit. Il a trois surfaces qui partagent un même cœur :</p>
 
 <ul>
   <li><strong>Une CLI Rust</strong> qui analyse les bases de code avec tree-sitter, les découpe en suivant l'arbre syntaxique et les indexe pour la recherche.</li>
